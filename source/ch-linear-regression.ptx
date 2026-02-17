@@ -454,14 +454,14 @@ summary(fit.power)
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(>|t|)    
 ## (Intercept)  6.64138    5.23318   1.269    0.206    
-## engine.size  0.76949    0.03919  19.637   <2e-16 ***
+## engine.size  0.76949    0.03919  19.637   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Residual standard error: 23.31 on 201 degrees of freedom
 ##   (2 observations deleted due to missingness)
 ## Multiple R-squared:  0.6574, Adjusted R-squared:  0.6556 
-## F-statistic: 385.6 on 1 and 201 DF,  p-value: < 2.2e-16
+## F-statistic: 385.6 on 1 and 201 DF,  p-value: &lt; 2.2e-16
 </pre>
     <p>
       The output produced by the application of the function <q><c>summary</c></q> is long and detailed. We will discuss this output in the next section. Here we concentrate on the table that goes under the title <q><c>Coefficients:</c></q>. The said table is made of 2 rows and 4 columns. It contains information for testing, for each of the coefficients, the null hypothesis that the value of the given coefficient is equal to zero. In particular, the second row may be used is order to test this hypothesis for the slope of the regression line, the coefficient that multiplies the explanatory variable.
@@ -883,14 +883,14 @@ summary(lm(horsepower ~ length, data=cars))
 ## Coefficients:
 ##              Estimate Std. Error t value Pr(>|t|)    
 ## (Intercept) -205.3971    32.8185  -6.259  2.3e-09 ***
-## length         1.7796     0.1881   9.459  < 2e-16 ***
+## length         1.7796     0.1881   9.459  &lt; 2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Residual standard error: 33.12 on 201 degrees of freedom
 ##   (2 observations deleted due to missingness)
 ## Multiple R-squared:  0.308,  Adjusted R-squared:  0.3046 
-## F-statistic: 89.47 on 1 and 201 DF,  p-value: < 2.2e-16
+## F-statistic: 89.47 on 1 and 201 DF,  p-value: &lt; 2.2e-16
       </pre>
 
       <p>
