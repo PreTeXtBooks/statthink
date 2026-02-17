@@ -567,7 +567,7 @@ mean((sig^2 &gt;= var.LCL) &amp; (sig^2 &lt;= var.UCL))
           <title>Chi-Square Distribution</title>
           <p>
             A distribution associated with the sum of squares of Normal random
-            variable. The distribution obtains only positive values and it is
+            variable. The distribution takes only positive values and it is
             not symmetric. The distribution is characterized by a positive
             parameter called <em>degrees of freedom</em>.
           </p>
@@ -610,7 +610,7 @@ mean((sig^2 &gt;= var.LCL) &amp; (sig^2 &lt;= var.UCL))
         <li><p>Expectation:
             <m>\bar x \pm \mbox{\texttt{qnorm(0.975)}} \cdot s/\sqrt{n}</m>.</p></li>
         <li><p>Probability:
-            <m>\bar p \pm \mbox{\texttt{qnorm(0.975)}} \cdot \hat p(1-\hat p)/\sqrt{n}</m>.</p></li>
+            <m>\hat p \pm \mbox{\texttt{qnorm(0.975)}} \cdot \sqrt{\hat p(1-\hat p)/n}</m>.</p></li>
         <li><p>Normal Expectation:
             <m>\bar x \pm \mbox{\texttt{qt(0.975,n-1)}} \cdot s/\sqrt{n}</m>.</p></li>
         <li><p>Normal Variance:
