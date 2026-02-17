@@ -7,9 +7,9 @@
     <title>Student Learning Objectives</title>
     
     <p>
-      This section provides an overview of the concepts and methods that where
+      This section provides an overview of the concepts and methods that were
       presented in the first part of the book. We attempt to relate them to
-      each other and put them in prospective. Some problems are provided. The
+      each other and put them in perspective. Some problems are provided. The
       solutions to these problems require combinations of many of the tools
       that were presented in previous chapters. By the end of this chapter,
       the student should be able to:
@@ -40,7 +40,7 @@
       Data is typically obtained by selecting a sample from a population and
       taking measurements on the sample. There are many ways to select a
       sample, but all methods for such selection should not violate the most
-      important characteristic that a sample should posses, namely that it
+      important characteristic that a sample should possess, namely that it
       represents the population it came from. In this book we concentrate on
       simple random sampling. However, the reader should be aware of the fact
       that other sampling designs exist and may be more appropriate in
@@ -64,7 +64,7 @@
       summarized, analyzed and handled with many tools. Frequently, the same
       tool, or tools that have much resemblance to each other, may be applied
       in different settings and for different forms of variability. In order
-      not to loose track it is important to understand in each scenario the
+      not to lose track it is important to understand in each scenario the
       source and nature of the variability that is being examined.
     </p>
     
@@ -221,7 +221,7 @@
           <m>\mathbb{E}(X) = (a+b)/2</m> and <m>\text{Var}(X) = (b-a)^2/12</m> in order to obtain the
           expectation and variance of a single observation and then we use the
           relations <m>\mathbb{E}(\bar X) = \mathbb{E}(X)</m> and <m>\text{Var}(\bar X) = \text{Var}(X)/n</m> to
-          translated these results to the expectation and variance of the sample
+          translate these results to the expectation and variance of the sample
           average:
         </p>
         
@@ -372,7 +372,7 @@ sig.bar
         </p>
         
         <p>
-          For Question 2.1 we compote that the cumulative distribution function of
+          For Question 2.1 we compute that the cumulative distribution function of
           the sample average at <m>x=2</m> is approximately equal:
         </p>
         
@@ -756,7 +756,7 @@ boxplot(QC)
         
         <p>
           In order to choose between the two options they agreed to prefer the
-          statistic that tends to have values that are closer to <m>b</m>. (with
+          statistic that tends to have values that are closer to <m>b</m> (with
           respect to the sampling distribution). They also agreed to compute the
           expectation and variance of each statistic. The performance of a
           statistic is evaluated using the <term>mean square error</term> (MSE), which is
