@@ -2,7 +2,7 @@
 
 This directory contains images generated from R code during the build process.
 
-## sleep-data-plot.png
+## sleep-data-plot.svg
 
 Generated from R code:
 ```r

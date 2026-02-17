@@ -366,7 +366,7 @@ plot(table(X))
     <exercise xml:id="exercise-1-2">
       <statement>
         <p>
-          The number of customers that wait in front of a coffee shop at the opening was reported during 25 days. The results were:
+          The number of customers who wait in front of a coffee shop at the opening was reported during 25 days. The results were:
         </p>
         <me>4,2,1,1,0,2,1,2,4,2,5,3,1,5,1,5,1,2,1,1,3,4,2,4,3</me>
         <ol>
