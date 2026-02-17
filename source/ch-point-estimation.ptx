@@ -649,7 +649,7 @@ var((19/20)*X.var)
         <ol>
           <li>
             <p>
-              Compute the proportion in the sample of those with a high level of blood pressure<fn>Hint: You may use the function summary or you may note that the expression <em>variable</em><c>==</c><em>level</em> produces a sequence with logical <c>TRUE</c> or <c>FALSE</c> entries that identify entries in the sequence <em>variable</em> that obtain the value <em>level</em>.</fn>.
+              Compute the proportion in the sample of those with a high level of blood pressure<fn>Hint: You may use the function summary or you may note that the expression <term>variable</term><c>==</c><term>level</term> produces a sequence with logical <c>TRUE</c> or <c>FALSE</c> entries that identify entries in the sequence <term>variable</term> that obtain the value <term>level</term>.</fn>.
             </p>
           </li>
           <li>
