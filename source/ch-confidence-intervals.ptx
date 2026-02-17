@@ -3,30 +3,475 @@
 <chapter xml:id="ch-confidence-intervals" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Confidence Intervals</title>
 
-  <introduction>
-    <p>
-      This chapter introduces estimation with confidence intervals.
-    </p>
-  </introduction>
-
   <section xml:id="sec-student-learning-objectives-11">
     <title>Student Learning Objectives</title>
-    <p>Content to be added.</p>
+
+    <p>A confidence interval is an estimate of an unknown parameter by a range of values. This range contains the value of the parameter with a prescribed probability, called the confidence level. In this chapter we discuss the construction of confidence intervals for the expectation and for the variance of a measurement as well as for the probability of an event. In some cases the construction will apply the Normal approximation suggested by the Central Limit Theorem. This approximation is valid when the sample size is large enough. The construction of confidence intervals for a small sample is considered in the context of Normal measurements. By the end of this chapter, the student should be able to:</p>
+
+    <ul>
+      <li><p>Define confidence intervals and confidence levels.</p></li>
+      <li><p>Construct a confidence interval for the expectation of a measurement and for the probability of an event.</p></li>
+      <li><p>Construct a confidence interval for expectation and for the variance of a Normal measurement.</p></li>
+      <li><p>Compute the sample size that will produce a confidence interval of a given width.</p></li>
+    </ul>
+
   </section>
 
-  <section xml:id="sec-interval-estimation">
-    <title>Interval Estimation</title>
-    <p>Content to be added.</p>
+  <section xml:id="sec-intervals-mean-proportion">
+    <title>Intervals for Mean and Proportion</title>
+
+    <p>A confidence interval, like a point estimator, is a method for estimating the unknown value of a parameter. However, instead of producing a single number, the confidence interval is an interval of numbers. The interval of values is calculated from the data. The confidence interval is likely to include the unknown population parameter. The probability of the event of inclusion is denoted as the <em>confidence level</em> of the confidence intervals.</p>
+
+    <p>This section presents a method for the computation of confidence intervals for the expectation of a measurement and a similar method for the computation of a confidence interval for the probability of an event. These methods rely on the application of the Central Limit Theorem to the sample average in the one case, and to the sample proportion in the other case.</p>
+
+    <p>In the first subsection we compute a confidence interval for the expectation of the variable “<c>price</c>" and a confidence interval for the proportion of diesel cars. The confidence intervals are computed based on the data in the file “<c>cars.csv</c>". In the subsequent subsections we discuss the theory behind the computation of the confidence intervals and explain the meaning of the confidence level. Subsection <xref ref="subsec-cimean" /> does so with respect to the confidence interval for the expectation and Subsection <xref ref="subsec-cifrac" /> with respect to the confidence interval for the proportion.</p>
+
+    <subsection xml:id="confidenceexamples">
+      <title>Examples of Confidence Intervals</title>
+
+      <p>A point estimator of the expectation of a measurement is the sample average of the variable that is associated with the measurement. A confidence interval is an interval of numbers that is likely to contain the parameter value. A natural interval to consider is an interval centered at the sample average <m>\bar x</m>. The interval is set to have a width that assures the inclusion of the parameter value in the prescribed probability, namely the confidence level.</p>
+
+      <p>Consider the confidence interval for the expectation. The structure of the confidence interval of confidence level 95% is <m>[\bar x - 1.96 \cdot s/\sqrt{n}, \bar x + 1.96 \cdot s/\sqrt{n}]</m>, where <m>s</m> is the estimated standard deviation of the measurement (namely, the sample standard deviation) and <m>n</m> is the sample size. This interval may be expressed in the form:</p>
+
+      <me>\bar x \pm 1.96 \cdot s/\sqrt{n}\;.</me>
+
+      <p>As an illustration, let us construct a 0.95-confidence interval for the expected price of a car. :</p>
+
+      <program language="r"><input>
+cars &lt;- read.csv("_data/cars.csv")
+x.bar &lt;- mean(cars$price,na.rm=TRUE)
+s &lt;- sd(cars$price,na.rm=TRUE)
+n &lt;- 201
+
+      </input></program>
+
+      <p>In the first line of code the data in the file “<c>cars.csv</c>" is stored in a data frame called “<c>cars</c>". In the second line the average <m>\bar x</m> is computed for the variable “<c>price</c>" in the data frame “<c>cars</c>". This average is stored under the name “<c>x.bar</c>". Recall that the variable “<c>price</c>" contains 4 missing values. Hence, in order to compute the average of the non-missing values we should set a “<c>TRUE</c>" value to the argument “<c>na.rm</c>". The sample standard deviation “<c>s</c>" is computed in the third line by the application of the function “<c>sd</c>". We set once more the argument “<c>na.rm=TRUE</c>" in order to deal with the missing values. Finally, in the last line we store the sample size “<c>n</c>", the number of non-missing values.</p>
+
+      <p>Let us compute the lower and the upper limits of the confidence interval for the expectation of the price:</p>
+
+      <program language="r"><input>
+x.bar - 1.96*s/sqrt(n)
+x.bar + 1.96*s/sqrt(n)
+
+      </input></program>
+
+      <p>The lower limit of the confidence interval turns out to be $12,108.47 and the upper limit is $14,305.79. The confidence interval is the range of values between these two numbers.</p>
+
+      <p>Consider, next, a confidence interval for the probability of an event. The estimate of the probability <m>p</m> is <m>\hat p</m>, the relative proportion of occurrences of the event in the sample. Again, we construct an interval about this estimate. In this case, a confidence interval of confidence level 95% is of the form <m>\big[\hat p - 1.96 \cdot \sqrt{\hat p(1-\hat p)/n}, \hat p + 1.96 \cdot \sqrt{\hat p(1-\hat p)/n}\big]</m>, where <m>n</m> is the sample size. Observe that <m>\hat p</m> replaces <m>\bar x</m> as the estimate of the parameter and that <m>\hat p(1-\hat p)/n</m> replace <m>s^2/n</m> as the estimate of the variance of the estimator. The confidence interval for the probability may be expressed in the form:</p>
+
+      <me>\hat p \pm 1.96 \cdot \sqrt{\hat p (1-\hat p)/n}\;.</me>
+
+      <p>As an example, let us construct a confidence interval for the proportion of car types that use diesel fuel. The variable “<c>fuel.type</c>" is a factor that records the type of fuel the car uses, either diesel or gas:</p>
+
+      <program language="r"><input>
+table(cars$fuel.type)
+
+      </input></program>
+
+      <p>Only 20 of the 205 types of cars are run on diesel in this data set. The point estimation of the probability of such car types and the confidence interval for this probability are:</p>
+
+      <program language="r"><input>
+n &lt;- 205
+p.hat &lt;- 20/n
+p.hat
+p.hat - 1.96*sqrt(p.hat*(1-p.hat)/n)
+p.hat + 1.96*sqrt(p.hat*(1-p.hat)/n)
+
+      </input></program>
+
+      <p>The point estimation of the probability is <m>\hat p = 20/205 \approx 0.098</m> and the confidence interval, after rounding up, is <m>[0.057, 0.138]</m>.</p>
+
+    </subsection>
+
+    <subsection xml:id="subsec-cimean">
+      <title>Confidence Intervals for the Mean</title>
+
+      <p>In the previous subsection we computed a confidence interval for the expected price of a car and a confidence interval for the probability that a car runs on diesel. In this subsection we explain the theory behind the construction of confidence intervals for the expectation. The theory provides insight to the way confidence intervals should be interpreted. In the next subsection we will discuss the theory behind the construction of confidence intervals for the probability of an event.</p>
+
+      <p>Assume one is interested in a confidence interval for the expectation of a measurement <m>X</m>. For a sample of size <m>n</m>, one may compute the sample average <m>\bar X</m>, which is the point estimator for the expectation. The expected value of the sample average is the expectation <m>\Expec(X)</m>, for which we are trying to produce the confidence interval. Moreover, the variance of the sample average is <m>\Var(X)/n</m>, where <m>\Var(X)</m> is the variance of a single measurement and <m>n</m> is the sample size.</p>
+
+      <p>The construction of a confidence interval for the expectation relies on the Central Limit Theorem and on estimation of the variance of the measurement. The Central Limit Theorem states that the distribution of the (standardized) sample average <m>Z = (\bar X - \Expec(X)/\sqrt{\Var(X)/n}</m> is approximately standard Normal for a large enough sample size. The variance of the measurement can be estimated using the sample variance <m>S^2</m>.</p>
+
+      <p>Supposed that we are interested in a confidence interval with a confidence level of 95%. The value 1.96 is the 0.975-percentile of the standard Normal. Therefore, about 95% of the distribution of the standardized sample average is concentrated in the range <m>[-1.96,1,96]</m>:</p>
+
+      <me>\Prob \bigg(\bigg|\frac{\bar X - \Expec(X)}{\sqrt{\Var(X)/n}}\bigg| \leq 1.96 \bigg) \approx 0.95</me>
+
+      <p>The event, the probability of which is being described in the last display, states that the absolute value of deviation of the sample average from the expectation, divided by the standard deviation of the sample average, is no more than 1.96. In other words, the distance between the sample average and the expectation is at most 1.96 units of standard deviation. One may rewrite this event in a form that puts the expectation within an interval that is centered at the sample average:</p>
+
+      <me>\begin{aligned}
+\Big\{|\bar X - \Expec(X)| \leq 1.96 \cdot \sqrt{\Var(X)/n} \Big\} \quad \Longleftrightarrow &amp; \\
+\Big\{ \bar X -1.96 \cdot\sqrt{\Var(X)/n} \leq  \Expec(X) &amp;\leq \bar X + 1.96 \cdot \sqrt{\Var(X)/n}\Big\}\;.\end{aligned}</me>
+
+      <p>Clearly, the probability of the later event is (approximately) 0.95 since we are considering the same event, each time represented in a different form. The second representation states that the expectation <m>\Expec(X)</m> belongs to an interval about the sample average: <m>\bar X \pm 1.96  \sqrt{\Var(X)/n}</m>. This interval is, almost, the confidence interval we seek.</p>
+
+      <p>The difficulty is that we do not know the value of the variance <m>\Var(X)</m>, hence we cannot compute the interval in the proposed form from the data. In order to overcome this difficulty we recall that the unknown variance may nonetheless be estimated from the data:</p>
+
+      <me>S^2 \approx \Var(X) \quad \Longrightarrow \quad \sqrt{\Var(X)/n} \approx S/\sqrt{n}\;,</me>
+
+      <p>where <m>S</m> is the sample standard deviation.</p>
+
+      <p>When the sample size is sufficiently large, so that <m>S</m> is very close to the value of the standard deviation of an observation, we obtain that the interval <m>\bar X \pm 1.96  \sqrt{\Var(X)/n}</m> and the interval <m>\bar X \pm 1.96 \cdot S/\sqrt{n}</m> almost coincide. Therefore:</p>
+
+      <me>\Prob \bigg( \bar X -1.96 \cdot \frac{S}{\sqrt{n}} \leq  \Expec(X) \leq \bar X + 1.96 \cdot \frac{S}{\sqrt{n}}\bigg) \approx 0.95\;.</me>
+
+      <p>Hence, <m>\bar X \pm 1.96 \cdot S/\sqrt{n}</m> is an (approximate) confidence interval of the (approximate) confidence level 0.95.</p>
+
+      <p>Let us demonstrate the issue of confidence level by running a simulation. We are interested in a confidence interval for the expected price of a car. In the simulation we assume that the distribution of the price is <m>\mathrm{Exponential}(1/13000)</m>. (Consequently, <m>\Expec(X) = 13,000</m>). We take the sample size to be equal to <m>n=201</m> and compute the actual probability of the confidence interval containing the value of the expectation:</p>
+
+      <program language="r"><input>
+lam &lt;- 1/13000
+n &lt;- 201
+X.bar &lt;- rep(0,10^5)
+S &lt;- rep(0,10^5)
+for(i in 1:10^5) {
+  X &lt;- rexp(n,lam)
+  X.bar[i] &lt;- mean(X)
+  S[i] &lt;- sd(X)
+}
+LCL &lt;- X.bar - 1.96*S/sqrt(n)
+UCL &lt;- X.bar + 1.96*S/sqrt(n)
+mean((13000 &gt;= LCL) &amp; (13000 &lt;= UCL))
+
+      </input></program>
+
+      <p>Below we will go over the code and explain the simulation. But, before doing so, notice that the actual probability that the confidence interval contains the expectation is about 0.945, which is slightly below the nominal confidence level of 0.95. Still quoting the nominal value as the confidence level of the confidence interval is not too far from reality.</p>
+
+      <p>Let us look now at the code that produced the simulation. In each iteration of the simulation a sample is generated. The sample average and standard deviations are computed and stored in the appropriate locations of the sequences “<c>X.bar</c>" and “<c>S</c>". At the end of all the iterations the content of these two sequences represents the sampling distribution of the sample average <m>\bar X</m> and the sample standard deviation <m>S</m>, respectively.</p>
+
+      <p>The lower and the upper end-points of the confidence interval are computed in the next two lines of code. The lower level of the confidence interval is stored in the object “<c>LCL</c>" and the upper level is stored in “<c>UCL</c>". Consequently, we obtain the sampling distribution of the confidence interval. This distribution is approximated by 100,000 random confidence intervals that are generated by the sampling distribution. Some of these random intervals contain the value of the expectation, namely 13,000, and some do not. The proportion of intervals that contain the expectation is the (simulated) confidence level. The last expression produces this confidence level, which turns out to be equal to about 0.945.</p>
+
+      <p>The last expression involves a new element, the term “<c>&amp;</c>", which calls for more explanations. Indeed, let us refer to the last expression in the code. This expression involves the application of the function “<c>mean</c>". The input to this function contains two sequences with logical values (“<c>TRUE</c>" or “<c>FALSE</c>"), separated by the character “<c>&amp;</c>". The character “<c>&amp;</c>" corresponds to the logical “AND" operator. This operator produces a “<c>TRUE</c>" if a “<c>TRUE</c>" appears at both sides. Otherwise, it produces a “<c>FALSE</c>". (Compare this operator to the operator “OR", that is expressed in <c>R</c> with the character “<c>|</c>", that produces a “<c>TRUE</c>" if at least one “<c>TRUE</c>" appears at either sides.)</p>
+
+      <p>In order to clarify the behavior of the terms “<c>&amp;</c>" and “<c>|</c>" consider the following example:</p>
+
+      <program language="r"><input>
+a &lt;- c(TRUE, TRUE, FALSE, FALSE)
+b &lt;- c(FALSE, TRUE, TRUE, FALSE)
+a &amp; b
+a | b
+
+      </input></program>
+
+      <p>The term “<c>&amp;</c>" produces a “<c>TRUE</c>" only if parallel components in the sequences “<c>a</c>" and “<c>b</c>" both obtain the value “<c>TRUE</c>". On the other hand, the term “<c>|</c>" produces a “<c>TRUE</c>" if at least one of the parallel components are “<c>TRUE</c>". Observe, also, that the output of the expression that puts either of the two terms between two sequences with logical values is a sequence of the same length (with logical components as well).</p>
+
+      <p>The expression “<c>(13000 &gt;= LCL)</c>" produces a logical sequence of length 100,000 with “<c>TRUE</c>" appearing whenever the expectation is larger than the lower level of the confidence interval. Similarly, the expression “<c>(13000 &lt;= UCL)</c>" produces “<c>TRUE</c>" values whenever the expectation is less than the upper level of the confidence interval. The expectation belongs to the confidence interval if the value in both expressions is “<c>TRUE</c>". Thus, the application of the term “<c>&amp;</c>" to these two sequences identifies the confidence intervals that contain the expectation. The application of the function “<c>mean</c>" to a logical vector produces the relative frequency of <c>TRUE</c>’s in the vector. In our case this corresponds to the relative frequency of confidence intervals that contain the expectation, namely the confidence level.</p>
+
+      <p>We calculated before the confidence interval <m>[12108.47, 14305.79]</m> for the expected price of a car. This confidence interval was obtained via the application of the formula for the construction of confidence intervals with a 95% confidence level to the variable “<c>price</c>" in the data frame “<c>cars</c>". Casually speaking, people frequently refer to such an interval as an interval that contains the expectation with probability of 95%.</p>
+
+      <p>However, one should be careful when interpreting the confidence level as a probabilistic statement. The probability computations that led to the method for constructing confidence intervals were carried out in the context of the sampling distribution. Therefore, probability should be interpreted in the context of all data sets that could have emerged and not in the context of the given data set. No probability is assigned to the statement “The expectation belongs to the interval <m>[12108.47, 14305.79]</m>". The probability is assigned to the statement “The expectation belongs to the interval <m>\bar X \pm 1.96 \cdot S /\sqrt{n}</m>", where <m>\bar X</m> and <m>S</m> are interpreted as random variables. Therefore the statement that the interval <m>[12108.47, 14305.79]</m> contains the expectation with probability of 95% is meaningless. What is meaningful is the statement that the given interval was constructed using a procedure that produces, when applied to random samples, intervals that contain the expectation with the assigned probability.</p>
+
+    </subsection>
+
+    <subsection xml:id="subsec-cifrac">
+      <title>Confidence Intervals for a Proportion</title>
+
+      <p>The next issue is the construction of a confidence interval for the probability of an event. Recall that a probability <m>p</m> of some event can be estimated by the observed relative frequency of the event in the sample, denoted <m>\hat P</m>. The estimation is associated with the Bernoulli random variable <m>X</m>, that obtains the value 1 when the event occurs and the value 0 when it does not. In the estimation problem <m>p</m> is the expectation of <m>X</m> and <m>\hat P</m> is the sample average of this measurement. With this formulation we may relate the problem of the construction of a confidence interval for <m>p</m> to the problem of constructing a confidence interval for the expectation of a measurement. The latter problem was dealt with in the previous subsection.</p>
+
+      <p>Specifically, the discussion regarding the steps in the construction – staring with an application of the Central Limit Theorem in order to produce an interval that depends on the sample average and its variance and proceeding by the replacement of the unknown variance by its estimate – still apply and may be taken as is. However, in the specific case we have a particular expression for the variance of the estimate <m>\hat P</m>:</p>
+
+      <me>\Var(\hat P) = p(1-p)/n \approx \hat P(1- \hat P) /n\;.</me>
+
+      <p>The tradition is to estimate this variance by using the estimator <m>\hat P</m> for the unknown <m>p</m> instead of using the sample variance. The resulting confidence interval of significance level 0.95 takes the form:</p>
+
+      <me>\bar P \pm 1.96 \cdot\sqrt{ \hat P(1-\hat P)/n}\;.</me>
+
+      <p>Let us run a simulation in order to assess the confidence level of the confidence interval for the probability. Assume that <m>n=205</m> and <m>p=0.12</m>. The simulation we run is very similar to the simulation of Subsection <xref ref="subsec-cimean" />. In the first stage we produce the sampling distribution of <m>\hat P</m> (stored in the sequence “<c>P.hat</c>") and in the second stage we compute the relative frequency in the simulation of the intervals that contain the actual value of <m>p</m> that was used in the simulation:</p>
+
+      <program language="r"><input>
+p &lt;- 0.12
+n &lt;- 205
+P.hat &lt;- rep(0,10^5)
+for(i in 1:10^5) {
+  X &lt;- rbinom(n,1,p)
+  P.hat[i] &lt;- mean(X)
+}
+LCL &lt;- P.hat - 1.96*sqrt(P.hat*(1-P.hat)/n)
+UCL &lt;- P.hat + 1.96*sqrt(P.hat*(1-P.hat)/n)
+mean((p &gt;= LCL) &amp; (p &lt;= UCL))
+
+      </input></program>
+
+      <p>In this simulation we obtained that the actual confidence level is approximately 0.951, which is slightly above the nominal confidence level of 0.95.</p>
+
+      <p>The formula <m>\bar X \pm 1.96 \cdot S/\sqrt{n}</m> that is used for a confidence interval for the expectation and the formula <m>\hat P \pm 1.96 \cdot \{\hat P (1-\hat P)/n\}^{1/2}</m> for the probability both refer to a confidence intervals with confidence level of 95%. If one is interested in a different confidence level then the width of the confidence interval should be adjusted: a wider interval for higher confidence and a narrower interval for smaller confidence level.</p>
+
+      <p>Specifically, if we examine the derivation of the formulae for confidence intervals we may notice that the confidence level is used to select the number 1.96, which is the 0.975-percentile of the standard Normal distribution (1.96 =<c>qnorm(0.975)</c>). The selected number satisfies that the interval <m>[-1.96,1.96]</m> contains 95% of the standard Normal distribution by leaving out 2.5% on both tails. For a different confidence level the number 1.96 should be replace by a different number.</p>
+
+      <p>For example, if one is interested in a 90% confidence level then one should use 1.645, which is the 0.95-percentile of the standard Normal distribution (<c>qnorm(0.95)</c>), leaving out 5% in both tails. The resulting confidence interval for an expectation is <m>\bar X \pm 1.645 \cdot S/\sqrt{n}</m> and the confidence interval for a probability is <m>\hat P \pm 1.645 \cdot \{\hat P (1-\hat P)/n\}^{1/2}</m>.</p>
+
+    </subsection>
+
   </section>
 
-  <section xml:id="sec-confidence-intervals-intro">
-    <title>Confidence Intervals</title>
-    <p>Content to be added.</p>
+  <section xml:id="sec-intervals-normal-measurements">
+    <title>Intervals for Normal Measurements</title>
+
+    <p>In the construction of the confidence intervals in the previous section it was assumed that the sample size is large enough. This assumption was used both in the application of the Central Limit Theorem and in the substitution of the unknown variance by its estimated value. For a small sample size the reasoning that was applied before may no longer be valid. The Normal distribution may not be a good enough approximation of the sampling distribution of the sample average and the sample variance may differ substantially from the actual value of the measurement variance.</p>
+
+    <p>In general, making inference based on small samples requires more detailed modeling of the distribution of the measurements. In this section we will make the assumption that the distribution of the measurements is Normal. This assumption may not fit all scenarios. For example, the Normal distribution is a poor model for the price of a car, which is better modeled by the Exponential distribution. Hence, a blind application of the methods developed in this section to variables such as the price when the sample size is small may produce dubious outcomes and is not recommended.</p>
+
+    <p>When the distribution of the measurements is Normal then the method discussed in this section will produce valid confidence intervals for the expectation of the measurement even for a small sample size. Furthermore, we will extend the methodology to enable the construction of confidence intervals for the variance of the measurement.</p>
+
+    <p>Before going into the details of the methods let us present an example of inference that involves a small sample. Consider the issue of fuel consumption. Two variables in the “<c>cars</c>" data frame describe the fuel consumption. The first, “<c>city.mpg</c>", reports the number of miles per gallon when the car is driven in urban conditions and the second, “<c>highway.mpg</c>", reports the miles per gallon in highway conditions. Typically, driving in city conditions requires more stopping and change of speed and is less efficient in terms of fuel consumption. Hence, one expects to obtained a reduced number of miles per gallon when driving in urban conditions compared to the number when driving in highway conditions.</p>
+
+    <p>For each car type we calculate the difference variable that measures the difference between the number of miles per gallon in highway conditions and the number in urban conditions. The cars are sub-divided between cars that run on diesel and cars that run on gas. Our concern is to estimate, for each fuel type, the expectation of difference variable and to estimate the variance of that variable. In particular, we are interested in the construction of a confidence intervals for the expectation and a confidence interval for the variance.</p>
+
+    <p>Box plots of the difference in fuel consumption between highway and urban conditions are presented in Figure <xref ref="fig-confidence2" />. The box plot on the left hand side corresponds to cars that run on diesel and the box plot on the right hand side corresponds to cars that run on gas. Recall that 20 of the 205 car types use diesel and the other 185 car types use gas. One may suspect that the fuel consumption characteristics vary between the two types of fuel. Indeed, the measurement tends to have sightly higher values for vehicles that use gas.</p>
+
+    <program language="r"><input>
+cars$dif.mpg =  cars$highway.mpg - cars$city.mpg
+boxplot(dif.mpg ~ fuel.type, data=cars)
+
+    </input></program>
+
+    <p>We conduct inference for each fuel type separately. However, since the sample size for cars that run on diesel is only 20, one may have concerns regarding the application of methods that assume a large sample size to a sample size this small.</p>
+
+    <subsection xml:id="subsec-confidence-intervals-for-a-normal-mean">
+      <title>Confidence Intervals for a Normal Mean</title>
+
+      <p>Consider the construction of a confidence interval for the expectation of a Normal measurement. In the previous section, when dealing with the construction of a confidence interval for the expectation, we exploited the Central Limit Theorem in order to identify that the distribution of the standardized sample average <m>(\bar X - \Expec(X))/\sqrt{\Var(X)/n}</m> is, approximately, standard Normal. Afterwards, we substituted the standard deviation of the measurement by the sample standard deviation <m>S</m>, which was an accurate estimator of the former due to the magnitude sample size.</p>
+
+      <p>In the case where the measurements themselves are Normally distributed one can identify the exact distribution of the standardized sample average, with the sample variance substituting the variance of the measurement: <m>(\bar X - \Expec(X))/(S/\sqrt{n})</m>. This specific distribution is called the Student’s <m>t</m>-distribution, or simply the <m>t</m>-distribution.</p>
+
+      <p>The <m>t</m>-distribution is bell shaped and symmetric. Overall, it looks like the standard Normal distribution but it has wider tails. The <m>t</m>-distribution is characterized by a parameter called the number of <em>degrees of freedom</em>. In the current setting, where we deal with the standardized sample average (with the sample variance substituting the variance of the measurement) the number of degrees of freedom equals the number of observations associated with the estimation of the variance, minus 1. Hence, if the sample size is <m>n</m> and if the measurement is Normally distributed then the standardized sample average (with <m>S</m> substituting the standard deviation of the measurement) has a <m>t</m>-distribution on <m>(n-1)</m> degrees of freedom. We use <m>t_{(n-1)}</m> to denote this <m>t</m>-distribution.</p>
+
+      <p>The <c>R</c> system contains functions for the computation of the density, the cumulative probability function and the percentiles of the <m>t</m>-distribution, as well as for the simulation of a random sample from this distribution. Specifically, the function “<c>qt</c>" computes the percentiles of the <m>t</m>-distribution. The first argument to the function is a probability and the second argument is the number of degrees of freedom. The output of the function is the percentile associated with the probability of the first argument. Namely, it is a value such that the probability that the <m>t</m>-distribution is below the value is equal to the probability in the first argument.</p>
+
+      <p>For example, let “<c>n</c>" be the sample size. The output of the expression “<c>qt(0.975,n-1)</c>" is the 0.975-percentile of the <m>t</m>-distribution on <m>(n-1)</m> degrees of freedom. By definition, 97.5% of the <m>t</m>-distribution are below this value and 2.5% are above it. The symmetry of the <m>t</m> distribution implies that 2.5% of the distribution is below the negative of this value. The middle part of the distribution is bracketed by these two values: <m>[-\mbox{\texttt{qt(0.975,n-1)}}, \mbox{\texttt{qt(0.975,n-1)}}]</m>, and it contains 95% of the distribution.</p>
+
+      <p>Summarizing the above claims in a single formula produces the statement:</p>
+
+      <me>\frac{\bar X - \Expec(X)}{S/\sqrt{n}} \sim t_{(n-1)} \quad \Longrightarrow \quad \Prob \bigg(\bigg|\frac{\bar X - \Expec(X)}{S/\sqrt{n}}\bigg| \leq \mbox{\texttt{qt(0.975,n-1)}} \bigg) = 0.95\;.</me>
+
+      <p>Notice that the equation associated with the probability is not an approximation but an exact relation. Rewriting the event that is described in the probability in the form of a confidence interval, produces</p>
+
+      <me>\bar X \pm \mbox{\texttt{qt(0.975,n-1)}}\cdot S/ \sqrt{n}</me>
+
+      <p>as a confidence interval for the expectation of the Normal measurement with a confidence level of 95%.</p>
+
+      <p>The structure of the confidence interval for the expectation of a Normal measurement is essentially identical to the structure proposed in the previous section. The only difference is that the number 1.96, the percentile of the standard Normal distribution, is substituted by the percentile of the <m>t</m>-distribution.</p>
+
+      <p>Consider the construction of a confidence interval for the expected difference in fuel consumption between highway and urban driving conditions. In order to save writing we created two new variables; a factor called “<c>fuel</c>" that contains the data on the fuel type of each car, and a numerical vector called “<c>dif.mpg</c>" that contains the difference between highway and city fuel consumption for each car type:</p>
+
+      <program language="r"><input>
+fuel &lt;- cars$fuel.type
+dif.mpg &lt;- cars$highway.mpg - cars$city.mpg
+
+      </input></program>
+
+      <p>We are interested in confidence intervals based on the data stored in the variable “<c>dif.mpg</c>". One confidence interval will be associated with the level “<c>diesel</c>" of the factor “<c>fuel</c>" and the other will be associated with the level “<c>gas</c>" of the same factor.</p>
+
+      <p>In order to compute these confidence intervals we need to compute, for each level of the factor “<c>fuel</c>", the sample average and the sample standard deviation of the data points of the variable “<c>dif.mpg</c>" that are associated with that level.</p>
+
+      <p>It is convenient to use the function “<c>tapply</c>" for this task. This function uses three arguments. The first argument is the sequence of values over which we want to carry out some computation. The second argument is a factor. The third argument is a name of a function that is used for the computation. The function “<c>tapply</c>" applies the function in the third argument to each sub-collection of values of the first argument. The sub-collections are determined by the levels of the second argument.</p>
+
+      <p>Sounds complex but it is straightforward enough to apply:</p>
+
+      <program language="r"><input>
+tapply(dif.mpg,fuel,mean)
+tapply(dif.mpg,fuel,sd)
+
+      </input></program>
+
+      <p>Sample averages are computed in the first application of the function “<c>tapply</c>". Observe that an average was computed for cars that run on diesel and an average was computed for cars that run on gas. In both cases the average corresponds to the difference in fuel consumption. Similarly, the standard deviations were computed in the second application of the function. We obtain that the point estimates of the expectation for diesel and gas cars are 4.45 and 5.648649, respectively and the point estimates for the standard deviation of the variable are 2.781045 and 1.433607.</p>
+
+      <p>Let us compute the confidence interval for each type of fuel:</p>
+
+      <program language="r"><input>
+x.bar &lt;- tapply(dif.mpg,fuel,mean)
+s &lt;- tapply(dif.mpg,fuel,sd)
+n &lt;- c(20,185)
+x.bar - qt(0.975,n-1)*s/sqrt(n)
+x.bar + qt(0.975,n-1)*s/sqrt(n)
+
+      </input></program>
+
+      <p>The objects “<c>x.bar</c>" and “<c>s</c>" contain the sample averages and sample standard deviations, respectively. Both are sequences of length two, with the first component referring to “<c>diesel</c>" and the second component referring to “<c>gas</c>". The object “<c>n</c>" contains the two sample sizes, 20 for “<c>diesel</c>" and 185 for “<c>gas</c>". In the expression next to last the lower boundary for each of the confidence intervals is computed and in the last expression the upper boundary is computed. The confidence interval for the expected difference in diesel cars is <m>[3.148431, 5.751569]</m>. and the confidence interval for cars using gas is <m>[5.440699, 5.856598]</m>.</p>
+
+      <p>The 0.975-percentiles of the <m>t</m>-distributions are computed with the expressions “<c>qt(0.025,n-1)</c>":</p>
+
+      <program language="r"><input>
+qt(0.975,n-1)
+
+      </input></program>
+
+      <p>The second argument of the function “<c>qt</c>" is a sequence with two components, the number 19 and the number 184. Accordingly, The first position in the output of the function is the percentile associated with 19 degrees of freedom and the second position is the percentile associated to 184 degrees of freedom.</p>
+
+      <p>Compare the resulting percentiles to the 0.975-percentile of the standard Normal distribution, which is essentially equal to 1.96. When the sample size is small, 20 for example, the percentile of the <m>t</m>-distribution is noticeably larger than the percentile of the standard Normal. However, for a larger sample size the percentiles, more or less, coincide. It follows that for a large sample the method proposed in Subsection <xref ref="subsec-cimean" /> and the method discussed in this subsection produce essentially the same confidence intervals.</p>
+
+    </subsection>
+
+    <subsection xml:id="subsec-confidence-intervals-for-a-normal-variance">
+      <title>Confidence Intervals for a Normal Variance</title>
+
+      <p>The next task is to compute confidence intervals for the variance of a Normal measurement. The main idea in the construction of a confidence interval is to identify the distribution of a random variable associated with the parameter of interest. A region that contains 95% of the distribution of the random variable (or, more generally, the central part of the distribution of probability equal to the confidence level) is identified. The confidence interval results from the reformulation of the event associated with that region. The new formulation puts the parameter between a lower limit and an upper limit. These lower and the upper limits are computed from the data and they form the boundaries of the confidence interval.</p>
+
+      <p>We start with the sample variance, <m>S^2 = \sum_{i=1}^n (X_i - \bar X)^2/(n-1)</m>, which serves as a point estimator of the parameter of interest. When the measurements are Normally distributed then the random variable <m>(n-1)S^2/\sigma^2</m> possesses a special distribution called the chi-square distribution. (Chi is the Greek letter <m>\chi</m>, which is read “Kai".) This distribution is associated with the sum of squares of Normal variables. It is parameterized, just like the <m>t</m>-distribution, by a parameter called the number of degrees of freedom. This number is equal to <m>(n-1)</m> in the situation we discuss. The chi-square distribution on <m>(n-1)</m> degrees of freedom is denoted with the symbol <m>\chi^2_{(n-1)}</m>.</p>
+
+      <p>The <c>R</c> system contains functions for the computation of the density, the cumulative probability function and the percentiles of the chi-square distribution, as well as for the simulation of a random sample from this distribution. Specifically, the percentiles of the chi-square distribution are computed with the aid of the function “<c>qchisq</c>". The first argument to the function is a probability and the second argument is the number of degrees of freedom. The output of the function is the percentile associated with the probability of the first argument. Namely, it is a value such that the probability that the chi-square distribution is below the value is equal to the probability in the first argument.</p>
+
+      <p>For example, let “<c>n</c>" be the sample size. The output of the expression “<c>qt(0.975,n-1)</c>" is the 0.975-percentile of the chi-square distribution. By definition, 97.5% of the chi-square distribution are below this value and 2.5% are above it. Similarly, the expression “<c>qchisq(0.025,n-1)</c>" is the 0.025-percentile of the chi-square distribution, with 2.5% of the distribution below this value. Notice that between these two percentiles, namely within the interval <m>[\mbox{\texttt{qchisq(0.025,n-1)}}, \mbox{\texttt{qchisq(0.975,n-1)}}]</m>, are 95% of the chi-square distribution.</p>
+
+      <p>We may summarize that for Normal measurements:</p>
+
+      <me>\begin{aligned}
+\lefteqn{(n-1)S^2/\sigma^2 \sim \chi^2_{(n-1)} \quad \Longrightarrow }\\ &amp; \Prob \big( \mbox{\texttt{qchisq(0.025,n-1)}} \leq (n-1)S^2/\sigma^2  \leq \mbox{\texttt{qchisq(0.975,n-1)}} \big) = 0.95\;.\end{aligned}</me>
+
+      <p>The chi-square distribution is not symmetric. Therefore, in order to identify the region that contains 95% of the distribution region we have to compute both the 0.025- and the 0.975-percentiles of the distribution.</p>
+
+      <p>The event associated with the 95% region is rewritten in a form that puts the parameter <m>\sigma^2</m> in the center:</p>
+
+      <me>\big\{(n-1)S^2/\mbox{\texttt{qchisq(0.975,n-1)}} \leq  \sigma^2  \leq (n-1)S^2/\mbox{\texttt{qchisq(0.025,n-1)}}\big\}\;.</me>
+
+      <p>The left most and the right most expressions in this event mark the end points of the confidence interval. The structure of the confidence interval is:</p>
+
+      <me>\big[\{(n-1)/\mbox{\texttt{qchisq(0.975,n-1)}}\}\times S^2,\;\{(n-1)/\mbox{\texttt{qchisq(0.025,n-1)}}\}\times S^2\big]\;.</me>
+
+      <p>Consequently, the confidence interval is obtained by the multiplication of the estimator of the variance by a ratio between the number of degrees of freedom (<m>n-1</m>) and an appropriate percentile of the chi-square distribution. The percentile on the left hand side is associated with the larger probability (making the ratio smaller) and the percentile on the right hand side is associated with the smaller probability (making the ratio larger).</p>
+
+      <p>Consider, specifically, the confidence intervals for the variance of the measurement “<c>diff.mpg</c>" for cars that run on diesel and for cars that run on gas. Here, the size of the samples is 20 and 185, respectively:</p>
+
+      <program language="r"><input>
+(n-1)/qchisq(0.975,n-1)
+(n-1)/qchisq(0.025,n-1)
+
+      </input></program>
+
+      <p>The ratios that are used in the left hand side of the intervals are 0.5783456 and 0.8234295, respectively. Both ratios are less than one. On the other hand, the ratios associated with the other end of the intervals, 2.133270 and 1.240478, are both larger than one.</p>
+
+      <p>Let us compute the point estimates of the variance and the associated confidence intervals. Recall that the object “<c>s</c>" contains the sample standard deviations of the difference in fuel consumption for diesel and for gas cars. The object “<c>n</c>" contains the two sample sizes:</p>
+
+      <program language="r"><input>
+s^2
+(n-1)*s^2/qchisq(0.975,n-1)
+(n-1)*s^2/qchisq(0.025,n-1)
+
+      </input></program>
+
+      <p>The variance of the difference in fuel consumption for diesel cars is estimated to be 7.734211 with a 95%-confidence interval of <m>[4.473047, 16.499155]</m> and for cars that use gas the estimated variance is 2.055229, with a confidence interval of <m>[1.692336, 2.549466]</m>.</p>
+
+      <p>As a final example in this section let us simulate the confidence level for a confidence interval for the expectation and for a confidence interval for the variance of a Normal measurement. In this simulation we assume that the expectation is equal to <m>\mu = 3</m> and the variance is equal to <m>\sigma^2 = 3^2 = 9</m>. The sample size is taken to be <m>n=20</m>. We start by producing the sampling distribution of the sample average <m>\bar X</m> and of the sample standard deviation <m>S</m>:</p>
+
+      <program language="r"><input>
+mu &lt;- 4
+sig &lt;- 3
+n &lt;- 20
+X.bar &lt;- rep(0,10^5)
+S &lt;- rep(0,10^5)
+for(i in 1:10^5) {
+  X &lt;- rnorm(n,mu,sig)
+  X.bar[i] &lt;- mean(X)
+  S[i] &lt;- sd(X)
+}
+
+      </input></program>
+
+      <p>Consider first the confidence interval for the expectation:</p>
+
+      <program language="r"><input>
+mu.LCL &lt;- X.bar - qt(0.975,n-1)*S/sqrt(n)
+mu.UCL &lt;- X.bar + qt(0.975,n-1)*S/sqrt(n)
+mean((mu &gt;= mu.LCL) &amp; (mu &lt;= mu.UCL))
+
+      </input></program>
+
+      <p>The nominal significance level of the confidence interval is 95%, which is practically identical to the confidence level that was computed in the simulation.</p>
+
+      <p>The confidence interval for the variance is obtained in a similar way. The only difference is that we apply now different formulae for the computation of the upper and lower confidence limits:</p>
+
+      <program language="r"><input>
+var.LCL &lt;- (n-1)*S^2/qchisq(0.975,n-1)
+var.UCL &lt;- (n-1)*S^2/qchisq(0.025,n-1)
+mean((sig^2 &gt;= var.LCL) &amp; (sig^2 &lt;= var.UCL))
+
+      </input></program>
+
+      <p>Again, we obtain that the nominal confidence level of 95% coincides with the confidence level computed in the simulation.</p>
+
+    </subsection>
+
+  </section>
+
+  <section xml:id="sec-choosing-sample-size">
+    <title>Choosing the Sample Size</title>
+
+    <p>One of the more important contributions of Statistics to research is providing guidelines for the design of experiments and surveys. A well planed experiment may produce accurate enough answers to the research questions while optimizing the use of resources. On the other hand, poorly planed trials may fail to produce such answers or may waste valuable resources.</p>
+
+    <p>Unfortunately, in this book we do not cover the subject of experiment design. Still, we would like to give a brief discussion of a narrow aspect in design: The selection of the sample size.</p>
+
+    <p>An important consideration at the stage of the planning of an experiment or a survey is the number of observations that should be collected. Indeed, having a larger sample size is usually preferable from the statistical point of view. However, an increase in the sample size typically involves an increase in expenses. Thereby, one would prefer to collect the minimal number of observations that is still sufficient in order to reach a valid conclusion.</p>
+
+    <p>As an example, consider an opinion poll aimed at the estimation of the proportion in the population of those that support a specific candidate that considers running for an office. How large the sample must be in order to assure, with high probability, that the percentage in the sample of supporters is within 0.5% of the percentage in the population? Within 0.25%?</p>
+
+    <p>A natural way to address this problem is via a confidence interval for the proportion. If the range of the confidence interval is no more than 0.05 (or 0.025 in the other case) then with a probability equal to the confidence level it is assured that the population relative frequency is within the given distance from the sample proportion.</p>
+
+    <p>Consider a confidence level of 95%. Recall that the structure of the confidence interval for the proportion is <m>\hat P \pm 1.96 \cdot \{\hat P (1-\hat P)/n\}^{1/2}</m>. The range of the confidence interval is <m>1.96 \cdot \{\hat P (1-\hat P)/n\}^{1/2}</m>. How large should <m>n</m> be in order to guarantee that the range is no more than 0.05?</p>
+
+    <p>The answer to this question depends on the magnitude of <m>\hat P (1-\hat P)</m>, which is a random quantity. Luckily, one may observe that the maximal value of the quadratic function <m>f(p) = p (1-p)</m> is 1/4. It follows that</p>
+
+    <me>1.96 \cdot \{\hat P (1-\hat P)/n\}^{1/2} \leq 1.96 \cdot \{0.25/n\}^{1/2} = 0.98/\sqrt{n}\;.</me>
+
+    <p>Finally,</p>
+
+    <me>0.98/\sqrt{n} \leq 0.05 \quad \Longrightarrow \quad \sqrt{n} \geq 0.98/0.05 = 19.6
+\quad \Longrightarrow \quad  n \geq (19.6)^2 = 384.16\;.</me>
+
+    <p>The conclusion is that <m>n</m> should be larger than 384 in order to assure the given range. For example, <m>n=385</m> should be sufficient.</p>
+
+    <p>If the request is for an interval of range 0.025 then the last line of reasoning should be modified accordingly:</p>
+
+    <me>0.98/\sqrt{n} \leq 0.025 \quad \Longrightarrow \quad \sqrt{n} \geq \frac{0.98}{0.025} = 39.2
+\quad \Longrightarrow \quad  n \geq (39.2)^2 = 1536.64\;.</me>
+
+    <p>Consequently, <m>n=1537</m> will do. Increasing the accuracy by 50% requires a sample size that is 4 times larger.</p>
+
+    <p>More examples that involve selection of the sample size will be considered as part of the homework.</p>
+
   </section>
 
   <section xml:id="sec-exercises-11">
     <title>Exercises</title>
-    <p>Content to be added.</p>
+
+    <exercise>
+      <statement>
+        <p>This exercise deals with an experiment that was conducted among students. The aim of the experiment was to assess the effect of rumors and prior reputation of the instructor on the evaluation of the instructor by her students. The experiment was conducted by Towler and Dipboye. This case study is taken from the <url href="http://onlinestatbook.com/rvls.html">Rice Virtual Lab in Statistics</url>. More details on this case study can be found in the case study "<url href="http://onlinestatbook.com/case_studies_rvls/instructor_reputation/index.html">Instructor Reputation and Teacher Ratings</url>" that is presented in that site.</p>
+        
+        <p>The experiment involved 49 students that were randomly assigned to one of two conditions. Before viewing the lecture, students were give one of two "summaries" of the instructor's prior teaching evaluations. The first type of summary, i.e. the first condition, described the lecturer as a charismatic instructor. The second type of summary (second condition) described the lecturer as a punitive instructor. We code the first condition as "<c>C</c>" and the second condition as "<c>P</c>". All subjects watched the same twenty-minute lecture given by the exact same lecturer. Following the lecture, subjects rated the lecturer.</p>
+        
+        <p>The outcomes are stored in the file "<c>teacher.csv</c>". The file can be found on the internet at <url href="http://pluto.huji.ac.il/~msby/StatThink/Datasets/teacher.csv">http://pluto.huji.ac.il/~msby/StatThink/Datasets/teacher.csv</url>. Download this file to your computer and store it in the working directory of <c>R</c>. Read the content of the file into an <c>R</c> data frame. Produce a summary of the content of the data frame and answer the following questions:</p>
+        
+        <ol>
+          <li><p>Identify, for each variable in the file "<c>teacher.csv</c>", the name and the type of the variable (factor or numeric).</p></li>
+          <li><p>Estimate the expectation and the standard deviation among all students of the rating of the teacher.</p></li>
+          <li><p>Estimate the expectation and the standard deviation of the rating only for students who were given a summary that describes the teacher as charismatic.</p></li>
+          <li><p>Construct a confidence interval of 99% confidence level for the expectation of the rating among students who were given a summary that describes the teacher as charismatic. (Assume the ratings have a Normal distribution.)</p></li>
+          <li><p>Construct a confidence interval of 90% confidence level for the variance of the rating among students who were given a summary that describes the teacher as charismatic. (Assume the ratings have a Normal distribution.)</p></li>
+        </ol>
+      </statement>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>Twenty observations are used in order to construct a confidence interval for the expectation. In one case, the construction is based on the Normal approximation of the sample average and in the other case it is constructed under the assumption that the observations are Normally distributed. Assume that in reality the measurement is distributed <m>\mathrm{Exponential}(1/4)</m>.</p>
+        
+        <ol>
+          <li><p>Compute, via simulation, the actual confidence level for the first case of a confidence interval with a nominal confidence level of 95%.</p></li>
+          <li><p>Compute, via simulation, the actual confidence level for the second case of a confidence interval with a nominal confidence level of 95%.</p></li>
+          <li><p>Which of the two approaches would you prefer?</p></li>
+        </ol>
+      </statement>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>Insurance companies are interested in knowing the population percent of drivers who always buckle up before riding in a car.</p>
+        
+        <ol>
+          <li><p>When designing a study to determine this proportion, what is the minimal sample size that is required for a 99% confident that the population proportion is accurately estimated, up to an error of 0.03?</p></li>
+          <li><p>Suppose that the insurance companies did conduct the study by surveying 400 drivers. They found that 320 of the drives claim to always buckle up. Produce an 80% confidence interval for the population proportion of drivers who claim to always buckle up.</p></li>
+        </ol>
+      </statement>
+    </exercise>
     
     <figure xml:id="fig-confidence2">
       <caption>Box Plots of Ratings</caption>
@@ -34,10 +479,12 @@
         <description>Box plots comparing ratings between two conditions</description>
       </image>
     </figure>
+
   </section>
 
   <section xml:id="sec-summary-11">
     <title>Summary</title>
-    <p>Content to be added.</p>
+
   </section>
+
 </chapter>
