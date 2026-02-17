@@ -50,7 +50,7 @@
     
     <figure xml:id="fig-intror1">
       <caption>Frequency of Average Time (in Hours) Spent Sleeping per Night</caption>
-      <image source="generated/sleep-data-plot.svg" width="60%">
+      <image source="_figures/sleep-data-plot.png" width="60%">
         <description>A bar plot showing the frequency distribution of average sleep time in hours. The x-axis shows time in hours from 5 to 9, and the y-axis shows frequency. The plot displays bars at various heights representing how many people reported each sleep duration.</description>
       </image>
     </figure>
@@ -191,9 +191,9 @@ setwd("~/IntroStat")
         <input>
 1 + 2
         </input>
-        <output>
+        <pre>
 [1] 3
-        </output>
+        </pre>
       </program>
       
       <p>
@@ -212,9 +212,9 @@ setwd("~/IntroStat")
         <input>
 c(5,5.5,6,6,6,6.5,6.5,6.5,6.5,7,7,8,8,9)
         </input>
-        <output>
+        <pre>
 [1] 5.0 5.5 6.0 6.0 6.0 6.5 6.5 6.5 6.5 7.0 7.0 8.0 8.0 9.0
-        </output>
+        </pre>
       </program>
       
       <p>
@@ -251,9 +251,9 @@ X &lt;- c(5,5.5,6,6,6,6.5,6.5,6.5,6.5,7,7,8,8,9)
         <input>
 X
         </input>
-        <output>
+        <pre>
 [1] 5.0 5.5 6.0 6.0 6.0 6.5 6.5 6.5 6.5 7.0 7.0 8.0 8.0 9.0
-        </output>
+        </pre>
       </program>
       
       <p>
@@ -294,9 +294,9 @@ X
         <input>
 x
         </input>
-        <output>
-Error: object 'x' not found
-        </output>
+        <pre>
+Error in eval(expr, envir, enclos): object 'x' not found
+        </pre>
       </program>
       
       <p>
@@ -315,11 +315,11 @@ Error: object 'x' not found
         <input>
 table(X)
         </input>
-        <output>
+        <pre>
 X
   5 5.5   6 6.5   7   8   9 
   1   1   3   4   2   2   1
-        </output>
+        </pre>
       </program>
       
       <p>
@@ -335,7 +335,10 @@ X
 plot(table(X))
         </input>
       </program>
-      
+    <figure xml:id="fig-plot-table-x">
+      <image source="_figures/fig-plot-table-x.png" width="60%">
+      </image>
+    </figure>
       <p>
         This plot is practically identical to the plot in <xref ref="fig-intror1" />. The only difference is in the names given to the axes. These names were changed in <xref ref="fig-intror1" /> for clarity.
       </p>
