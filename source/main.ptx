@@ -4,6 +4,9 @@
   <docinfo>
     <macros>
       \newcommand{\R}{\mathbb{R}}
+      \newcommand{\Expec}{\mathbf{E}}
+      \newcommand{\Prob}{\mathbf{P}}
+      \newcommand{\Var}{\mathbf{V}}
     </macros>
     <latex-image-preamble>
       \usepackage{tikz}
