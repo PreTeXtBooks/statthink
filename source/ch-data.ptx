@@ -77,6 +77,11 @@ work.hours &lt;- c(5,6,3,3,2,4,7,5,2,3,5,6,5,4,4,3,5,2,5,3)
 table(work.hours)
         </input>
       </program>
+<pre>
+## work.hours
+## 2 3 4 5 6 7 
+## 3 5 3 6 2 1
+</pre>
       <p>
         Recall that the function <q><c>table</c></q> takes as input a sequence of data and produces as output the frequencies of the different values.
       </p>
@@ -88,6 +93,15 @@ table(work.hours)
 data.frame(table(work.hours))
         </input>
       </program>
+<pre>
+##   work.hours Freq
+## 1          2    3
+## 2          3    5
+## 3          4    3
+## 4          5    6
+## 5          6    2
+## 6          7    1
+</pre>
       <p>
         A frequency is the number of times a given datum occurs in a data set. According to the table above, there are three students who work 2 hours, five students who work 3 hours, etc. The total of the frequency column, 20, represents the total number of students included in the sample.
       </p>
@@ -108,6 +122,19 @@ sum(freq)
 freq/sum(freq)
         </input>
       </program>
+<pre>
+## work.hours
+## 2 3 4 5 6 7 
+## 3 5 3 6 2 1
+</pre>
+<pre>
+## [1] 20
+</pre>
+<pre>
+## work.hours
+##    2    3    4    5    6    7 
+## 0.15 0.25 0.15 0.30 0.10 0.05
+</pre>
       <p>
         We stored the frequencies in an object called <q><c>freq</c></q>. The content of the object are the frequencies 3, 5, 3, 6, 2 and 1. The function <q><c>sum</c></q> sums the components of its input. The sum of the frequencies is the sample size , the total number of students that responded to the survey, which is 20. Hence, when we apply the function <q><c>sum</c></q> to the object <q><c>freq</c></q> we get 20 as an output.
       </p>
@@ -119,6 +146,9 @@ freq/sum(freq)
 sum(freq/sum(freq))
         </input>
       </program>
+<pre>
+## [1] 1
+</pre>
       <p>
         The cumulative relative frequency is the accumulation of previous relative frequencies. To find the cumulative relative frequencies, add all the previous relative frequencies to the relative frequency of the current value. Alternatively, we may apply the function <q><c>cumsum</c></q> to the sequence of relative frequencies:
       </p>
@@ -127,6 +157,10 @@ sum(freq/sum(freq))
 cumsum(freq/sum(freq))
         </input>
       </program>
+<pre>
+##    2    3    4    5    6    7 
+## 0.15 0.40 0.55 0.85 0.95 1.00
+</pre>
       <p>
         Observe that the cumulative relative frequency of the smallest value 2 is the frequency of that value (0.15). The cumulative relative frequency of the second value 3 is the sum of the relative frequency of the smaller value (0.15) and the relative frequency of the current value (0.25), which produces a total of <m>0.15 + 0.25 = 0.40</m>. Likewise, for the third value 4 we get a cumulative relative frequency of <m>0.15 + 0.25 + 0.15 = 0.55</m>. The last entry of the cumulative relative frequency column is one, indicating that one hundred percent of the data has been accumulated.
       </p>
@@ -260,6 +294,15 @@ ex.1 &lt;- read.csv("_data/ex1.csv")
 head(ex.1)
         </input>
       </program>
+<pre>
+##        id    sex height
+## 1 5696379 FEMALE    182
+## 2 3019088   MALE    168
+## 3 2038883   MALE    172
+## 4 1920587 FEMALE    154
+## 5 6006813   MALE    174
+## 6 4055945 FEMALE    176
+</pre>
       <p>
         The object <q><c>ex.1</c></q>, the output of the function <q><c>read.csv</c></q> is a <em>data frame</em>. Data frames are the standard tabular format of storing statistical data. The columns of the table are called <em>variables</em> and correspond to measurements. In this example the three variables are:
       </p>
@@ -393,6 +436,10 @@ freq &lt;- table(calves)
 cumsum(freq)
           </input>
         </program>
+<pre>
+##  1  2  3  4  5  6  7 
+##  4  7 18 28 32 38 45
+</pre>
         <p>
           <ol>
             <li><p>How many cows were involved in this study?</p></li>
