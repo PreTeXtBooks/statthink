@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<chapter xml:id="ch-sampling-distribution" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>The Sampling Distribution</title>
+
+  <introduction>
+    <p>
+      This chapter introduces sampling distributions and presents the Central Limit Theorem
+      and the Law of Large Numbers.
+    </p>
+  </introduction>
+
+  <section xml:id="sec-student-learning-objectives-7">
+    <title>Student Learning Objectives</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-law-large-numbers">
+    <title>The Law of Large Numbers</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-central-limit-theorem">
+    <title>The Central Limit Theorem</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-exercises-7">
+    <title>Exercises</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-summary-7">
+    <title>Summary</title>
+    <p>Content to be added.</p>
+  </section>
+</chapter>

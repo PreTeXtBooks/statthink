@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<chapter xml:id="ch-overview-integration" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Overview and Integration</title>
+
+  <introduction>
+    <p>
+      This chapter summarizes the material of the first seven chapters and discusses
+      it in the statistical context.
+    </p>
+  </introduction>
+
+  <section xml:id="sec-student-learning-objectives-8">
+    <title>Student Learning Objectives</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-overview-part-one">
+    <title>Overview of Part I</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-statistical-inference-intro">
+    <title>Introduction to Statistical Inference</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-exercises-8">
+    <title>Exercises</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-summary-8">
+    <title>Summary</title>
+    <p>Content to be added.</p>
+  </section>
+</chapter>

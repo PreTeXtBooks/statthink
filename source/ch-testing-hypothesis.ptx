@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<chapter xml:id="ch-testing-hypothesis" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Testing Hypotheses</title>
+
+  <introduction>
+    <p>
+      This chapter introduces the testing of statistical hypotheses.
+    </p>
+  </introduction>
+
+  <section xml:id="sec-student-learning-objectives-12">
+    <title>Student Learning Objectives</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-hypothesis-tests">
+    <title>Hypothesis Tests</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-test-procedure">
+    <title>The Structure of Hypothesis Tests</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-errors-testing">
+    <title>Errors in Hypothesis Testing</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-exercises-12">
+    <title>Exercises</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-summary-12">
+    <title>Summary</title>
+    <p>Content to be added.</p>
+  </section>
+</chapter>

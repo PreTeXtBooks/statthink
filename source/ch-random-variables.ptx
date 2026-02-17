@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<chapter xml:id="ch-random-variables" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Random Variables</title>
+
+  <introduction>
+    <p>
+      This chapter presents the concept of a random variable and examples of special types
+      of random variables.
+    </p>
+  </introduction>
+
+  <section xml:id="sec-student-learning-objectives-5">
+    <title>Student Learning Objectives</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-random-variables-intro">
+    <title>Random Variables</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-expectation">
+    <title>The Expectation of a Random Variable</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-variance-standard-deviation">
+    <title>The Variance and the Standard Deviation</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-discrete-random-variables">
+    <title>Discrete Random Variables</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-continuous-random-variables">
+    <title>Continuous Random Variables</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-exercises-5">
+    <title>Exercises</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-summary-5">
+    <title>Summary</title>
+    <p>Content to be added.</p>
+  </section>
+</chapter>

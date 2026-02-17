@@ -1,0 +1,39 @@
+name: Check PreTeXt Build on PR
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install PreTeXt
+        run: |
+          pip install --upgrade pip
+          pip install pretextbook
+
+      - name: Build HTML
+        run: |
+          pretext build web
+
+      - name: Check for build errors
+        run: |
+          echo "Build completed successfully!"
+          ls -la output/web/
+
+      - name: Upload build artifact for inspection
+        uses: actions/upload-artifact@v4
+        with:
+          name: pretext-build
+          path: output/web/
+          retention-days: 7

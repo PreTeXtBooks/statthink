@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<chapter xml:id="ch-point-estimation" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Point Estimation</title>
+
+  <introduction>
+    <p>
+      This chapter introduces point estimation, one of the basic tools of statistical inference.
+    </p>
+  </introduction>
+
+  <section xml:id="sec-student-learning-objectives-10">
+    <title>Student Learning Objectives</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-estimating-parameters">
+    <title>Estimating Parameters</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-estimators">
+    <title>Estimators and Their Properties</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-exercises-10">
+    <title>Exercises</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-summary-10">
+    <title>Summary</title>
+    <p>Content to be added.</p>
+  </section>
+</chapter>

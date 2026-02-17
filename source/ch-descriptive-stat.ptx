@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<chapter xml:id="ch-descriptive-stat" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Descriptive Statistics</title>
+
+  <introduction>
+    <p>
+      This chapter provides numerical and graphical tools for presenting and summarizing
+      the distribution of data.
+    </p>
+  </introduction>
+
+  <section xml:id="sec-student-learning-objectives-3">
+    <title>Student Learning Objectives</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-displaying-data">
+    <title>Displaying Data</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-measures-location">
+    <title>Measures of the Location of the Data</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-measures-spread">
+    <title>Measures of the Spread of the Data</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-exercises-3">
+    <title>Exercises</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-summary-3">
+    <title>Summary</title>
+    <p>Content to be added.</p>
+  </section>
+</chapter>

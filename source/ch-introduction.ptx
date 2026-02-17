@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<chapter xml:id="ch-introduction" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Introduction</title>
+
+  <introduction>
+    <p>
+      This chapter introduces the basic concepts of statistics, with special attention to concepts
+      used in descriptive statistics and probability theory.
+    </p>
+  </introduction>
+
+  <section xml:id="sec-student-learning-objectives-1">
+    <title>Student Learning Objectives</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-why-learn-statistics">
+    <title>Why Learn Statistics?</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-statistics">
+    <title>Statistics</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-key-terms">
+    <title>Key Terms</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-data-sampling">
+    <title>Data, Sampling, and Variation in Data and Sampling</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-frequency">
+    <title>Frequency, Frequency Tables, and Levels of Measurement</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-experimental-design">
+    <title>Experimental Design and Ethics</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-probability-intro">
+    <title>Probability (Introduction)</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-introduction-r">
+    <title>Introduction to <c>R</c></title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-exercises-1">
+    <title>Exercises</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-summary-1">
+    <title>Summary</title>
+    <p>Content to be added.</p>
+  </section>
+</chapter>

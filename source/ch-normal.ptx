@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<chapter xml:id="ch-normal" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>The Normal Random Variable</title>
+
+  <introduction>
+    <p>
+      This chapter deals with the Normal random variable, one of the most important
+      distributions in statistics.
+    </p>
+  </introduction>
+
+  <section xml:id="sec-student-learning-objectives-6">
+    <title>Student Learning Objectives</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-continuous-distribution">
+    <title>Continuous Distribution</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-normal-distribution">
+    <title>The Normal Distribution</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-standard-normal">
+    <title>The Standard Normal Distribution</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-normal-approximation">
+    <title>The Normal Approximation</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-exercises-6">
+    <title>Exercises</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-summary-6">
+    <title>Summary</title>
+    <p>Content to be added.</p>
+  </section>
+</chapter>
