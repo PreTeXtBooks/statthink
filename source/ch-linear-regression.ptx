@@ -31,10 +31,10 @@
     <subsection xml:id="subsec-scatter-plot">
       <title>The Scatter Plot</title>
       <p>
-        Consider two numeric variables. A scatter plot can be used in order to display the data in these two variables. The scatter plot is a graph in which each observation is represented as a point. Examination of the scatter plot may revile relations between the two variables.
+        Consider two numeric variables. A scatter plot can be used in order to display the data in these two variables. The scatter plot is a graph in which each observation is represented as a point. Examination of the scatter plot may reveal relations between the two variables.
       </p>
       <p>
-        Consider an example. A marine biologist measured the length (in millimeters) and the weight (in grams) of 10 fish that where collected in one of her expeditions. The results are summarized in a data frame that is presented in <xref ref="table-regression-1" />. Notice that the data frame contains 10 observations. The variable <m>x</m> corresponds to the length of the fish and the variable <m>y</m> corresponds to the weight.
+        Consider an example. A marine biologist measured the length (in millimeters) and the weight (in grams) of 10 fish that were collected in one of her expeditions. The results are summarized in a data frame that is presented in <xref ref="table-regression-1" />. Notice that the data frame contains 10 observations. The variable <m>x</m> corresponds to the length of the fish and the variable <m>y</m> corresponds to the weight.
       </p>
 
       <table xml:id="table-regression-1">
@@ -116,7 +116,7 @@ plot(y~x)
 
       <figure xml:id="fig-regression1">
         <caption>A Scatter Plot</caption>
-        <image source="images/regression1.png" width="60%">
+        <image source="_figures/Regression1.png" width="60%">
           <description>Scatter plot showing relationship between fish length (x-axis) and weight (y-axis)</description>
         </image>
       </figure>
@@ -147,7 +147,7 @@ plot(horsepower ~ engine.size, data=cars)
 
       <figure xml:id="fig-regression2">
         <caption>The Scatter Plot of Power versus Engine Size</caption>
-        <image source="images/regression2.png" width="60%">
+        <image source="_figures/Regression2.png" width="60%">
           <description>Scatter plot showing relationship between engine size (x-axis) and horsepower (y-axis)</description>
         </image>
       </figure>
@@ -178,7 +178,7 @@ plot(horsepower ~ engine.size, data=cars)
 
       <figure xml:id="fig-regression3">
         <caption>Lines</caption>
-        <image source="images/regression3.png" width="60%">
+        <image source="_figures/Regression3.png" width="60%">
           <description>Scatter plot with three lines showing different intercepts and slopes</description>
         </image>
       </figure>
@@ -215,7 +215,7 @@ abline(mean(y),0,col="red")
       </program>
 
       <p>
-        Initially, the scatter plot is created and the lines are added to the plot one after the other. Observe that color of the first line that is added is green, it has an intercept of 7 and a slope of 1. The second line is blue, with a intercept of 14 and a negative slope of -2. The last line is red, and its constant value is the average of the variable <m>y</m>.
+        Initially, the scatter plot is created and the lines are added to the plot one after the other. Observe that color of the first line that is added is green, it has an intercept of 7 and a slope of 1. The second line is blue, with an intercept of 14 and a negative slope of -2. The last line is red, and its constant value is the average of the variable <m>y</m>.
       </p>
       <p>
         In the next section we discuss the computation of the regression line, the line that describes the linear trend in the data. This line will be added to scatter plots with the aid of the function <q><c>abline</c></q>.
@@ -274,7 +274,7 @@ abline(fit)
 
       <figure xml:id="fig-regression4">
         <caption>A Fitted Regression Line</caption>
-        <image source="images/regression4.png" width="60%">
+        <image source="_figures/Regression4.png" width="60%">
           <description>Scatter plot with fitted regression line showing the linear relationship</description>
         </image>
       </figure>
@@ -389,7 +389,7 @@ abline(fit.power)
 
       <figure xml:id="fig-regression5">
         <caption>A Regression Model of Power versus Engine Size</caption>
-        <image source="images/regression5.png" width="60%">
+        <image source="_figures/Regression5.png" width="60%">
           <description>Scatter plot with regression line showing relationship between engine size and horsepower</description>
         </image>
       </figure>
@@ -455,7 +455,7 @@ summary(fit)
 
       <figure xml:id="fig-regression6">
         <caption>Residuals and Deviations from the Mean</caption>
-        <image source="images/regression6.png" width="60%">
+        <image source="_figures/Regression6.png" width="60%">
           <description>Two scatter plots showing residuals from regression line and deviations from mean</description>
         </image>
       </figure>
@@ -522,7 +522,7 @@ sqrt(sum(residuals(fit)^2)/8)
         R-squared is the difference between 1 and the ratio of the variances. Its value is between 0 and 1 and it represents the fraction of the variability of the response that is <em>explained</em> by the regression line. The closer the points are to the regression line the larger the value of R-squared becomes. On the other hand, the less there is a linear trend in the data the closer to 0 is the value of R-squared. In the extreme case of R-squared equal to 1 all the data point are positioned exactly on a single straight line. In the other extreme, a value of 0 for R-squared implies no linear trend in the data.
       </p>
       <p>
-        Let us compte manually the difference between 1 and the ratio between the variance of the residuals and the variance of the response:
+        Let us compute manually the difference between 1 and the ratio between the variance of the residuals and the variance of the response:
       </p>
 
       <program language="r">
@@ -711,7 +711,7 @@ confint(fit.power)
       </p>
       
       <p>
-        We start with the definition of residuals. Let us return to the artificial example that compared length of fish to their weight. The data for this example was given in Table [tab:Regression_1] and was saved in the objects <q><c>x</c></q> and <q><c>y</c></q>. The regression model was fitted to this data by the application of the function <q><c>lm</c></q> to the formula <q><c>y~x</c></q> and the fitted model was saved in an object called <q><c>fit</c></q>. Let us apply the function <q><c>summary</c></q> to the fitted model:
+        We start with the definition of residuals. Let us return to the artificial example that compared length of fish to their weight. The data for this example was given in <xref ref="table-regression-1" /> and was saved in the objects <q><c>x</c></q> and <q><c>y</c></q>. The regression model was fitted to this data by the application of the function <q><c>lm</c></q> to the formula <q><c>y~x</c></q> and the fitted model was saved in an object called <q><c>fit</c></q>. Let us apply the function <q><c>summary</c></q> to the fitted model:
       </p>
       
       <program language="r">
@@ -746,7 +746,9 @@ summary(fit)
       
       <figure xml:id="fig-regression6">
         <caption>Residuals and Deviations from the Mean</caption>
-        <image source="_figures/Regression6.png" />
+        <image source="_figures/Regression6.png" width="60%">
+          <description>Two scatter plots showing residuals from regression line (upper) and deviations from mean (lower)</description>
+        </image>
       </figure>
       
       <p>
@@ -810,7 +812,7 @@ sqrt(sum(residuals(fit)^2)/8)
       </p>
       
       <p>
-        Let us compte manually the difference between 1 and the ratio between the variance of the residuals and the variance of the response:
+        Let us compute manually the difference between 1 and the ratio between the variance of the residuals and the variance of the response:
       </p>
       
       <program language="r">
@@ -820,7 +822,7 @@ sqrt(sum(residuals(fit)^2)/8)
       </program>
       
       <p>
-        Observe that the computed value of R-squared is the same as the value <q><c>Multiple R-squared: 0.3297</c></q> that is given in the report.
+        Observe that the computed value of R-squared is the same as the value <q><c>Multiple R-squared: 0.4281</c></q> that is given in the report.
       </p>
       
       <p>
@@ -834,7 +836,7 @@ sqrt(sum(residuals(fit)^2)/8)
       </program>
       
       <p>
-        The value of this adjusted quantity is equal to the value <q><c>Adjusted R-squared: 0.246</c></q> in the report.
+        The value of this adjusted quantity is equal to the value <q><c>Adjusted R-squared: 0.3566</c></q> in the report.
       </p>
       
       <p>
@@ -842,11 +844,11 @@ sqrt(sum(residuals(fit)^2)/8)
       </p>
       
       <p>
-        The last line in the report produces an overall goodness of fit test for the regression model. In the current application of linear regression this test reduces to a test of the slope being equal to zero, the same test that is reported in the second row of the table of coefficients<fn>In more complex applications of linear regression, applications that are not considered in this book, the test in the last line of the report and the tests of coefficients do not coincide.</fn>. The <m>F</m> statistic is simply the square of the <m>t</m> value that is given in the second row of the table. The sampling distribution of this statistic under the null hypothesis is the <m>F</m>-distribution on 1 and <m>n-2</m> degrees of freedom, which is the sampling distribution of the square of the test statistic for the slope. The computed <m>p</m>-value, <q><c>p-value: 0.08255</c></q> is the identical (after rounding up) to the <m>p</m>-value given in the second line of the table.
+        The last line in the report produces an overall goodness of fit test for the regression model. In the current application of linear regression this test reduces to a test of the slope being equal to zero, the same test that is reported in the second row of the table of coefficients<fn>In more complex applications of linear regression, applications that are not considered in this book, the test in the last line of the report and the tests of coefficients do not coincide.</fn>. The <m>F</m> statistic is simply the square of the <m>t</m> value that is given in the second row of the table. The sampling distribution of this statistic under the null hypothesis is the <m>F</m>-distribution on 1 and <m>n-2</m> degrees of freedom, which is the sampling distribution of the square of the test statistic for the slope. The computed <m>p</m>-value, <q><c>p-value: 0.04003</c></q> is the identical (after rounding up) to the <m>p</m>-value given in the second line of the table.
       </p>
       
       <p>
-        Return to the R-squared coefficient. This coefficient is a convenient measure of the goodness of fit of the regression model to the data. Let us demonstrate this point with the aid of the <q><c>cars</c></q> data. In Subsection <xref ref="subsec-Inference" /> we fitted a regression model to the power of the engine as a response and the size of the engine as an explanatory variable. The fitted model was saved in the object called <q><c>fit.power</c></q>. A report of this fit, the output of the expression <q><c>summary(fit.power)</c></q> was also presented. The null hypothesis of zero slope was clearly rejected. The value of R-squared for this fit was 0.6574. Consequently, about 2/3 of the variability in the power of the engine is explained by the size of the engine.
+        Return to the R-squared coefficient. This coefficient is a convenient measure of the goodness of fit of the regression model to the data. Let us demonstrate this point with the aid of the <q><c>cars</c></q> data. In Subsection <xref ref="subsec-fitting-regression-line" /> we fitted a regression model to the power of the engine as a response and the size of the engine as an explanatory variable. The fitted model was saved in the object called <q><c>fit.power</c></q>. A report of this fit, the output of the expression <q><c>summary(fit.power)</c></q> was also presented. The null hypothesis of zero slope was clearly rejected. The value of R-squared for this fit was 0.6574. Consequently, about 2/3 of the variability in the power of the engine is explained by the size of the engine.
       </p>
       
       <p>
@@ -894,7 +896,7 @@ abline(lm(horsepower ~ length, data=cars))
     <exercise>
       <statement>
         <p>
-          Figure [fig:Regression8] presents 10 points and three lines. One of the lines is colored <term>red</term> and one of the points is marked as a <term>red triangle</term>. The points in the plot refer to the data frame in Table [tab:Regression_2] and the three lines refer to the linear equations:
+          <xref ref="fig-regression8" /> presents 10 points and three lines. One of the lines is colored <term>red</term> and one of the points is marked as a <term>red triangle</term>. The points in the plot refer to the data frame in <xref ref="table-regression2" /> and the three lines refer to the linear equations:
         </p>
         <p>
           1. <m>y = 4</m>
@@ -979,7 +981,9 @@ abline(lm(horsepower ~ length, data=cars))
     
     <figure xml:id="fig-regression8">
       <caption>Lines and Points</caption>
-      <image source="_figures/Regression8.png" />
+      <image source="_figures/Regression8.png" width="60%">
+        <description>Scatter plot with 10 points and three lines, one marked in red</description>
+      </image>
     </figure>
     
     <exercise>
@@ -1091,7 +1095,7 @@ abline(lm(horsepower ~ length, data=cars))
     <exercise>
       <statement>
         <p>
-          In Chapter <xref ref="ChapTwoSamp" /> we analyzed an example that involved the difference between fuel consumption in highway and city driving conditions as the response<fn>The response was computed using the expression <q><c>cars$highway.mpg - cars$city.mpg</c></q></fn>. The explanatory variable was a factor that was produced by splitting the cars into two weight groups. In this exercise we would like to revisit this example. Here we use the weight of the car directly as an explanatory variable. We also consider the size of the engine as an alternative explanatory variable and compare between the two regression models.
+          In Chapter <xref ref="ch-two-samples" /> we analyzed an example that involved the difference between fuel consumption in highway and city driving conditions as the response<fn>The response was computed using the expression <q><c>cars$highway.mpg - cars$city.mpg</c></q></fn>. The explanatory variable was a factor that was produced by splitting the cars into two weight groups. In this exercise we would like to revisit this example. Here we use the weight of the car directly as an explanatory variable. We also consider the size of the engine as an alternative explanatory variable and compare between the two regression models.
         </p>
         <p>
           1. Fit the regression model that uses the variable <q><c>curb.weight</c></q> as an explanatory variable. Is the slope significantly different than 0? What fraction of the standard deviation of the response is explained by a regression model involving this variable?
