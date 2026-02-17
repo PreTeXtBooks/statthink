@@ -10,7 +10,13 @@ This is the PreTeXt version of "Introduction to Statistical Thinking" by Benjami
 
 ### Prerequisites
 
-Install PreTeXt CLI:
+Install PreTeXt CLI and dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Or install PreTeXt CLI directly:
 
 ```bash
 pip install pretextbook
