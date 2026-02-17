@@ -6,13 +6,13 @@
   <section xml:id="sec-student-learning-objectives-15">
     <title>Student Learning Objectives</title>
     <p>
-      Chapters <xref ref="ch-two-samples" /> and <xref ref="ch-linear-regression" /> introduced statistical
+      <xref ref="ch-two-samples" /> and <xref ref="ch-linear-regression" /> introduced statistical
       inference that involves a response and an explanatory variable that may
       affect the distribution of the response. In both chapters the response
       was numeric. The two chapters differed in the data type of the
-      explanatory variable. In Chapter <xref ref="ch-two-samples" /> the explanatory variable
+      explanatory variable. In <xref ref="ch-two-samples" /> the explanatory variable
       was a factor with two levels that splits the sample into two
-      sub-samples. In Chapter <xref ref="ch-linear-regression" /> the explanatory variable was
+      sub-samples. In <xref ref="ch-linear-regression" /> the explanatory variable was
       numeric and produced, together with the response, a linear trend. The
       aim in this chapter is to consider the case where the response is a
       Bernoulli variable. Such a variable may emerge as the indicator of the
@@ -23,7 +23,7 @@
     <p>
       Specifically, when the explanatory variable is a factor with two levels
       then we may use the function <c>prop.test</c>. This function was used in
-      Chapter <xref ref="ch-testing-hypothesis" /> for the analysis of the probability of an event
+      <xref ref="ch-testing-hypothesis" /> for the analysis of the probability of an event
       in a single sample. Here we use it in order to compare between two
       sub-samples. This is similar to the way the function <c>t.test</c> was used
       for a numeric response for both a single sample and for the comparison
@@ -53,7 +53,7 @@
       or any other pair of levels.</fn>, and may emerge as the indicator
       of an event. Else, it may be associated with a factor with two levels
       and correspond to the indication of one of the two levels. Such response
-      was considered in Chapters <xref ref="ch-confidence-intervals" /> and <xref ref="ch-testing-hypothesis" /> where
+      was considered in <xref ref="ch-confidence-intervals" /> and <xref ref="ch-testing-hypothesis" /> where
       confidence intervals and tests for the probability of an event where
       discussed in the context of a single sample. In this chapter we discuss
       the investigation of relations between a response of this form and an
@@ -283,7 +283,7 @@ prop.test(table(cars$fuel.type,cars$num.of.doors))
       In the previous section we considered a Bernoulli response and a factor
       with two levels as an explanatory variable. In this section we use a
       numeric variable as the explanatory variable. The discussion in this
-      section is parallel to the discussion in Chapter <xref ref="ch-linear-regression" /> that
+      section is parallel to the discussion in <xref ref="ch-linear-regression" /> that
       presented the topic of linear regression. However, since the response is
       not of the same form, it is the indicator of a level of a factor and not
       a regular numeric response, then the tools the are used are different.
@@ -472,7 +472,7 @@ summary(fit.doors)
       A report is produced when the function <c>summary</c> is applied to the
       fitted model. Notice the similarities and the differences between the
       report presented here and the reports for linear regression that are
-      presented in Chapter <xref ref="ch-linear-regression" />. Both reports contain estimates
+      presented in <xref ref="ch-linear-regression" />. Both reports contain estimates
       of the coefficients <m>a</m> and <m>b</m> and tests for the equality of these
       coefficients to zero. When the coefficient <m>b</m>, the coefficient that
       represents the slope, is equal to 0 then the probability of the event
