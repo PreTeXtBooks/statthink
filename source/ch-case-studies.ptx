@@ -101,7 +101,7 @@
       The analysis of these case studies may involve any of the tools that
       were described in the second part of the book (and some from the first
       part). It may be useful to read again
-      Chapters <xref ref="ch-statistical-inference" />–<xref ref="ch-bernoulli-response" /> before reading the case
+      <xref ref="ch-statistical-inference" />–<xref ref="ch-bernoulli-response" /> before reading the case
       studies.
     </p>
 
@@ -156,6 +156,15 @@ patient &lt;- read.csv("_data/discriminate.csv")
 summary(patient)
         </input>
       </program>
+<pre>
+##     weight        time      
+##  BMI=23:33   Min.   : 5.00  
+##  BMI=30:38   1st Qu.:20.00  
+##              Median :30.00  
+##              Mean   :27.82  
+##              3rd Qu.:30.00  
+##              Max.   :60.00
+</pre>
       <p>
         Observe that of the 72 <q>patients</q>, 38 are overweight and 33 have an
         average weight. The time spent with the patient, as predicted by
@@ -174,6 +183,10 @@ summary(patient)
 hist(patient$time)
         </input>
       </program>
+    <figure xml:id="fig-case1">
+      <image source="_figures/Case1.png" width="60%">
+      </image>
+    </figure>
       <p>
         A feature in this plot that catches
         attention is the fact that there is a high concentration of values in
@@ -187,6 +200,11 @@ hist(patient$time)
 table(patient$time)
         </input>
       </program>
+<pre>
+## 
+##  5 15 20 25 30 40 45 50 60 
+##  1 10 15  3 30  4  5  2  1
+</pre>
       <p>
         Notice that 30 of the 72 physicians marked <c>30</c> as the time they
         expect to spend with the patient. This is the middle value in the range,
@@ -211,6 +229,23 @@ boxplot(time~weight,data=patient)
 t.test(time~weight,data=patient)
         </input>
       </program>
+    <figure xml:id="fig-case2">
+      <image source="_figures/Case2.png" width="60%">
+      </image>
+    </figure>
+<pre>
+## 
+##  Welch Two Sample t-test
+## 
+## data:  time by weight
+## t = 2.8516, df = 67.174, p-value = 0.005774
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##   1.988532 11.265056
+## sample estimates:
+## mean in group BMI=23 mean in group BMI=30 
+##             31.36364             24.73684
+</pre>
       <p>
         Nothing seems problematic in the box plot.
         The two distributions, as they are reflected in the box plots, look
@@ -242,6 +277,19 @@ t.test(time~weight,data=patient)
 var.test(time~weight,data=patient)
         </input>
       </program>
+<pre>
+## 
+##  F test to compare two variances
+## 
+## data:  time by weight
+## F = 1.0443, num df = 32, denom df = 37, p-value = 0.8931
+## alternative hypothesis: true ratio of variances is not equal to 1
+## 95 percent confidence interval:
+##  0.5333405 2.0797269
+## sample estimates:
+## ratio of variances 
+##           1.044316
+</pre>
       <p>
         In this test we do not reject the null hypothesis that the two variances
         of the response are equal since the <m>p</m>-value is larger than <m>0.05</m>. The
@@ -270,6 +318,19 @@ var.test(time~weight,data=patient)
 table(patient$time,patient$weight)
         </input>
       </program>
+<pre>
+##     
+##      BMI=23 BMI=30
+##   5       0      1
+##   15      2      8
+##   20      6      9
+##   25      1      2
+##   30     14     16
+##   40      4      0
+##   45      4      1
+##   50      2      0
+##   60      0      1
+</pre>
       <p>
         Not surprisingly, there is still high concentration at that level
         <c>30</c>. But one can see that only 2 of the responses of the <c>BMI=30</c>
@@ -297,6 +358,24 @@ plot(factor(patient$time&gt;=30)~weight,data=patient)
 prop.test(table(patient$time&gt;=30,patient$weight))
         </input>
       </program>
+    <figure xml:id="fig-case3">
+      <image source="_figures/Case3.png" width="60%">
+      </image>
+    </figure>
+<pre>
+## 
+##  2-sample test for equality of proportions with continuity
+##  correction
+## 
+## data:  table(patient$time >= 30, patient$weight)
+## X-squared = 3.7098, df = 1, p-value = 0.05409
+## alternative hypothesis: two.sided
+## 95 percent confidence interval:
+##  -0.515508798 -0.006658689
+## sample estimates:
+##    prop 1    prop 2 
+## 0.3103448 0.5714286
+</pre>
       <p>
         The mosaic plot presents the relation between the explanatory
         variable and the new factor.
@@ -383,6 +462,19 @@ hist(job$ratings)
 hist(job$sims)
         </input>
       </program>
+<pre>
+##       grip            arm            ratings           sims        
+##  Min.   : 29.0   Min.   : 19.00   Min.   :21.60   Min.   :-4.1700  
+##  1st Qu.: 94.0   1st Qu.: 64.50   1st Qu.:34.80   1st Qu.:-0.9650  
+##  Median :111.0   Median : 81.50   Median :41.30   Median : 0.1600  
+##  Mean   :110.2   Mean   : 78.75   Mean   :41.01   Mean   : 0.2018  
+##  3rd Qu.:124.5   3rd Qu.: 94.00   3rd Qu.:47.70   3rd Qu.: 1.0700  
+##  Max.   :189.0   Max.   :132.00   Max.   :57.20   Max.   : 5.1700
+</pre>
+    <figure xml:id="fig-case4">
+      <image source="_figures/Case4.png" width="60%">
+      </image>
+    </figure>
       <p>
         All variables are numeric. Examination of the 4 summaries and
         histograms does not produce interesting findings. All variables are, more
@@ -417,6 +509,10 @@ abline(sims.score)
 plot(grip~arm,data=job)
         </input>
       </program>
+    <figure xml:id="fig-case5">
+      <image source="_figures/Case5.png" width="60%">
+      </image>
+    </figure>
       <p>
         Let us consider the variable <c>sims</c> as a response. The first step is
         to plot a scatter plot of the response and explanatory variable, for
@@ -435,7 +531,7 @@ abline(sims.grip)
       </program>
       <p>
         The plot that is produced by this code is presented on the upper-left
-        panel of Figure (CaseStudies5).
+        panel of <xref ref="fig-case5"> />.
       </p>
       <p>
         The plot for the relation between the response and the variable <c>arm</c>
@@ -450,7 +546,7 @@ abline(sims.arm)
       </program>
       <p>
         The plot that is produced by the last code is presented on the
-        upper-right panel of Figure (CaseStudies5).
+        upper-right panel of <xref ref="fig-case5"> />.
       </p>
       <p>
         Both plots show similar characteristics. There is an overall linear
@@ -470,6 +566,26 @@ abline(sims.arm)
 summary(sims.grip)
         </input>
       </program>
+<pre>
+## 
+## Call:
+## lm(formula = sims ~ grip, data = job)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2.9295 -0.8708 -0.1219  0.8039  3.3494 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt; |t|)    
+## (Intercept) -4.809675   0.511141   -9.41   &lt; 2e-16 ***
+## grip         0.045463   0.004535   10.03   &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.295 on 145 degrees of freedom
+## Multiple R-squared:  0.4094, Adjusted R-squared:  0.4053 
+## F-statistic: 100.5 on 1 and 145 DF,  p-value: &lt; 2.2e-16
+</pre>
       <p>
         Examination of the report reveals a clear statistical significance for
         the effect of the explanatory variable on the distribution of response.
@@ -488,6 +604,26 @@ summary(sims.grip)
 summary(sims.arm)
         </input>
       </program>
+<pre>
+## 
+## Call:
+## lm(formula = sims ~ arm, data = job)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.6467 -0.7502 -0.0285  0.6875  3.0770 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt; |t|)    
+## (Intercept) -4.095160   0.391745  -10.45   &lt; 2e-16 ***
+## arm          0.054563   0.004806   11.35   &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.226 on 145 degrees of freedom
+## Multiple R-squared:  0.4706, Adjusted R-squared:  0.467 
+## F-statistic: 128.9 on 1 and 145 DF,  p-value: &lt; 2.2e-16
+</pre>
       <p>
         This variable is also statistically significant. The value of R-squared
         is <m>0.4706</m>. The proportion of the standard deviation that is explained
@@ -502,7 +638,7 @@ summary(sims.arm)
         obtained by combining the information in both variables. The production
         of such combination is not discussed in this book, though it is similar
         in principle to the methods of linear regression that are presented in
-        Chapter <xref ref="ch-linear-regression" />. The produced score<fn>The score is produced by the application of the function <c>lm</c> to
+        <xref ref="ch-linear-regression" />. The produced score<fn>The score is produced by the application of the function <c>lm</c> to
         <em>both</em> variables as explanatory variables. The code expression that
         can be used is <c>lm(sims ~ grip + arm, data=job)</c>.</fn> takes the form:
       </p>
@@ -521,9 +657,29 @@ sims.score &lt;- lm(sims~score,data=job)
 abline(sims.score)
         </input>
       </program>
+<pre>
+## 
+## Call:
+## lm(formula = sims ~ score, data = job)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.1890 -0.7390 -0.0698  0.7411  2.8636 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt; |t|)    
+## (Intercept)  0.07479    0.09452   0.791     0.43    
+## score        1.01291    0.07730  13.104   &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.14 on 145 degrees of freedom
+## Multiple R-squared:  0.5422, Adjusted R-squared:  0.539 
+## F-statistic: 171.7 on 1 and 145 DF,  p-value: &lt; 2.2e-16
+</pre>
       <p>
         The scatter plot that includes the regression line can be found at the
-        lower-left panel of Figure (CaseStudies5). Indeed, the linear
+        lower-left panel of <xref ref="fig-case5">. Indeed, the linear
         trend is more pronounced for this scatter plot and the regression line a
         better description of the relation between the response and the
         explanatory variable. A summary of the regression model produces the
@@ -560,7 +716,7 @@ plot(grip~arm,data=job)
       </program>
       <p>
         It is presented in the lower-right panel of
-        Figure (CaseStudies5). Indeed, one may see that the two
+        <xref ref="fig-case5">. Indeed, one may see that the two
         measurements of strength are not independent of each other but tend to
         produce an increasing linear trend. Hence, it should not be surprising
         that the relation of each of them with the response produces essentially
@@ -609,6 +765,10 @@ qqnorm(residuals(sims.score))
 qqline(residuals(sims.score))
         </input>
       </program>
+    <figure xml:id="fig-case6">
+      <image source="_figures/Case6.png" width="60%">
+      </image>
+    </figure>
       <p>
         The produced histogram is represented on the upper panel. The histogram portrays a symmetric
         distribution that may result from Normally distributed observations. A
