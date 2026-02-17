@@ -11,14 +11,19 @@ JS_SCRIPT='<script src="external/custom-program-toggle.js"></script>'
 find "$OUTPUT_DIR" -name "*.html" -type f | while read -r file; do
     # Check if the file contains program elements
     if grep -q 'class="program"' "$file"; then
+        # Create a temporary file
+        temp_file=$(mktemp)
+        
         # Inject CSS before </head>
         if ! grep -q "custom-program-toggle.css" "$file"; then
-            sed -i "s|</head>|$CSS_LINK\n</head>|" "$file"
+            sed "s|</head>|$CSS_LINK\n</head>|" "$file" > "$temp_file"
+            mv "$temp_file" "$file"
         fi
         
         # Inject JS before </body>
         if ! grep -q "custom-program-toggle.js" "$file"; then
-            sed -i "s|</body>|$JS_SCRIPT\n</body>|" "$file"
+            sed "s|</body>|$JS_SCRIPT\n</body>|" "$file" > "$temp_file"
+            mv "$temp_file" "$file"
         fi
     fi
 done

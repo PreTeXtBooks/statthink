@@ -21,7 +21,6 @@
     <knowl example="no"/>
     <knowl exercise-inline="no"/>
     <knowl exercise-divisional="no"/>
-    <knowl program="yes"/>
     <css style="custom" colors="blue_red">
       <file source="custom-program-toggle.css" css-stylename="custom-toggle"/>
     </css>
