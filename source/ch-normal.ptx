@@ -26,7 +26,7 @@
       <title>The Normal Distribution</title>
       
       <p>
-        A Normal random variable has a continuous distribution over the sample space of all numbers, negative or positive. We denote the Normal distribution via <q><m>X \sim \mathrm{Normal}(\mu, \sigma^2)</m></q>, where <m>\mu = \mathbb{E}(X)</m> is the expectation of the random variable and <m>\sigma^2 = \mathrm{Var}(X)</m> is its variance<fn>If <m>X \sim \mathrm{Normal}(\mu,\sigma^2)</m> then the density of <m>X</m> is given by the formula <m>f(x) = \exp\{-\frac{(x-\mu)^2}{2 \sigma^2}\}/\sqrt{2 \pi \sigma^2}</m>, for all <m>x</m>.</fn>.
+        A Normal random variable has a continuous distribution over the sample space of all numbers, negative or positive. We denote the Normal distribution via <m>X \sim \mathrm{Normal}(\mu, \sigma^2)</m>, where <m>\mu = \mathbb{E}(X)</m> is the expectation of the random variable and <m>\sigma^2 = \mathrm{Var}(X)</m> is its variance<fn>If <m>X \sim \mathrm{Normal}(\mu,\sigma^2)</m> then the density of <m>X</m> is given by the formula <m>f(x) = \exp\{-\frac{(x-\mu)^2}{2 \sigma^2}\}/\sqrt{2 \pi \sigma^2}</m>, for all <m>x</m>.</fn>.
       </p>
       
       <p>
@@ -86,7 +86,7 @@ pnorm(5,2,3) - pnorm(0,2,3)
       <title>The Standard Normal Distribution</title>
       
       <p>
-        The standard normal distribution is a normal distribution of standardized values, which are called <m>z</m>-scores. A <m>z</m>-score is the original measurement measured in units of the standard deviation from the expectation. For example, if the expectation of a Normal distribution is 2 and the standard deviation is <m>3 = \sqrt{9}</m>, then the value of 0 is 2/3 standard deviations smaller than (or to the left of) the expectation. Hence, the <m>z</m>-score of the value 0 is -2/3. The calculation of the <m>z</m>-score emerges from the equation:
+        The standard Normal distribution is a Normal distribution of standardized values, which are called <m>z</m>-scores. A <m>z</m>-score is the original measurement measured in units of the standard deviation from the expectation. For example, if the expectation of a Normal distribution is 2 and the standard deviation is <m>3 = \sqrt{9}</m>, then the value of 0 is 2/3 standard deviations smaller than (or to the left of) the expectation. Hence, the <m>z</m>-score of the value 0 is -2/3. The calculation of the <m>z</m>-score emerges from the equation:
       </p>
 
       <me>(0 =)\; x = \mu + z \cdot \sigma\; (= 2 + z \cdot 3)</me>
@@ -237,7 +237,7 @@ qnorm(0.25)
       </p>
 
       <p>
-        In Chapter 3 we considered box plots as a mean for the graphical display of numerical data. The box plot includes a vertical rectangle that initiates at the first quartile and ends at the third quartile, with the median marked within the box. The rectangle contains 50% of the data. Whiskers extend from the ends of this rectangle to the smallest and to the largest data values that are not outliers. Outliers are values that lie outside of the normal range of the data. Outliers are identified as values that are more than 1.5 times the interquartile range away from the ends of the central rectangle. Hence, a value is an outlier if it is larger than the third quartile plus 1.5 times the interquartile range or if it is less than the first quartile minus 1.5 times the interquartile range.
+        In Chapter 3 we considered box plots as a means for the graphical display of numerical data. The box plot includes a vertical rectangle that initiates at the first quartile and ends at the third quartile, with the median marked within the box. The rectangle contains 50% of the data. Whiskers extend from the ends of this rectangle to the smallest and to the largest data values that are not outliers. Outliers are values that lie outside of the normal range of the data. Outliers are identified as values that are more than 1.5 times the interquartile range away from the ends of the central rectangle. Hence, a value is an outlier if it is larger than the third quartile plus 1.5 times the interquartile range or if it is less than the first quartile minus 1.5 times the interquartile range.
       </p>
 
       <p>
