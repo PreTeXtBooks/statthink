@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<chapter xml:id="ch-linear-regression" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Linear Regression</title>
+
+  <introduction>
+    <p>
+      This chapter discusses regression that relates the distribution of a numeric response
+      to a numeric explanatory variable.
+    </p>
+  </introduction>
+
+  <section xml:id="sec-student-learning-objectives-14">
+    <title>Student Learning Objectives</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-simple-linear-regression">
+    <title>Simple Linear Regression</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-least-squares">
+    <title>The Least Squares Method</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-regression-inference">
+    <title>Inference in Regression</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-exercises-14">
+    <title>Exercises</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-summary-14">
+    <title>Summary</title>
+    <p>Content to be added.</p>
+  </section>
+</chapter>

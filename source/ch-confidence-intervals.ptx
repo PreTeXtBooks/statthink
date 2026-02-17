@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<chapter xml:id="ch-confidence-intervals" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Confidence Intervals</title>
+
+  <introduction>
+    <p>
+      This chapter introduces estimation with confidence intervals.
+    </p>
+  </introduction>
+
+  <section xml:id="sec-student-learning-objectives-11">
+    <title>Student Learning Objectives</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-interval-estimation">
+    <title>Interval Estimation</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-confidence-intervals-intro">
+    <title>Confidence Intervals</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-exercises-11">
+    <title>Exercises</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-summary-11">
+    <title>Summary</title>
+    <p>Content to be added.</p>
+  </section>
+</chapter>

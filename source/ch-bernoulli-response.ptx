@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<chapter xml:id="ch-bernoulli-response" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>A Bernoulli Response</title>
+
+  <introduction>
+    <p>
+      This chapter discusses regression where the response is a factor with two levels
+      (Bernoulli/binary response).
+    </p>
+  </introduction>
+
+  <section xml:id="sec-student-learning-objectives-15">
+    <title>Student Learning Objectives</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-logistic-regression">
+    <title>Logistic Regression</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-odds-ratio">
+    <title>Odds and Odds Ratios</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-exercises-15">
+    <title>Exercises</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-summary-15">
+    <title>Summary</title>
+    <p>Content to be added.</p>
+  </section>
+</chapter>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<publication>
+  <!-- Set where external assets and generated assets will be   -->
+  <!-- stored or created.  Directories are relative to the main -->
+  <!-- source PreTeXt file                                      -->
+  <source>
+    <directories external="../assets" generated="../generated-assets"/>
+  </source>
+
+  <common>
+    <!-- The URL where this book will be hosted, important for    -->
+    <!-- managing external, or canonical URLs to your book's pages -->
+    <base-url href="https://pretextbooks.github.io/statthink/"/>
+  </common>
+
+  <!-- HTML-Specific Options -->
+  <html>
+    <calculator model="geogebra-graphing"/>
+    <index-page ref="frontmatter"/>
+    <knowl example="no"/>
+    <knowl exercise-inline="no"/>
+    <knowl exercise-divisional="no"/>
+  </html>
+</publication>

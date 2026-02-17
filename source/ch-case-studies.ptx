@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<chapter xml:id="ch-case-studies" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Case Studies</title>
+
+  <introduction>
+    <p>
+      This chapter presents the analysis of two case studies, applying the tools presented
+      throughout the book.
+    </p>
+  </introduction>
+
+  <section xml:id="sec-student-learning-objectives-16">
+    <title>Student Learning Objectives</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-case-study-1">
+    <title>Case Study 1</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-case-study-2">
+    <title>Case Study 2</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-exercises-16">
+    <title>Exercises</title>
+    <p>Content to be added.</p>
+  </section>
+
+  <section xml:id="sec-summary-16">
+    <title>Summary</title>
+    <p>Content to be added.</p>
+  </section>
+</chapter>
