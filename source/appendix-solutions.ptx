@@ -764,7 +764,7 @@ tapply(teacher$rating,teacher$condition,sd)
         </input>
       </program>
       <p>Obtain that average for the condition “<c>C</c>" is <m>2.613332</m> and the     standard deviation is <m>0.5329833</m>.</p>
-      <p>You may note that the rating given by students that were exposed to the     description of the lecturer as charismatic is higher on the average than     the rating given by students that were exposed to a less favorable     description. The box plots of the ratings for the two conditions are     presented in <xref ref="fig-confidence2"/>.</p>
+      <p>You may note that the rating given by students that were exposed to the     description of the lecturer as charismatic is higher on the average than     the rating given by students that were exposed to a less favorable     description. The box plots of the ratings for the two conditions are     presented in <xref ref="fig-confidence1"/>.</p>
       <program language="r">
         <input>
 cars &lt;- read.csv("_data/cars.csv")
