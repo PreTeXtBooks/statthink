@@ -4,7 +4,7 @@
   <title>The Sampling Distribution</title>
 
   <section xml:id="sec-student-learning-objectives-7">
-    <title>Student Learning Objective</title>
+    <title>Student Learning Objectives</title>
     <p>
       In this section we integrate the concept of <em>data</em> that is extracted from a sample with the concept of a <em>random variable</em>. The new element that connects between these two concepts is the notion of <em>sampling distribution</em>. The data we observe results from the specific sample that was selected. The sampling distribution, in a similar way to random variables, corresponds to all samples that could have been selected. (Or, stated in a different tense, to the sample that will be selected prior to the selection itself.) Summaries of the distribution of the data, such as the sample mean and the sample standard deviation, become random variables when considered in the context of the sampling distribution. In this section we investigate the sampling distribution of such data summaries. In particular, it is demonstrated that (for large samples) the sampling distribution of the sample average may be approximated by the Normal distribution. The mathematical theorem that proves this approximation is called the <em>Central Limit Theory</em>. By the end of this chapter, the student should be able to:
     </p>
@@ -181,7 +181,7 @@ sd(X.bar)
         </input>
       </program>
       <p>
-        Observe that the expectation of the population and the expectation of the sample average, are practically the same, the standard deviation of the sample average is about 10 times smaller than the standard deviation of the population. This result is not accidental and actually reflects a general phenomena that will be seen below in other examples.
+        Observe that the expectation of the population and the expectation of the sample average are practically the same, but the standard deviation of the sample average is about 10 times smaller than the standard deviation of the population. This result is not accidental and actually reflects a general phenomena that will be seen below in other examples.
       </p>
       <p>
         We may use the simulated sampling distribution in order to compute an approximation of the probability of the sample average falling within 1 centimeter of the population mean. Let us first compute the relevant probability and then explain the details of the computation:
