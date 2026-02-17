@@ -508,7 +508,7 @@ confint(fit.power)
     <p>
       Observe the similarity between the confidence intervals that are computed by the function and the crude confidence intervals that were produced by us. The small discrepancies that do exist between the intervals result from the fact that the function <q><c>confint</c></q> uses the <m>t</m>-distribution whereas we used the Normal approximation.
     </p>
-    
+    </subsection>
     <subsection xml:id="subsec-rsquared-variance-residuals">
       <title>R-squared and the Variance of Residuals</title>
       
