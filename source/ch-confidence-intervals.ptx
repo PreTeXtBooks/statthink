@@ -578,7 +578,7 @@ mean((sig^2 &gt;= var.LCL) &amp; (sig^2 &lt;= var.UCL))
     <subsection xml:id="subsec-discuss-forum-11">
       <title>Discuss in the forum</title>
       <p>
-        When large samples are at hand one may make fewer a-priori assumptions
+        When large samples are at hand one may make fewer a priori assumptions
         regarding the exact form of the distribution of the measurement. General
         limit theorems, such as the Central Limit Theorem, may be used in order
         to establish the validity of the inference under general conditions. On
