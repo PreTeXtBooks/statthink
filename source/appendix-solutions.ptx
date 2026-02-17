@@ -191,7 +191,7 @@ summary(x)
         <li><p>The event <m>\{Y &lt; 3\}</m> contains the values 0, 1 and 2. Therefore,</p>
       <p><me>\Prob(Y &lt; 3) = \Prob(Y=0) + \Prob(Y=1) + \Prob(Y=2) = \frac{1}{21} + \frac{2}{21} + \frac{3}{21} = \frac{6}{21}= 0.2857\;.</me></p>
       </li>
-        <li><p>The event <m>\{Y = \mbox{odd}\}</m> contains the values 1, 3 and 5. Therefore,</p><
+        <li><p>The event <m>\{Y = \mbox{odd}\}</m> contains the values 1, 3 and 5. Therefore,</p>
       <p><me>\Prob(Y = \mbox{odd}) = \Prob(Y=1) + \Prob(Y=3) + \Prob(Y=5) = \frac{2}{21} + \frac{4}{21} + \frac{6}{21} = \frac{12}{21}= 0.5714\;.</me></p>
       </li>
         <li><p>The event <m>\{1 \leq Y &lt; 4\}</m> contains the values 1, 2 and 3. Therefore,</p>
