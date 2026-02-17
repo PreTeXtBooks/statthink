@@ -33,7 +33,7 @@
       For example, a car manufacture may be interested in the fuel consumption of a new type of car. In order to do so the manufacturer may apply a standard test cycle to a sample of 10 new cars of the given type and measure their fuel consumptions. The parameter of interest is the average fuel consumption among <term>all</term> cars of the given type. The average consumption of the 10 cars is a point estimate of the parameter of interest.
     </p>
     <p>
-      An alternative approach for the estimation of a parameter is to construct an interval that is most likely to contain the population parameter. Such an interval, which is computed on the basis of the data, is called the a <term>confidence interval</term>. The sampling probability that the confidence interval will indeed contain the parameter value is called the <term>confidence level</term>. Confidence intervals are constructed so as to have a prescribed confidence level.
+      An alternative approach for the estimation of a parameter is to construct an interval that is most likely to contain the population parameter. Such an interval, which is computed on the basis of the data, is called a <term>confidence interval</term>. The sampling probability that the confidence interval will indeed contain the parameter value is called the <term>confidence level</term>. Confidence intervals are constructed so as to have a prescribed confidence level.
     </p>
     <p>
       A different problem in statistical inference is <term>hypothesis testing</term>. The scientific paradigm involves the proposal of new theories and hypothesis that presumably provide a better description for the laws of Nature. On the basis of these hypothesis one may propose predictions that can be examined empirically. If the empirical evidence is consistent with the predictions of the new hypothesis but not with those of the old theory then the old theory is rejected in favor of the new one. Otherwise, the established theory maintains its status. Statistical hypothesis testing is a formal method for determining which of the two hypothesis should prevail that uses this paradigm.
@@ -454,7 +454,7 @@ sd(mid.range)
       <title>Glossary</title>
       <dl>
         <li>
-          <title>Statistical Inferential</title>
+          <title>Statistical Inference</title>
           <p>Methods for gaining insight regarding the population parameters from the observed data.</p>
         </li>
         <li>
