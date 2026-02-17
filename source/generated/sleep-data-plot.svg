@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="400" fill="white"/>
+  
+  <!-- Title -->
+  <text x="300" y="30" text-anchor="middle" font-size="16" font-family="Arial">
+    Frequency of Average Time (in Hours) Spent Sleeping per Night
+  </text>
+  
+  <!-- Axes -->
+  <line x1="80" y1="350" x2="550" y2="350" stroke="black" stroke-width="2"/>
+  <line x1="80" y1="350" x2="80" y2="80" stroke="black" stroke-width="2"/>
+  
+  <!-- X-axis label -->
+  <text x="315" y="385" text-anchor="middle" font-size="14" font-family="Arial">x = Time</text>
+  
+  <!-- Y-axis label -->
+  <text x="40" y="220" text-anchor="middle" font-size="14" font-family="Arial" transform="rotate(-90, 40, 220)">y = Frequency</text>
+  
+  <!-- Bars for sleep data: 5(1), 5.5(1), 6(3), 6.5(4), 7(2), 8(2), 9(1) -->
+  <rect x="100" y="290" width="40" height="60" fill="lightblue" stroke="black"/>
+  <rect x="160" y="290" width="40" height="60" fill="lightblue" stroke="black"/>
+  <rect x="220" y="170" width="40" height="180" fill="lightblue" stroke="black"/>
+  <rect x="280" y="110" width="40" height="240" fill="lightblue" stroke="black"/>
+  <rect x="340" y="230" width="40" height="120" fill="lightblue" stroke="black"/>
+  <rect x="400" y="230" width="40" height="120" fill="lightblue" stroke="black"/>
+  <rect x="460" y="290" width="40" height="60" fill="lightblue" stroke="black"/>
+  
+  <!-- X-axis labels -->
+  <text x="120" y="370" text-anchor="middle" font-size="12">5</text>
+  <text x="180" y="370" text-anchor="middle" font-size="12">5.5</text>
+  <text x="240" y="370" text-anchor="middle" font-size="12">6</text>
+  <text x="300" y="370" text-anchor="middle" font-size="12">6.5</text>
+  <text x="360" y="370" text-anchor="middle" font-size="12">7</text>
+  <text x="420" y="370" text-anchor="middle" font-size="12">8</text>
+  <text x="480" y="370" text-anchor="middle" font-size="12">9</text>
+  
+  <!-- Y-axis labels -->
+  <text x="70" y="355" text-anchor="end" font-size="12">0</text>
+  <text x="70" y="295" text-anchor="end" font-size="12">1</text>
+  <text x="70" y="235" text-anchor="end" font-size="12">2</text>
+  <text x="70" y="175" text-anchor="end" font-size="12">3</text>
+  <text x="70" y="115" text-anchor="end" font-size="12">4</text>
+</svg>
