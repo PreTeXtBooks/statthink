@@ -74,6 +74,9 @@ cars &lt;- read.csv("_data/cars.csv")
 mean(cars$price)
       </input>
     </program>
+<pre>
+## [1] NA
+</pre>
 
     <p>
       The application of the function <c>mean</c> for the computation of the sample average produced a missing value. The reason is that the variable <c>price</c> contains 4 missing values. As default, when applied to a sequence that contains missing values, the function <c>mean</c> produce as output a missing value.
@@ -88,7 +91,9 @@ mean(cars$price)
 mean(cars$price,na.rm=TRUE)
       </input>
     </program>
-
+<pre>
+## [1] 13207.13
+</pre>
     <p>
       The resulting average price is, approximately, $13,000.
     </p>
@@ -139,7 +144,9 @@ for(i in 1:10^5) {
 mean(abs(X.bar - 1/lam) &lt;= 1000)
         </input>
       </program>
-
+<pre>
+## [1] 0.72405
+</pre>
       <p>
         In the last line of the code we compute the probability of being within $1,000 of the expected price. Recall that the expected price in the Exponential case is the reciprocal of the rate <m>\lambda</m>. In this simulation we obtained 0.7247 as an approximation of the probability.
       </p>
@@ -159,7 +166,9 @@ sig &lt;- 13000/sqrt(201)
 pnorm(14000,mu,sig) - pnorm(12000,mu,sig)
         </input>
       </program>
-
+<pre>
+## [1] 0.7245391
+</pre>
       <p>
         The probability of falling within the interval <m>[12000, 14000]</m> is computed as the difference between the cumulative Normal probability at 14,000 and the cumulative Normal probability at 12,000.
       </p>
@@ -187,7 +196,9 @@ sig &lt;- 12000/sqrt(201)
 pnorm(13000,mu,sig) - pnorm(11000,mu,sig)
         </input>
       </program>
-
+<pre>
+## [1] 0.7625775
+</pre>
       <p>
         This time we get that the probability is, approximately, 0.763.
       </p>
@@ -271,7 +282,10 @@ var(X.bar)
 var(mid.range)
         </input>
       </program>
-
+<pre>
+## [1] 0.02003947
+## [1] 0.1870101
+</pre>
       <p>
         We get that the variance of the sample average<fn>As a matter of fact, the variance of the sample average is exactly <m>\Var(X)/100 = 0.02</m>. Due to the inaccuracy of the simulation we got a slightly different variance.</fn> is approximately equal to 0.02. The variance of the mid-range statistic is approximately equal to 0.185, more than 9 times as large. We see that the accuracy of the sample average is better in this case than the accuracy of the mid-range estimator. Evaluating the two estimators at other values of the parameter will produce the same relation. Hence, in the current example it seems as if the sample average is the better of the two.
       </p>
@@ -303,7 +317,10 @@ var(X.bar)
 var(mid.range)
         </input>
       </program>
-
+<pre>
+## [1] 0.02087122
+## [1] 0.001209319
+</pre>
       <p>
         Again, we get that the variance of the sample average is approximately equal to 0.02, which is close to the theoretical value<fn>Actually, the exact value of the variance of the sample average is <m>\Var(X)/100 = 0.02083333</m>. The results of the simulation are consistent with this theoretical computation.</fn>. The variance of mid-range statistic is approximately equal to 0.0012.
       </p>
@@ -392,7 +409,6 @@ for(i in 1:10^5) {
 }
       </input>
     </program>
-
     <p>
       The content of the object <c>X.var</c>, at the end of the simulation, approximates the sampling distribution of the estimator <m>S^2</m>.
     </p>
@@ -415,7 +431,12 @@ mean(X.var)
 mean((19/20)*X.var)
       </input>
     </program>
-
+<pre>
+## [1] 2.995744
+</pre>
+<pre>
+## [1] 2.845957
+</pre>
     <p>
       Note that 3 is the value of the variance of the measurement that was used in the simulation. Observe that the expectation of <m>S^2</m> is essentially equal to 3, whereas the expectation of the alternative estimator is less than 3. Hence, at least in the example that we consider, the center of the distribution of <m>S^2</m> is located on the target value. On the other hand, the center of the sampling distribution of the alternative estimator is located off that target value.
     </p>
@@ -498,7 +519,12 @@ var(X.var)
 var((19/20)*X.var)
       </input>
     </program>
-
+<pre>
+## [1] 0.9484016
+</pre>
+<pre>
+## [1] 0.8559324
+</pre>
     <p>
       Observe that the variance of <m>S^2</m> is essentially equal to 0.936 and the variance of the alternative estimator is essentially equal to 0.845.
     </p>
