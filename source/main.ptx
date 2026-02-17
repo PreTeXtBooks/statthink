@@ -7,6 +7,7 @@
       \newcommand{\Expec}{\mathbf{E}}
       \newcommand{\Prob}{\mathbf{P}}
       \newcommand{\Var}{\mathbf{V}}
+      \newcommand{\texttt}[1]{\mathtt{#1}}
     </macros>
     <latex-image-preamble>
       \usepackage{tikz}
