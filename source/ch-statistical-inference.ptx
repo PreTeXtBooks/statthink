@@ -75,6 +75,40 @@ cars &lt;- read.csv("_data/cars.csv")
 summary(cars)
       </input>
     </program>
+<pre>
+##          make      fuel.type   num.of.doors       body.style drive.wheels
+##  toyota    : 32   diesel: 20   four:114     convertible: 6   4wd:  9     
+##  nissan    : 18   gas   :185   two : 89     hardtop    : 8   fwd:120     
+##  mazda     : 17                NA's:  2     hatchback  :70   rwd: 76     
+##  honda     : 13                             sedan      :96               
+##  mitsubishi: 13                             wagon      :25               
+##  subaru    : 12                                                          
+##  (Other)   :100                                                          
+##  engine.location   wheel.base         length          width      
+##  front:202       Min.   : 86.60   Min.   :141.1   Min.   :60.30  
+##  rear :  3       1st Qu.: 94.50   1st Qu.:166.3   1st Qu.:64.10  
+##                  Median : 97.00   Median :173.2   Median :65.50  
+##                  Mean   : 98.76   Mean   :174.0   Mean   :65.91  
+##                  3rd Qu.:102.40   3rd Qu.:183.1   3rd Qu.:66.90  
+##                  Max.   :120.90   Max.   :208.1   Max.   :72.30  
+##                                                                  
+##      height       curb.weight    engine.size      horsepower   
+##  Min.   :47.80   Min.   :1488   Min.   : 61.0   Min.   : 48.0  
+##  1st Qu.:52.00   1st Qu.:2145   1st Qu.: 97.0   1st Qu.: 70.0  
+##  Median :54.10   Median :2414   Median :120.0   Median : 95.0  
+##  Mean   :53.72   Mean   :2556   Mean   :126.9   Mean   :104.3  
+##  3rd Qu.:55.50   3rd Qu.:2935   3rd Qu.:141.0   3rd Qu.:116.0  
+##  Max.   :59.80   Max.   :4066   Max.   :326.0   Max.   :288.0  
+##                                                 NA's   :2      
+##     peak.rpm       city.mpg      highway.mpg        price      
+##  Min.   :4150   Min.   :13.00   Min.   :16.00   Min.   : 5118  
+##  1st Qu.:4800   1st Qu.:19.00   1st Qu.:25.00   1st Qu.: 7775  
+##  Median :5200   Median :24.00   Median :30.00   Median :10295  
+##  Mean   :5125   Mean   :25.22   Mean   :30.75   Mean   :13207  
+##  3rd Qu.:5500   3rd Qu.:30.00   3rd Qu.:34.00   3rd Qu.:16500  
+##  Max.   :6600   Max.   :49.00   Max.   :54.00   Max.   :45400  
+##  NA's   :2                                      NA's   :4
+</pre>
     <p>
       Observe that the first 6 variables are factors, i.e. they contain qualitative data that is associated with categorization or the description of an attribute. The last 11 variable are numeric and contain quantitative data.
     </p>
@@ -341,6 +375,9 @@ for(i in 1:10^5) {
 mean(abs(X.bar-12000) &lt;= 1.96*0.0705*12000)
         </input>
       </program>
+<pre>
+## [1] 0.94978
+</pre>
       <p>
         Observe that the simulation produces 0.9496 as the probability of the interval. This result is close enough to the target probability of 0.95, proposing that the Normal approximation is adequate in this example.
       </p>
@@ -381,6 +418,10 @@ for(i in 1:10^5) {
 quantile(mid.range,c(0.025,0.975))
         </input>
       </program>
+<pre>
+##     2.5%    97.5% 
+## 4.941019 5.058398
+</pre>
       <p>
         Observe that (approximately) 95% of the sampling distribution of the statistic are in the range <m>[4.941680, 5.059004]</m>.
       </p>
@@ -393,6 +434,10 @@ mean(mid.range)
 sd(mid.range)
         </input>
       </program>
+<pre>
+## [1] 4.999871
+## [1] 0.02772162
+</pre>
       <p>
         The expectation of the statistic is obtained by the application of the function <q><c>mean</c></q> to the sequence. Observe that it is practically equal to 5. The standard deviation is obtained by the application of the function <q><c>sd</c></q>. Its value is approximately equal to 0.028.
       </p>
@@ -431,7 +476,7 @@ sd(mid.range)
     <exercise xml:id="exercise-9-2">
       <statement>
         <p>
-          In Chapter <xref ref="ch-two-samples" /> we will present a statistical test for testing if there is a difference between the patients that received the active magnets and the patients that received the inactive placebo in terms of the <term>expected</term> value of the variable that measures the change. The test statist for this problem is taken to be
+          In <xref ref="ch-two-samples" /> we will present a statistical test for testing if there is a difference between the patients that received the active magnets and the patients that received the inactive placebo in terms of the <term>expected</term> value of the variable that measures the change. The test statist for this problem is taken to be
         </p>
         <me>\frac{\bar X_1 - \bar X_2}{\sqrt{S^2_1/29 + S^2_2/21}}\;,</me>
         <p>
