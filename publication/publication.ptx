@@ -21,5 +21,6 @@
     <knowl example="no"/>
     <knowl exercise-inline="no"/>
     <knowl exercise-divisional="no"/>
+    <knowl program="yes"/>
   </html>
 </publication>
