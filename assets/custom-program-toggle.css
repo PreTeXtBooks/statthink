@@ -1,0 +1,46 @@
+/* Custom CSS for R code toggle functionality */
+
+.program-toggle-wrapper {
+    margin: 1em 0;
+}
+
+.program-toggle-button {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left;
+    color: #333;
+    transition: background-color 0.3s ease;
+    margin-bottom: 0;
+}
+
+.program-toggle-button:hover {
+    background-color: #e0e0e0;
+}
+
+.program-toggle-button:focus {
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
+}
+
+.program-toggle-button.expanded {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: none;
+}
+
+.program-toggle-content {
+    transition: all 0.3s ease;
+}
+
+.program-toggle-content .code-box {
+    margin: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}

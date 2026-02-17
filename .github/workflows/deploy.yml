@@ -51,6 +51,7 @@ jobs:
       - name: Build HTML
         run: |
           pretext build web
+          ./inject-custom-assets.sh
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

@@ -8,6 +8,12 @@
     <latex-image-preamble>
       \usepackage{tikz}
     </latex-image-preamble>
+    <html-css>
+      <file source="custom-program-toggle.css"/>
+    </html-css>
+    <html-js>
+      <file source="custom-program-toggle.js"/>
+    </html-js>
   </docinfo>
 
   <book xml:id="statthink">

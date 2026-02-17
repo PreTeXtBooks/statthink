@@ -22,5 +22,11 @@
     <knowl exercise-inline="no"/>
     <knowl exercise-divisional="no"/>
     <knowl program="yes"/>
+    <css style="custom" colors="blue_red">
+      <file source="custom-program-toggle.css" css-stylename="custom-toggle"/>
+    </css>
+    <js>
+      <file source="custom-program-toggle.js"/>
+    </js>
   </html>
 </publication>
