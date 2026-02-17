@@ -73,6 +73,15 @@ ex.1 &lt;- read.csv("_data/ex1.csv")
 summary(ex.1)
       </input>
     </program>
+<pre>
+##        id              sex         height     
+##  Min.   :1538611   FEMALE:54   Min.   :117.0  
+##  1st Qu.:3339583   MALE  :46   1st Qu.:158.0  
+##  Median :5105620               Median :171.0  
+##  Mean   :5412367               Mean   :170.1  
+##  3rd Qu.:7622236               3rd Qu.:180.2  
+##  Max.   :9878130               Max.   :208.0
+</pre>
     <p>
       We saw in the previous chapter that, when applied to a numeric sequence, the function <q><c>summary</c></q> produces the smallest and largest values in the sequence, the three quartiles (including the median) and the mean. If the input of the same function is a factor then the outcome is the frequency in the data of each of the levels of the factor. Here <q><c>sex</c></q> is a factor with two levels. From the summary we can see that 54 of the subjects in the sample are female and 46 are male.
     </p>
@@ -98,6 +107,15 @@ pop.1 &lt;- read.csv(file="_data/pop1.csv")
 summary(pop.1)
       </input>
     </program>
+<pre>
+##        id              sex            height   
+##  Min.   :1000082   FEMALE:48888   Min.   :117  
+##  1st Qu.:3254220   MALE  :51112   1st Qu.:162  
+##  Median :5502618                  Median :170  
+##  Mean   :5502428                  Mean   :170  
+##  3rd Qu.:7757518                  3rd Qu.:178  
+##  Max.   :9999937                  Max.   :217
+</pre>
     <p>
       The object <q><c>pop.1</c></q> is a data frame of the same structure as the data frame <q><c>ex.1</c></q>. It contains three variables: a unique identifier of each subject (<c>id</c>), the sex of the subject (<c>sex</c>), and its height (<c>height</c>). Applying the function <q><c>summary</c></q> to the data frame produces the summary of the variables that it contains. In particular, for the variable <q><c>sex</c></q>, which is a factor, it produces the frequency of its two categories <mdash /> 48,888 female and 51,112 <mdash /> a total of 100,000 subjects. For the variable <q><c>height</c></q>, which is a numeric variable, it produces the extreme values, the quartiles, and the mean.
     </p>
@@ -157,6 +175,9 @@ summary(pop.1)
 sample(pop.1$height,1)
         </input>
       </program>
+<pre>
+## [1] 177
+</pre>
       <p>
         The first entry to the function is the given sequence of heights. When we set the second argument to 1 then the function selects one of the entries of the sequence at random, with each entry having the same likelihood of being selected. Specifically, in this example an entry that contains the value 162 was selected. Let us run the function again:
       </p>
@@ -165,6 +186,9 @@ sample(pop.1$height,1)
 sample(pop.1$height,1)
         </input>
       </program>
+<pre>
+## [1] 168
+</pre>
       <p>
         In this instance an entry with a different value was selected. Try to run the command several times yourself and see what you get. Would you necessarily obtain a different value in each run?
       </p>
@@ -224,6 +248,9 @@ X &lt;- pop.1$height
 mean(abs(X-170) &lt;= 10)
         </input>
       </program>
+<pre>
+## [1] 0.64541
+</pre>
       <p>
         We get that the height of a person randomly sampled from the population is between 160 and 180 centimeters with probability 0.64541.
       </p>
@@ -246,6 +273,9 @@ Y &lt;- c(6.3, 6.9, 6.6, 3.4, 5.5, 4.3, 6.5, 4.7, 6.1, 5.3)
 abs(Y-5)
         </input>
       </program>
+<pre>
+##  [1] 1.3 1.9 1.6 1.6 0.5 0.7 1.5 0.3 1.1 0.3
+</pre>
       <p>
         Compare the resulting output to the original sequence. The first value in the input sequence is 6.3. Its distance from 5 is indeed 1.3. The fourth value in the input sequence is 3.4. The difference 3.4 - 5 is equal to -1.6, and when the absolute value is taken we get a distance of 1.6.
       </p>
@@ -257,6 +287,9 @@ abs(Y-5)
 abs(Y - 5) &lt;= 1
         </input>
       </program>
+<pre>
+##  [1] FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE  TRUE FALSE  TRUE
+</pre>
       <p>
         Observe the in this example the function <q><c>&lt;=</c></q> produced 10 logical values, one for each of the elements of the sequence to the left of it. The first input in the sequence <q><c>Y</c></q> is 6.3, which is more than one unit away from 5. Hence, the first output of the logical expression is <q><c>FALSE</c></q>. On the other hand, the last input in the sequence <q><c>Y</c></q> is 5.3, which is within the range. Therefore, the last output of the logical expression is <q><c>TRUE</c></q>.
       </p>
@@ -268,16 +301,15 @@ abs(Y - 5) &lt;= 1
 mean(abs(Y - 5) &lt;= 1)
         </input>
       </program>
+<pre>
+##  0.4
+</pre>
       <p>
         When a sequence with logical values is entered into the function <q><c>mean</c></q> then the function replaces the <c>TRUE</c>'s by 1 and the <c>FALSE</c>'s by 0. The average produces then the relative frequency of <c>TRUE</c>'s in the sequence as required. Specifically, in this example there are 4 <c>TRUE</c>'s and 6 <c>FALSE</c>'s. Consequently, the output of the final expression is <m>4/10 = 0.4</m>.
       </p>
       <p>
         The computation of the probability that the sampled height falls within 10 centimeter of 170 is based on the same code. The only differences are that the input sequence <q><c>Y</c></q> is replaced by the sequence of population heights <q><c>X</c></q> as input. the number <q><c>5</c></q> is replaced by the number <q><c>170</c></q> and the number <q><c>1</c></q> is replaced by the number <q><c>10</c></q>. In both cases the result of the computation is the relative proportion of the times that the values of the input sequence fall within a given range of the indicated number.
       </p>
-    </subsection>
-
-    <subsection xml:id="sec-probability-function">
-      <title>The Probability Function</title>
       <p>
         The probability function of a random variable is defined for any value that the random variable may obtain and produces the <em>distribution</em> of the random variable. The probability function may emerge as a relative frequency as in the given example or it may be a result of theoretical modeling. Examples of theoretical random variables are presented mainly in the next two chapters.
       </p>
