@@ -35,7 +35,7 @@
 
       <figure xml:id="fig-normal1">
         <caption>The Normal(2,9) Distribution</caption>
-        <image source="_figures/Normal1.png" width="60%">
+        <image source="_figures/Normal.png" width="60%">
           <description>A plot showing the Normal(2,9) distribution with the region between 0 and 5 shaded, indicating P(0 &lt; X &lt; 5)</description>
         </image>
       </figure>
@@ -49,7 +49,9 @@
 pnorm(5,2,3) - pnorm(0,2,3)
         </input>
       </program>
-
+<pre>
+## [1] 0.5888522
+</pre>
       <p>
         The difference is the indicated area that corresponds to the probability of being inside the interval, which turns out to be approximately equal to 0.589. Notice that the expectation <m>\mu</m> of the Normal distribution is entered as the second argument to the function. The third argument to the function is the standard deviation, i.e. the square root of the variance. In this example, the standard deviation is <m>\sqrt{9}=3</m>.
       </p>
@@ -125,7 +127,9 @@ pnorm(5,2,3) - pnorm(0,2,3)
 pnorm((5-2)/3) - pnorm((0-2)/3)
         </input>
       </program>
-
+<pre>
+## [1] 0.5888522
+</pre>
       <p>
         The value that is being computed, the area under the graph for the standard Normal distribution, is presented in <xref ref="fig-normal3" />. Recall that 3 arguments were specified in the previous application of the function <c>pnorm</c>: the <m>x</m> value, the expectation, and the standard deviation. In the given application we did not specify the last two arguments, only the first one. (Notice that the output of the expression <c>(5-2)/3</c> is a single number and, likewise, the output of the expression <c>(0-2)/3</c> is also a single number.)
       </p>
@@ -167,7 +171,10 @@ qnorm(0.975)
 qnorm(0.025)
         </input>
       </program>
-
+<pre>
+## [1] 1.959964
+## [1] -1.959964
+</pre>
       <p>
         Observe that <m>z_1</m> is practically equal to 1.96 and <m>z_0 = -1.96 = -z_1</m>. The fact that <m>z_0</m> is the negative of <m>z_1</m> results from the symmetry of the standard Normal distribution about 0. As a conclusion we get that for the standard Normal distribution 95% of the probability is concentrated in the range <m>[-1.96, 1.96]</m>.
       </p>
@@ -189,7 +196,10 @@ qnorm(0.975,2,3)
 qnorm(0.025,2,3)
         </input>
       </program>
-
+<pre>
+## [1] 7.879892
+## [1] -3.879892
+</pre>
       <p>
         Hence, we get that <m>x_0 = -3.88</m> has the property that the total probability to its left is 0.025 and <m>x_1 = 7.88</m> has the property that the total probability to its right is 0.025. The total probability in the range <m>[-3.88, 7.88]</m> is 0.95.
       </p>
@@ -204,7 +214,10 @@ qnorm(0.025,2,3)
 2 + qnorm(0.025)*3
         </input>
       </program>
-
+<pre>
+## [1] 7.879892
+## [1] -3.879892
+</pre>
       <p>
         Hence, we again produce the interval <m>[-3.88,7.88]</m>, the interval that was obtained before as the central interval that contains 95% of the distribution of the <m>\mathrm{Normal}(2,9)</m> random variable.
       </p>
@@ -231,7 +244,10 @@ qnorm(0.75)
 qnorm(0.25)
         </input>
       </program>
-
+<pre>
+## [1] 0.6744898
+## [1] -0.6744898
+</pre>
       <p>
         Observe that for the standard Normal distribution one has that 75% of the distribution is to the left of the value 0.6744898, which is the third quartile of this distribution. Likewise, 25% of the standard Normal distribution are to the left of the value -0.6744898, which is the first quartile. The interquartile range is the length of the interval between the third and the first quartiles. In the case of the standard Normal distribution this length is equal to <m>0.6744898 - (-0.6744898) = 1.348980</m>.
       </p>
@@ -250,7 +266,10 @@ qnorm(0.75) + 1.5*(qnorm(0.75)-qnorm(0.25))
 qnorm(0.25) - 1.5*(qnorm(0.75)-qnorm(0.25))
         </input>
       </program>
-
+<pre>
+## [1] 2.697959
+## [1] -2.697959
+</pre>
       <p>
         Hence, a value larger than 2.697959 or smaller than -2.697959 would be identified as an outlier.
       </p>
@@ -268,7 +287,9 @@ qnorm(0.25) - 1.5*(qnorm(0.75)-qnorm(0.25))
 2*(1-pnorm(2.697959))
         </input>
       </program>
-
+<pre>
+## [1] 0.006976603
+</pre>
       <p>
         We get that for the standard Normal distribution the probability of an outlier is approximately 0.7%.
       </p>
@@ -302,7 +323,9 @@ qnorm(0.25) - 1.5*(qnorm(0.75)-qnorm(0.25))
 pbinom(2060,4000,0.5) - pbinom(1939,4000,0.5)
         </input>
       </program>
-
+<pre>
+## [1] 0.9442883
+</pre>
       <p>
         This is an exact computation. The Normal approximation produces an approximate evaluation, not an exact computation. The Normal approximation replaces Binomial computations by computations carried out for the Normal distribution. The computation of a probability for a Binomial random variable is replaced by computation of probability for a Normal random variable that has the same expectation and standard deviation as the Binomial random variable.
       </p>
@@ -318,7 +341,9 @@ sig &lt;- sqrt(4000*0.5*0.5)
 pnorm(2060,mu,sig) - pnorm(1939,mu,sig)
         </input>
       </program>
-
+<pre>
+## [1] 0.9442441
+</pre>
       <p>
         Observe that in this example the Normal approximation of the probability (0.9442441) agrees with the Binomial computation of the probability (0.9442883) up to 3 significant digits.
       </p>
@@ -333,7 +358,10 @@ qnorm(0.975,mu,sig)
 qnorm(0.025,mu,sig)
         </input>
       </program>
-
+<pre>
+## [1] 2061.98
+## [1] 1938.02
+</pre>
       <p>
         After rounding to the nearest integer we get the interval <m>[1938,2062]</m> as a proposed central region.
       </p>
@@ -348,7 +376,10 @@ qbinom(0.975,4000,0.5)
 qbinom(0.025,4000,0.5)
         </input>
       </program>
-
+<pre>
+## [1] 2062
+## [1] 1938
+</pre>
       <p>
         Again, we get the interval <m>[1938,2062]</m> as the central region, in agreement with the one proposed by the Normal approximation. Notice that the function <c>qbinom</c> produces the percentiles of the Binomial distribution. It may not come as a surprise to learn that <c>qpois</c>, <c>qunif</c>, <c>qexp</c> compute the percentiles of the Poisson, Uniform and Exponential distributions, respectively.
       </p>
@@ -386,7 +417,10 @@ pbinom(6,30,0.3)
 pnorm(6,30*0.3,sqrt(30*0.3*0.7))
         </input>
       </program>
-
+<pre>
+## [1] 0.159523
+## [1] 0.1159989
+</pre>
       <p>
         The Normal approximation, which is equal to 0.1159989, is not too close to the actual probability, which is equal to 0.1595230.
       </p>
@@ -404,7 +438,9 @@ pnorm(6,30*0.3,sqrt(30*0.3*0.7))
 pnorm(6.5,30*0.3,sqrt(30*0.3*0.7))
         </input>
       </program>
-
+<pre>
+## [1] 0.159523
+</pre>
       <p>
         Observe that the corrected approximation is much closer to the target probability, which is 0.1595230, and is substantially better that the uncorrected approximation which was 0.1159989. Generally, it is recommended to apply the continuity correction to the Normal approximation of a discrete distribution.
       </p>
@@ -426,7 +462,9 @@ pnorm(6.5,30*0.3,sqrt(30*0.3*0.7))
 ppois(3,2)
         </input>
       </program>
-
+<pre>
+## [1] 0.8571235
+</pre>
       <p>
         The actual Binomial probability in the first case (<m>n=20</m>, <m>p=0.1</m>) and a Normal approximation thereof are:
       </p>
@@ -437,7 +475,10 @@ pbinom(3,20,0.1)
 pnorm(3.5,2,sqrt(20*0.1*0.9))
         </input>
       </program>
-
+<pre>
+## [1] 0.8670467
+## [1] 0.8682238
+</pre>
       <p>
         Observe that the Normal approximation (with a continuity correction) is better than the Poisson approximation in this case.
       </p>
@@ -452,7 +493,10 @@ pbinom(3,200,0.01)
 pnorm(3.5,2,sqrt(200*0.01*0.99))
         </input>
       </program>
-
+<pre>
+## [1] 0.858034
+## [1] 0.856789
+</pre>
       <p>
         Observe that the Poisson approximation that produces 0.8571235 is slightly closer to the target than the Normal approximation. The greater accuracy of the Poisson approximation for the case where <m>n</m> is large and <m>p</m> is small is more pronounced in the final case (<m>n=2000</m>, <m>p=0.001</m>) where the target probability and the Normal approximation are:
       </p>
@@ -463,7 +507,10 @@ pbinom(3,2000,0.001)
 pnorm(3.5,2,sqrt(2000*0.001*0.999))
         </input>
       </program>
-
+<pre>
+## [1] 0.8572138
+## [1] 0.8556984
+</pre>
       <p>
         Compare the actual Binomial probability, which is equal to 0.8572138, to the Poisson approximation that produced 0.8571235. The Normal approximation, 0.8556984, is slightly off, but is still acceptable.
       </p>
