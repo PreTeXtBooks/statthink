@@ -64,6 +64,13 @@ X.samp &lt;- sample(pop.1$height,100)
 X.samp
         </input>
       </program>
+<pre>
+##   [1] 178 182 183 172 177 161 163 185 143 157 171 182 182 178 157 165 153
+##  [18] 178 164 168 180 166 192 182 172 164 163 182 165 141 157 158 188 168
+##  [35] 161 158 160 162 163 170 171 183 173 160 178 171 159 170 190 179 159
+##  [52] 173 160 174 179 172 176 181 171 186 155 165 175 191 169 179 166 184
+##  [69] 181 166 158 168 165 168 155 185 196 145 153 163 172 163 177 184 165
+##  [86] 156 140 202 162 157 176 176 171 166 185 171 184 173 174 162</pre>
       <p>
         In the first line of code we produce a data frame that contains the information on the entire population. In the second line we select a sample of size 100 from the population, and in the third line we present the content of the sample.
       </p>
@@ -81,6 +88,9 @@ X.samp
 mean(X.samp)
         </input>
       </program>
+<pre>
+## [1] 170.19
+</pre>
       <p>
         In our artificial example we can actually compute the true population mean:
       </p>
@@ -89,6 +99,9 @@ mean(X.samp)
 mean(pop.1$height)
         </input>
       </program>
+<pre>
+## [1] 170.035
+</pre>
       <p>
         Hence, we may see that although the match between the estimated value and the actual value is not perfect still they are close enough.
       </p>
@@ -108,6 +121,9 @@ X.bar &lt;- mean(X.samp)
 X.bar
         </input>
       </program>
+<pre>
+## [1] 169.08
+</pre>
       <p>
         and do it once more:
       </p>
@@ -118,6 +134,9 @@ X.bar &lt;- mean(X.samp)
 X.bar
         </input>
       </program>
+<pre>
+## [1] 170.89
+</pre>
       <p>
         In each case we got a different value for the sample average. In the first of the last two iterations the result was more than 1 centimeter away from the population average, which is equal to 170.035, and in the second it was within the range of 1 centimeter. Can we say, prior to taking the sample, what is the probability of falling within 1 centimeter of the population mean?
       </p>
@@ -145,6 +164,7 @@ for(i in 1:10^5) {
 }
         </input>
       </program>
+
       <p>
         In the first line we produce a sequence of length 100,000 that contains zeros. The function <q><c>rep</c></q> creates a sequence that contains repeats of its first argument a number of times that is specified by its second argument. In this example, the numerical value 0 is repeated 100,000 times to produce a sequence of zeros of the length we seek.
       </p>
@@ -180,6 +200,12 @@ mean(X.bar)
 sd(X.bar)
         </input>
       </program>
+<pre>
+## [1] 170.035
+## [1] 11.23205
+## [1] 170.0346
+## [1] 1.11987
+</pre>
       <p>
         Observe that the expectation of the population and the expectation of the sample average are practically the same, but the standard deviation of the sample average is about 10 times smaller than the standard deviation of the population. This result is not accidental and actually reflects a general phenomena that will be seen below in other examples.
       </p>
@@ -191,6 +217,9 @@ sd(X.bar)
 mean(abs(X.bar - mean(pop.1$height)) &lt;= 1)
         </input>
       </program>
+<pre>
+## [1] 0.62649
+</pre>
       <p>
         Hence we get that the probability of the given event is about 62.6%.
       </p>
@@ -243,6 +272,10 @@ mean(X.bar)
 sd(X.bar)
         </input>
       </program>
+<pre>
+## [1] 5.000031
+## [1] 0.198051
+</pre>
       <p>
         The histogram of the sample average is presented in the lower panel of <xref ref="fig-sampdist7" />. Compare it to the distribution of a single Binomial random variable that appears in the upper panel. Notice, once more, that the center of the two distributions coincide but the spread of the sample average is smaller. The sample space of a single Binomial random variable is composed of integers. The sample space of the average of 64 Binomial random variables, on the other hand, contains many more values and is closer to the sample space of a random variable with a continuous distribution.
       </p>
@@ -268,6 +301,10 @@ sd(X.bar)
 quantile(X.bar,c(0.025,0.975))
         </input>
       </program>
+<pre>
+##     2.5%    97.5% 
+## 4.609375 5.390625
+</pre>
       <p>
         We used the sequence <q><c>c(0.025,0.975)</c></q> as the input to the second argument. As a result we obtained the output 4.609375, which is the 2.5%-percentile of the sampling distribution of the average, and 5.390625, which is the 97.5%-percentile of the sampling distribution of the average.
       </p>
@@ -279,6 +316,9 @@ quantile(X.bar,c(0.025,0.975))
 qnorm(c(0.025,0.975),mean(X.bar),sd(X.bar))
         </input>
       </program>
+<pre>
+## [1] 4.611859 5.388204
+</pre>
       <p>
         Observe the similarity between the percentiles of the distribution of the average and the percentiles of the Normal distribution. This similarity is a reflection of the Normal approximation of the sampling distribution of the average, which is formulated in the next section under the title: <em>The Central Limit Theorem</em>.
       </p>
@@ -332,6 +372,11 @@ mean(unif.100)
 mean(unif.1000)
         </input>
       </program>
+<pre>
+## [1] 5.000141
+## [1] 5.000465
+## [1] 4.999981
+</pre>
       <p>
         For all sample size the expectation of the sample average is equal to 5, which is the expectation of the <m>\mathrm{Uniform}(3,7)</m> distribution.
       </p>
@@ -345,6 +390,11 @@ var(unif.100)
 var(unif.1000)
         </input>
       </program>
+<pre>
+## [1] 0.1329634
+## [1] 0.01341528
+## [1] 0.001338488
+</pre>
       <p>
         Notice that the variances decrease with the increase of the sample sizes. The decrease is according to the formula <m>\Var(\bar X) = \Var(X)/n</m>.
       </p>
@@ -415,6 +465,11 @@ mean(exp.100)
 mean(exp.1000)
         </input>
       </program>
+<pre>
+## [1] 1.999011
+## [1] 2.000074
+## [1] 2.000183
+</pre>
       <p>
         So the expectations of the sample average are all equal to 2. For the variance we get:
       </p>
@@ -425,6 +480,11 @@ var(exp.100)
 var(exp.1000)
         </input>
       </program>
+<pre>
+## [1] 0.3980615
+## [1] 0.04012221
+## [1] 0.004005182
+</pre>
       <p>
         Which is in agreement with the decrease proposed by the theory,
       </p>
