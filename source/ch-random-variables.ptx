@@ -147,6 +147,9 @@
 dbinom(c(1,3,5,7,9),10,0.5)
       </input>
     </program>
+<pre>
+## [1] 0.009765625 0.117187500 0.246093750 0.117187500 0.009765625
+</pre>
       <p>
         Observe that the output of the function is a sequence of the same length
         as the first argument. This output contains the Binomial probabilities
@@ -160,6 +163,9 @@ dbinom(c(1,3,5,7,9),10,0.5)
 sum(dbinom(c(1,3,5,7,9),10,0.5))
       </input>
     </program>
+<pre>
+## [1] 0.5
+</pre>
       <p>
         Observe that the probability of obtaining an odd value in this specific
         case is equal to one half.
@@ -174,6 +180,11 @@ x &lt;- 0:10
 dbinom(x,10,0.5)
       </input>
     </program>
+<pre>
+##  [1] 0.0009765625 0.0097656250 0.0439453125 0.1171875000 0.2050781250
+##  [6] 0.2460937500 0.2050781250 0.1171875000 0.0439453125 0.0097656250
+## [11] 0.0009765625
+</pre>
       <p>
         The expression “<c>start.value:end.value</c>" produces a sequence of numbers
         that initiate with the number “<c>start.value</c>" and proceeds in jumps of
@@ -201,6 +212,16 @@ pbinom(x,10,0.5)
 cumsum(dbinom(x,10,0.5))
       </input>
     </program>
+<pre>
+##  [1] 0.0009765625 0.0107421875 0.0546875000 0.1718750000 0.3769531250
+##  [6] 0.6230468750 0.8281250000 0.9453125000 0.9892578125 0.9990234375
+## [11] 1.0000000000
+</pre>
+<pre>
+##  [1] 0.0009765625 0.0107421875 0.0546875000 0.1718750000 0.3769531250
+##  [6] 0.6230468750 0.8281250000 0.9453125000 0.9892578125 0.9990234375
+## [11] 1.0000000000
+</pre>
       <p>
         The output of the function “<c>pbinom</c>" is the cumulative probability
         <m>\Prob(X \leq x)</m> that the random variable is less than or equal to the
@@ -251,6 +272,10 @@ EX
 sum((X.val-EX)^2*P.val)
       </input>
     </program>
+<pre>
+## [1] 5
+## [1] 2.5
+</pre>
       <p>
         This agrees with the specific formulae for Binomial variables, since
         <m>10 \times 0.5 = 5</m> and <m>10 \times 0.5 \times(1-0.5) = 2.5</m>.
@@ -296,6 +321,11 @@ sum((X.val-EX)^2*P.val)
 dbinom(x,10,1/6)
       </input>
     </program>
+<pre>
+##  [1] 1.615056e-01 3.230112e-01 2.907100e-01 1.550454e-01 5.426588e-02
+##  [6] 1.302381e-02 2.170635e-03 2.480726e-04 1.860544e-05 8.269086e-07
+## [11] 1.653817e-08
+</pre>
       <p>
         In this case smaller values of the random variable are assigned higher
         probabilities and larger values are assigned lower probabilities.
@@ -394,6 +424,15 @@ dpois(x,2)
 ppois(x,2)
       </input>
     </program>
+<pre>
+##  [1] 1.353353e-01 2.706706e-01 2.706706e-01 1.804470e-01 9.022352e-02
+##  [6] 3.608941e-02 1.202980e-02 3.437087e-03 8.592716e-04 1.909493e-04
+## [11] 3.818985e-05
+</pre>
+<pre>
+##  [1] 0.1353353 0.4060058 0.6766764 0.8571235 0.9473470 0.9834364 0.9954662
+##  [8] 0.9989033 0.9997626 0.9999535 0.9999917
+</pre>
       <p>
         The probability function of the Poisson distribution with <m>\lambda = 2</m>,
         in the range between 0 and 10, is plotted in
@@ -418,6 +457,9 @@ P.val &lt;- dpois(X.val,2)
 sum(X.val*P.val)
       </input>
     </program>
+<pre>
+## [1] 1.999907
+</pre>
       <p>
         Observe that the outcome is almost, but not quite, equal to <m>2.00</m>,
         which is the actual value of the expectation. The reason for the
@@ -435,6 +477,10 @@ EX
 sum((X.val-EX)^2*P.val)
       </input>
     </program>
+<pre>
+## [1] 2
+## [1] 2
+</pre>
       <p>
         In the last expression we have computed the variance of the Poisson
         distribution and obtained that it is equal to the expectation. This
@@ -558,6 +604,9 @@ sum((X.val-EX)^2*P.val)
 dunif(0:10,3,7)
       </input>
     </program>
+<pre>
+##  [1] 0.00 0.00 0.00 0.25 0.25 0.25 0.25 0.25 0.00 0.00 0.00
+</pre>
       <p>
         Notice that for the values 0, 1, and 2, and the values 8, 9 and 10 that
         are outside of the interval the density is equal to zero, indicating
@@ -572,6 +621,9 @@ dunif(0:10,3,7)
 dunif(4.73,3,7)
       </input>
     </program>
+<pre>
+## [1] 0.25
+</pre>
     <figure xml:id="fig-rvar6">
       <caption>The Uniform(3,7) Distribution</caption>
       <image source="_figures/RVar6.png" />
@@ -597,6 +649,9 @@ dunif(4.73,3,7)
 punif(4.73,3,7)
       </input>
     </program>
+<pre>
+## [1] 0.4325
+</pre>
       <p>
         This probability corresponds to the marked area to the left of the point
         <m>x = 4.73</m> in <xref ref="fig-rvar6" />. This area of the marked
@@ -608,6 +663,9 @@ punif(4.73,3,7)
 (4.73-3)/(7-3)
       </input>
     </program>
+<pre>
+## [1] 0.4325
+</pre>
       <p>
         is the area of the marked rectangle and is equal to the probability.
       </p>
@@ -628,6 +686,9 @@ den &lt;- dunif(x,3,7)
 plot(x,den)
       </input>
     </program>
+    <figure xml:id="fig-plot-x-den">
+      <image source="_figures/plot-x-den.png" />
+    </figure>
       <p>
         The object “<c>den</c>" is a sequence of length 1,000 that contains the
         density of the <m>\mathrm{Uniform}(3,7)</m> evaluated over the values of
@@ -661,6 +722,9 @@ plot(x,den)
 plot(x,den,type="l")
       </input>
     </program>
+    <figure xml:id="fig-plot-x-den-1">
+      <image source="_figures/plot-x-den-1.png" />
+    </figure>
       <p>
         The cumulative probability of the <m>\mathrm{Uniform}(3,7)</m> is produced by the code:
       </p>
@@ -670,6 +734,9 @@ cdf &lt;- punif(x,3,7)
 plot(x,cdf,type="l")
       </input>
     </program>
+    <figure xml:id="fig-plot-x-cdf">
+      <image source="_figures/plot-x-cdf.png" />
+    </figure>
       <p>
         One can think of the density of the Uniform as an histogram<fn>If <m>X \sim \mathrm{Uniform}(a,b)</m> then the density is <m>f(x) = 1/(b-a)</m>, for <m>a \leq x \leq b</m>, and it is equal to 0 for other values of <m>x</m>.</fn>. The
         expectation of a Uniform random variable is the middle point of it’s
@@ -754,6 +821,9 @@ plot(x,cdf,type="l")
 pexp(6,0.5) - pexp(2,0.5)
       </input>
     </program>
+<pre>
+## [1] 0.3180924
+</pre>
       <p>
         The difference is the probability of belonging to the interval, namely
         the area marked in the plot.
