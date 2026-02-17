@@ -213,7 +213,12 @@ abline(14,-2,col="blue")
 abline(mean(y),0,col="red")
         </input>
       </program>
-
+      <figure xml:id="fig-regression3a">
+        <caption>A Scatter Plot</caption>
+        <image source="_figures/Regression3a.png" width="60%">
+          <description>Scatter plot showing relationship between fish length (x-axis) and weight (y-axis)</description>
+        </image>
+      </figure>
       <p>
         Initially, the scatter plot is created and the lines are added to the plot one after the other. Observe that color of the first line that is added is green, it has an intercept of 7 and a slope of 1. The second line is blue, with an intercept of 14 and a negative slope of -2. The last line is red, and its constant value is the average of the variable <m>y</m>.
       </p>
@@ -311,8 +316,8 @@ sum((y-mean(y))*(x-mean(x)))/9
       </program>
 
       <pre>
-## [1] 3.733056
-## [1] 3.733056
+## [1] 2.386111
+## [1] 2.386111
       </pre>
 
       <p>
@@ -399,230 +404,7 @@ abline(fit.power)
       </p>
     </subsection>
 
-    <subsection xml:id="subsec-r-squared">
-      <title>R-squared and the Variance of Residuals</title>
-      <p>
-        In this section we discuss the residuals between the values of the response and their estimated expected value according to the regression model. These residuals are the regression model equivalence of the deviations between the observations and the sample average. We use these residuals in order compute the variability that is not accounted for by the regression model. Indeed, the ratio between the total variability of the residuals and the total variability of the deviations from the average serves as a measure of the variability that is not explained by the explanatory variable. R-squared, which is equal to 1 minus this ratio, is interpreted as the fraction of the variability of the response that is explained by the regression model.
-      </p>
-      <p>
-        We start with the definition of residuals. Let us return to the artificial example that compared length of fish to their weight. The data for this example was given in <xref ref="table-regression-1" /> and was saved in the objects <q><c>x</c></q> and <q><c>y</c></q>. The regression model was fitted to this data by the application of the function <q><c>lm</c></q> to the formula <c>y~x</c> and the fitted model was saved in an object called <q><c>fit</c></q>. Let us apply the function <q><c>summary</c></q> to the fitted model:
-      </p>
-
-      <program language="r">
-        <input>
-summary(fit)
-        </input>
-      </program>
-
-      <pre>
-## 
-## Call:
-## lm(formula = y ~ x)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -3.2602 -1.6509 -0.2295  2.1127  3.0663 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)  
-## (Intercept)   4.6165     1.7726   2.604   0.0314 *
-## x             1.4274     0.5835   2.447   0.0400 *
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 2.791 on 8 degrees of freedom
-## Multiple R-squared:  0.4281,Adjusted R-squared:  0.3566 
-## F-statistic: 5.985 on 1 and 8 DF,  p-value: 0.04003
-      </pre>
-
-      <p>
-        The given report contains a table with estimates of the regression coefficients and information for conducting hypothesis testing. The report contains other information that is associated mainly with the notion of the residuals from regression line. Our current goal is to understand what is that other information.
-      </p>
-      <p>
-        The residual from regression for each observation is the difference between the value of the response for the observation and the estimated expectation of the response under the regression model<fn>The estimated expectation of the response is also called <em>the predicted response</em>.</fn>. An observation is a pair <m>(x_i,y_i)</m>, with <m>y_i</m> being the value of the response. The expectation of the response according to the regression model is <m>a + b \cdot x_i</m>, where <m>a</m> and <m>b</m> are the coefficients of the model. The estimated expectation is obtained by using, in the formula for the expectation, the coefficients that are estimated from the data. The residual is the difference between <m>y_i</m> and <m>a + b \cdot x_i</m>.
-      </p>
-      <p>
-        Consider an example. The first observation on the fish is <m>(4.5, 9.5)</m>, where <m>x_1 = 4.5</m> and <m>y_1 = 9.5</m>. The estimated intercept is 4.6165 and the estimated slope is 1.4274. The estimated expectation of the response for the first variable is equal to
-      </p>
-      <me>4.6165 + 1.4274 \cdot x_1 = 4.6165 + 1.4274 \cdot 4.5  =  11.0398\;.</me>
-      <p>
-        The residual is the difference between the observes response and this value:
-      </p>
-      <me>y_1 - (4.6165 + 1.4274 \cdot x_1) = 9.5 - 11.0398 = -1.5398\;.</me>
-      <p>
-        The residuals for the other observations are computed in the same manner. The values of the intercept and the slope are kept the same but the values of the explanatory variable and the response are changed.
-      </p>
-
-      <figure xml:id="fig-regression6">
-        <caption>Residuals and Deviations from the Mean</caption>
-        <image source="_figures/Regression6.png" width="60%">
-          <description>Two scatter plots showing residuals from regression line and deviations from mean</description>
-        </image>
-      </figure>
-
-      <p>
-        Consult the upper plot in <xref ref="fig-regression6" />. This is a scatter plot of the data, together with the regression line in <em>black</em> and the line of the average in <em>red</em>. A vertical arrow extends from each data point to the regression line. The point where each arrow hits the regression line is associated with the estimated value of the expectation for that point. The residual is the difference between the value of the response at the origin of the arrow and the value of the response at the tip of its head. Notice that there are as many residuals as there are observations.
-      </p>
-      <p>
-        The function <q><c>residuals</c></q> computes the residuals. The input to the function is the fitted regression model and the output is the sequence of residuals. When we apply the function to the object <q><c>fit</c></q>, which contains the fitted regression model for the fish data, we get the residuals:
-      </p>
-
-      <program language="r">
-        <input>
-residuals(fit)
-        </input>
-      </program>
-
-      <pre>
-##           1           2           3           4           5           6 
-## -1.53970748 -0.51846997 -1.64174908  0.06614406  3.06633893  3.06020557 
-##           7           8           9          10 
-## -0.22953247 -3.26024544  1.25860275  1.73841313
-      </pre>
-
-      <p>
-        Indeed, 10 residuals are produced, one for each observation. In particular, the residual for the first observation is -1.5397075, which is essentially the value that we obtained<fn>The discrepancy between the value that we computed and the value computed by the function results from rounding up errors. We used the vales of the coefficients that appear in the report. These values are rounded up. The function <c>residuals</c> uses the coefficients without rounding.</fn>.
-      </p>
-      <p>
-        Return to the report produced by the application of the function <q><c>summary</c></q> to the fitted regression model. The first component in the report is the formula that identifies the response and the explanatory variable. The second component, the component that comes under the title <q>Residuals:</q>, gives a summary of the distribution of the residuals. This summary includes the smallest and the largest values in the sequence of residuals, as well as the first and third quartiles and the median. The average is not reported since the average of the residuals from the regression line is always equal to 0.
-      </p>
-      <p>
-        The table that contains information on the coefficients was discussed in the previous section. Let us consider the last 3 lines of the report.
-      </p>
-      <p>
-        The first of the three lines contains the estimated value of the standard deviation of the response from the regression model. If the expectations of the measurements of the response are located on the regression line then the variability of the response corresponds to the variability about this line. The resulting variance is estimated by the sum of squares of the residuals from the regression line, divided by the number of observations minus 2. A division by the number of observation minus 2 produces an unbiased estimator of the variance of the response about the regression model. Taking the square root of the estimated variance produces an estimate of the standard deviation:
-      </p>
-
-      <program language="r">
-        <input>
-sqrt(sum(residuals(fit)^2)/8)
-        </input>
-      </program>
-
-      <pre>
-## [1] 2.790787
-      </pre>
-
-      <p>
-        The last computation is a manual computation of the estimated standard deviation. It involves squaring the residuals and summing the squares. This sum is divided by the number of observations minus 2 (<m>10-2=8</m>). Taking the square root produces estimate. The value that we get for the estimated standard deviation is 2.790787, which coincides with the value that appears in the first of the last 3 lines of the report.
-      </p>
-      <p>
-        The second of these lines reports the R-squared of the linear fit. In order to explain the meaning of R-squared let us consider <xref ref="fig-regression6" /> once again. The two plots in the figure present the scatter plot of the data together with the regression line and the line of the average. Vertical <em>black</em> arrows that represent the residuals from the regression are added to the upper plot. The lower plot contains vertical <em>red</em> arrows that extend from the data points to the line of the average. These arrows represent the deviations of the response from the average.
-      </p>
-      <p>
-        Consider two forms of variation. One form is the variation of the response from its average value. This variation is summarized by the sample variance, the sum of the squared lengths of the <em>red</em> arrows divided by the number of observations minus 1. The other form of variation is the variation of the response from the fitted regression line. This variation is summarized by the sample variation of the residuals, the sum of squared lengths of the <em>black</em> arrows divided by the number of observations minus 1. The ratio between these two quantities gives the relative variability of the response that remains after fitting the regression line to the data.
-      </p>
-      <p>
-        The line of the average is a straight line. The deviations of the observations from this straight line can be thought of as residuals from that line. The variability of these residuals, the sum of squares of the deviations from the average divided by the number of observations minus 1, is equal to the sample variance.
-      </p>
-      <p>
-        The regression line is the unique straight line that minimizes the variability of its residuals. Consequently, the variability of the residuals from the regression, the sum of squares of the residuals from the regression divided by the number of observations minus 1, is the smallest residual variability produced by any straight line. It follows that the sample variance of the regression residuals is less than the sample variance of the response. Therefore, the ratio between the variance of the residuals and the variance of the response is less than 1.
-      </p>
-      <p>
-        R-squared is the difference between 1 and the ratio of the variances. Its value is between 0 and 1 and it represents the fraction of the variability of the response that is <em>explained</em> by the regression line. The closer the points are to the regression line the larger the value of R-squared becomes. On the other hand, the less there is a linear trend in the data the closer to 0 is the value of R-squared. In the extreme case of R-squared equal to 1 all the data point are positioned exactly on a single straight line. In the other extreme, a value of 0 for R-squared implies no linear trend in the data.
-      </p>
-      <p>
-        Let us compute manually the difference between 1 and the ratio between the variance of the residuals and the variance of the response:
-      </p>
-
-      <program language="r">
-        <input>
-1-var(residuals(fit))/var(y)
-        </input>
-      </program>
-
-      <pre>
-## [1] 0.4280673
-      </pre>
-
-      <p>
-        Observe that the computed value of R-squared is the same as the value <q>Multiple R-squared: 0.4281</q> that is given in the report.
-      </p>
-      <p>
-        The report provides another value of R-squared, titled <em>Adjusted R-squared</em>. The difference between the adjusted and unadjusted quantities is that in the former the sample variance of the residuals from the regression is replaced by an unbiased estimate of the variability of the response about the regression line. The sum of squares in the unbiased estimator is divided by the number of observations minus 2. Indeed, when we re-compute the ratio using the unbiased estimate, the sum of squared residuals divided by <m>10 - 2 = 8</m>, we get:
-      </p>
-
-      <program language="r">
-        <input>
-1-(sum(residuals(fit)^2)/8)/var(y)
-        </input>
-      </program>
-
-      <pre>
-## [1] 0.3566427
-      </pre>
-
-      <p>
-        The value of this adjusted quantity is equal to the value <q>Adjusted R-squared: 0.3566</q> in the report.
-      </p>
-      <p>
-        Which value of R-squared to use is a matter of personal taste. In any case, for a larger number of observations the difference between the two values becomes negligible.
-      </p>
-      <p>
-        The last line in the report produces an overall goodness of fit test for the regression model. In the current application of linear regression this test reduces to a test of the slope being equal to zero, the same test that is reported in the second row of the table of coefficients<fn>In more complex applications of linear regression, applications that are not considered in this book, the test in the last line of the report and the tests of coefficients do not coincide.</fn>. The <m>F</m> statistic is simply the square of the <m>t</m> value that is given in the second row of the table. The sampling distribution of this statistic under the null hypothesis is the <m>F</m>-distribution on 1 and <m>n-2</m> degrees of freedom, which is the sampling distribution of the square of the test statistic for the slope. The computed <m>p</m>-value, <q>p-value: 0.04003</q> is the identical (after rounding up) to the <m>p</m>-value given in the second line of the table.
-      </p>
-      <p>
-        Return to the R-squared coefficient. This coefficient is a convenient measure of the goodness of fit of the regression model to the data. Let us demonstrate this point with the aid of the <q><c>cars</c></q> data. In <xref ref="sec-regression-inference" /> we fitted a regression model to the power of the engine as a response and the size of the engine as an explanatory variable. The fitted model was saved in the object called <q><c>fit.power</c></q>. A report of this fit, the output of the expression <c>summary(fit.power)</c> was also presented. The null hypothesis of zero slope was clearly rejected. The value of R-squared for this fit was 0.6574. Consequently, about 2/3 of the variability in the power of the engine is explained by the size of the engine.
-      </p>
-      <p>
-        Consider trying to fit a different regression model for the power of the engine as a response. The variable <q><c>length</c></q> describes the length of the car (in inches). How well would the length explain the power of the car? We may examine this question using linear regression:
-      </p>
-
-      <program language="r">
-        <input>
-summary(lm(horsepower ~ length, data=cars))
-        </input>
-      </program>
-
-      <pre>
-## 
-## Call:
-## lm(formula = horsepower ~ length, data = cars)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -85.625 -20.863  -6.208  16.083 122.816 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) -56.0879    21.2429  -2.641   0.0089 ** 
-## length        0.6842     0.0749   9.135 3.52e-16 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 33.45 on 201 degrees of freedom
-##   (2 observations deleted due to missingness)
-## Multiple R-squared:  0.2933,Adjusted R-squared:  0.2898 
-## F-statistic: 83.46 on 1 and 201 DF,  p-value: 3.518e-16
-      </pre>
-
-      <p>
-        We used one expression to fit the regression model to the data and to summarize the outcome of the fit.
-      </p>
-      <p>
-        A scatter plot of the two variables together with the regression line may be produced using the code:
-      </p>
-
-      <program language="r">
-        <input>
-plot(horsepower ~ length, data=cars)
-abline(lm(horsepower ~ length, data=cars))
-        </input>
-      </program>
-
-      <p>
-        From the examination of the figure we may see that indeed there is a linear trend in the relation between the length and the power of the car. Longer cars tend to have more power. Testing the null hypothesis that the slope is equal to zero produces a very small <m>p</m>-value and leads to the rejection of the null hypothesis.
-      </p>
-      <p>
-        The length of the car and the size of the engine are both statistically significant in their relation to the response. However, which of the two explanatory variables produces a better fit?
-      </p>
-      <p>
-        An answer to this question may be provided by the examination of values of R-squared, the ratio of the variance of the response explained by each of the explanatory variable. The R-squared for the size of the engine as an explanatory variable is 0.6574, which is approximately equal to 2/3. The value of R-squared for the length of the car as an explanatory variable is 0.2933, less than 1/3. It follows that the size of the engine explains twice as much of the variability of the power of the engine than the size of car and is a better explanatory variable.
-      </p>
-    </subsection>
-  </section>
-
-  <section xml:id="sec-regression-inference">
+  <subsection xml:id="sec-regression-inference">
     <title>Inference</title>
     
     <p>
@@ -660,7 +442,27 @@ abline(lm(horsepower ~ length, data=cars))
 summary(fit.power)
       </input>
     </program>
-    
+    <pre>
+## 
+## Call:
+## lm(formula = horsepower ~ engine.size, data = cars)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -59.643 -12.282  -5.515  10.251 125.153 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  6.64138    5.23318   1.269    0.206    
+## engine.size  0.76949    0.03919  19.637   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 23.31 on 201 degrees of freedom
+##   (2 observations deleted due to missingness)
+## Multiple R-squared:  0.6574, Adjusted R-squared:  0.6556 
+## F-statistic: 385.6 on 1 and 201 DF,  p-value: < 2.2e-16
+</pre>
     <p>
       The output produced by the application of the function <q><c>summary</c></q> is long and detailed. We will discuss this output in the next section. Here we concentrate on the table that goes under the title <q><c>Coefficients:</c></q>. The said table is made of 2 rows and 4 columns. It contains information for testing, for each of the coefficients, the null hypothesis that the value of the given coefficient is equal to zero. In particular, the second row may be used is order to test this hypothesis for the slope of the regression line, the coefficient that multiplies the explanatory variable.
     </p>
@@ -698,7 +500,11 @@ summary(fit.power)
 confint(fit.power)
       </input>
     </program>
-    
+    <pre>
+##                  2.5 %     97.5 %
+## (Intercept) -3.6775989 16.9603564
+## engine.size  0.6922181  0.8467537
+</pre>
     <p>
       Observe the similarity between the confidence intervals that are computed by the function and the crude confidence intervals that were produced by us. The small discrepancies that do exist between the intervals result from the fact that the function <q><c>confint</c></q> uses the <m>t</m>-distribution whereas we used the Normal approximation.
     </p>
@@ -888,6 +694,231 @@ abline(lm(horsepower ~ length, data=cars))
         An answer to this question may be provided by the examination of values of R-squared, the ratio of the variance of the response explained by each of the explanatory variable. The R-squared for the size of the engine as an explanatory variable is 0.6574, which is approximately equal to 2/3. The value of R-squared for the length of the car as an explanatory variable is 0.308, less than 1/3. It follows that the size of the engine explains twice as much of the variability of the power of the engine than the size of car and is a better explanatory variable.
       </p>
     </subsection>
+</section>
+
+    <section xml:id="subsec-r-squared">
+      <title>R-squared and the Variance of Residuals</title>
+      <p>
+        In this section we discuss the residuals between the values of the response and their estimated expected value according to the regression model. These residuals are the regression model equivalence of the deviations between the observations and the sample average. We use these residuals in order compute the variability that is not accounted for by the regression model. Indeed, the ratio between the total variability of the residuals and the total variability of the deviations from the average serves as a measure of the variability that is not explained by the explanatory variable. R-squared, which is equal to 1 minus this ratio, is interpreted as the fraction of the variability of the response that is explained by the regression model.
+      </p>
+      <p>
+        We start with the definition of residuals. Let us return to the artificial example that compared length of fish to their weight. The data for this example was given in <xref ref="table-regression-1" /> and was saved in the objects <q><c>x</c></q> and <q><c>y</c></q>. The regression model was fitted to this data by the application of the function <q><c>lm</c></q> to the formula <c>y~x</c> and the fitted model was saved in an object called <q><c>fit</c></q>. Let us apply the function <q><c>summary</c></q> to the fitted model:
+      </p>
+
+      <program language="r">
+        <input>
+summary(fit)
+        </input>
+      </program>
+
+      <pre>
+## 
+## Call:
+## lm(formula = y ~ x)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.0397 -2.1388 -0.6559  1.8518  4.0595 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)  
+## (Intercept)   4.6165     2.3653   1.952   0.0868 .
+## x             1.4274     0.7195   1.984   0.0826 .
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 2.791 on 8 degrees of freedom
+## Multiple R-squared:  0.3297, Adjusted R-squared:  0.246 
+## F-statistic: 3.936 on 1 and 8 DF,  p-value: 0.08255
+      </pre>
+
+      <p>
+        The given report contains a table with estimates of the regression coefficients and information for conducting hypothesis testing. The report contains other information that is associated mainly with the notion of the residuals from regression line. Our current goal is to understand what is that other information.
+      </p>
+      <p>
+        The residual from regression for each observation is the difference between the value of the response for the observation and the estimated expectation of the response under the regression model<fn>The estimated expectation of the response is also called <em>the predicted response</em>.</fn>. An observation is a pair <m>(x_i,y_i)</m>, with <m>y_i</m> being the value of the response. The expectation of the response according to the regression model is <m>a + b \cdot x_i</m>, where <m>a</m> and <m>b</m> are the coefficients of the model. The estimated expectation is obtained by using, in the formula for the expectation, the coefficients that are estimated from the data. The residual is the difference between <m>y_i</m> and <m>a + b \cdot x_i</m>.
+      </p>
+      <p>
+        Consider an example. The first observation on the fish is <m>(4.5, 9.5)</m>, where <m>x_1 = 4.5</m> and <m>y_1 = 9.5</m>. The estimated intercept is 4.6165 and the estimated slope is 1.4274. The estimated expectation of the response for the first variable is equal to
+      </p>
+      <me>4.6165 + 1.4274 \cdot x_1 = 4.6165 + 1.4274 \cdot 4.5  =  11.0398\;.</me>
+      <p>
+        The residual is the difference between the observes response and this value:
+      </p>
+      <me>y_1 - (4.6165 + 1.4274 \cdot x_1) = 9.5 - 11.0398 = -1.5398\;.</me>
+      <p>
+        The residuals for the other observations are computed in the same manner. The values of the intercept and the slope are kept the same but the values of the explanatory variable and the response are changed.
+      </p>
+
+      <figure xml:id="fig-regression6">
+        <caption>Residuals and Deviations from the Mean</caption>
+        <image source="_figures/Regression6.png" width="60%">
+          <description>Two scatter plots showing residuals from regression line and deviations from mean</description>
+        </image>
+      </figure>
+
+      <p>
+        Consult the upper plot in <xref ref="fig-regression6" />. This is a scatter plot of the data, together with the regression line in <em>black</em> and the line of the average in <em>red</em>. A vertical arrow extends from each data point to the regression line. The point where each arrow hits the regression line is associated with the estimated value of the expectation for that point. The residual is the difference between the value of the response at the origin of the arrow and the value of the response at the tip of its head. Notice that there are as many residuals as there are observations.
+      </p>
+      <p>
+        The function <q><c>residuals</c></q> computes the residuals. The input to the function is the fitted regression model and the output is the sequence of residuals. When we apply the function to the object <q><c>fit</c></q>, which contains the fitted regression model for the fish data, we get the residuals:
+      </p>
+
+      <program language="r">
+        <input>
+residuals(fit)
+        </input>
+      </program>
+
+      <pre>
+##          1          2          3          4          5          6 
+## -1.5397075 -1.6977999 -2.2857694  0.2279229  3.7158923  4.0594616 
+##          7          8          9         10 
+## -2.5849385 -3.0397075  2.1312463  1.0133998
+      </pre>
+
+      <p>
+        Indeed, 10 residuals are produced, one for each observation. In particular, the residual for the first observation is -1.5397075, which is essentially the value that we obtained<fn>The discrepancy between the value that we computed and the value computed by the function results from rounding up errors. We used the vales of the coefficients that appear in the report. These values are rounded up. The function <c>residuals</c> uses the coefficients without rounding.</fn>.
+      </p>
+      <p>
+        Return to the report produced by the application of the function <q><c>summary</c></q> to the fitted regression model. The first component in the report is the formula that identifies the response and the explanatory variable. The second component, the component that comes under the title <q>Residuals:</q>, gives a summary of the distribution of the residuals. This summary includes the smallest and the largest values in the sequence of residuals, as well as the first and third quartiles and the median. The average is not reported since the average of the residuals from the regression line is always equal to 0.
+      </p>
+      <p>
+        The table that contains information on the coefficients was discussed in the previous section. Let us consider the last 3 lines of the report.
+      </p>
+      <p>
+        The first of the three lines contains the estimated value of the standard deviation of the response from the regression model. If the expectations of the measurements of the response are located on the regression line then the variability of the response corresponds to the variability about this line. The resulting variance is estimated by the sum of squares of the residuals from the regression line, divided by the number of observations minus 2. A division by the number of observation minus 2 produces an unbiased estimator of the variance of the response about the regression model. Taking the square root of the estimated variance produces an estimate of the standard deviation:
+      </p>
+
+      <program language="r">
+        <input>
+sqrt(sum(residuals(fit)^2)/8)
+        </input>
+      </program>
+
+      <pre>
+## [1] 2.790787
+      </pre>
+
+      <p>
+        The last computation is a manual computation of the estimated standard deviation. It involves squaring the residuals and summing the squares. This sum is divided by the number of observations minus 2 (<m>10-2=8</m>). Taking the square root produces estimate. The value that we get for the estimated standard deviation is 2.790787, which coincides with the value that appears in the first of the last 3 lines of the report.
+      </p>
+      <p>
+        The second of these lines reports the R-squared of the linear fit. In order to explain the meaning of R-squared let us consider <xref ref="fig-regression6" /> once again. The two plots in the figure present the scatter plot of the data together with the regression line and the line of the average. Vertical <em>black</em> arrows that represent the residuals from the regression are added to the upper plot. The lower plot contains vertical <em>red</em> arrows that extend from the data points to the line of the average. These arrows represent the deviations of the response from the average.
+      </p>
+      <p>
+        Consider two forms of variation. One form is the variation of the response from its average value. This variation is summarized by the sample variance, the sum of the squared lengths of the <em>red</em> arrows divided by the number of observations minus 1. The other form of variation is the variation of the response from the fitted regression line. This variation is summarized by the sample variation of the residuals, the sum of squared lengths of the <em>black</em> arrows divided by the number of observations minus 1. The ratio between these two quantities gives the relative variability of the response that remains after fitting the regression line to the data.
+      </p>
+      <p>
+        The line of the average is a straight line. The deviations of the observations from this straight line can be thought of as residuals from that line. The variability of these residuals, the sum of squares of the deviations from the average divided by the number of observations minus 1, is equal to the sample variance.
+      </p>
+      <p>
+        The regression line is the unique straight line that minimizes the variability of its residuals. Consequently, the variability of the residuals from the regression, the sum of squares of the residuals from the regression divided by the number of observations minus 1, is the smallest residual variability produced by any straight line. It follows that the sample variance of the regression residuals is less than the sample variance of the response. Therefore, the ratio between the variance of the residuals and the variance of the response is less than 1.
+      </p>
+      <p>
+        R-squared is the difference between 1 and the ratio of the variances. Its value is between 0 and 1 and it represents the fraction of the variability of the response that is <em>explained</em> by the regression line. The closer the points are to the regression line the larger the value of R-squared becomes. On the other hand, the less there is a linear trend in the data the closer to 0 is the value of R-squared. In the extreme case of R-squared equal to 1 all the data point are positioned exactly on a single straight line. In the other extreme, a value of 0 for R-squared implies no linear trend in the data.
+      </p>
+      <p>
+        Let us compute manually the difference between 1 and the ratio between the variance of the residuals and the variance of the response:
+      </p>
+
+      <program language="r">
+        <input>
+1-var(residuals(fit))/var(y)
+        </input>
+      </program>
+
+      <pre>
+## [1] 0.3297413
+      </pre>
+
+      <p>
+        Observe that the computed value of R-squared is the same as the value <q>Multiple R-squared: 0.3297</q> that is given in the report.
+      </p>
+      <p>
+        The report provides another value of R-squared, titled <em>Adjusted R-squared</em>. The difference between the adjusted and unadjusted quantities is that in the former the sample variance of the residuals from the regression is replaced by an unbiased estimate of the variability of the response about the regression line. The sum of squares in the unbiased estimator is divided by the number of observations minus 2. Indeed, when we re-compute the ratio using the unbiased estimate, the sum of squared residuals divided by <m>10 - 2 = 8</m>, we get:
+      </p>
+
+      <program language="r">
+        <input>
+1-(sum(residuals(fit)^2)/8)/var(y)
+        </input>
+      </program>
+
+      <pre>
+## [1] 0.245959
+      </pre>
+
+      <p>
+        The value of this adjusted quantity is equal to the value <q>Adjusted R-squared: 0.246</q> in the report.
+      </p>
+      <p>
+        Which value of R-squared to use is a matter of personal taste. In any case, for a larger number of observations the difference between the two values becomes negligible.
+      </p>
+      <p>
+        The last line in the report produces an overall goodness of fit test for the regression model. In the current application of linear regression this test reduces to a test of the slope being equal to zero, the same test that is reported in the second row of the table of coefficients<fn>In more complex applications of linear regression, applications that are not considered in this book, the test in the last line of the report and the tests of coefficients do not coincide.</fn>. The <m>F</m> statistic is simply the square of the <m>t</m> value that is given in the second row of the table. The sampling distribution of this statistic under the null hypothesis is the <m>F</m>-distribution on 1 and <m>n-2</m> degrees of freedom, which is the sampling distribution of the square of the test statistic for the slope. The computed <m>p</m>-value, <q>p-value: 0.08255</q> is the identical (after rounding up) to the <m>p</m>-value given in the second line of the table.
+      </p>
+      <p>
+        Return to the R-squared coefficient. This coefficient is a convenient measure of the goodness of fit of the regression model to the data. Let us demonstrate this point with the aid of the <q><c>cars</c></q> data. In <xref ref="sec-regression-inference" /> we fitted a regression model to the power of the engine as a response and the size of the engine as an explanatory variable. The fitted model was saved in the object called <q><c>fit.power</c></q>. A report of this fit, the output of the expression <c>summary(fit.power)</c> was also presented. The null hypothesis of zero slope was clearly rejected. The value of R-squared for this fit was 0.6574. Consequently, about 2/3 of the variability in the power of the engine is explained by the size of the engine.
+      </p>
+      <p>
+        Consider trying to fit a different regression model for the power of the engine as a response. The variable <q><c>length</c></q> describes the length of the car (in inches). How well would the length explain the power of the car? We may examine this question using linear regression:
+      </p>
+
+      <program language="r">
+        <input>
+summary(lm(horsepower ~ length, data=cars))
+        </input>
+      </program>
+
+      <pre>
+## 
+## Call:
+## lm(formula = horsepower ~ length, data = cars)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -53.57 -20.35  -6.69  14.45 180.72 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -205.3971    32.8185  -6.259  2.3e-09 ***
+## length         1.7796     0.1881   9.459  < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 33.12 on 201 degrees of freedom
+##   (2 observations deleted due to missingness)
+## Multiple R-squared:  0.308,  Adjusted R-squared:  0.3046 
+## F-statistic: 89.47 on 1 and 201 DF,  p-value: < 2.2e-16
+      </pre>
+
+      <p>
+        We used one expression to fit the regression model to the data and to summarize the outcome of the fit.
+      </p>
+      <p>
+        A scatter plot of the two variables together with the regression line may be produced using the code:
+      </p>
+
+      <program language="r">
+        <input>
+plot(horsepower ~ length, data=cars)
+abline(lm(horsepower ~ length, data=cars))
+        </input>
+      </program>
+      <figure xml:id="fig-regression6a">
+        <image source="_figures/Regression6a.png" width="60%">
+        </image>
+      </figure>
+      <p>
+        From the examination of the figure we may see that indeed there is a linear trend in the relation between the length and the power of the car. Longer cars tend to have more power. Testing the null hypothesis that the slope is equal to zero produces a very small <m>p</m>-value and leads to the rejection of the null hypothesis.
+      </p>
+      <p>
+        The length of the car and the size of the engine are both statistically significant in their relation to the response. However, which of the two explanatory variables produces a better fit?
+      </p>
+      <p>
+        An answer to this question may be provided by the examination of values of R-squared, the ratio of the variance of the response explained by each of the explanatory variable. The R-squared for the size of the engine as an explanatory variable is 0.6574, which is approximately equal to 2/3. The value of R-squared for the length of the car as an explanatory variable is 0.2933, less than 1/3. It follows that the size of the engine explains twice as much of the variability of the power of the engine than the size of car and is a better explanatory variable.
+      </p>
   </section>
 
   <section xml:id="sec-exercises-14">
@@ -1095,7 +1126,7 @@ abline(lm(horsepower ~ length, data=cars))
     <exercise>
       <statement>
         <p>
-          In Chapter <xref ref="ch-two-samples" /> we analyzed an example that involved the difference between fuel consumption in highway and city driving conditions as the response<fn>The response was computed using the expression <q><c>cars$highway.mpg - cars$city.mpg</c></q></fn>. The explanatory variable was a factor that was produced by splitting the cars into two weight groups. In this exercise we would like to revisit this example. Here we use the weight of the car directly as an explanatory variable. We also consider the size of the engine as an alternative explanatory variable and compare between the two regression models.
+          In <xref ref="ch-two-samples" /> we analyzed an example that involved the difference between fuel consumption in highway and city driving conditions as the response<fn>The response was computed using the expression <q><c>cars$highway.mpg - cars$city.mpg</c></q></fn>. The explanatory variable was a factor that was produced by splitting the cars into two weight groups. In this exercise we would like to revisit this example. Here we use the weight of the car directly as an explanatory variable. We also consider the size of the engine as an alternative explanatory variable and compare between the two regression models.
         </p>
         <p>
           1. Fit the regression model that uses the variable <q><c>curb.weight</c></q> as an explanatory variable. Is the slope significantly different than 0? What fraction of the standard deviation of the response is explained by a regression model involving this variable?
