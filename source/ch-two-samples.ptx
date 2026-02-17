@@ -97,7 +97,19 @@ plot(dif.mpg~heavy)
 t.test(dif.mpg~heavy)
         </input>
       </program>
-
+<pre>
+## 
+##  Welch Two Sample t-test
+## 
+## data:  dif.mpg by heavy
+## t = 2.4255, df = 191.56, p-value = 0.01621
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  0.1029150 0.9989315
+## sample estimates:
+## mean in group FALSE  mean in group TRUE 
+##            5.805825            5.254902
+</pre>
       <p>The function <c>t.test</c>, when applied to a formula that describes the relation between a numeric response and a explanatory factor with two level, produces a special form of a <m>t</m>-test that is called the <term>Welch Two Sample <m>t</m>-test</term>. The statistical model associated with this test assumes the present of two independent sub-samples, each associated with a level of the explanatory variable. The relevant parameters for this model are the two expectations and the two variances associated with the sub-samples.</p>
 
       <p>The hypotheses tested in the context of the Welch test are formulated in terms of the difference between the expectation of the first sub-sample and the expectation of the second sub-sample. In the default application of the test the null hypothesis is that the difference is equal to 0 (or, equivalently, that the expectations are equal to each other). The alternative is that the difference is not equal to 0 (hence, the expectations differ).</p>
@@ -171,6 +183,19 @@ tapply(dif.mpg,heavy,mean)
 tapply(dif.mpg,heavy,var)
         </input>
       </program>
+<pre>
+## heavy
+## FALSE  TRUE 
+##   103   102
+</pre>
+<pre>
+##    FALSE     TRUE 
+## 5.805825 5.254902
+</pre>
+<pre>
+##    FALSE     TRUE 
+## 2.020750 3.261114
+</pre>
 
       <p>Observe that there 103 lighter cars and 102 heavier ones. These counts were obtained by the application of the function <c>table</c> to the factor <c>heavy</c>. The lighter cars are associated with the level <c>FALSE</c> and heavier cars are associated with the level <c>TRUE</c>.</p>
 
@@ -233,7 +258,9 @@ tapply(dif.mpg,heavy,var)
 2*(1-pt(2.4255,191.561))
         </input>
       </program>
-
+<pre>
+## [1] 0.01621458
+</pre>
       <p>which (after rounding) is equal to the reported <m>p</m>-value of 0.01621. This <m>p</m>-value is less than 0.05, hence the null hypothesis is rejected in favor of the alternative hypothesis that assumes an effect of the weight on the expectation.</p>
     </subsection>
   </section>
@@ -282,7 +309,20 @@ tapply(dif.mpg,heavy,var)
       <input>
 var.test(dif.mpg~heavy)
       </input>
-    </program>
+    </program
+<pre>
+## 
+##  F test to compare two variances
+## 
+## data:  dif.mpg by heavy
+## F = 0.61965, num df = 102, denom df = 101, p-value = 0.01663
+## alternative hypothesis: true ratio of variances is not equal to 1
+## 95 percent confidence interval:
+##  0.4189200 0.9162126
+## sample estimates:
+## ratio of variances 
+##          0.6196502
+</pre>
 
     <p>Consider the report produced by the function. The observed value of the test statistic is <c>F = 0.6197</c>, and it is associated with the <m>F</m>-distribution on <c>num df = 102</c> and <c>denom df = 101</c> degrees of freedom. The test statistic can be used in order to test the null hypothesis <m>H_0: \Var(X_a)/\Var(X_b) = 1</m>, that states that the two variance are equal, against the alternative hypothesis that they are not. The <m>p</m>-value for this test is <c>p-value = 0.01663</c>, which is less than 0.05. Consequently, the null hypothesis is rejected and the conclusion is that the two variances are significantly different from each other. The estimated ratio of variances, given at the bottom of the report, is 0.6196502. The confidence interval for the ratio is reported also and is equal to <m>[0.4189200, 0.9162126]</m>.</p>
 
@@ -295,7 +335,9 @@ var.test(dif.mpg~heavy)
 2*pf(0.6196502,102,101)
       </input>
     </program>
-
+<pre>
+## [1] 0.01662612
+</pre>
     <p>Compare this value to the <m>p</m>-value that appears in the report and see that, after rounding up, the two are the same.</p>
 
     <p>For the confidence interval of the ratio compute the percentiles of the <m>F</m> distribution:</p>
@@ -306,7 +348,12 @@ qf(0.025,102,101)
 qf(0.975,102,101)
       </input>
     </program>
-
+<pre>
+## [1] 0.676317
+</pre>
+<pre>
+## [1] 1.479161
+</pre>
     <p>The confidence interval is equal to:</p>
 
     <me>\begin{aligned}
