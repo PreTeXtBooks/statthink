@@ -97,7 +97,6 @@ plot(table(n.cost))
       
       <ol>
         <li><p>In order to compute the mean of the data we may write the following simple <c>R</c> code:</p></li>
-      </ol>
       <program language="r">
         <input>
 x.val &lt;- c(2,4,6,8,10)
@@ -127,7 +126,7 @@ mean(x)
 ## [1] 4.666667
 </pre>
       <p>Observe that when we apply the function “<c>mean</c>" to “<c>x</c>" we get again     the value 4.666667.</p>
-      <ol>
+      </li>
         <li><p>In order to compute the sample standard deviation we may compute first the sample variance and then take the square root of the result:</p>
       <program language="r">
         <input>
