@@ -330,7 +330,7 @@ var(mid.range)
     </p>
 
     <p>
-      The computation of the sample variance from the data is discussed in <xref ref="ch-descriptive-statistics" />. Recall that the sample variance is computed via the formula:
+      The computation of the sample variance from the data is discussed in <xref ref="ch-descriptive-stat" />. Recall that the sample variance is computed via the formula:
     </p>
 
     <me>
@@ -338,7 +338,7 @@ var(mid.range)
     </me>
 
     <p>
-      where <m>\bar x</m> is the sample average and <m>n</m> is the sample size. The term <m>x_i-\bar x</m> is the deviation from the sample average of the <m>i</m>th observation and <m>\sum_{i=1}^n (x_i - \bar x)^2</m> is the sum of the squares of deviations. It is pointed out in <xref ref="ch-descriptive-statistics" /> that the reason for dividing the sum of squares by <m>(n-1)</m>, rather than <m>n</m>, stems from considerations of statistical inference. A promise was made that these reasonings will be discussed in due course. Now we want to deliver on this promise.
+      where <m>\bar x</m> is the sample average and <m>n</m> is the sample size. The term <m>x_i-\bar x</m> is the deviation from the sample average of the <m>i</m>th observation and <m>\sum_{i=1}^n (x_i - \bar x)^2</m> is the sum of the squares of deviations. It is pointed out in <xref ref="ch-descriptive-stat" /> that the reason for dividing the sum of squares by <m>(n-1)</m>, rather than <m>n</m>, stems from considerations of statistical inference. A promise was made that these reasonings will be discussed in due course. Now we want to deliver on this promise.
     </p>
 
     <p>
@@ -635,7 +635,7 @@ var((19/20)*X.var)
         </p>
 
         <p>
-          The file <c>pop2.csv</c> was introduced in Exercise of <xref ref="ch-sampling-distributions" />. This file contains information associated to the blood pressure of an imaginary population of size 100,000. The file can be found on the internet (<url href="http://pluto.huji.ac.il/~msby/StatThink/Datasets/pop2.csv" />). One of the variables in the file is a factor by the name <c>group</c> that identifies levels of blood pressure. The levels of this variable are <c>HIGH</c>, <c>LOW</c>, and <c>NORMAL</c>.
+          The file <c>pop2.csv</c> was introduced in Exercise of <xref ref="ch-sampling-distribution" />. This file contains information associated to the blood pressure of an imaginary population of size 100,000. The file can be found on the internet (<url href="http://pluto.huji.ac.il/~msby/StatThink/Datasets/pop2.csv" />). One of the variables in the file is a factor by the name <c>group</c> that identifies levels of blood pressure. The levels of this variable are <c>HIGH</c>, <c>LOW</c>, and <c>NORMAL</c>.
         </p>
 
         <p>
