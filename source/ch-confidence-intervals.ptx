@@ -24,7 +24,7 @@
 
     <p>This section presents a method for the computation of confidence intervals for the expectation of a measurement and a similar method for the computation of a confidence interval for the probability of an event. These methods rely on the application of the Central Limit Theorem to the sample average in the one case, and to the sample proportion in the other case.</p>
 
-    <p>In the first subsection we compute a confidence interval for the expectation of the variable “<c>price</c>" and a confidence interval for the proportion of diesel cars. The confidence intervals are computed based on the data in the file “<c>cars.csv</c>". In the subsequent subsections we discuss the theory behind the computation of the confidence intervals and explain the meaning of the confidence level. Subsection <xref ref="subsec-cimean" /> does so with respect to the confidence interval for the expectation and Subsection <xref ref="subsec-cifrac" /> with respect to the confidence interval for the proportion.</p>
+    <p>In the first subsection we compute a confidence interval for the expectation of the variable “<c>price</c>" and a confidence interval for the proportion of diesel cars. The confidence intervals are computed based on the data in the file “<c>cars.csv</c>". In the subsequent subsections we discuss the theory behind the computation of the confidence intervals and explain the meaning of the confidence level. <xref ref="subsec-cimean" /> does so with respect to the confidence interval for the expectation and <xref ref="subsec-cifrac" /> with respect to the confidence interval for the proportion.</p>
 
     <subsection xml:id="confidenceexamples">
       <title>Examples of Confidence Intervals</title>
@@ -54,6 +54,10 @@ x.bar - 1.96*s/sqrt(n)
 x.bar + 1.96*s/sqrt(n)
 
       </input></program>
+<pre>
+## [1] 12108.47
+## [1] 14305.79
+</pre>
 
       <p>The lower limit of the confidence interval turns out to be $12,108.47 and the upper limit is $14,305.79. The confidence interval is the range of values between these two numbers.</p>
 
@@ -67,7 +71,11 @@ x.bar + 1.96*s/sqrt(n)
 table(cars$fuel.type)
 
       </input></program>
-
+<pre>
+## 
+## diesel    gas 
+##     20    185
+</pre>
       <p>Only 20 of the 205 types of cars are run on diesel in this data set. The point estimation of the probability of such car types and the confidence interval for this probability are:</p>
 
       <program language="r"><input>
@@ -78,7 +86,11 @@ p.hat - 1.96*sqrt(p.hat*(1-p.hat)/n)
 p.hat + 1.96*sqrt(p.hat*(1-p.hat)/n)
 
       </input></program>
-
+<pre>
+## [1] 0.09756098
+## [1] 0.05694226
+## [1] 0.1381797
+</pre>
       <p>The point estimation of the probability is <m>\hat p = 20/205 \approx 0.098</m> and the confidence interval, after rounding up, is <m>[0.057, 0.138]</m>.</p>
 
     </subsection>
@@ -133,6 +145,9 @@ UCL &lt;- X.bar + 1.96*S/sqrt(n)
 mean((13000 &gt;= LCL) &amp; (13000 &lt;= UCL))
 
       </input></program>
+<pre>
+## [1] 0.94425
+</pre>
 
       <p>Below we will go over the code and explain the simulation. But, before doing so, notice that the actual probability that the confidence interval contains the expectation is about 0.945, which is slightly below the nominal confidence level of 0.95. Still quoting the nominal value as the confidence level of the confidence interval is not too far from reality.</p>
 
@@ -151,7 +166,10 @@ a &amp; b
 a | b
 
       </input></program>
-
+<pre>
+## [1] FALSE  TRUE FALSE FALSE
+## [1]  TRUE  TRUE  TRUE FALSE
+</pre>
       <p>The term “<c>&amp;</c>" produces a “<c>TRUE</c>" only if parallel components in the sequences “<c>a</c>" and “<c>b</c>" both obtain the value “<c>TRUE</c>". On the other hand, the term “<c>|</c>" produces a “<c>TRUE</c>" if at least one of the parallel components are “<c>TRUE</c>". Observe, also, that the output of the expression that puts either of the two terms between two sequences with logical values is a sequence of the same length (with logical components as well).</p>
 
       <p>The expression “<c>(13000 &gt;= LCL)</c>" produces a logical sequence of length 100,000 with “<c>TRUE</c>" appearing whenever the expectation is larger than the lower level of the confidence interval. Similarly, the expression “<c>(13000 &lt;= UCL)</c>" produces “<c>TRUE</c>" values whenever the expectation is less than the upper level of the confidence interval. The expectation belongs to the confidence interval if the value in both expressions is “<c>TRUE</c>". Thus, the application of the term “<c>&amp;</c>" to these two sequences identifies the confidence intervals that contain the expectation. The application of the function “<c>mean</c>" to a logical vector produces the relative frequency of <c>TRUE</c>’s in the vector. In our case this corresponds to the relative frequency of confidence intervals that contain the expectation, namely the confidence level.</p>
@@ -175,7 +193,7 @@ a | b
 
       <me>\bar P \pm 1.96 \cdot\sqrt{ \hat P(1-\hat P)/n}\;.</me>
 
-      <p>Let us run a simulation in order to assess the confidence level of the confidence interval for the probability. Assume that <m>n=205</m> and <m>p=0.12</m>. The simulation we run is very similar to the simulation of Subsection <xref ref="subsec-cimean" />. In the first stage we produce the sampling distribution of <m>\hat P</m> (stored in the sequence “<c>P.hat</c>") and in the second stage we compute the relative frequency in the simulation of the intervals that contain the actual value of <m>p</m> that was used in the simulation:</p>
+      <p>Let us run a simulation in order to assess the confidence level of the confidence interval for the probability. Assume that <m>n=205</m> and <m>p=0.12</m>. The simulation we run is very similar to the simulation of <xref ref="subsec-cimean" />. In the first stage we produce the sampling distribution of <m>\hat P</m> (stored in the sequence “<c>P.hat</c>") and in the second stage we compute the relative frequency in the simulation of the intervals that contain the actual value of <m>p</m> that was used in the simulation:</p>
 
       <program language="r"><input>
 p &lt;- 0.12
@@ -190,7 +208,8 @@ UCL &lt;- P.hat + 1.96*sqrt(P.hat*(1-P.hat)/n)
 mean((p &gt;= LCL) &amp; (p &lt;= UCL))
 
       </input></program>
-
+<pre>## [1] 0.95225
+</pre>
       <p>In this simulation we obtained that the actual confidence level is approximately 0.951, which is slightly above the nominal confidence level of 0.95.</p>
 
       <p>The formula <m>\bar X \pm 1.96 \cdot S/\sqrt{n}</m> that is used for a confidence interval for the expectation and the formula <m>\hat P \pm 1.96 \cdot \{\hat P (1-\hat P)/n\}^{1/2}</m> for the probability both refer to a confidence intervals with confidence level of 95%. If one is interested in a different confidence level then the width of the confidence interval should be adjusted: a wider interval for higher confidence and a narrower interval for smaller confidence level.</p>
@@ -223,6 +242,12 @@ cars$dif.mpg =  cars$highway.mpg - cars$city.mpg
 boxplot(dif.mpg ~ fuel.type, data=cars)
 
     </input></program>
+    <figure xml:id="fig-confidence1">
+      <caption>Box Plots of Ratings</caption>
+      <image source="_figures/Confidence1.png" width="60%">
+        <description>Box plots comparing ratings between two conditions</description>
+      </image>
+    </figure>
 
     <p>We conduct inference for each fuel type separately. However, since the sample size for cars that run on diesel is only 20, one may have concerns regarding the application of methods that assume a large sample size to a sample size this small.</p>
 
@@ -272,7 +297,14 @@ tapply(dif.mpg,fuel,mean)
 tapply(dif.mpg,fuel,sd)
 
       </input></program>
-
+<pre>
+##   diesel      gas 
+## 4.450000 5.648649
+</pre>
+<pre>
+##   diesel      gas 
+## 2.781045 1.433607
+</pre>
       <p>Sample averages are computed in the first application of the function “<c>tapply</c>". Observe that an average was computed for cars that run on diesel and an average was computed for cars that run on gas. In both cases the average corresponds to the difference in fuel consumption. Similarly, the standard deviations were computed in the second application of the function. We obtain that the point estimates of the expectation for diesel and gas cars are 4.45 and 5.648649, respectively and the point estimates for the standard deviation of the variable are 2.781045 and 1.433607.</p>
 
       <p>Let us compute the confidence interval for each type of fuel:</p>
@@ -285,7 +317,14 @@ x.bar - qt(0.975,n-1)*s/sqrt(n)
 x.bar + qt(0.975,n-1)*s/sqrt(n)
 
       </input></program>
-
+<pre>
+##   diesel      gas 
+## 3.148431 5.440699
+</pre>
+<pre>
+##   diesel      gas 
+## 5.751569 5.856598
+</pre>
       <p>The objects “<c>x.bar</c>" and “<c>s</c>" contain the sample averages and sample standard deviations, respectively. Both are sequences of length two, with the first component referring to “<c>diesel</c>" and the second component referring to “<c>gas</c>". The object “<c>n</c>" contains the two sample sizes, 20 for “<c>diesel</c>" and 185 for “<c>gas</c>". In the expression next to last the lower boundary for each of the confidence intervals is computed and in the last expression the upper boundary is computed. The confidence interval for the expected difference in diesel cars is <m>[3.148431, 5.751569]</m>. and the confidence interval for cars using gas is <m>[5.440699, 5.856598]</m>.</p>
 
       <p>The 0.975-percentiles of the <m>t</m>-distributions are computed with the expressions “<c>qt(0.025,n-1)</c>":</p>
@@ -294,10 +333,12 @@ x.bar + qt(0.975,n-1)*s/sqrt(n)
 qt(0.975,n-1)
 
       </input></program>
-
+<pre>
+## [1] 2.093024 1.972941
+</pre>
       <p>The second argument of the function “<c>qt</c>" is a sequence with two components, the number 19 and the number 184. Accordingly, The first position in the output of the function is the percentile associated with 19 degrees of freedom and the second position is the percentile associated to 184 degrees of freedom.</p>
 
-      <p>Compare the resulting percentiles to the 0.975-percentile of the standard Normal distribution, which is essentially equal to 1.96. When the sample size is small, 20 for example, the percentile of the <m>t</m>-distribution is noticeably larger than the percentile of the standard Normal. However, for a larger sample size the percentiles, more or less, coincide. It follows that for a large sample the method proposed in Subsection <xref ref="subsec-cimean" /> and the method discussed in this subsection produce essentially the same confidence intervals.</p>
+      <p>Compare the resulting percentiles to the 0.975-percentile of the standard Normal distribution, which is essentially equal to 1.96. When the sample size is small, 20 for example, the percentile of the <m>t</m>-distribution is noticeably larger than the percentile of the standard Normal. However, for a larger sample size the percentiles, more or less, coincide. It follows that for a large sample the method proposed in <xref ref="subsec-cimean" /> and the method discussed in this subsection produce essentially the same confidence intervals.</p>
 
     </subsection>
 
@@ -336,7 +377,10 @@ qt(0.975,n-1)
 (n-1)/qchisq(0.025,n-1)
 
       </input></program>
-
+<pre>
+## [1] 0.5783456 0.8234295
+## [1] 2.133270 1.240478
+</pre>
       <p>The ratios that are used in the left hand side of the intervals are 0.5783456 and 0.8234295, respectively. Both ratios are less than one. On the other hand, the ratios associated with the other end of the intervals, 2.133270 and 1.240478, are both larger than one.</p>
 
       <p>Let us compute the point estimates of the variance and the associated confidence intervals. Recall that the object “<c>s</c>" contains the sample standard deviations of the difference in fuel consumption for diesel and for gas cars. The object “<c>n</c>" contains the two sample sizes:</p>
@@ -347,7 +391,18 @@ s^2
 (n-1)*s^2/qchisq(0.025,n-1)
 
       </input></program>
-
+<pre>
+##   diesel      gas 
+## 7.734211 2.055229
+</pre>
+<pre>
+##   diesel      gas 
+## 4.473047 1.692336
+</pre>
+<pre>
+##   diesel      gas 
+## 16.499155  2.549466
+</pre>
       <p>The variance of the difference in fuel consumption for diesel cars is estimated to be 7.734211 with a 95%-confidence interval of <m>[4.473047, 16.499155]</m> and for cars that use gas the estimated variance is 2.055229, with a confidence interval of <m>[1.692336, 2.549466]</m>.</p>
 
       <p>As a final example in this section let us simulate the confidence level for a confidence interval for the expectation and for a confidence interval for the variance of a Normal measurement. In this simulation we assume that the expectation is equal to <m>\mu = 3</m> and the variance is equal to <m>\sigma^2 = 3^2 = 9</m>. The sample size is taken to be <m>n=20</m>. We start by producing the sampling distribution of the sample average <m>\bar X</m> and of the sample standard deviation <m>S</m>:</p>
@@ -374,7 +429,9 @@ mu.UCL &lt;- X.bar + qt(0.975,n-1)*S/sqrt(n)
 mean((mu &gt;= mu.LCL) &amp; (mu &lt;= mu.UCL))
 
       </input></program>
-
+<pre>
+## [1] 0.95009
+</pre>
       <p>The nominal significance level of the confidence interval is 95%, which is practically identical to the confidence level that was computed in the simulation.</p>
 
       <p>The confidence interval for the variance is obtained in a similar way. The only difference is that we apply now different formulae for the computation of the upper and lower confidence limits:</p>
@@ -385,7 +442,9 @@ var.UCL &lt;- (n-1)*S^2/qchisq(0.025,n-1)
 mean((sig^2 &gt;= var.LCL) &amp; (sig^2 &lt;= var.UCL))
 
       </input></program>
-
+<pre>
+## [1] 0.94959
+</pre>
       <p>Again, we obtain that the nominal confidence level of 95% coincides with the confidence level computed in the simulation.</p>
 
     </subsection>
@@ -472,13 +531,6 @@ mean((sig^2 &gt;= var.LCL) &amp; (sig^2 &lt;= var.UCL))
         </ol>
       </statement>
     </exercise>
-    
-    <figure xml:id="fig-confidence2">
-      <caption>Box Plots of Ratings</caption>
-      <image source="_figures/Confidence2-1.png" width="60%">
-        <description>Box plots comparing ratings between two conditions</description>
-      </image>
-    </figure>
 
   </section>
 
