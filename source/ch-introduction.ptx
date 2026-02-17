@@ -3,65 +3,434 @@
 <chapter xml:id="ch-introduction" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Introduction</title>
 
-  <introduction>
-    <p>
-      This chapter introduces the basic concepts of statistics, with special attention to concepts
-      used in descriptive statistics and probability theory.
-    </p>
-  </introduction>
-
   <section xml:id="sec-student-learning-objectives-1">
     <title>Student Learning Objectives</title>
-    <p>Content to be added.</p>
+    
+    <p>
+      This chapter introduces the basic concepts of statistics. Special attention is given to concepts that are used in the first part of this book, the part that deals with graphical and numeric statistical ways to describe data (descriptive statistics) as well as mathematical theory of probability that enables statisticians to draw conclusions from data.
+    </p>
+    
+    <p>
+      The course applies the widely used freeware programming environment for statistical analysis, known as <c>R</c>. In this chapter we will discuss the installation of the program and present very basic features of that system.
+    </p>
+    
+    <p>
+      By the end of this chapter, the student should be able to:
+    </p>
+    
+    <ul>
+      <li><p>Recognize key terms in statistics and probability.</p></li>
+      <li><p>Install the <c>R</c> program on an accessible computer.</p></li>
+      <li><p>Learn and apply a few basic operations of the computational system <c>R</c>.</p></li>
+    </ul>
   </section>
 
   <section xml:id="sec-why-learn-statistics">
     <title>Why Learn Statistics?</title>
-    <p>Content to be added.</p>
+    
+    <p>
+      You are probably asking yourself the question, <q>When and where will I use statistics?</q>. If you read any newspaper or watch television, or use the Internet, you will see statistical information. There are statistics about crime, sports, education, politics, and real estate. Typically, when you read a newspaper article or watch a news program on television, you are given sample information. With this information, you may make a decision about the correctness of a statement, claim, or <q>fact</q>. Statistical methods can help you make the <q>best educated guess</q>.
+    </p>
+    
+    <p>
+      Since you will undoubtedly be given statistical information at some point in your life, you need to know some techniques to analyze the information thoughtfully. Think about buying a house or managing a budget. Think about your chosen profession. The fields of economics, business, psychology, education, biology, law, computer science, police science, and early childhood development require at least one course in statistics.
+    </p>
+    
+    <p>
+      Included in this chapter are the basic ideas and words of probability and statistics. In the process of learning the first part of the book, and more so in the second part of the book, you will understand that statistics and probability work together.
+    </p>
   </section>
 
   <section xml:id="sec-statistics">
     <title>Statistics</title>
-    <p>Content to be added.</p>
+    
+    <p>
+      The science of statistics deals with the collection, analysis, interpretation, and presentation of data. We see and use data in our everyday lives. To be able to use data correctly is essential to many professions and is in your own best self-interest.
+    </p>
+    
+    <figure xml:id="fig-intror1">
+      <caption>Frequency of Average Time (in Hours) Spent Sleeping per Night</caption>
+      <image source="generated/sleep-data-plot.svg" width="60%">
+        <description>A bar plot showing the frequency distribution of average sleep time in hours. The x-axis shows time in hours from 5 to 9, and the y-axis shows frequency. The plot displays bars at various heights representing how many people reported each sleep duration.</description>
+      </image>
+    </figure>
+    
+    <p>
+      For example, assume the average time (in hours, to the nearest half-hour) a group of people sleep per night has been recorded. Consider the following data:
+    </p>
+    
+    <me>5,\; 5.5,\; 6,\; 6,\; 6,\; 6.5,\; 6.5,\; 6.5,\; 6.5,\; 7,\; 7,\; 8,\; 8,\; 9</me>
+    
+    <p>
+      In <xref ref="fig-intror1" /> this data is presented in a graphical form (called a bar plot). A bar plot consists of a number axis (the <m>x</m>-axis) and bars (vertical lines) positioned above the number axis. The length of each bar corresponds to the number of data points that obtain the given numerical value. In the given plot the frequency of average time (in hours) spent sleeping per night is presented with hours of sleep on the horizontal <m>x</m>-axis and frequency on vertical <m>y</m>-axis.
+    </p>
+    
+    <p>
+      Think of the following questions:
+    </p>
+    
+    <ul>
+      <li><p>Would the bar plot constructed from data collected from a different group of people look the same as or different from the example? Why?</p></li>
+      <li><p>If one would have carried the same example in a different group with the same size and age as the one used for the example, do you think the results would be the same? Why or why not?</p></li>
+      <li><p>Where does the data appear to cluster? How could you interpret the clustering?</p></li>
+    </ul>
+    
+    <p>
+      The questions above ask you to analyze and interpret your data. With this example, you have begun your study of statistics.
+    </p>
+    
+    <p>
+      In this course, you will learn how to organize and summarize data. Organizing and summarizing data is called descriptive statistics. Two ways to summarize data are by graphing and by numbers (for example, finding an average). In the second part of the book you will also learn how to use formal methods for drawing conclusions from <q>good</q> data. The formal methods are called inferential statistics. Statistical inference uses probabilistic concepts to determine if conclusions drawn are reliable or not.
+    </p>
+    
+    <p>
+      Effective interpretation of data is based on good procedures for producing data and thoughtful examination of the data. In the process of learning how to interpret data you will probably encounter what may seem to be too many mathematical formulae that describe these procedures. However, you should always remember that the goal of statistics is not to perform numerous calculations using the formulae, but to gain an understanding of your data. The calculations can be done using a calculator or a computer. The understanding must come from you. If you can thoroughly grasp the basics of statistics, you can be more confident in the decisions you make in life.
+    </p>
+  </section>
+
+  <section xml:id="sec-probability-intro">
+    <title>Probability</title>
+    
+    <p>
+      Probability is the mathematical theory used to study uncertainty. It provides tools for the formalization and quantification of the notion of uncertainty. In particular, it deals with the chance of an event occurring. For example, if the different potential outcomes of an experiment are equally likely to occur then the probability of each outcome is taken to be one divided by the number of potential outcomes. As an illustration, consider tossing a fair coin. There are two possible outcomes <mdash /> a head or a tail <mdash /> and the probability of each outcome is <m>1/2</m>.
+    </p>
+    
+    <p>
+      If you toss a fair coin 4 times, the outcomes may not necessarily be 2 heads and 2 tails. However, if you toss the same coin 4,000 times, the outcomes will be close to 2,000 heads and 2,000 tails. It is very unlikely to obtain more than 2,060 tails and it is similarly unlikely to obtain less than 1,940 tails. This is consistent with the expected theoretical probability of heads in any one toss. Even though the outcomes of a few repetitions are uncertain, there is a regular pattern of outcomes when the number of repetitions is large. Statistics exploits this pattern regularity in order to make extrapolations from the observed sample to the entire population.
+    </p>
+    
+    <p>
+      The theory of probability began with the study of games of chance such as poker. Today, probability is used to predict the likelihood of an earthquake, of rain, or whether you will get an <q>A</q> in this course. Doctors use probability to determine the chance of a vaccination causing the disease the vaccination is supposed to prevent. A stockbroker uses probability to determine the rate of return on a client's investments. You might use probability to decide to buy a lottery ticket or not.
+    </p>
+    
+    <p>
+      Although probability is instrumental for the development of the theory of statistics, in this introductory course we will not develop the mathematical theory of probability. Instead, we will concentrate on the philosophical aspects of the theory and use computerized simulations in order to demonstrate probabilistic computations that are applied in statistical inference.
+    </p>
   </section>
 
   <section xml:id="sec-key-terms">
     <title>Key Terms</title>
-    <p>Content to be added.</p>
+    
+    <p>
+      In statistics, we generally want to study a population. You can think of a population as an entire collection of persons, things, or objects under study. To study the larger population, we select a sample. The idea of sampling is to select a portion (or subset) of the larger population and study that portion (the sample) to gain information about the population. Data are the result of sampling from a population.
+    </p>
+    
+    <p>
+      Because it takes a lot of time and money to examine an entire population, sampling is a very practical technique. If you wished to compute the overall grade point average at your school, it would make sense to select a sample of students who attend the school. The data collected from the sample would be the students' grade point averages. In presidential elections, opinion poll samples of 1,000 to 2,000 people are taken. The opinion poll is supposed to represent the views of the people in the entire country. Manufacturers of canned carbonated drinks take samples to determine if the manufactured 16 ounce containers does indeed contain 16 ounces of the drink.
+    </p>
+    
+    <p>
+      From the sample data, we can calculate a <term>statistic</term>. A statistic is a number that is a property of the sample. For example, if we consider one math class to be a sample of the population of all math classes, then the average number of points earned by students in that one math class at the end of the term is an example of a statistic. The statistic can be used as an estimate of a population <term>parameter</term>. A parameter is a number that is a property of the population. Since we considered all math classes to be the population, then the average number of points earned per student over all the math classes is an example of a parameter.
+    </p>
+    
+    <p>
+      One of the main concerns in the field of statistics is how accurately a statistic estimates a parameter. The accuracy really depends on how well the sample represents the population. The sample must contain the characteristics of the population in order to be a representative sample.
+    </p>
+    
+    <p>
+      Two words that come up often in statistics are <term>average</term> and <term>proportion</term>. If you were to take three exams in your math classes and obtained scores of 86, 75, and 92, you calculate your average score by adding the three exam scores and dividing by three (your average score would be 84.3 to one decimal place). If, in your math class, there are 40 students and 22 are men and 18 are women, then the proportion of men students is <m>22/40</m> and the proportion of women students is <m>18/40</m>. Average and proportion are discussed in more detail in later chapters.
+    </p>
   </section>
 
-  <section xml:id="sec-data-sampling">
-    <title>Data, Sampling, and Variation in Data and Sampling</title>
-    <p>Content to be added.</p>
-  </section>
-
-  <section xml:id="sec-frequency">
-    <title>Frequency, Frequency Tables, and Levels of Measurement</title>
-    <p>Content to be added.</p>
-  </section>
-
-  <section xml:id="sec-experimental-design">
-    <title>Experimental Design and Ethics</title>
-    <p>Content to be added.</p>
-  </section>
-
-  <section xml:id="sec-probability-intro">
-    <title>Probability (Introduction)</title>
-    <p>Content to be added.</p>
-  </section>
-
-  <section xml:id="sec-introduction-r">
-    <title>Introduction to <c>R</c></title>
-    <p>Content to be added.</p>
+  <section xml:id="sec-r-programming-environment">
+    <title>The <c>R</c> Programming Environment</title>
+    
+    <p>
+      The <c>R</c> Programming Environment is a widely used open source system for statistical analysis and statistical programming. It includes thousands of functions for the implementation of both standard and exotic statistical methods and it is probably the most popular system in the academic world for the development of new statistical tools. We will use <c>R</c> in order to apply the statistical methods that will be discussed in the book to some example data sets and in order to demonstrate, via simulations, concepts associated with probability and its application in statistics.
+    </p>
+    
+    <p>
+      The demonstrations in the book involve very basic <c>R</c> programming skills and the applications are implemented using, in most cases, simple and natural code. A detailed explanation will accompany the code that is used.
+    </p>
+    
+    <p>
+      Learning <c>R</c>, like the learning of any other programming language, can be achieved only through practice. Hence, we strongly recommend that you not only read the code presented in the book but also run it yourself, in parallel to the reading of the provided explanations. Moreover, you are encouraged to play with the code: introduce changes in the code and in the data and see how the output changes as a result. One should not be afraid to experiment. At worst, the computer may crash or freeze. In both cases, restarting the computer will solve the problem <ellipsis />
+    </p>
+    
+    <p>
+      You may download <c>R</c> from the <c>R</c> project home page <url href="https://www.r-project.org" visual="www.r-project.org"/> and install it on the computer that you are using.
+    </p>
+    
+    <p>
+      In addition to installing <c>R</c> we recommend that you also install <c>RStudio</c> <url href="https://www.rstudio.com" visual="www.rstudio.com"/>. RStudio is an integrated development environment (IDE) for <c>R</c>. It includes a console, syntax-highlighting editor that supports direct code execution, as well as tools for plotting, history, debugging and workspace management.
+    </p>
+    
+    <figure xml:id="fig-fig1b">
+      <caption>The RStudio interface</caption>
+      <image source="_figures/rstudio.png" width="60%">
+        <description>Screenshot of the RStudio interface showing four panels: the top-left panel is the editor, the bottom-left panel shows the R-Console, and the two right panels show the R-environment, history, file browser, plot panel and help viewer among others.</description>
+      </image>
+    </figure>
+    
+    <p>
+      The screenshot in <xref ref="fig-fig1b" /> shows the RStudio interface. There are four panels. The top-left panel is the editor, the bottom-left panel shows the <c>R-Console</c>. The two right panels show the R-environment, history, file browser, plot panel and help viewer among others.
+    </p>
+    
+    <subsection xml:id="subsec-some-basic-r-commands">
+      <title>Some Basic <c>R</c> Commands</title>
+      
+      <p>
+        <c>R</c> is an object-oriented programming system. During the session you may create and manipulate objects by the use of functions that are part of the basic installation. You may also use the <c>R</c> programming language. Most of the functions that are part of the system are themselves written in the <c>R</c> language and one may easily write new functions or modify existing functions to suit specific needs.
+      </p>
+      
+      <p>
+        Let us start by opening <c>RStudio</c>. It is good practice to have a separate folder for each project where you will store your data and <c>R</c>-code. We have a folder called <c>IntroStat</c>. When starting a <c>R</c> or <c>RStudio</c>-session it is good practice to set the current working directory to your project directory using the <q><c>setwd</c></q> function for example like this:
+      </p>
+      
+      <program language="r">
+        <input>
+setwd("~/IntroStat")
+        </input>
+      </program>
+      
+      <p>
+        Now we are ready to run our first <c>R</c>-command. Type in the <c>R-Console</c> panel, immediately after the <q><c>></c></q> prompt, the expression <q><c>1+2</c></q> and then hit the Return key. (Do not include the double quotation in the expression that you type!):
+      </p>
+      
+      <program language="r">
+        <input>
+1 + 2
+        </input>
+        <output>
+[1] 3
+        </output>
+      </program>
+      
+      <p>
+        The prompt <q><c>></c></q> indicates that the system is ready to receive commands. Writing an expression, such as <q><c>1+2</c></q>, and hitting the Return key sends the expression to be executed. The execution of the expression may produce an object, in this case an object that is composed of a single number, the number <q>3</q>.
+      </p>
+      
+      <p>
+        Whenever required, the <c>R</c> system takes an action. If no other specifications are given regarding the required action then the system will apply the pre-programmed action. This action is called the <term>default</term> action. In the case of hitting the Return key after the expression that we wrote the default is to display the produced object on the screen.
+      </p>
+      
+      <p>
+        Next, let us demonstrate <c>R</c> in a more meaningful way by using it in order to produce the bar-plot of <xref ref="fig-intror1" />. First we have to input the data. We will produce a sequence of numbers that form the data<fn>In <c>R</c>, a sequence of numbers is called a <term>vector</term>. However, we will use the term <term>sequence</term> to refer to vectors.</fn>. For that we will use the function <q><c>c</c></q> that combines its arguments and produces a sequence with the arguments as the components of the sequence. Write the expression:
+      </p>
+      
+      <program language="r">
+        <input>
+c(5,5.5,6,6,6,6.5,6.5,6.5,6.5,7,7,8,8,9)
+        </input>
+        <output>
+[1] 5.0 5.5 6.0 6.0 6.0 6.5 6.5 6.5 6.5 7.0 7.0 8.0 8.0 9.0
+        </output>
+      </program>
+      
+      <p>
+        at the prompt and hit return.
+      </p>
+      
+      <p>
+        The function <q><c>c</c></q> is an example of an <c>R</c> function. A function has a name, <q><c>c</c></q> in this case, that is followed by brackets that include the input to the function. We call the components of the input the <term>arguments</term> of the function. Arguments are separated by commas. A function produces an output, which is typically an <c>R</c> object. In the current example an object of the form of a sequence was created and, according to the default application of the system, was sent to the screen and not saved.
+      </p>
+      
+      <p>
+        If we want to create an object for further manipulation then we should save it and give it a name. For example, if we want to save the vector of data under the name <q><c>X</c></q> we may write the following expression at the prompt (and then hit return):
+      </p>
+      
+      <program language="r">
+        <input>
+X &lt;- c(5,5.5,6,6,6,6.5,6.5,6.5,6.5,7,7,8,8,9)
+        </input>
+      </program>
+      
+      <p>
+        The arrow that appears after the <q><c>X</c></q> is produced by typing the less than key <q><c>&lt;</c></q> followed by the minus key <q><c>-</c></q>. This arrow is the assignment operator.
+      </p>
+      
+      <p>
+        Observe that you may save typing by calling and editing lines of code that were processes in an earlier part of the session. One may browse through the lines using the up and down arrows on the right-hand side of the keyboard and use the right and left arrows to move along the line presented at the prompt. For example, the last expression may be produced by finding first the line that used the function <q><c>c</c></q> with the up and down arrow and then moving to the beginning of the line with the left arrow. At the beginning of the line all one has to do is type <q><c>X &lt;- </c></q> and hit the Return key.
+      </p>
+      
+      <p>
+        Notice that no output was sent to the screen. Instead, the output from the <q><c>c</c></q> function was assigned to an object that has the name <q><c>X</c></q>. A new object by the given name was formed and it is now available for further analysis. In order to verify this you may write <q><c>X</c></q> at the prompt and hit return:
+      </p>
+      
+      <program language="r">
+        <input>
+X
+        </input>
+        <output>
+[1] 5.0 5.5 6.0 6.0 6.0 6.5 6.5 6.5 6.5 7.0 7.0 8.0 8.0 9.0
+        </output>
+      </program>
+      
+      <p>
+        The content of the object <q><c>X</c></q> is sent to the screen, which is the default output. Notice that we have not changed the given object, which is still in the memory.
+      </p>
+      
+      <p>
+        The object <q><c>X</c></q> is in the memory, but it is not saved on the hard disk. With the end of the session the objects created in the session are erased unless specifically saved.
+      </p>
+      
+      <p>
+        You can save objects with the <q><c>save</c></q> function
+      </p>
+      
+      <program language="r">
+        <input>
+save(X, file = "X.RData")
+        </input>
+      </program>
+      
+      <p>
+        To see whether this worked, delete the object <c>X</c> from your environment using the function <q><c>rm</c></q>, load your saved object using the <q><c>load</c></q> function, and print its contents to check whether we successfully restored it:
+      </p>
+      
+      <program language="r">
+        <input>
+rm(X)
+load("X.RData")
+X
+        </input>
+      </program>
+      
+      <p>
+        We used a capital letter to name the object. We could have used a small letter just as well or practically any combination of letters. However, you should note that <c>R</c> distinguishes between capital and small letter. Hence, typing <q><c>x</c></q> in the console window and hitting return will produce an error message:
+      </p>
+      
+      <program language="r">
+        <input>
+x
+        </input>
+        <output>
+Error: object 'x' not found
+        </output>
+      </program>
+      
+      <p>
+        An object named <q><c>x</c></q> does not exist in the <c>R</c> system and we have not created such object. The object <q><c>X</c></q>, on the other hand, does exist.
+      </p>
+      
+      <p>
+        Names of functions that are part of the system are fixed but you are free to choose a name to objects that you create. For example, if one wants to create an object by the name <q><c>my.vector</c></q> that contains the numbers 3, 7, 3, 3, and -5 then one may write the expression <q><c>my.vector &lt;- c(3,7,3,3,-5)</c></q> at the prompt and hit the Return key.
+      </p>
+      
+      <p>
+        If we want to produce a table that contains a count of the frequency of the different values in our data we can apply the function <q><c>table</c></q> to the object <q><c>X</c></q> (which is the object that contains our data):
+      </p>
+      
+      <program language="r">
+        <input>
+table(X)
+        </input>
+        <output>
+X
+  5 5.5   6 6.5   7   8   9 
+  1   1   3   4   2   2   1
+        </output>
+      </program>
+      
+      <p>
+        Notice that the output of the function <q><c>table</c></q> is a table of the different levels of the input vector and the frequency of each level. This output is yet another type of an object.
+      </p>
+      
+      <p>
+        The bar-plot of <xref ref="fig-intror1" /> can be produced by the application of the function <q><c>plot</c></q> to the object that is produced as an output of the function <q><c>table</c></q>:
+      </p>
+      
+      <program language="r">
+        <input>
+plot(table(X))
+        </input>
+      </program>
+      
+      <p>
+        This plot is practically identical to the plot in <xref ref="fig-intror1" />. The only difference is in the names given to the axes. These names were changed in <xref ref="fig-intror1" /> for clarity.
+      </p>
+      
+      <p>
+        Clearly, if one wants to produce a bar-plot to other numerical data all one has to do is replace in the expression <c>plot(table(X))</c> the object <c>X</c> by an object that contains the other data. For example, to plot the data in <c>my.vector</c> you may use <c>plot(table(my.vector))</c>.
+      </p>
+    </subsection>
   </section>
 
   <section xml:id="sec-exercises-1">
     <title>Exercises</title>
-    <p>Content to be added.</p>
+    
+    <exercise xml:id="exercise-1-1">
+      <statement>
+        <p>
+          A potential candidate for a political position in some state is interested to know what are her chances to win the primaries of her party and be selected as parties candidate for the position. In order to examine the opinions of her party voters she hires the services of a polling agency. The polling is conducted among 500 registered voters of the party. One of the questions that the pollsters refers to the willingness of the voters to vote for a female candidate for the job. Forty two percent of the people asked said that they prefer to have a women running for the job. Thirty eight percent said that the candidate's gender is irrelevant. The rest prefers a male candidate. Which of the following is (i) a population (ii) a sample (iii) a parameter and (iv) a statistic:
+        </p>
+        <ol>
+          <li><p>The 500 registered voters.</p></li>
+          <li><p>The percentage, among all registered voters of the given party, of those that prefer a male candidate.</p></li>
+          <li><p>The number 42% that corresponds to the percentage of those that prefer a female candidate.</p></li>
+          <li><p>The voters in the state that are registered to the given party.</p></li>
+        </ol>
+      </statement>
+    </exercise>
+    
+    <exercise xml:id="exercise-1-2">
+      <statement>
+        <p>
+          The number of customers who wait in front of a coffee shop at the opening was reported during 25 days. The results were:
+        </p>
+        <me>4,2,1,1,0,2,1,2,4,2,5,3,1,5,1,5,1,2,1,1,3,4,2,4,3</me>
+        <ol>
+          <li><p>Identify the number of days in which 5 customers were waiting.</p></li>
+          <li><p>The number of waiting customers that occurred the largest number of times.</p></li>
+          <li><p>The number of waiting customers that occurred the least number of times.</p></li>
+        </ol>
+      </statement>
+    </exercise>
   </section>
 
   <section xml:id="sec-summary-1">
     <title>Summary</title>
-    <p>Content to be added.</p>
+    
+    <subsection xml:id="subsec-glossary-1">
+      <title>Glossary</title>
+      
+      <dl>
+        <li>
+          <title>Data</title>
+          <p>A set of observations taken on a sample from a population.</p>
+        </li>
+        
+        <li>
+          <title>Statistic</title>
+          <p>A numerical characteristic of the data. A statistic estimates the corresponding population parameter. For example, the average number of contribution to the course's forum for this term is an estimate for the average number of contributions in all future terms (parameter).</p>
+        </li>
+        
+        <li>
+          <title>Statistics</title>
+          <p>The science that deals with processing, presentation and inference from data.</p>
+        </li>
+        
+        <li>
+          <title>Probability</title>
+          <p>A mathematical field that models and investigates the notion of randomness.</p>
+        </li>
+      </dl>
+    </subsection>
+    
+    <subsection xml:id="subsec-r-functions-1">
+      <title><c>R</c> functions introduced in this chapter</title>
+      
+      <ul>
+        <li><p><c>setwd(dir)</c> is used to set the working directory to <c>dir</c>.</p></li>
+        <li><p><c>c()</c> is a generic function which combines its arguments.</p></li>
+        <li><p><c>save(..., file)</c> writes <c>R</c> objects to the specified file.</p></li>
+        <li><p><c>load()</c> reloads datasets written with the function save.</p></li>
+        <li><p><c>rm()</c> can be used to remove objects.</p></li>
+        <li><p><c>table()</c> constructs a table of counts of the different values.</p></li>
+        <li><p><c>plot()</c> is a generic function for plotting of <c>R</c> objects.</p></li>
+      </ul>
+    </subsection>
+    
+    <subsection xml:id="subsec-discuss-forum-1">
+      <title>Discuss in the forum</title>
+      
+      <p>
+        A sample is a subgroup of the population that is supposed to represent the entire population. In your opinion, is it appropriate to attempt to represent the entire population only by a sample?
+      </p>
+      
+      <p>
+        When you formulate your answer to this question it may be useful to come up with an example of a question from you own field of interest one may want to investigate. In the context of this example you may identify a target population which you think is suited for the investigation of the given question. The appropriateness of using a sample can be discussed in the context of the example question and the population you have identified.
+      </p>
+    </subsection>
   </section>
 </chapter>
