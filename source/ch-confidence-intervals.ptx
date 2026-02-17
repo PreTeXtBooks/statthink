@@ -27,6 +27,13 @@
   <section xml:id="sec-exercises-11">
     <title>Exercises</title>
     <p>Content to be added.</p>
+    
+    <figure xml:id="fig-confidence2">
+      <caption>Box Plots of Ratings</caption>
+      <image source="_figures/Confidence2-1.png" width="60%">
+        <description>Box plots comparing ratings between two conditions</description>
+      </image>
+    </figure>
   </section>
 
   <section xml:id="sec-summary-11">

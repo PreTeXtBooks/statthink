@@ -77,14 +77,14 @@ plot(table(n.cost))
       <title>Exercise 3.1</title>
       
       <ol>
-        <li><p>Consider the data “<c>x1</c>". From the summary we see that it is distributed in the range between 0 and slightly below 5. The central 50% of the distribution are located between 2.5 and 3.8. The mean and median are approximately equal to each other, which suggests an approximately symmetric distribution. Consider the histograms in <xref ref="fig:DStat9"/>. Histograms 1 and 3 correspond to a distributions in the appropriate range. However, the distribution in Histogram 3 is concentrated in lower values than suggested by the given first and third quartiles. Consequently, we match the summary of “<c>x1</c>" with Histogram 1.</p></li>
+        <li><p>Consider the data “<c>x1</c>". From the summary we see that it is distributed in the range between 0 and slightly below 5. The central 50% of the distribution are located between 2.5 and 3.8. The mean and median are approximately equal to each other, which suggests an approximately symmetric distribution. Consider the histograms in <xref ref="fig-dstat9"/>. Histograms 1 and 3 correspond to a distributions in the appropriate range. However, the distribution in Histogram 3 is concentrated in lower values than suggested by the given first and third quartiles. Consequently, we match the summary of “<c>x1</c>" with Histogram 1.</p></li>
       </ol>
       <p>Consider the data “<c>x2</c>". Again, the distribution is in the range     between 0 and slightly below 5. The central 50% of the distribution are     located between 0.6 and 1.8. The mean is larger than the median, which     suggests a distribution skewed to the right. Therefore, we match the     summary of “<c>x2</c>" with Histogram 3.</p>
       <p>For the data in “<c>x3</c>" we may note that the distribution is in the range     between 2 and 6. The histogram that fits this description is     Histograms 2.</p>
-      <p>The box plot is essentially a graphical representation of the     information presented by the function “<c>summary</c>". Following the     rational of matching the summary with the histograms we may obtain that     Histogram 1 should be matched with Box-plot 2 in     <xref ref="fig:DStat10"/>, Histogram 2 matches Box-plot 3, and     Histogram 3 matches Box-plot 1. Indeed, it is easier to match the box     plots with the summaries. However, it is a good idea to practice the     direct matching of histograms with box plots.</p>
+      <p>The box plot is essentially a graphical representation of the     information presented by the function “<c>summary</c>". Following the     rational of matching the summary with the histograms we may obtain that     Histogram 1 should be matched with Box-plot 2 in     <xref ref="fig-dstat10"/>, Histogram 2 matches Box-plot 3, and     Histogram 3 matches Box-plot 1. Indeed, it is easier to match the box     plots with the summaries. However, it is a good idea to practice the     direct matching of histograms with box plots.</p>
       <ol>
-        <li><p>The data in “<c>x1</c>" fits Box-plot 2 in <xref ref="fig:DStat10"/>. The value 0.000 is the smallest value in the data and it corresponds to the smallest point in the box plot. Since this point is below the bottom whisker it follows that it is an outlier. More directly, we may note that the inter-quartile range is equal to <m>IQR = 3.840 - 2.498 = 1.342</m>. The lower threshold is equal to <m>2.498  - 1.5 \times 1.342 = 0.485</m>, which is larger that the given value. Consequently, the given value 0.000 is an outlier.</p></li>
-        <li><p>Observe that the data in “<c>x3</c>" fits Box-plot 3 in <xref ref="fig:DStat10"/>. The vale 6.414 is the largest value in the data and it corresponds to the endpoint of the upper whisker in the box plot and is not an outlier. Alternatively, we may note that the inter-quartile range is equal to <m>IQR =  4.690 - 3.391 = 1.299</m>. The upper threshold is equal to <m>4.690 + 1.5 \times 1.299 = 6.6385</m>, which is larger that the given value. Consequently, the given value 6.414 is not an outlier.</p></li>
+        <li><p>The data in “<c>x1</c>" fits Box-plot 2 in <xref ref="fig-dstat10"/>. The value 0.000 is the smallest value in the data and it corresponds to the smallest point in the box plot. Since this point is below the bottom whisker it follows that it is an outlier. More directly, we may note that the inter-quartile range is equal to <m>IQR = 3.840 - 2.498 = 1.342</m>. The lower threshold is equal to <m>2.498  - 1.5 \times 1.342 = 0.485</m>, which is larger that the given value. Consequently, the given value 0.000 is an outlier.</p></li>
+        <li><p>Observe that the data in “<c>x3</c>" fits Box-plot 3 in <xref ref="fig-dstat10"/>. The vale 6.414 is the largest value in the data and it corresponds to the endpoint of the upper whisker in the box plot and is not an outlier. Alternatively, we may note that the inter-quartile range is equal to <m>IQR =  4.690 - 3.391 = 1.299</m>. The upper threshold is equal to <m>4.690 + 1.5 \times 1.299 = 6.6385</m>, which is larger that the given value. Consequently, the given value 6.414 is not an outlier.</p></li>
       </ol>
     </subsection>
     
@@ -161,7 +161,7 @@ summary(x)
       <title>Exercise 4.1</title>
       
       <ol>
-        <li><p>Consult Table <xref ref="tab:tab4"/>. The probabilities of the different values of <m>Y</m> are <m>\{p, 2p, \ldots, 6p\}</m>. These probabilities sum to 1, consequently</p></li>
+        <li><p>Consult Table <xref ref="tab-tab4"/>. The probabilities of the different values of <m>Y</m> are <m>\{p, 2p, \ldots, 6p\}</m>. These probabilities sum to 1, consequently</p></li>
       </ol>
       <p><me>p + 2p + 3 p + 4 p + 5 p + 6p = (1+2+3+4+5+6)p = 21 p = 1 \Longrightarrow p = 1/21\;.</me></p>
       <ol>
@@ -574,7 +574,7 @@ x2.var &lt;- var(magnets$change[30:50])
       <title>Exercise 10.1</title>
       
       <ol>
-        <li><p>We simulate the sampling distribution of the average and the median in a sample generated from the Normal distribution. In order to do so we copy the code that was used in Subsection <xref ref="ComparingEstimators"/>, replacing the object “<c>mid.range</c>" by the object “<c>X.med</c>" and using the function “<c>median</c>" in order to compute the sample median instead of the computation of the mid-range statistic:</p></li>
+        <li><p>We simulate the sampling distribution of the average and the median in a sample generated from the Normal distribution. In order to do so we copy the code that was used in Subsection <xref ref="subsec-comparing-estimators"/>, replacing the object “<c>mid.range</c>" by the object “<c>X.med</c>" and using the function “<c>median</c>" in order to compute the sample median instead of the computation of the mid-range statistic:</p></li>
       </ol>
       <program language="r">
         <input>
@@ -606,7 +606,7 @@ var(X.med)
       </program>
       <p>Observe that the variance of the sample average is essentially equal to     <m>0.020</m> and the variance of the sample median is essentially equal to     <m>0.0312</m>. The mean square error of an unbiased estimator is equal to its     variance. Hence, these numbers represent the mean square errors of the     estimators. It follows that the mean square error of the sample average     is less than the mean square error of the sample median in the     estimation of the expectation of a Normal measurement.</p>
       <ol>
-        <li><p>We repeat the same steps as before for the Uniform distribution. Notice that we use the parameters <m>a=0.5</m> and <m>b=5.5</m> the same way we did in Subsection <xref ref="ComparingEstimators"/>. These parameters produce an expectation <m>\Expec(X) = 3</m> and a variance <m>\Var(X) = 2.083333</m>:</p></li>
+        <li><p>We repeat the same steps as before for the Uniform distribution. Notice that we use the parameters <m>a=0.5</m> and <m>b=5.5</m> the same way we did in Subsection <xref ref="subsec-comparing-estimators"/>. These parameters produce an expectation <m>\Expec(X) = 3</m> and a variance <m>\Var(X) = 2.083333</m>:</p></li>
       </ol>
       <program language="r">
         <input>
@@ -748,7 +748,7 @@ tapply(teacher$rating,teacher$condition,sd)
         </input>
       </program>
       <p>Obtain that average for the condition “<c>C</c>" is <m>2.613332</m> and the     standard deviation is <m>0.5329833</m>.</p>
-      <p>You may note that the rating given by students that were exposed to the     description of the lecturer as charismatic is higher on the average than     the rating given by students that were exposed to a less favorable     description. The box plots of the ratings for the two conditions are     presented in <xref ref="fig:Confidence2"/>.</p>
+      <p>You may note that the rating given by students that were exposed to the     description of the lecturer as charismatic is higher on the average than     the rating given by students that were exposed to a less favorable     description. The box plots of the ratings for the two conditions are     presented in <xref ref="fig-confidence2"/>.</p>
       <program language="r">
         <input>
 cars &lt;- read.csv("_data/cars.csv")
