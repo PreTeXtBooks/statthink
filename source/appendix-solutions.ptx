@@ -9,81 +9,1371 @@
 
   <section xml:id="sec-solutions-ch1">
     <title>Chapter 1: Introduction</title>
-    <p>Content to be added.</p>
+    
+    <subsection xml:id="subsec-solution-1-1">
+      <title>Exercise 1.1</title>
+      
+      <ol>
+        <li><p>According to the information in the question the polling was conducted among 500 registered voters. The 500 registered voters corresponds to the sample.</p></li>
+        <li><p>The percentage, among all registered voters of the given party, of those that prefer a male candidate is a parameter. This quantity is a characteristic of the population.</p></li>
+        <li><p>It is given that 42% of the sample prefer a female candidate. This quantity is a numerical characteristic of the data, of the sample. Hence, it is a statistic.</p></li>
+        <li><p>The voters in the state that are registered to the given party is the target population.</p></li>
+      </ol>
+    </subsection>
+    
+    <subsection xml:id="subsec-solution-1-2">
+      <title>Exercise 1.2</title>
+      
+      <p>One may read the data into <c>R</c> and create a table using the code:</p>
+      <program language="r">
+        <input>
+n.cost &lt;- c(4,2,1,1,0,2,1,2,4,2,5,3,1,5,1,5,1,2,1,1,3,4,2,4,3)
+table(n.cost)
+        </input>
+      </program>
+      <p>For convenience, one may also create the bar plot of the data using the code:</p>
+      <program language="r">
+        <input>
+plot(table(n.cost))
+        </input>
+      </program>
+      <ol>
+        <li><p>The number of days in which 5 costumers where waiting is 3, since the frequency of the value “5" in the data is 3. That can be seen from the table by noticing the number below value “5" is 3. It can also be seen from the bar plot by observing that the hight of the bar above the value “5" is equal to 3.</p></li>
+        <li><p>The number of waiting costumers that occurred the largest number of times is 1. The value “1” occurred 8 times, more than any other value. Notice that the bar above this value is the highest.</p></li>
+        <li><p>The value “0”, which occurred only once, occurred the least number of times.</p></li>
+      </ol>
+    </subsection>
+    
   </section>
 
   <section xml:id="sec-solutions-ch2">
     <title>Chapter 2: Sampling and Data Structures</title>
-    <p>Content to be added.</p>
+    
+    <subsection xml:id="subsec-solution-2-1">
+      <title>Exercise 2.1</title>
+      
+      <ol>
+        <li><p>The relative frequency of direct hits of category 1 is 0.3993. Notice that the cumulative relative frequency of category 1 and 2 hits, the sum of the relative frequency of both categories, is 0.6630. The relative frequency of category 2 hits is 0.2637. Consequently, the relative frequency of direct hits of category 1 is 0.6630 - 0.2637 = 0.3993.</p></li>
+        <li><p>The relative frequency of direct hits of category 4 or more is 0.0769. Observe that the cumulative relative of the value “3" is 0.6630 + 0.2601 = 0.9231. This follows from the fact that the cumulative relative frequency of the value “2" is 0.6630 and the relative frequency of the value “3" is 0.2601. The total cumulative relative frequency is 1.0000. The relative frequency of direct hits of category 4 or more is the difference between the total cumulative relative frequency and cumulative relative frequency of 3 hits: 1.0000 - 0.9231 = 0.0769.</p></li>
+      </ol>
+    </subsection>
+    
+    <subsection xml:id="subsec-solution-2-2">
+      <title>Exercise 2.2</title>
+      
+      <ol>
+        <li><p>The total number of cows that were involved in this study is 45. The object “<c>freq</c>" contain the table of frequency of the cows, divided according to the number of calves that they had. The cumulative frequency of all the cows that had 7 calves or less, which includes all cows in the study, is reported under the number “7" in the output of the expression “<c>cumsum(freq)</c>". This number is 45.</p></li>
+        <li><p>The number of cows that gave birth to a total of 4 calves is 10. Indeed, the cumulative frequency of cows that gave birth to 4 calves or less is 28. The cumulative frequency of cows that gave birth to 3 calves or less is 18. The frequency of cows that gave birth to exactly 4 calves is the difference between these two numbers: 28 - 18 = 10.</p></li>
+        <li><p>The relative frequency of cows that gave birth to at least 4 calves is <m>27/45 = 0.6</m>. Notice that the cumulative frequency of cows that gave at most 3 calves is 18. The total number of cows is 45. Hence, the number of cows with 4 or more calves is the difference between these two numbers: 45 - 18 = 27. The relative frequency of such cows is the ratio between this number and the total number of cows: <m>27/45 = 0.6</m>.</p></li>
+      </ol>
+    </subsection>
+    
   </section>
 
   <section xml:id="sec-solutions-ch3">
     <title>Chapter 3: Descriptive Statistics</title>
-    <p>Content to be added.</p>
+    
+    <subsection xml:id="subsec-solution-3-1">
+      <title>Exercise 3.1</title>
+      
+      <ol>
+        <li><p>Consider the data “<c>x1</c>". From the summary we see that it is distributed in the range between 0 and slightly below 5. The central 50% of the distribution are located between 2.5 and 3.8. The mean and median are approximately equal to each other, which suggests an approximately symmetric distribution. Consider the histograms in <xref ref="fig:DStat9"/>. Histograms 1 and 3 correspond to a distributions in the appropriate range. However, the distribution in Histogram 3 is concentrated in lower values than suggested by the given first and third quartiles. Consequently, we match the summary of “<c>x1</c>" with Histogram 1.</p></li>
+      </ol>
+      <p>Consider the data “<c>x2</c>". Again, the distribution is in the range     between 0 and slightly below 5. The central 50% of the distribution are     located between 0.6 and 1.8. The mean is larger than the median, which     suggests a distribution skewed to the right. Therefore, we match the     summary of “<c>x2</c>" with Histogram 3.</p>
+      <p>For the data in “<c>x3</c>" we may note that the distribution is in the range     between 2 and 6. The histogram that fits this description is     Histograms 2.</p>
+      <p>The box plot is essentially a graphical representation of the     information presented by the function “<c>summary</c>". Following the     rational of matching the summary with the histograms we may obtain that     Histogram 1 should be matched with Box-plot 2 in     <xref ref="fig:DStat10"/>, Histogram 2 matches Box-plot 3, and     Histogram 3 matches Box-plot 1. Indeed, it is easier to match the box     plots with the summaries. However, it is a good idea to practice the     direct matching of histograms with box plots.</p>
+      <ol>
+        <li><p>The data in “<c>x1</c>" fits Box-plot 2 in <xref ref="fig:DStat10"/>. The value 0.000 is the smallest value in the data and it corresponds to the smallest point in the box plot. Since this point is below the bottom whisker it follows that it is an outlier. More directly, we may note that the inter-quartile range is equal to <m>IQR = 3.840 - 2.498 = 1.342</m>. The lower threshold is equal to <m>2.498  - 1.5 \times 1.342 = 0.485</m>, which is larger that the given value. Consequently, the given value 0.000 is an outlier.</p></li>
+        <li><p>Observe that the data in “<c>x3</c>" fits Box-plot 3 in <xref ref="fig:DStat10"/>. The vale 6.414 is the largest value in the data and it corresponds to the endpoint of the upper whisker in the box plot and is not an outlier. Alternatively, we may note that the inter-quartile range is equal to <m>IQR =  4.690 - 3.391 = 1.299</m>. The upper threshold is equal to <m>4.690 + 1.5 \times 1.299 = 6.6385</m>, which is larger that the given value. Consequently, the given value 6.414 is not an outlier.</p></li>
+      </ol>
+    </subsection>
+    
+    <subsection xml:id="subsec-solution-3-2">
+      <title>Exercise 3.2</title>
+      
+      <ol>
+        <li><p>In order to compute the mean of the data we may write the following simple <c>R</c> code:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+x.val &lt;- c(2,4,6,8,10)
+freq &lt;- c(10,6,10,2,2)
+rel.freq &lt;- freq/sum(freq)
+x.bar &lt;- sum(x.val*rel.freq)
+x.bar
+        </input>
+      </program>
+      <p>We created an object “<c>x.val</c>" that contains the unique values of the     data and an object “<c>freq</c>" that contains the frequencies of the values.     The object “<c>rel.freq</c>" contains the relative frequencies, the ratios     between the frequencies and the number of observations. The average is     computed as the sum of the products of the values with their relative     frequencies. It is stored in the objects “<c>x.bar</c>" and obtains the value     4.666667.</p>
+      <p>An alternative approach is to reconstruct the original data from the     frequency table. A simple trick that will do the job is to use the     function “<c>rep</c>". The first argument to this function is a sequence of     values. If the second argument is a sequence of the same length that     contains integers then the output will be composed of a sequence that     contains the values of the first sequence, each repeated a number of     times indicated by the second argument. Specifically, if we enter to     this function the unique value “<c>x.val</c>" and the frequency of the values     “<c>freq</c>" then the output will be the sequence of values of the original     sequence “<c>x</c>":</p>
+      <program language="r">
+        <input>
+x &lt;- rep(x.val,freq)
+x
+mean(x)
+        </input>
+      </program>
+      <p>Observe that when we apply the function “<c>mean</c>" to “<c>x</c>" we get again     the value 4.666667.</p>
+      <ol>
+        <li><p>In order to compute the sample standard deviation we may compute first the sample variance and then take the square root of the result:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+var.x &lt;- sum((x.val-x.bar)^2*freq)/(sum(freq)-1)
+sqrt(var.x)
+        </input>
+      </program>
+      <p>Notice that the expression “<c>sum((x.val-x.bar)^2*freq)</c>" compute the sum     of square deviations. The expression “<c>(sum(freq)-1)</c>" produces the     number of observations minus 1 (<m>n-1</m>). The ratio of the two gives the     sample variance.</p>
+      <p>Alternatively, had we produced the object “<c>x</c>" that contains the data,     we may apply the function “<c>sd</c>" to get the sample standard deviation:</p>
+      <program language="r">
+        <input>
+sd(x)
+        </input>
+      </program>
+      <p>Observe that in both forms of computation we obtain the same result:     2.425914.</p>
+      <ol>
+        <li><p>In order to compute the median one may produce the table of cumulative relative frequencies of “<c>x</c>":</p></li>
+      </ol>
+      <program language="r">
+        <input>
+data.frame(x.val,cumsum(rel.freq))
+        </input>
+      </program>
+      <p>Recall that the object “<c>x.val</c>" contains the unique values of the data.     The expression “<c>cumsum(rel.freq)</c>" produces the cumulative relative     frequencies. The function “<c>data.frame</c>" puts these two variables into a     single data frame and provides a clearer representation of the results.</p>
+      <p>Notice that more that 50% of the observations have value 4 or less.     However, strictly less than 50% of the observations have value 2 or     less. Consequently, the median is 4. (If the value of the cumulative     relative frequency at 4 would have been exactly 50% then the median     would have been the average between 4 and the value larger than 4.)</p>
+      <p>In the case that we produce the values of the data “<c>x</c>" then we may     apply the function “<c>summary</c>" to it and obtain the median this way</p>
+      <program language="r">
+        <input>
+summary(x)
+        </input>
+      </program>
+      <ol>
+        <li><p>As for the inter-quartile range (IQR) notice that the first quartile is 2 and the third quartile is 6. Hence, the inter-quartile range is equal to 6 - 2 = 4. The quartiles can be read directly from the output of the function “<c>summary</c>" or can be obtained from the data frame of the cumulative relative frequencies. For the later observe that more than 25% of the data are less or equal to 2 and more 75% of the data are less or equal to 6 (with strictly less than 75% less or equal to 4).</p></li>
+        <li><p>In order to answer the last question we conduct the computation: <m>(10 - 4.666667)/2.425914 = 2.198484</m>. We conclude that the value 10 is approximately 2.1985 standard deviations above the mean.</p></li>
+      </ol>
+    </subsection>
+    
   </section>
 
   <section xml:id="sec-solutions-ch4">
     <title>Chapter 4: Probability</title>
-    <p>Content to be added.</p>
+    
+    <subsection xml:id="subsec-solution-4-1">
+      <title>Exercise 4.1</title>
+      
+      <ol>
+        <li><p>Consult Table <xref ref="tab:tab4"/>. The probabilities of the different values of <m>Y</m> are <m>\{p, 2p, \ldots, 6p\}</m>. These probabilities sum to 1, consequently</p></li>
+      </ol>
+      <p><me>p + 2p + 3 p + 4 p + 5 p + 6p = (1+2+3+4+5+6)p = 21 p = 1 \Longrightarrow p = 1/21\;.</me></p>
+      <ol>
+        <li><p>The event <m>\{Y &lt; 3\}</m> contains the values 0, 1 and 2. Therefore,</p></li>
+      </ol>
+      <p><me>\Prob(Y &lt; 3) = \Prob(Y=0) + \Prob(Y=1) + \Prob(Y=2) = \frac{1}{21} + \frac{2}{21} + \frac{3}{21} = \frac{6}{21}= 0.2857\;.</me></p>
+      <ol>
+        <li><p>The event <m>\{Y = \mbox{odd}\}</m> contains the values 1, 3 and 5. Therefore,</p></li>
+      </ol>
+      <p><me>\Prob(Y = \mbox{odd}) = \Prob(Y=1) + \Prob(Y=3) + \Prob(Y=5) = \frac{2}{21} + \frac{4}{21} + \frac{6}{21} = \frac{12}{21}= 0.5714\;.</me></p>
+      <ol>
+        <li><p>The event <m>\{1 \leq Y &lt; 4\}</m> contains the values 1, 2 and 3. Therefore,</p></li>
+      </ol>
+      <p><me>\Prob(1 \leq Y &lt; 4) = \Prob(Y=1) + \Prob(Y=2) + \Prob(Y=3) = \frac{2}{21} + \frac{3}{21} + \frac{4}{21} = \frac{9}{21}= 0.4286\;.</me></p>
+      <ol>
+        <li><p>The event <m>\{|Y -3| &lt; 1.5\}</m> contains the values 2, 3 and 4. Therefore,</p></li>
+      </ol>
+      <p><me>\Prob(|Y -3| &lt; 1.5) = \Prob(Y=2) + \Prob(Y=3) + \Prob(Y=4) = \frac{3}{21} + \frac{4}{21} + \frac{5}{21} = \frac{12}{21}= 0.5714\;.</me></p>
+      <ol>
+        <li><p>The values that the random variable <m>Y</m> obtains are the numbers 0, 1, 2, …, 5, with probabilities <m>\{1/21, 2/21, \ldots, 6/21\}</m>, respectively. The expectation is obtained by the multiplication of the values by their respective probabilities and the summation of the products. Let us carry out the computation in <c>R</c>:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+Y.val &lt;- c(0,1,2,3,4,5)
+P.val &lt;- c(1,2,3,4,5,6)/21
+E &lt;- sum(Y.val*P.val)
+E
+        </input>
+      </program>
+      <p>We obtain an expectation <m>\Expec(Y) = 3.3333</m>.</p>
+      <ol>
+        <li><p>The values that the random variable <m>Y</m> obtains are the numbers 0, 1, 2, …, 5, with probabilities <m>\{1/21, 2/21, \ldots, 6/21\}</m>, respectively. The expectation is equal to <m>\Expec(Y) = 3.333333</m>. The variance is obtained by the multiplication of the squared deviation from the expectation of the values by their respective probabilities and the summation of the products. Let us carry out the computation in <c>R</c>:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+Var &lt;- sum((Y.val-E)^2*P.val)
+        </input>
+      </program>
+      <p>We obtain a variance <m>\Var(Y) = 2.2222</m>.</p>
+      <ol>
+        <li><p>The standard deviation is the square root of the variance: <m>\sqrt{\Var(Y)} = \sqrt{2.2222} = 1.4907</m>.</p></li>
+      </ol>
+    </subsection>
+    
+    <subsection xml:id="subsec-solution-4-2">
+      <title>Exercise 4.2</title>
+      
+      <ol>
+        <li><p>An outcome of the game of chance may be represented by a sequence of length three composed of the letters “H" and “T". For example, the sequence “THH“ corresponds to the case where the first toss produced a ”Tail", the second a “Head" and the third a “Head".</p></li>
+      </ol>
+      <p>With this notation we obtain that the possible outcomes of the game are     <m>\{\mbox{HHH}, \mbox{THH},\mbox{HTH}, \mbox{TTH},\mbox{HHT}, \mbox{THT},\mbox{HTT},          \mbox{TTT}\}</m>. All outcomes are equally likely. There are 8 possible outcomes and only     one of which corresponds to winning. Consequently, the probability of winning is 1/8.</p>
+      <ol>
+        <li><p>Consider the previous solution. One looses if any other of the outcomes occurs. Hence, the probability of loosing is 7/8.</p></li>
+        <li><p>Denote the gain of the player by <m>X</m>. The random variable <m>X</m> may obtain two values: 10-2 = 8 if the player wins and -2 if the player looses. The probabilities of these values are {1/8, 7/8}, respectively. Therefore, the expected gain, the expectation of <m>X</m> is:</p></li>
+      </ol>
+      <p><me>\Expec(X) = 8 \times \frac{1}{8} + (-2) \times \frac{7}{8} =-0.75\;.</me></p>
+    </subsection>
+    
   </section>
 
   <section xml:id="sec-solutions-ch5">
     <title>Chapter 5: Random Variables</title>
-    <p>Content to be added.</p>
+    
+    <subsection xml:id="subsec-solution-5-1">
+      <title>Exercise 5.1</title>
+      
+      <ol>
+        <li><p>The Binomial distribution is a reasonable model for the number of people that develop high fever as result of the vaccination. Let <m>X</m> be the number of people that do so in a give day. Hence, <m>X \sim \mbox{Binomial}(500,0.09)</m>. According to the formula for the expectation in the Binomial distribution, since <m>n=500</m> and <m>p=0.09</m>, we get that:</p></li>
+      </ol>
+      <p><me>\Expec(X) = n p = 500 \times 0.09 = 45\;.</me></p>
+      <ol>
+        <li><p>Let <m>X \sim \mbox{Binomial}(500,0.09)</m>. Using the formula for the variance for the Binomial distribution we get that:</p></li>
+      </ol>
+      <p><me>\Var(X) = n p(1-p) = 500 \times 0.09\times 0.91 = 40.95\;.</me> Hence, since <m>\sqrt{Var(X)} = \sqrt{40.95} = 6.3992</m>, the standard deviation is 6.3992.</p>
+      <ol>
+        <li><p>Let <m>X \sim \mbox{Binomial}(500,0.09)</m>. The probability that more than 40 people will develop a reaction may be computed as the difference between 1 and the probability that 40 people or less will develop a reaction:</p></li>
+      </ol>
+      <p><me>\Prob(X &gt; 40) = 1- \Prob(X \leq 40)\;.</me> The probability can be computes with the aid of the function “<c>pbinom</c>" that produces the cumulative probability of the Binomial distribution:</p>
+      <program language="r">
+        <input>
+1 - pbinom(40,500,0.09)
+        </input>
+      </program>
+      <ol>
+        <li><p>The probability that the number of people that will develop a reaction is between 50 and 45 (inclusive) is the difference between <m>\Prob(X\leq 50)</m> and <m>\Prob(X &lt; 45) = \Prob(X \leq 44)</m>. Apply the function “<c>pbinom</c>" to get:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+pbinom(50,500,0.09) - pbinom(44,500,0.09)
+        </input>
+      </program>
+    </subsection>
+    
+    <subsection xml:id="subsec-solution-5-2">
+      <title>Exercise 5.2</title>
+      
+      <ol>
+        <li><p>The plots can be produced with the following code, which should be run one line at a time:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+x &lt;- 0:15
+plot(x,dnbinom(x,2,0.5),type="h")
+plot(x,dnbinom(x,4,0.5),type="h")
+plot(x,dnbinom(x,8,0.8),type="h")
+        </input>
+      </program>
+      <p>The first plot, that corresponds to     <m>X_1 \sim \mbox{Negative-Binomial}(2,0.5)</m>, fits Barplot 3. Notice that     the distribution tends to obtain smaller values and that the probability     of the value “0" is equal to the probability of the value “1".</p>
+      <p>The second plot, the one that corresponds to     <m>X_2 \sim \mbox{Negative-Binomial}(4,0.5)</m>, is associated with     Barplot 1. Notice that the distribution tends to obtain larger values.     For example, the probability of the value “10" is substantially larger     than zero, where for the other two plots this is not the case.</p>
+      <p>The third plot, the one that corresponds to     <m>X_3 \sim \mbox{Negative-Binomial}(8,0.8)</m>, matches Barplot 2. Observe     that this distribution tends to produce smaller probabilities for the     small values as well as for the larger values. Overall, it is more     concentrated than the other two.</p>
+      <ol>
+        <li><p>Barplot 1 corresponds to a distribution that tends to obtain larger values than the other two distributions. Consequently, the expectation of this distribution should be larger. The conclusion is that the pair <m>\Expec(X) = 4</m>, <m>\Var(X) = 8</m> should be associated with this distribution.</p></li>
+      </ol>
+      <p>Barplot 2 describes a distribution that produce smaller probabilities     for the small values as well as for the larger values and is more     concentrated than the other two. The expectations of the two remaining     distributions are equal to each other and the variance of the pair     <m>\Expec(X) = 2</m>, <m>\Var(X) =  2.5</m> is smaller. Consequently, this is the     pair that should be matched with this box plot.</p>
+      <p>This leaves only Barplot 3, that should be matched with the pair     <m>\Expec(X) = 2</m>, <m>\Var(X) =  4</m>.</p>
+    </subsection>
+    
   </section>
 
   <section xml:id="sec-solutions-ch6">
     <title>Chapter 6: The Normal Random Variable</title>
-    <p>Content to be added.</p>
+    
+    <subsection xml:id="subsec-solution-6-1">
+      <title>Exercise 6.1</title>
+      
+      <ol>
+        <li><p>Let <m>X</m> be the total weight of 8 people. By the assumption, <m>X \sim \mbox{Normal}(560, 57^2)</m>. We are interested in the probability <m>\Prob(X &gt; 650)</m>. This probability is equal to the difference between 1 and the probability <m>\Prob(X \leq 650)</m>. We use the function “<c>pnorm</c>" in order to carry out the computation:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+1 - pnorm(650,560,57)
+        </input>
+      </program>
+      <p>We get that the probability that the total weight of 8 people exceeds     650kg is equal to 0.05717406.</p>
+      <ol>
+        <li><p>Let <m>Y</m> be the total weight of 9 people. By the assumption, <m>Y \sim \mbox{Normal}(630, 61^2)</m>. We are interested in the probability <m>\Prob(Y &gt; 650)</m>. This probability is equal to the difference between 1 and the probability <m>\Prob(Y \leq 650)</m>. We use again the function “<c>pnorm</c>" in order to carry out the computation:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+1 - pnorm(650,630,61)
+        </input>
+      </program>
+      <p>We get that the probability that the total weight of 9 people exceeds     650kg is much higher and is equal to 0.3715054.</p>
+      <ol>
+        <li><p>Again, <m>X \sim \mbox{Normal}(560, 57^2)</m>, where <m>X</m> is the total weight of 8 people. In order to find the central region that contains 80% of the distribution we need to identify the 10%-percentile and the 90%-percentile of <m>X</m>. We use the function “<c>qnorm</c>" in the code:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+qnorm(0.1,560,57)
+qnorm(0.9,560,57)
+        </input>
+      </program>
+      <p>The requested region is the interval \[486.9516, 633.0484\].</p>
+      <ol>
+        <li><p>As before, <m>Y \sim \mbox{Normal}(630, 61^2)</m>, where <m>Y</m> is the total weight of 9 people. In order to find the central region that contains 80% of the distribution we need to identify the 10%-percentile and the 90%-percentile of <m>Y</m>. The computation this time produces:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+qnorm(0.1,630,61)
+qnorm(0.9,630,61)
+        </input>
+      </program>
+      <p>and the region is \[551.8254, 708.1746\].</p>
+    </subsection>
+    
+    <subsection xml:id="subsec-solution-6-2">
+      <title>Exercise 6.2</title>
+      
+      <ol>
+        <li><p>The probability <m>\Prob(X &gt; 11)</m> can be   computed as the difference between 1 and the probability   <m>\Prob(X \leq 11)</m>. The latter probability can be computed with the   function “<c>pbinom</c>":</p></li>
+      </ol>
+      <program language="r">
+        <input>
+1 - pbinom(11,27,0.32)
+        </input>
+      </program>
+      <p>Therefore, <m>\Prob(X &gt; 11) = 0.1203926</m>.</p>
+      <ol>
+        <li><p>Refer again to the probability <m>\Prob(X &gt; 11)</m>. A formal application of the Normal approximation replaces in the computation the Binomial distribution by the Normal distribution with the same mean and variance. Since <m>\Expec(X) = n \cdot p = 27 \cdot 0.32 = 8.64</m> and <m>\Var(X) = n \cdot p \cdot (1-p) = 27 \cdot 0.32 \cdot 0.68 = 5.8752</m>. If we take <m>X \sim \mbox{Normal}(8.64,5.8752)</m> and use the function “<c>pnorm</c>" we get:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+1 - pnorm(11,27*0.32,sqrt(27*0.32*0.68))
+        </input>
+      </program>
+      <p>Therefore, the current Normal approximation proposes     <m>\Prob(X &gt; 11) \approx 0.1651164</m>.</p>
+      <ol>
+        <li><p>The continuity correction, that consider interval of range 0.5 about each value, replace <m>\Prob(X &gt; 11)</m>, that involves the values <m>\{12, 13, \ldots, 27\}</m>, by the event <m>\Prob(X &gt; 11.5)</m>. The Normal approximation uses the Normal distribution with the same mean and variance. Since <m>\Expec(X) =  8.64</m> and <m>\Var(X) = 5.8752</m>. If we take <m>X \sim \mbox{Normal}(8.64,5.8752)</m> and use the function “<c>pnorm</c>" we get:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+1 - pnorm(11.5,27*0.32,sqrt(27*0.32*0.68))
+        </input>
+      </program>
+      <p>The Normal approximation with continuity correction proposes     <m>\Prob(X &gt; 11) \approx 0.1190149</m>.</p>
+      <ol>
+        <li><p>The Poisson approximation replaces the Binomial distribution by the Poisson distribution with the same expectation. The expectation is <m>\Expec(X) = n \cdot p = 27 \cdot 0.32 = 8.64</m>. If we take <m>X \sim \mbox{Poisson}(8.64)</m> and use the function “<c>ppois</c>" we get:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+1 - ppois(11,27*0.32)
+        </input>
+      </program>
+      <p>Therefore, the Poisson approximation proposes <m>\Prob(X &gt; 11) \approx 0.1651164</m>.</p>
+    </subsection>
+    
   </section>
 
   <section xml:id="sec-solutions-ch7">
     <title>Chapter 7: The Sampling Distribution</title>
-    <p>Content to be added.</p>
-  </section>
-
-  <section xml:id="sec-solutions-ch8">
-    <title>Chapter 8: Overview and Integration</title>
-    <p>Content to be added.</p>
+    
+    <subsection xml:id="subsec-solution-7-1">
+      <title>Exercise 7.1</title>
+      
+      <ol>
+        <li><p>After placing the file “<c>pop2.csv</c>" in the working directory one may produce  a data frame with the content of the file and compute the average of the  variable “<c>bmi</c>" using the code:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+pop.2 &lt;- read.csv(file="_data/pop2.csv")
+mean(pop.2$bmi)
+        </input>
+      </program>
+      <p>We obtain that the population average of the variable is equal to 24.98446.</p>
+      <ol>
+        <li><p>Applying the function “<c>sd</c>" to the sequence of population values produces the population standard deviation:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+sd(pop.2$bmi)
+        </input>
+      </program>
+      <p>In turns out that the standard deviation of the measurement is 4.188511.</p>
+      <ol>
+        <li><p>In order to compute the expectation under the sampling distribution of the sample average we conduct a simulation. The simulation produces (an approximation) of the sampling distribution of the sample average. The sampling distribution is represented by the content of the sequence “<c>X.bar</c>":</p></li>
+      </ol>
+      <program language="r">
+        <input>
+X.bar &lt;- rep(0,10^5)
+for(i in 1:10^5) {
+X.samp &lt;- sample(pop.2$bmi,150)
+X.bar[i] &lt;- mean(X.samp)
+}
+mean(X.bar)
+        </input>
+      </program>
+      <p>Initially, we produce a vector of zeros of the given lenght (100,000).     In each iteration of the “<c>for</c>" loop a random sample of size 150 is     selected from the population. The sample average is computed and stored     in the sequence “<c>X.bar</c>". At the end of all the iterations all the     zeros are replaced by evaluations of the sample average.</p>
+      <p>The expectation of the sampling distribution of the sample average is     computed by the application of the function “<c>mean</c>" to the sequence     that represents the sampling distribution of the sample average. The     result for the current is 24.98681, which is vary similar[^3] to the     population average 24.98446.</p>
+      <ol>
+        <li><p>The standard deviation of the sample average under the sampling distribution is computed using the function “<c>sd</c>":</p></li>
+      </ol>
+      <program language="r">
+        <input>
+sd(X.bar)
+        </input>
+      </program>
+      <p>The resulting standard deviation is 0.3422717. Recall that the standard     deviation of a single measurement is equal to 4.188511 and that the     sample size is <m>n=150</m>. The ratio between the standard deviation of the     measurement and the square root of 150 is     <m>4.188511/\sqrt{150} =0.3419905</m>, which is similar in value to the     standard deviation of the sample average[^4].</p>
+      <ol>
+        <li><p>The central region that contains 80% of the sampling distribution of the sample average can be identified with the aid of the function “<c>quantile</c>":</p></li>
+      </ol>
+      <program language="r">
+        <input>
+quantile(X.bar,c(0.1,0.9))
+        </input>
+      </program>
+      <p>The value 24.54972 is the 10%-percentile of the sampling distribution.     To the left of this value are 10% of the distribution. The value     25.42629 is the 90%-percentile of the sampling distribution. To the     right of this value are 10% of the distribution. Between these two     values are 80% of the sampling distribution.</p>
+      <ol>
+        <li><p>The Normal approximation, which is the conclusion of the Central Limit Theorem substitutes the sampling distribution of the sample average by the Normal distribution with the same expectation and standard deviation. The percentiles are computed with the function “<c>qnorm</c>":</p></li>
+      </ol>
+      <program language="r">
+        <input>
+qnorm(c(0.1,0.9),mean(X.bar),sd(X.bar))
+        </input>
+      </program>
+      <p>Observe that we used the expectation and the standard deviation of the     sample average in the function. The resulting interval is     <m>[24.54817, 25.42545]</m>, which is similar to the interval     <m>[24.54972, 25.42629]</m> which was obtained via simulations.</p>
+    </subsection>
+    
+    <subsection xml:id="subsec-solution-7-2">
+      <title>Exercise 7.2</title>
+      
+      <ol>
+        <li><p>Denote by <m>X</m> the distance from the specified endpoint of a random hit. Observe that <m>X \sim \mbox{Uniform}(0,10)</m>. The 25 hits form a sample <m>X_1, X_2, \ldots, X_{25}</m> from this distribution and the sample average <m>\bar X</m> is the average of these random locations. The expectation of the average is equal to the expectation of a single measurement. Since <m>\Expec(X) = (a + b)/2 = (0 + 10)/2 = 5</m> we get that <m>\Expec(\bar X) = 5</m>.</p></li>
+        <li><p>The variance of the sample average is equal to the variance of a single measurement, divided by the sample size. The variance of the Uniform distribution is <m>\Var(X) = (a + b)^2/12 = (10-0)^2/12 = 8.333333</m>. The standard deviation of the sample average is equal to the standard deviation of the sample average is equal to the standard deviation of a single measurement, divided by the square root of the sample size. The sample size is <m>n=25</m>. Consequently, the standard deviation of the average is <m>\sqrt{8.333333/25}=0.5773503</m>.</p></li>
+        <li><p>The left-most third of the detector is the interval to the left of 10/3. The distribution of the sample average, according to the Central Limit Theorem, is Normal. The probability of being less than 10/3 for the Normal distribution may be computed with the function “<c>pnorm</c>":</p></li>
+      </ol>
+      <program language="r">
+        <input>
+mu &lt;- 5
+sig &lt;- sqrt(10^2/(12*25))
+pnorm(10/3,mu,sig)
+        </input>
+      </program>
+      <p>The expectation and the standard deviation of the sample average are     used in computation of the probability. The probability is 0.001946209,     about 0.2%.</p>
+      <ol>
+        <li><p>The central region in the <m>\mbox{Normal}(\mu,\sigma^2)</m> distribution that contains 99% of the distribution is of the form <m>\mu \pm \mbox{\texttt{qnorm(0.995)}}\cdot \sigma</m>, where “<c>qnorm(0.995)</c>" is the 99.5%-percentile of the Standard Normal distribution. Therefore, <m>c =\mbox{\texttt{qnorm(0.995)}}\cdot \sigma</m>:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+qnorm(0.995)*sig
+        </input>
+      </program>
+      <p>We get that <m>c=1.487156</m>.</p>
+    </subsection>
+    
   </section>
 
   <section xml:id="sec-solutions-ch9">
     <title>Chapter 9: Introduction to Statistical Inference</title>
-    <p>Content to be added.</p>
+    
+    <subsection xml:id="subsec-solution-9-1">
+      <title>Exercise 9.1</title>
+      
+      <ol>
+        <li><p>Let us read the data into a data frame by the name “<c>magnets</c>" and apply the function “<c>summary</c>" to the data frame:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+magnets &lt;- read.csv("_data/magnets.csv")
+summary(magnets)
+        </input>
+      </program>
+      <p>The variable “<c>change</c>" contains the difference between the patient’s     rating before the application of the device and the rating after the     application. The sample average of this variable is reported as the     “<c>Mean</c>" for this variable and is equal to 3.5.</p>
+      <ol>
+        <li><p>The variable “<c>active</c>" is a factor. Observe that the summary of this variable lists the two levels of the variable and the frequency of each level. Indeed, the levels are coded with numbers but, nonetheless, the variable is a factor[^12].</p></li>
+        <li><p>Based on the hint we know that the expressions “<c>change[1:29]</c>" and “<c>change[30:50]</c>" produce the values of the variable “<c>change</c>" for the patients that were treated with active magnets and by inactive placebo, respectively. We apply the function “<c>mean</c>" to these sub-sequences:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+mean(magnets$change[1:29])
+mean(magnets$change[30:50])
+        </input>
+      </program>
+      <p>The sample average for the patients that were treated with active     magnets is 5.241379 and sample average for the patients that were     treated with inactive placebo is 1.095238.</p>
+      <ol>
+        <li><p>We apply the function “<c>sd</c>" to these sub-sequences:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+sd(magnets$change[1:29])
+sd(magnets$change[30:50])
+        </input>
+      </program>
+      <p>The sample standard deviation for the patients that were treated with     active magnets is 3.236568 and sample standard deviation for the     patients that were treated with inactive placebo is 1.578124.</p>
+      <ol>
+        <li><p>We apply the function “<c>boxplot</c>" to each sub-sequences:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+boxplot(magnets$change[1:29])
+boxplot(magnets$change[30:50])
+        </input>
+      </program>
+      <p>The first box-plot     corresponds to the sub-sequence of the patients that received     an active magnet. There are no outliers in this plot. The second box-plot      corresponds to the sub-sequence of the patients that received     an inactive placebo. Three values, the values “3", “4", and “5" are     associated with outliers. Let us see what is the total number of     observations that receive these values:</p>
+      <program language="r">
+        <input>
+table(magnets$change[30:50])
+        </input>
+      </program>
+      <p>One may see that a single observation obtained the value “3", another     one obtained the value “5" and 2 observations obtained the value “4", a     total of 4 outliers[^13]. Notice that the single point that is     associated with the value “4" actually represents 2 observations and not     one.</p>
+    </subsection>
+    
+    <subsection xml:id="subsec-solution-9-2">
+      <title>Exercise 9.2</title>
+      
+      <ol>
+        <li><p>Let us run the following simulation:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+mu1 &lt;- 3.5
+sig1 &lt;- 3
+mu2 &lt;- 3.5
+sig2 &lt;- 1.5
+test.stat &lt;- rep(0,10^5)
+for(i in 1:10^5) {
+X1 &lt;- rnorm(29,mu1,sig1)
+X2 &lt;- rnorm(21,mu2,sig2)
+X1.bar &lt;- mean(X1)
+X2.bar &lt;- mean(X2)
+X1.var &lt;- var(X1)
+X2.var &lt;- var(X2)
+test.stat[i] &lt;- (X1.bar-X2.bar)/sqrt(X1.var/29 + X2.var/21)
+}
+quantile(test.stat,c(0.025,0.975))
+        </input>
+      </program>
+      <p>Observe that each iteration of the simulation involves the generation of     two samples. One sample is of size 29 and it is generated from the     <m>\mathrm{Normal}(3.5,3^2)</m> distribution and the other sample is of size     21 and it is generated from the <m>\mathrm{Normal}(3.5,1.5^2)</m>     distribution. The sample average and the sample variance are computed     for each sample. The test statistic is computed based on these averages     and variances and it is stored in the appropriate position of the     sequence “<c>test.stat</c>".</p>
+      <p>The values of the sequence “<c>test.stat</c>" at the end of all the     iterations represent the sampling distribution of the static. The     application of the function “<c>quantile</c>" to the sequence gives the     0.025-percentiles and the 0.975-percentiles of the sampling     distribution, which are -2.014838 and 2.018435. It follows that the     interval <m>[-2.014838, 2.018435]</m> contains about 95% of the sampling     distribution of the statistic.</p>
+      <ol>
+        <li><p>In order to evaluate the statistic for the given data set we apply the same steps that were used in the simulation for the computation of the statistic:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+x1.bar &lt;- mean(magnets$change[1:29])
+x2.bar &lt;- mean(magnets$change[30:50])
+x1.var &lt;- var(magnets$change[1:29])
+x2.var &lt;- var(magnets$change[30:50])
+(x1.bar-x2.bar)/sqrt(x1.var/29 + x2.var/21)
+        </input>
+      </program>
+      <p>In the first line we compute the sample average for the first 29     patients and in the second line we compute it for the last 21 patients.     In the third and fourth lines we do the same for the sample variances of     the two types of patients. Finally, in the fifth line we evaluate the     statistic. The computed value of the statistic turns out to be 5.985601,     a value that does not belong to the interval <m>[-2.014838, 2.018435]</m>.</p>
+    </subsection>
+    
   </section>
 
   <section xml:id="sec-solutions-ch10">
     <title>Chapter 10: Point Estimation</title>
-    <p>Content to be added.</p>
+    
+    <subsection xml:id="subsec-solution-10-1">
+      <title>Exercise 10.1</title>
+      
+      <ol>
+        <li><p>We simulate the sampling distribution of the average and the median in a sample generated from the Normal distribution. In order to do so we copy the code that was used in Subsection <xref ref="ComparingEstimators"/>, replacing the object “<c>mid.range</c>" by the object “<c>X.med</c>" and using the function “<c>median</c>" in order to compute the sample median instead of the computation of the mid-range statistic:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+mu &lt;- 3
+sig &lt;- sqrt(2)
+X.bar &lt;- rep(0,10^5)
+X.med &lt;- rep(0,10^5)
+for(i in 1:10^5) {
+X &lt;- rnorm(100,mu,sig)
+X.bar[i] &lt;- mean(X)
+X.med[i] &lt;- median(X)
+}
+        </input>
+      </program>
+      <p>The sequence “<c>X.bar</c>" represents the sampling distribution of the     sample average and the sequence “<c>X.med</c>" represents the sampling     distribution of the sample median. We apply the function “<c>mean</c>" to     these sequences in order to obtain the expectations of the estimators:</p>
+      <program language="r">
+        <input>
+mean(X.bar)
+mean(X.med)
+        </input>
+      </program>
+      <p>The expectation of the measurement, the parameter of interest is equal     to 3. Observe that expectations of the estimators are essentially equal     to the expectation[^13]. Consequently, both estimators are unbiased     estimators of the expectation of the measurement.</p>
+      <p>In order to obtain the variances of the estimators we apply the function     “<c>var</c>" to the sequences that represent their sampling distributions:</p>
+      <program language="r">
+        <input>
+var(X.bar)
+var(X.med)
+        </input>
+      </program>
+      <p>Observe that the variance of the sample average is essentially equal to     <m>0.020</m> and the variance of the sample median is essentially equal to     <m>0.0312</m>. The mean square error of an unbiased estimator is equal to its     variance. Hence, these numbers represent the mean square errors of the     estimators. It follows that the mean square error of the sample average     is less than the mean square error of the sample median in the     estimation of the expectation of a Normal measurement.</p>
+      <ol>
+        <li><p>We repeat the same steps as before for the Uniform distribution. Notice that we use the parameters <m>a=0.5</m> and <m>b=5.5</m> the same way we did in Subsection <xref ref="ComparingEstimators"/>. These parameters produce an expectation <m>\Expec(X) = 3</m> and a variance <m>\Var(X) = 2.083333</m>:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+a &lt;- 0.5
+b &lt;- 5.5
+X.bar &lt;- rep(0,10^5)
+X.med &lt;- rep(0,10^5)
+for(i in 1:10^5) {
+X &lt;- runif(100,a,b)
+X.bar[i] &lt;- mean(X)
+X.med[i] &lt;- median(X)
+}
+        </input>
+      </program>
+      <p>Applying the function “<c>mean</c>" to the sequences that represent the     sampling distribution of the estimators we obtain that both estimators     are essentially unbiased[^14]:</p>
+      <program language="r">
+        <input>
+mean(X.bar)
+mean(X.med)
+        </input>
+      </program>
+      <p>Compute the variances:</p>
+      <program language="r">
+        <input>
+var(X.bar)
+var(X.med)
+        </input>
+      </program>
+      <p>Observe <m>0.021</m> is, essentially, the value of the variance of the sample     average[^15]. The variance of the sample median is essentially equal to     0.061. The variance of each of the estimators is equal to it’s mean     square error. This is the case since the estimators are unbiased.     Consequently, we again obtain that the mean square error of the sample     average is less than that of the sample median.</p>
+    </subsection>
+    
+    <subsection xml:id="subsec-solution-10-2">
+      <title>Exercise 10.2</title>
+      
+      <ol>
+        <li><p>Assuming that the file “<c>ex2.csv</c>" is saved in the working directory, one may read the content of the file into a data frame and produce a summary of the content of the data frame using the code:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+ex2 &lt;- read.csv("_data/ex2.csv")
+summary(ex2)
+        </input>
+      </program>
+      <p>Examine the variable “<c>group</c>". Observe that the sample contains 37     subjects with high levels of blood pressure. Dividing 37 by the sample     size we get:</p>
+      <program language="r">
+        <input>
+37/150
+        </input>
+      </program>
+      <p>Consequently, the sample proportion is <m>0.2466667</m>.</p>
+      <p>Alternatively, we compute the sample proportion using the code:</p>
+      <program language="r">
+        <input>
+mean(ex2$group == "HIGH")
+        </input>
+      </program>
+      <p>Notice that the expression “<c>ex2$group == HIGH</c>" produces a sequence of     length 150 with logical entries. The entry is equal to “<c>TRUE</c>" if the     equality holds and it is equal to “<c>FALSE</c>" if it dos not[^17]. When the     function “<c>mean</c>" is applied to a sequence with logical entries it     produces the relative frequeny of the <c>TRUE</c>s in the sequence. This     corresponds, in the corrent context, to the sample proportion of the     level “<c>HIGH</c>" in the variable “<c>ex2$group</c>".</p>
+      <ol>
+        <li><p>Make sure that the file “<c>pop2.csv</c>" is saved in the working directory. In order to compute the proportion in the population we read the content of the file into a data frame and compute the relative frequency of the level “<c>HIGH</c>" in the variable “<c>group</c>":</p></li>
+      </ol>
+      <program language="r">
+        <input>
+pop2 &lt;- read.csv("_data/pop2.csv")
+mean(pop2$group == "HIGH")
+        </input>
+      </program>
+      <p>We get that the proporion in the population is <m>p = 0.28126</m>.</p>
+      <ol>
+        <li><p>The simulation of the sampling distribution involves a selection of a random sample of size 150 from the population and the computation of the proportion of the level “<c>HIGH</c>" in that sample. This procedure is iterated 100,000 times in order to produce an approximation of the distribution:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+P.hat &lt;- rep(0,10^5)
+for(i in 1:10^5) {
+X &lt;- sample(pop2$group,150)
+P.hat[i] &lt;- mean(X == "HIGH")
+}
+mean(P.hat)
+        </input>
+      </program>
+      <p>Observe that the sampling distribution is stored in the object     “<c>P.hat</c>". The function “<c>sample</c>" is used in order to sample 150     observation from the sequence “<c>pop2$group</c>". The sample is stored in     the object “<c>X</c>". The expression “<c>mean(X == HIGH)</c>" computes the     relative frequency of the level “<c>HIGH</c>" in the sequence “<c>X</c>".</p>
+      <p>At the last line, after the production of the sequence “<c>P.hat</c>" is     completed, the function “<c>mean</c>" is applied to the sequence. The result     is the expected value of estimator <m>\hat P</m>, which is equal to     <m>0.2812307</m>. This expectation is essentially equal to the probability of     the event <m>p = 0.28126</m>.[^18]</p>
+      <ol>
+        <li><p>The application of the function “<c>var</c>" to the sequence “<c>P.hat</c>" produces:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+var(P.hat)
+        </input>
+      </program>
+      <p>Hence, the variance of the estimator is (approximately) equal to     <m>0.00135</m>.</p>
+      <ol>
+        <li><p>Compute the variance according to the formula that is proposed in Section:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+p &lt;- mean(pop2$group == "HIGH")
+p*(1-p)/150
+        </input>
+      </program>
+      <p>We get that the proposed variance in Section \[sec::Estimation\_5\] is     <m>0.0013476850</m>, which is in good agreement with the value <m>0.00135</m> that     was obtained in the simulation[^19].</p>
+    </subsection>
+    
   </section>
 
   <section xml:id="sec-solutions-ch11">
     <title>Chapter 11: Confidence Intervals</title>
-    <p>Content to be added.</p>
+    
+    <subsection xml:id="subsec-solution-11-1">
+      <title>Exercise 11.1</title>
+      
+      <ol>
+        <li><p>We read the content of the file “<c>teacher.csv</c>" into a data frame by the name “<c>teacher</c>" and produce a summary of the content of the data frame:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+teacher &lt;- read.csv("_data/teacher.csv")
+summary(teacher)
+        </input>
+      </program>
+      <p>There are two variables: The variable “<c>condition</c>" is a factor with two     levels, “<c>C</c>" that codes the Charismatic condition and “<c>P</c>" that codes     the Punitive condition. The second variable is “<c>rating</c>", which is a     numeric variable.</p>
+      <ol>
+        <li><p>The sample average for the variable “<c>rating</c>" can be obtained from the summary or from the application of the function “<c>mean</c>" to the variable. The standard deviation is obtained from the application of the function “<c>sd</c>" to the variable:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+mean(teacher$rating)
+sd(teacher$rating)
+        </input>
+      </program>
+      <p>Observe that the sample average is equal to <m>2.428567</m> and the sample     standard deviation is equal to <m>0.5651949</m>.</p>
+      <ol>
+        <li><p>The sample average and standard deviation for each sub-sample may be produced with the aid of the function “<c>tapply</c>". We apply the function in the third argument, first “<c>mean</c>" and then “<c>sd</c>" to the variable rating, in the first argument, over each level of the factor “<c>condition</c>" in the second argument:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+tapply(teacher$rating,teacher$condition,mean)
+tapply(teacher$rating,teacher$condition,sd)
+        </input>
+      </program>
+      <p>Obtain that average for the condition “<c>C</c>" is <m>2.613332</m> and the     standard deviation is <m>0.5329833</m>.</p>
+      <p>You may note that the rating given by students that were exposed to the     description of the lecturer as charismatic is higher on the average than     the rating given by students that were exposed to a less favorable     description. The box plots of the ratings for the two conditions are     presented in <xref ref="fig:Confidence2"/>.</p>
+      <program language="r">
+        <input>
+cars &lt;- read.csv("_data/cars.csv")
+cars$dif.mpg =  cars$highway.mpg - cars$city.mpg
+boxplot(dif.mpg ~ fuel.type, data=cars)
+        </input>
+      </program>
+      <ol>
+        <li><p>The 99% confidence interval for the expectation is computed by the formula <m>\bar x \pm \mbox{\texttt{qt(0.995,n-1)}} \cdot s/\sqrt{n}</m>. Only 0.5% of the <m>t</m>-distribution on <m>(n-1)</m> degrees of freedom resides above the percentile “<c>qt(0.995,n-1)</c>". Using this percentile leaves out a total of 1% in both tails and keeps 99% of the distribution inside the central interval.</p></li>
+      </ol>
+      <p>For the students that were exposed to Condition “<c>C</c>",     <m>\bar x = 2.613332</m>, <m>s = 0.5329833</m>, and <m>n = 25</m>:</p>
+      <program language="r">
+        <input>
+2.613332 - qt(0.995,24)*0.5329833/sqrt(25)
+2.613332 + qt(0.995,24)*0.5329833/sqrt(25)
+        </input>
+      </program>
+      <p>The confidence interval for the expectation is <m>[2.315188, 2.911476]</m>.</p>
+      <ol>
+        <li><p>The 90% confidence interval for the variance is computed by the formula <m>\big[\frac{n-1}{\mbox{\texttt{qchisq(0.95,n-1)}}} s^2 ,\;\frac{n-1}{\mbox{\texttt{qchisq(0.05,n-1)}}} s^2\big]</m>. Observe that 5% of the chi-square distribution on <m>(n-1)</m> degrees of freedom is above the percentile “<c>qchisq(0.95,n-1)</c>" and 5% are below the percentile “<c>qchisq(0.05,n-1)</c>".</p></li>
+      </ol>
+      <p>For the students that were exposed to Condition “<c>C</c>", <m>s = 0.5329833</m>,     and <m>n = 25</m>:</p>
+      <program language="r">
+        <input>
+(24/qchisq(0.95,24))*0.5329833^2
+(24/qchisq(0.05,24))*0.5329833^2
+        </input>
+      </program>
+      <p>The point estimate of the variance is <m>s^2 = 0.5329833^2 = 0.2840712</m>.     The confidence interval for the variance is <m>[0.18722243, 0.4923093]</m>.</p>
+    </subsection>
+    
+    <subsection xml:id="subsec-solution-11-2">
+      <title>Exercise 11.2</title>
+      
+      <ol>
+        <li><p>Let us produce the sampling distribution of the sample average and the sample standard deviation for 20 observations from the <m>\mathrm{Exponential}(1/4)</m> distribution:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+lam &lt;- 1/4
+n &lt;- 20
+X.bar &lt;- rep(0,10^5)
+S &lt;- rep(0,10^5)
+for(i in 1:10^5) {
+X &lt;- rexp(n,lam)
+X.bar[i] &lt;- mean(X)
+S[i] &lt;- sd(X)
+}
+        </input>
+      </program>
+      <p>We compute the confidence level for a confidence interval with a nominal     confidence level of 95%. Observe that using the Normal approximation of     the sample average corresponds to the application of the Normal     percentile in the construction of the confidence interval.</p>
+      <program language="r">
+        <input>
+norm.LCL &lt;- X.bar - qnorm(0.975)*S/sqrt(n)
+norm.UCL &lt;- X.bar + qnorm(0.975)*S/sqrt(n)
+mean((4 &gt;= norm.LCL) &amp; (4 &lt;= norm.UCL))
+        </input>
+      </program>
+      <p>The expectation of the measurement is equal to 4. This number belongs to     the confidence interval 90.47% of the times. Consequently, the actual     confidence level is 90.47%.</p>
+      <ol>
+        <li><p>Using the same sampling distribution that was produced in the solution to Question 1 we now compute the actual confidence level of a confidence interval that is constructed under the assumption that the measurement has a Normal distribution:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+t.LCL &lt;- X.bar - qt(0.975,n-1)*S/sqrt(n)
+t.UCL &lt;- X.bar + qt(0.975,n-1)*S/sqrt(n)
+mean((4 &gt;= t.LCL) &amp; (4 &lt;= t.UCL))
+        </input>
+      </program>
+      <p>Based on the assumption we used the percentiles of the <m>t</m>-distribution.     The actual significance level is 91.953% <m>\approx</m> 92%, still short of     the nominal 95% confidence level.</p>
+      <ol>
+        <li><p>It would be preferable to use the (incorrect) assumption that the observations have a Normal distribution than to apply the Normal approximation to such a small sample. In the current setting the former produced a confidence level that is closer to the nominal one. In general, using the percentiles of the <m>t</m>-distribution will produce wider and more conservative confidence intervals than those produces under the Normal approximation of the average. To be on the safer size, one typically prefers the more conservative confidence intervals.</p></li>
+      </ol>
+    </subsection>
+    
+    <subsection xml:id="subsec-solution-11-3">
+      <title>Exercise 11.3</title>
+      
+      <ol>
+        <li><p>The range of the confidence interval with 99% confidence interval is bounded by</p></li>
+      </ol>
+      <p><me>\mbox{\texttt{qnorm(0.995)}}\cdot \{\hat P (1-\hat P)/n\}^{1/2} \leq 2.575829 \cdot \sqrt{0.25/n} = 1.287915/\sqrt{n}\;,</me> since <c>qnorm(0.995)</c> = 2.575829 and <m>\hat P (1-\hat P) \leq 0.25</m>. Consequently, the sample size <m>n</m> should satisfy the inequality:</p>
+      <p><me>\begin{aligned} 1.287915/\sqrt{n} \leq 0.03\quad  &amp;\Longrightarrow  \quad \sqrt{n} \geq 1.287915/0.03 = 42.9305\\ &amp;\Longrightarrow \quad  n \geq (42.9305)^2 = 1843.028\;.\end{aligned}</me> The smallest integer larger than the lower bound is <m>n=1844</m>.</p>
+      <p>The 80% confidence interval for the probability is computed by the formula     <m>\hat p \pm \mbox{\texttt{qnorm(0.90)}} \cdot \sqrt{\hat p(1-\hat p)/n}</m>:</p>
+      <program language="r">
+        <input>
+n &lt;- 400
+p.hat &lt;- 320/400
+p.hat - qnorm(0.90)*sqrt(p.hat*(1-p.hat)/n)
+p.hat + qnorm(0.90)*sqrt(p.hat*(1-p.hat)/n)
+        </input>
+      </program>
+      <p>We obtain a confidence interval of the form <m>[0.774369, 0.825631]</m>.</p>
+    </subsection>
+    
   </section>
 
   <section xml:id="sec-solutions-ch12">
     <title>Chapter 12: Testing Hypotheses</title>
-    <p>Content to be added.</p>
+    
+    <subsection xml:id="subsec-solution-12-1">
+      <title>Exercise 12.1</title>
+      
+      <ol>
+        <li><p>The null hypothesis of no placebo effect corresponds to the expectation of the change equal to 0 (<m>H_0: \Expec(X) = 0</m>). The alternative hypothesis may be formulated as the expectation not being equal to 0 (<m>H_1: \Expec(X) \not = 0</m>). This corresponds to a two sided alternative. Observe that a negative expectation of the change still corresponds to the placebo having an effect.</p></li>
+        <li><p>The observations that can be used in order to test the hypothesis are those associated with patients that were treated with the inactive placebo, i.e. the last 21 observations. We extracts these values from the data frame using the expression “<c>magnets$change[30:50]</c>".</p></li>
+        <li><p>In order to carry out the test we read the data from the file “<c>magnets.csv</c>" into the data frame “<c>magnets</c>". The function “<c>t.test</c>" is applied to the observations extracted from the data frame. Note that the default expectation value of tested by the function is “<c>mu = 0</c>":</p></li>
+      </ol>
+      <program language="r">
+        <input>
+magnets &lt;- read.csv("_data/magnets.csv")
+t.test(magnets$change[30:50])
+        </input>
+      </program>
+      <p>The computed <m>p</m>-value is 0.004702, which is below 0.05. Consequently,     we reject the null hypothesis and conclude that a placebo effect seems     to be present.</p>
+    </subsection>
+    
+    <subsection xml:id="subsec-solution-12-2">
+      <title>Exercise 12.2</title>
+      
+      <ol>
+        <li><p>We simulate the sampling distribution of the sample average and standard deviation. The sample is composed of <m>n=20</m> observations from the given Exponential distribution:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+lam &lt;- 1/4
+n &lt;- 20
+X.bar &lt;- rep(0,10^5)
+S &lt;- rep(0,10^5)
+for(i in 1:10^5) {
+X &lt;- rexp(n,lam)
+X.bar[i] &lt;- mean(X)
+S[i] &lt;- sd(X)
+}
+T &lt;- (X.bar - 4)/(S/sqrt(n))
+mean(abs(T) &gt; qt(0.975,n-1))
+        </input>
+      </program>
+      <p>We compute the test statistic “<c>T</c>" from the sample average “<c>X.bar</c>"     and the sample standard deviation “<c>S</c>". In the last expression we     compute the probability that the absolute value of the test statistic is     larger than “<c>qt(0.975,19)</c>", which is the threshold that should be used     in order to obtain a significance level of 5% for Normal measurements.</p>
+      <p>We obtain that the actual significance level of the test is <m>0.08047</m>,     which is substantially larger than the nominal significance level.</p>
+      <ol>
+        <li><p>We repeat essentially the same simulations as before. We only change the distribution of the sample from the Exponential to the Uniform distribution:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+a &lt;- 0
+b &lt;- 8
+n &lt;- 20
+X.bar &lt;- rep(0,10^5)
+S &lt;- rep(0,10^5)
+for(i in 1:10^5) {
+X &lt;- runif(n,a,b)
+X.bar[i] &lt;- mean(X)
+S[i] &lt;- sd(X)
+}
+T &lt;- (X.bar - 4)/(S/sqrt(n))
+mean(abs(T) &gt; qt(0.975,n-1))
+        </input>
+      </program>
+      <p>The actual significance level of the test is <m>0.05163</m>, much closer to     the nominal significance level of 5%.</p>
+      <p>A possible explanation for the difference between the two cases is that     the Uniform distribution is symmetric like the Normal distribution,     whereas the Exponential is skewed. In any case, for larger sample sizes     one may expect the Central Limit Theorem to kick in and produce more     satisfactory results, even for the Exponential case.</p>
+    </subsection>
+    
+    <subsection xml:id="subsec-solution-12-3">
+      <title>Exercise 12.3</title>
+      
+      <ol>
+        <li><p>We input the data to <c>R</c> and then compute the test statistic and the appropriate percentile of the <m>t</m>-distribution:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+n &lt;- 55
+x.bar &lt;- 22.7
+s &lt;- 5.4
+t &lt;- (x.bar - 20)/(s/sqrt(n))
+abs(t)
+qt(0.975,n-1)
+        </input>
+      </program>
+      <p>Observe that the absolute value of the statistic (3.708099) is larger     than the threshold for rejection (2.004879). Consequently, we reject the     null hypothesis.</p>
+      <ol>
+        <li><p>We recompute the percentile of the <m>t</m>-distribution:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+qt(0.995,n-1)
+        </input>
+      </program>
+      <p>Again, the absolute value of the statistic (3.708099) is larger than the     threshold for rejection (2.669985). Consequently, we reject the null     hypothesis.</p>
+      <ol>
+        <li><p>In this question we should recompute the test statistic:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+t &lt;- (x.bar - 24)/(s/sqrt(n))
+abs(t)
+        </input>
+      </program>
+      <p>The absolute value of the new statistic (1.785381) is smaller than the     threshold for rejection (2.004879). Consequently, we do not reject the     null hypothesis.</p>
+    </subsection>
+    
   </section>
 
   <section xml:id="sec-solutions-ch13">
     <title>Chapter 13: Comparing Two Samples</title>
-    <p>Content to be added.</p>
+    
+    <subsection xml:id="subsec-solution-13-1">
+      <title>Exercise 13.1</title>
+      
+      <ol>
+        <li><p>The score of pain before the application of the device is measured in the variable “<c>score1</c>". This variable is used as the response. We apply the function “<c>t.test</c>" in order to test the equality of the expectation of the response in the two groups. First we read in the data from the file into a data frame and then we apply the test:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+magnets &lt;- read.csv("_data/magnets.csv")
+t.test(magnets$score1 ~ magnets$active)
+        </input>
+      </program>
+      <p>The computed <m>p</m>-value is 0.6806, which is above 0.05. Consequently, we     do not reject the null hypothesis that the expectations in the two     groups are equal. This should not come as a surprise, since patients     were assigned to the groups randomly and without knowledge to which     group they belong. Prior to the application of the device, the two     groups should look alike.</p>
+      <ol>
+        <li><p>Again, we use the variable “<c>score1</c>" as the response. Now apply the function “<c>var.test</c>" in order to test the equality of the variances of the response in the two groups:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+var.test(magnets$score1 ~ magnets$active)
+        </input>
+      </program>
+      <p>The computed <m>p</m>-value is 0.3687, which is once more above 0.05.     Consequently, we do not reject the null hypothesis that the variances in     the two groups are equal. This fact is reassuring. Indeed, prior to the     application of the device, the two groups have the same characteristics.     Therefore, any subsequent difference between the two groups can be     attributed to the difference in the treatment.</p>
+      <ol>
+        <li><p>The difference in score between the treatment and the control groups is measured in the variable “<c>change</c>". This variable is used as the response for the current analysis. We apply the function “<c>t.test</c>" in order to test the equality of the expectation of the response in the two groups:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+t.test(magnets$change ~ magnets$active)
+        </input>
+      </program>
+      <p>The computed <m>p</m>-value is <m>3.86\times 10^{-7}</m>, which is much below     0.05. Consequently, we reject the null hypothesis that the expectations     in the two groups are equal. The conclusion is that, according to this     trial, magnets do have an effect on the expectation of the response[^9].</p>
+      <ol>
+        <li><p>Once more we consider the variable “<c>change</c>" as the response. We apply the function “<c>var.test</c>" in order to test the equality of the variances of the response in the two groups:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+var.test(magnets$change ~ magnets$active)
+        </input>
+      </program>
+      <p>The computed <m>p</m>-value is 0.001535, which is much below 0.05.     Consequently, we reject the null hypothesis that the variances in the     two groups are equal. Hence, magnets also affect the variance of the     response.</p>
+    </subsection>
+    
+    <subsection xml:id="subsec-solution-13-2">
+      <title>Exercise 13.2</title>
+      
+      <ol>
+        <li><p>We simulate the sampling distribution of the sample standard deviation for two samples, one sample of size <m>n_a = 29</m> and the other of size <m>n_b=21</m>. Both samples are simulated from the given Normal distribution:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+mu &lt;- 4
+sig &lt;- 4
+n.a &lt;- 29
+n.b &lt;- 21
+S.a &lt;- rep(0,10^5)
+S.b &lt;- rep(0,10^5)
+for(i in 1:10^5) {
+X.a &lt;- rnorm(n.a,mu,sig)
+X.b &lt;- rnorm(n.b,mu,sig)
+S.a[i] &lt;- sd(X.a)
+S.b[i] &lt;- sd(X.b)
+}
+F &lt;- S.a^2/S.b^2
+mean((F &lt; qf(0.025,n.a-1,n.b-1))|(F &gt; qf(0.975,n.a-1,n.b-1)))
+        </input>
+      </program>
+      <p>We compute the test statistic “<c>F</c>" as the ratio of the two sample     standard deviations “<c>S.a</c>" and “<c>S.b</c>". The last expression computes     the probability that the test statistic is either less than     “<c>qt(0.025,n.a-1,n.b-1)</c>", or it is larger than     “<c>qt(0.975,n.a-1,n.b-1)</c>". The term “<c>qt(0.025,n.a-1,n.b-1)</c>" is the     0.025-percentile of the <m>F</m>-distribution on 28 and 20 degrees of freedom     and the term “<c>qt(0.975,n.a-1,n.b-1)</c>" is the 0.975-percentile of the     same <m>F</m>-distribution. The result of the last expression is the actual     significance level of the test.</p>
+      <p>We obtain that the actual significance level of the test when the     measurements are Normally distributed is 0.05074, which in agreement     with the nominal significance level of 5%. Indeed, the nominal     significance level is computed under the assumption that the     distribution of the measurement is Normal.</p>
+      <ol>
+        <li><p>We repeat essentially the same simulations as before. We only change the distribution of the samples from the Normal to the Exponential distribution:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+lam &lt;- 1/4
+n.a &lt;- 29
+n.b &lt;- 21
+S.a &lt;- rep(0,10^5)
+S.b &lt;- rep(0,10^5)
+for(i in 1:10^5) {
+X.a &lt;- rexp(n.a,lam)
+X.b &lt;- rexp(n.b,lam)
+S.a[i] &lt;- sd(X.a)
+S.b[i] &lt;- sd(X.b)
+}
+F &lt;- S.a^2/S.b^2
+mean((F &lt; qf(0.025,n.a-1,n.b-1))|(F &gt; qf(0.975,n.a-1,n.b-1)))
+        </input>
+      </program>
+      <p>The actual significance level of the test is <m>0.27596</m>, which is much     higher than the nominal significance level of 5%.</p>
+      <p>Through this experiment we may see that the <m>F</m>-test is not robust to     the divergence from the assumed Normal distribution of the measurement.     If the distribution of the measurement is skewed (the Exponential     distribution is an example of such skewed distribution) then the     application of the test to the data may produce unreliable conclusions.</p>
+    </subsection>
+    
+    <subsection xml:id="subsec-solution-13-3">
+      <title>Exercise 13.3</title>
+      
+      <ol>
+        <li><p>We input the data to <c>R</c> and then compute the estimate:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+s.a &lt;- 13.4
+s.b &lt;- 16.7
+s.a^2/s.b^2
+        </input>
+      </program>
+      <p>The estimate is equal to the ratio of the sample variances     <m>s_a^2/s_b^2</m>. It obtains the value <m>0.6438381</m>. Notice that the     information regarding the sample averages and the sizes of the     sub-samples is not relevant for the point estimation of the parameter.</p>
+      <ol>
+        <li><p>We use the formula:</p></li>
+      </ol>
+      <p><me>\big[(s_a^2/s_b^2)/\mbox{\texttt{qf(0.975,14,14)}} , (s_a^2/s_b^2)/\mbox{\texttt{qf(0.025,14,14)}}\big]</me> in order to compute the confidence interval:</p>
+      <program language="r">
+        <input>
+n.a &lt;- 15
+n.b &lt;- 15
+(s.a^2/s.b^2)/qf(0.975,n.a-1,n.b-1)
+(s.a^2/s.b^2)/qf(0.025,n.a-1,n.b-1)
+        </input>
+      </program>
+      <p>The confidence interval we obtain is <m>[0.2161555, 1.917728]</m>.</p>
+      <ol>
+        <li><p>The estimate of the parameter is not affected by the change in the sample sizes and it is still equal to <m>0.6438381</m>. For the confidence interval we use now the formula:</p></li>
+      </ol>
+      <p><me>\big[(s_a^2/s_b^2)/\mbox{\texttt{qf(0.975,149,149)}} , (s_a^2/s_b^2)/\mbox{\texttt{qf(0.025,149,149)}}\big]\,:</me></p>
+      <program language="r">
+        <input>
+n.a &lt;- 150
+n.b &lt;- 150
+(s.a^2/s.b^2)/qf(0.975,n.a-1,n.b-1)
+(s.a^2/s.b^2)/qf(0.025,n.a-1,n.b-1)
+        </input>
+      </program>
+      <p>The corrected confidence interval is <m>[0.466418, 0.8887467]</m>.</p>
+    </subsection>
+    
   </section>
 
   <section xml:id="sec-solutions-ch14">
     <title>Chapter 14: Linear Regression</title>
-    <p>Content to be added.</p>
+    
+    <subsection xml:id="subsec-solution-14-1">
+      <title>Exercise 14.1</title>
+      
+      <ol>
+        <li><p>The line marked in *red* is increasing and at <m>x=0</m> it seems to obtain the value <m>y=0</m>. An increasing line is associated with a linear equation with a positive slope coefficient (<m>b &gt; 0</m>). The only equation with that property is Equation 3, for which <m>b=1</m>. Notice that the intercept of this equation is <m>a = 0</m>, which agrees with the fact that the line passes through the origin <m>(x,y) = (0,0)</m>. If the <m>x</m>-axis and the <m>y</m>-axis were on the same scale then one would expect the line to be tilted in the 45 degrees angle. However, here the axes are not on the same scale, so the tilting is different.</p></li>
+        <li><p>The <m>x</m>-value of the line marked with a *red triangle* is <m>x=-1</m>. The <m>y</m>-value is below 5. The observation that has an <m>x</m>-value of -1 is Observation 6. The <m>y</m>-value of this observation is <m>y=4.3</m>. Notice that there is another observation with the same <m>y</m>-value, Observation 3. However, the <m>x</m>-value of that observation is <m>x=1.6</m>. Hence it is the point that is on the same level as the marked point, but it is placed to the right of it.</p></li>
+      </ol>
+    </subsection>
+    
+    <subsection xml:id="subsec-solution-14-2">
+      <title>Exercise 14.2</title>
+      
+      <ol>
+        <li><p>The intercept is equal to <m>a = -3.60</m> and the slope is equal to <m>b = 2.13</m>. Notice that the lope is the coefficient that multiplies the explanatory variable and the intercept is the coefficient that does not multiply the explanatory variable.</p></li>
+        <li><p>The value of the explanatory variable for the 3rd observation is <m>x_3 = 4.2</m>. When we use this value in the regression formula we obtain that:</p></li>
+      </ol>
+      <p><me>\Expec(Y_3) = 2.13 \cdot x_3 - 3.60 = 2.13 \cdot 4.2 - 3.60 = 5.346\;.</me> In words, the expectation of the response of the 3rd observation is equal to <m>5.346</m></p>
+    </subsection>
+    
+    <subsection xml:id="subsec-solution-14-3">
+      <title>Exercise 14.3</title>
+      
+      <ol>
+        <li><p>After saving the file “<c>aids.csv</c>" in the working directory of <c>R</c> we read it’s content into a data frame by the name “<c>aids</c>". We then produce a summary of the fit of the linear regression model of “<c>deaths</c>" as a response and “<c>diagnosed</c>" as the explanatory variable:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+aids &lt;- read.csv("_data/aids.csv")
+fit.deaths &lt;- lm(deaths~diagnosed,data=aids)
+summary(fit.deaths)
+        </input>
+      </program>
+      <p>The estimated value of the slope 0.6073. The computed <m>p</m>-value     associated with this slope is <m>1.81 \times 10^{-14}</m>, which is much     smaller than the 5% threshold. Consequently, the slope is statistically     significant.</p>
+      <p>For confidence intervals apply the function “<c>confint</c>" to the fitted     model:</p>
+      <program language="r">
+        <input>
+confint(fit.deaths)
+        </input>
+      </program>
+      <p>We get that the confidence interval for the slope is <m>[0.5422759 , 0.672427]</m>.</p>
+      <ol>
+        <li><p>A scatter plot of the two variables is produced by the application of the function “<c>plot</c>" to the formula that involves these two variables. The regression line is added to the plot using the function “<c>abline</c>" with the fitted model as an input:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+plot(deaths~diagnosed,data=aids)
+abline(fit.deaths)
+        </input>
+      </program>
+      <p>Observe that the points are nicely placed very to a line that     characterizes the linear trend of the regression.</p>
+      <ol>
+        <li><p>We fit a linear regression model of “<c>diagnosed</c>" as a response and “<c>year</c>" as the explanatory variable and save the fit in the object “<c>fit.diagnosed</c>". A summary of the model is produced by the application of the function “<c>summary</c>" to the fit:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+fit.diagnosed &lt;- lm(diagnosed~year,data=aids)
+summary(fit.diagnosed)
+        </input>
+      </program>
+      <p>The estimated value of the slope 1749.8. The computed <m>p</m>-value     associated with this slope is <m>0.0344</m>, which is less than the 0.05.     Consequently, one may declare the slope to be statistically significant.     Confidence intervals are produced using the function “<c>confint</c>":</p>
+      <program language="r">
+        <input>
+confint(fit.diagnosed)
+        </input>
+      </program>
+      <p>We get that the 95% confidence interval for the slope is     <m>[141.9360, 3357.618]</m>.</p>
+      <ol>
+        <li><p>A scatter plot of the two variables is produced by the application of the function “<c>plot</c>" and the regression line is added with function “<c>abline</c>":</p></li>
+      </ol>
+      <program language="r">
+        <input>
+plot(diagnosed~year,data=aids)
+abline(fit.diagnosed)
+        </input>
+      </program>
+      <p>Observe that the     points do not follow a linear trend. It seems that the number of     diagnosed cases increased in an exponential rate during the first years     after Aids was discovered. The trend changed in the mid 90’s with a big     drop in the number of diagnosed Aids patients. This drop may be     associated with the administration of therapies such as AZT to HIV     infected subjects that reduced the number of such subjects that     developed Aids. In the late 90’s there seams to be yet again a change in     the trend and the possible increase in numbers. The line of linear     regression misses all these changes and is a poor representation of the     historical development.</p>
+      <p>The take home message from this exercise is to not use models blindly. A     good advise is to plot the data. An examination of the plot provides a     warning that the linear model is probably not a good model for the given     problem.</p>
+    </subsection>
+    
+    <subsection xml:id="subsec-solution-14-4">
+      <title>Exercise 14.4</title>
+      
+      <ol>
+        <li><p>We read the data in the table into <c>R</c>. The variable “<c>year</c>" is the explanatory variable and the variable “<c>percent</c>" is the response. The scatter plot is produced using the function “<c>plot</c>" and the regression line, fitted to the data with the function “<c>lm</c>", is added to the plot using the function “<c>abline</c>":</p></li>
+      </ol>
+      <program language="r">
+        <input>
+year &lt;- c(1945,1950,1960,1970,1980,1986,1993)
+percent &lt;- c(35.5,31.5,31.4,27.3,21.9,17.5,15.8)
+plot(percent~year)
+abline(lm(percent~year))
+        </input>
+      </program>
+      <p>Observe that a linear trend is a     reasonable description of the reduction in the percentage of workers     that belong to labor unions in the post World War II period.</p>
+      <ol>
+        <li><p>We compute the averages, standard deviations and the covariance:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+mean.x &lt;- mean(year)
+mean.y &lt;- mean(percent)
+sd.x &lt;- sd(year)
+sd.y &lt;- sd(percent)
+cov.x.y &lt;- cov(year,percent)
+mean.x
+mean.y
+sd.x
+sd.y
+cov.x.y
+        </input>
+      </program>
+      <p>The average of the variable “<c>year</c>" is <m>1969.143</m> and the standard     deviation is <m>18.27957</m>. The average of the variable “<c>percent</c>" is     <m>25.84286</m> and the standard deviation is <m>7.574927</m>. The covariance     between the two variables is <m>-135.6738</m>.</p>
+      <ol>
+        <li><p>The slope of the regression line is the ratio between the covariance and the variance of the explanatory variable. The intercept is the solution of the equation that states that the value of regression line at the average of the explanatory variable is the average of the response:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+b &lt;- cov.x.y/sd.x^2
+a &lt;- mean.y - b*mean.x
+a
+b
+        </input>
+      </program>
+      <p>We get that the intercept is equal to <m>825.3845</m> and the slope is equal     to <m>-0.4060353</m>.</p>
+      <p>In order to validate these figures, let us apply the function “<c>lm</c>" to     the data:</p>
+      <program language="r">
+        <input>
+lm(percent~year)
+        </input>
+      </program>
+      <p>Indeed, we get the same numbers that we got from the manual computation.</p>
+    </subsection>
+    
+    <subsection xml:id="subsec-solution-14-5">
+      <title>Exercise 14.5</title>
+      
+      <ol>
+        <li><p>The estimate for the expected value for the <m>i</m>th observation is obtained by the evaluation of the expression <m>a + b\cdot x_i</m>, where <m>a</m> and <m>b</m> are the coefficients of the fitted regression model and <m>x_i</m> is the value of the explanatory variable for the <m>i</m>th observation. In our case <m>i=4</m> and <m>x_4 = 6.7</m>:</p></li>
+      </ol>
+      <p><me>a + b\cdot x_4 = 2.5-1.13\cdot x_4 = 2.5-1.13\cdot 6.7 =  -5.071\;.</me> Therefore, the estimate expectation of the response is <m>-5.071</m>.</p>
+      <ol>
+        <li><p>The residual from the regression line is the difference between the observed value of the response and the estimated expectation of the response. For the 4th observation we have that the observed value of the response is <m>y_4 = 0.17</m>. The estimated expectation was computed in the previous question. Therefore, the residual from the regression line for the 4th observation is:</p></li>
+      </ol>
+      <p><me>y_4 - (a + b\cdot x_4) = 0.17 - (-5.071) = 5.241\;.</me></p>
+    </subsection>
+    
+    <subsection xml:id="subsec-solution-14-6">
+      <title>Exercise 14.6</title>
+      
+      <ol>
+        <li><p>We create the response and then fit a model and apply the summarizing function to the model:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+dif.mpg &lt;- cars$highway.mpg - cars$city.mpg
+summary(lm(dif.mpg ~ cars$curb.weight))
+        </input>
+      </program>
+      <p>The <m>p</m>-value associated with the slope, <m>1.77\times 10^{-6}</m>, is much     smaller than the 5% threshold proposing a significant (negative) trend.     The value of R-squared, the fraction of the variability of the response     that is explained by a regression model, is <m>0.1066</m>.</p>
+      <p>The standard deviation is the square root of the variance. It follows     that the fraction of the standard deviation of the response that is     explained by the regression is <m>\sqrt{0.1066}= 0.3265</m>.</p>
+      <p>Following our own advice, we plot the data and the regression model:</p>
+      <program language="r">
+        <input>
+plot(dif.mpg ~ cars$curb.weight)
+abline(lm(dif.mpg ~ cars$curb.weight))
+        </input>
+      </program>
+      <p>One may observe that although there seems     to be an overall downward trend, there is still allot of variability     about the line of regression.</p>
+      <ol>
+        <li><p>We now fit and summarize the regression model with the size of engine as the explanatory variable:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+summary(lm(dif.mpg ~ cars$engine.size))
+        </input>
+      </program>
+      <p>The regression slope is negative. The <m>p</m>-value is <m>0.000633</m>, which is     statistically significant. The value of R-squared is <m>0.05603</m>.     Consequently, the fraction of the standard deviation of the response     that is explained by the current regression model is     <m>\sqrt{0.05603}= 0.2367</m>.</p>
+      <p>Produce the scatter plot with the line of regression:</p>
+      <program language="r">
+        <input>
+plot(dif.mpg ~ cars$engine.size)
+abline(lm(dif.mpg ~ cars$engine.size))
+        </input>
+      </program>
+      <p>Again, there is variability about the line of regression.</p>
+      <ol>
+        <li><p>Of the two models, the model that uses the curb weigh as the explanatory variable explains a larger portion of the variability in the response. Hence, unless other criteria tells us otherwise, we will prefer this model over the model that uses the size of engine as an explanatory variable.</p></li>
+      </ol>
+    </subsection>
+    
   </section>
 
   <section xml:id="sec-solutions-ch15">
     <title>Chapter 15: A Bernoulli Response</title>
-    <p>Content to be added.</p>
+    
+    <subsection xml:id="subsec-solution-15-1">
+      <title>Exercise 15.1</title>
+      
+      <ol>
+        <li><p>First we save the file “<c>diet.csv</c>" in the working directory of <c>R</c> and read it’s content. Then we apply the function “<c>table</c>" to the two variables in the file in order to obtain the requested frequency table:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+diet &lt;- read.csv("_data/diet.csv")
+table(diet$health,diet$type)
+        </input>
+      </program>
+      <p>The resulting table has two columns and 4 rows. The third row     corresponds to healthy subjects. Of these, 239 subjects used the AHA     recommended diet and 273 used the Mediterranean diet. We may also plot     this data using a mosaic plot:</p>
+      <program language="r">
+        <input>
+plot(health~type,data=diet)
+        </input>
+      </program>
+      <p>Examining this plot one may appreciate the     fact that the vast majority of the subjects were healthy and the     relative proportion of healthy subjects among users of the Mediterranean     diet is higher than the relative proportion among users of the AHA     recommended diet.</p>
+      <ol>
+        <li><p>In order to test the hypothesis that the probability of keeping healthy following an heart attack is the same for those that use the Mediterranean diet and for those that use the diet recommended by the AHA we create a <m>2\times 2</m>. This table compares the response of being healthy or not to the type of diet as an explanatory variable. A sequence with logical components, “<c>TRUE</c>" for healthy and “<c>FALSE</c>" for not, is used as the response. Such a sequence is produced via the expression “<c>diet$health==healthy</c>". The table may serve as input to the function “<c>prop.test</c>":</p></li>
+      </ol>
+      <program language="r">
+        <input>
+table(diet$health=="healthy",diet$type)
+prop.test(table(diet$health=="healthy",diet$type))
+        </input>
+      </program>
+      <p>The function “<c>prop.test</c>" conducts the test that compares between the     probabilities of keeping healthy. In particular, the computed <m>p</m>-value     for the test is <m>0.0001361</m>, which is less than 0.05. Therefore, we     reject the null hypothesis that both diets have the same effect on the     chances of remaining healthy following an heart attack.</p>
+      <ol>
+        <li><p>The confidence interval for the difference in probabilities is equal to <m>[0.1114300, 0.3313203]</m>. The point estimation of the difference between the probabilities is <m>\hat p_a - \hat p_b = 0.6881720- 0.4667969 \approx 0.22</m> in favor of a Mediterranean diet. The confidence interval proposes that a difference as low as 0.11 or as high as 0.33 are not excluded by the data.</p></li>
+      </ol>
+    </subsection>
+    
+    <subsection xml:id="subsec-solution-15-2">
+      <title>Exercise 15.2</title>
+      
+      <ol>
+        <li><p>We save the data of the file in a data frame by the name “<c>cushings</c>", produce a mosaic plot with the function “<c>plot</c>" and an histogram with the function “<c>hist</c>":</p></li>
+      </ol>
+      <program language="r">
+        <input>
+cushings &lt;- read.csv("_data/cushings.csv")
+plot(type~tetra,data=cushings)
+hist(cushings$tetra)
+        </input>
+      </program>
+      <p>The mosaic plot describes the distribution of the 4 levels of the     response within the different intervals of values of the explanatory     variable. The intervals coincide with the intervals that are used in the     construction of the histogram. In particular, the third vertical     rectangle from the left in the mosaic is associated with the third     interval from the left in the histogram[^6]. This interval is associated     with the range of values between 20 and 30. The height of the given     interval in the histogram is 2, which is the number of patients with     “<c>terta</c>" levels that belong to the interval.</p>
+      <p>There are 4 shades of *grey* in the first vertical rectangle from the     left. Each shade is associated with a different level of the response.     The lightest shade of grey, the upmost one, is associated with the level     “<c>u</c>". Notice that this is also the shade of grey of the entire third     vertical rectangle from the left. The conclusion is that the 2 patients     that are associated with this rectangle have Tetrahydrocortisone levels     between 2 and 30 and have an unknown type of syndrome.</p>
+      <ol>
+        <li><p>We fit the logistic regression to the entire data in the data frame “<c>cushings</c>" using the function “<c>glm</c>", with the “<c>family=binomial</c>" argument. The response is the indicator that the type is equal to “<c>b</c>". The fitted model is saved in an object called “<c>cushings.fit.all</c>". The application of the function “<c>summary</c>" to the fitted model produces a report that includes the test of the hypothesis of interest:</p></li>
+      </ol>
+      <program language="r">
+        <input>
+cushings.fit.all &lt;- glm((type=="b")~tetra,family=binomial, data=cushings)
+summary(cushings.fit.all)
+        </input>
+      </program>
+      <p>The test of interest examines the coefficient that is associated wit the     explanatory variable “<c>tetra</c>". The estimated value of this parameter is     <m>-0.04220</m>. The <m>p</m>-value for testing that the coefficient is 0 is equal     to <m>0.418</m>. Consequently, since the <m>p</m>-value is larger than 0.05, we do     not reject the null hypothesis that states that the response and the     explanatory variable are statistically unrelated.</p>
+      <p>Confidence intervals may be computed by applying the function     “<c>confint</c>" to the fitted model:</p>
+      <program language="r">
+        <input>
+confint(cushings.fit.all)
+        </input>
+      </program>
+      <p>Specifically, the confidence interval for the coefficient that is     associated with the explanatory variable is equal to     <m>[-0.1776113, 0.04016772]</m></p>
+      <ol>
+        <li><p>If we want to fit the logistic model to a partial subset of the data, say all the observations with values of the response other that “<c>u</c>", we may apply the argument “<c>subset</c>"[^7]. Specifically, adding the expression “<c>subset=(type!=u)</c>" would do the job[^8]. We repeat the same analysis as before. The only difference is the addition of the given expression to the function that fits the model to the data. The fitted model is saved in an object we call “<c>cushings.fit.known</c>":</p></li>
+      </ol>
+      <program language="r">
+        <input>
+cushings.fit.known &lt;- glm((type=="b")~tetra,family=binomial, data=cushings,subset=(type!="u"))
+summary(cushings.fit.known)
+        </input>
+      </program>
+      <p>The estimated value of the coefficient when considering only subject     with a known type of the syndrome is slightly changed to <m>-0.02276</m>. The     new <m>p</m>-value, which is equal to <m>0.620</m>, is larger than 0.05. Hence,     yet again, we do not reject the null hypothesis.</p>
+      <program language="r">
+        <input>
+confint(cushings.fit.known)
+        </input>
+      </program>
+      <p>For the modified confidence interval we apply the function “<c>confint</c>".     We get now <m>[-0.1537617, 0.06279923]</m> as a confidence interval for the     coefficient of the explanatory variable.</p>
+      <p>We started with the fitting the model to all the observations. Here we     use only the observations for which the type of the syndrome is known.     The practical implication of using all observations in the fit is     equivalent to announcing that the type of the syndrome for observations     of an unknown type is not type “<c>b</c>". This is not appropriate and may     introduce bias, since the type may well be “<c>b</c>". It is more appropriate     to treat the observations associated with the level “<c>u</c>" as missing     observations and to delete them from the analysis. This approach is the     approach that was used in the second analysis.</p>
+    </subsection>
+    
   </section>
 
-  <section xml:id="sec-solutions-ch16">
-    <title>Chapter 16: Case Studies</title>
-    <p>Content to be added.</p>
-  </section>
 </appendix>
