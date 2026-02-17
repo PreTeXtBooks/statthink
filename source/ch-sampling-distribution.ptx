@@ -55,7 +55,7 @@
     <subsection xml:id="subsec-sampling-population">
       <title>Sampling From a Population</title>
       <p>
-        Consider taking a sample from a population. Let us use again for the illustration the file <q><c>pop1.csv</c></q> like we did in <xref ref="ch-probability" />. The data frame produced from the file contains the sex and hight of the 100,000 members of some imaginary population. Recall that in <xref ref="ch-probability" /> we applied the function <q><c>sample</c></q> to randomly sample the height of a single subject from the population. Let us apply the same function again, but this time in order to sample the heights of 100 subjects:
+        Consider taking a sample from a population. Let us use again for the illustration the file <q><c>pop1.csv</c></q> like we did in <xref ref="ch-probability" />. The data frame produced from the file contains the sex and height of the 100,000 members of some imaginary population. Recall that in <xref ref="ch-probability" /> we applied the function <q><c>sample</c></q> to randomly sample the height of a single subject from the population. Let us apply the same function again, but this time in order to sample the heights of 100 subjects:
       </p>
       <program language="r">
         <input>
@@ -484,7 +484,7 @@ var(exp.1000)
           </li>
           <li>
             <title>group</title>
-            <p>A factor variable. The blood pressure category of each subject. The values are <q><c>NORMAL</c></q> both the systolic blood pressure is within its normal range (between 90 and 139) and the diastolic blood pressure is within its normal range (between 60 and 89). The value is <q><c>HIGH</c></q> if either measurements of blood pressure are above their normal upper limits and it is <q><c>LOW</c></q> if either measurements are below their normal lower limits.</p>
+            <p>A factor variable. The blood pressure category of each subject. The values are <q><c>NORMAL</c></q> if both the systolic blood pressure is within its normal range (between 90 and 139) and the diastolic blood pressure is within its normal range (between 60 and 89). The value is <q><c>HIGH</c></q> if either measurements of blood pressure are above their normal upper limits and it is <q><c>LOW</c></q> if either measurements are below their normal lower limits.</p>
           </li>
         </dl>
         <p>
