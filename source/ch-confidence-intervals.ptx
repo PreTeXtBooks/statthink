@@ -472,6 +472,13 @@ mean((sig^2 &gt;= var.LCL) &amp; (sig^2 &lt;= var.UCL))
         </ol>
       </statement>
     </exercise>
+    
+    <figure xml:id="fig-confidence2">
+      <caption>Box Plots of Ratings</caption>
+      <image source="_figures/Confidence2-1.png" width="60%">
+        <description>Box plots comparing ratings between two conditions</description>
+      </image>
+    </figure>
 
   </section>
 

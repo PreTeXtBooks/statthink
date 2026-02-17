@@ -1,36 +1,476 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-
+<?xml version="1.0" encoding="UTF-8"?>
 <chapter xml:id="ch-two-samples" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Comparing Two Samples</title>
 
-  <introduction>
-    <p>
-      This chapter discusses inference that involves the comparison of two measurements.
-    </p>
-  </introduction>
-
-  <section xml:id="sec-student-learning-objectives-13">
+  <section xml:id="sec-two-samples-learning-objectives">
     <title>Student Learning Objectives</title>
-    <p>Content to be added.</p>
+
+    <p>The next 3 chapters deal with the statistical inference associated with the relation between two variables. The relation corresponds to the effect of one variable on the distribution of the other. The variable whose distribution is being investigated is called the <term>response</term>. The variable which may have an effect on the distribution of the response is called the <term>explanatory variable</term>.</p>
+
+    <p>In this section we consider the case where the explanatory variable is a factor with two levels. This factor splits the sample into two sub-samples. The statistical inference compares between the distributions of the response variable in the two sub-samples. The statistical inference involves point estimation, confidence intervals, and hypothesis testing. <c>R</c> functions may be used in order to carry out the statistical inference. By the end of this chapter, the student should be able to:</p>
+
+    <ul>
+      <li>
+        <p>Define estimators, confidence intervals, and tests for comparing the distribution of a numerical response between two sub-populations.</p>
+      </li>
+      <li>
+        <p>Apply the function <c>t.test</c> in order to investigate the difference between the expectations of the response variable in the two sub-samples.</p>
+      </li>
+      <li>
+        <p>Apply the function <c>var.test</c> in order to investigate the ratio between the variances of the response variable in the two sub-samples.</p>
+      </li>
+    </ul>
   </section>
 
-  <section xml:id="sec-two-sample-tests">
-    <title>Comparing Two Populations</title>
-    <p>Content to be added.</p>
+  <section xml:id="sec-two-samples-comparing-distributions">
+    <title>Comparing Two Distributions</title>
+
+    <p>Up until this point in the book we have been considering tools for the investigation of the characteristics of the distribution of a single measurement. In most applications, however, one is more interested in inference regarding the relationships between several measurements. In particular, one may want to understand how the outcome of one measurement effects the outcome of another measurement.</p>
+
+    <p>A common form of a mathematical relation between two variables is when one of the variables is a function of the other. When such a relation holds then the value of the first variably is determined by the value of the second. However, in the statistical context relations between variables are more complex. Typically, a statistical relation between variables does not make one a direct function of the other. Instead, the <term>distribution</term> of values of one of the variables is affected by the value of the other variable. For a given value of the second variable the first variable may have one distribution, but for a different value of the second variable the distribution of the first variable may be different. In statistical terminology the second variable in this setting is called an <term>explanatory variable</term> and the first variable, with a distribution affected by the second variable, is called the <term>response</term>.</p>
+
+    <p>As an illustration of the relation between the response and the explanatory variable consider the following example. In a clinical trial, which is a precondition for the marketing of a new medical treatment, a group of patients is randomly divided into a <term>treatment</term> and a <term>control</term> sub-groups. The new treatment is anonymously administered to the treatment sub-group. At the same time, the patients in the control sub-group obtain the currently standard treatment. The new treatment passes the trial and is approved for marketing by the Health Authorities only if the response to the medical intervention is better for the treatment sub-group than it is for the control sub-group. This treatment-control experimental design, in which a response is measured under two experimental conditions, is used in many scientific and industrial settings.</p>
+
+    <p>In the example of a clinical trial one may identify two variables. One variable measures the response to the medical intervention for each patient that participated in the trial. This variable is the response variable, the distribution of which one seeks to investigate. The other variable indicates to which sub-group, treatment or control, each patient belongs. This variable is the explanatory variable. In the setting of a clinical trial the explanatory variable is a factor with two levels, <q>treatment</q> and <q>control</q>, that splits the sample into two sub-samples. The statistical inference compares the distribution of the response variable among the patients in the treatment sub-sample to the distribution of the response among the patients in the control sub-group.</p>
+
+    <p>The analysis of experimental settings such as the treatment-control trial is a special case that involves the investigation of the effect an explanatory variable may have on the response variable. In this special case the explanatory variable is a factor with two distinct levels. Each level of the factor is associate with a sub-sample, either treatment or control. The analysis seeks to compare the distribution of the response in one sub-sample with the distribution in the other sub-sample. If the response is a numeric measurement then the analysis may take the form of comparing the response's expectation in one sub-group to the expectation in the other. Alternatively, the analysis may involve comparing the variance. In a different case, if the response is the indicator of the occurrence of an event then the analysis may compare two probabilities, the probability of the event in the treatment group to the probability of the same event in the control group.</p>
+
+    <p>In this chapter we deal with statistical inference that corresponds to the comparison of the distribution of a numerical response variable between two sub-groups that are determined by a factor. The inference includes testing hypotheses, mainly the null hypothesis that the distribution of the response is the same in both subgroups versus the alternative hypothesis that the distribution is not the same. Another element in the inference is point estimation and confidence intervals of appropriate parameters.</p>
+
+    <p>In the next chapter we will consider the case where the explanatory variable is numeric and in the subsequent chapter we describe the inference that is used in the case that the response is the indicator of the occurrence of an event.</p>
   </section>
 
-  <section xml:id="sec-paired-data">
-    <title>Paired Data</title>
-    <p>Content to be added.</p>
+  <section xml:id="sec-two-samples-comparing-means">
+    <title>Comparing the Sample Means</title>
+
+    <p>In this section we deal with the issue of statistical inference when comparing the expectation of the response variable in two sub-samples. The inference is used in order to address questions such as the equality of the two expectations to each other and, in the case they are not equal, the assessment of the difference between the expectations. For the first question one may use statistical hypothesis testing and for the assessment one may use point estimates and/or confidence intervals.</p>
+
+    <p>In the first subsection we provide an example of a test of the hypothesis that the expectations are equal. A confidence interval for the difference between expectations is given in the output of the report of the <c>R</c> function that applies the test. The second subsection considers the construction of the confidence interval and the third subsection deals with the theory behind the statistical test.</p>
+
+    <subsection xml:id="subsec-two-samples-example-comparison">
+      <title>An Example of a Comparison of Means</title>
+
+      <p>In order to illustrate the statistical inference that compares two expectations let us return to an example that was considered in <xref ref="ch-testing-hypothesis" />. The response of interest is the difference in miles-per-gallon between driving in highway conditions and driving in city conditions. This response is produced as the difference between the variable <c>cars$highway.mpg</c> and the variable <c>cars$city.mpg</c>. It is stored in the object <c>dif.mpg</c>, which is a numerical sequence:</p>
+
+      <program language="r">
+        <input>
+cars &lt;- read.csv("_data/cars.csv")
+dif.mpg &lt;- cars$highway.mpg - cars$city.mpg
+        </input>
+      </program>
+
+      <p>The object <c>heavy</c> was defined in the previous chapter as a sequence with logical components. A component had the value <c>TRUE</c> if the curb weight of the car type associated with this component was above the median level of 2,414 lb. The component obtained the value <c>FALSE</c> if the curb weight did not exceed that level. The logical sequence <c>heavy</c> was used in order to select the subsequences associated with each weight sub-group. Statistical inference was applied separately to each subsequence.</p>
+
+      <p>In the current analysis we want to examine directly the relation between the response variable <c>dif.mpg</c> and an explanatory factor variable <c>heavy</c>. In order to do so we redefine the variable <c>heavy</c> to be a factor:</p>
+
+      <program language="r">
+        <input>
+heavy &lt;- factor(cars$curb.weight &gt; 2414)
+        </input>
+      </program>
+
+      <p>The variable <c>curb.weight</c> is numeric and the expression <c>cars$curb.weight &gt; 2414</c> produces a sequence with logical <c>TRUE</c> or <c>FALSE</c> components. This sequence is not a factor. In order to produce a factor we apply the function <c>factor</c> to the sequence. The function <c>factor</c> transforms its input into a factor. Specifically, the application of this function to a sequence with logical components produces a factor with two levels that are given the names <c>TRUE</c> and <c>FALSE</c><fn>It should be noted that the redefined sequence <c>heavy</c> is no longer a sequence with logical components. It cannot be used, for example, as an index to another sequence in order to select the components that are associated with the <c>TRUE</c> logical value.</fn>.</p>
+
+      <p>We want to examine the relation between the response variable <c>dif.mpg</c> and the explanatory factor <c>heavy</c>. Towards that end we produce a plot of the relation with the function <c>plot</c> and test for the equality of the expectations of the response with the function <c>t.test</c>. First the plot:</p>
+
+      <program language="r">
+        <input>
+plot(dif.mpg~heavy)
+        </input>
+      </program>
+
+      <figure xml:id="fig-two-samples-boxplot">
+        <caption>Boxplot of difference in MPG by weight group</caption>
+        <image source="_figures/TwoSamp-boxplot.png" width="60%">
+          <description>Two side-by-side boxplots comparing the distribution of difference in miles-per-gallon between highway and city driving for lighter cars (FALSE) versus heavier cars (TRUE), based on curb weight threshold of 2414 lb.</description>
+        </image>
+      </figure>
+
+      <p>Observe that the figure contains two box plots, one associated with the level <c>FALSE</c> of the explanatory factor and the other with the level <c>TRUE</c> of that factor. The box plots describe the distribution of the response variable for each level of the explanatory factor. Overall, the distribution of the response for heavier cars (cars associated with the level <c>TRUE</c>) tends to obtain smaller values than the distribution of the response for lighter cars (cars associated with the level <c>FALSE</c>).</p>
+
+      <p>The input to the function <c>plot</c> is a <term>formula</term> expression of the form: <q><em>response</em><m>\;\tilde{}\;</m><em>explanatory.variable</em></q>. A formula identifies the role of variables. The variable to the left of the tilde character (<m>\;\tilde{}\;</m>) in a formula is the response and the variable to the right is the explanatory variable. In the current case the variable <c>dif.mpg</c> is the response and the variable <c>heavy</c> is the explanatory variable.</p>
+
+      <p>Let us use a formal test in order to negate the hypothesis that the expectation of the response for the two weight groups is the same. The test is provided by the application of the function <c>t.test</c> to the formula <c>dif.mpg~heavy</c>:</p>
+
+      <program language="r">
+        <input>
+t.test(dif.mpg~heavy)
+        </input>
+      </program>
+<pre>
+## 
+##  Welch Two Sample t-test
+## 
+## data:  dif.mpg by heavy
+## t = 2.4255, df = 191.56, p-value = 0.01621
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  0.1029150 0.9989315
+## sample estimates:
+## mean in group FALSE  mean in group TRUE 
+##            5.805825            5.254902
+</pre>
+      <p>The function <c>t.test</c>, when applied to a formula that describes the relation between a numeric response and a explanatory factor with two level, produces a special form of a <m>t</m>-test that is called the <term>Welch Two Sample <m>t</m>-test</term>. The statistical model associated with this test assumes the present of two independent sub-samples, each associated with a level of the explanatory variable. The relevant parameters for this model are the two expectations and the two variances associated with the sub-samples.</p>
+
+      <p>The hypotheses tested in the context of the Welch test are formulated in terms of the difference between the expectation of the first sub-sample and the expectation of the second sub-sample. In the default application of the test the null hypothesis is that the difference is equal to 0 (or, equivalently, that the expectations are equal to each other). The alternative is that the difference is not equal to 0 (hence, the expectations differ).</p>
+
+      <p>The test is conducted with the aid of a test statistic. The computed value of the test statistic in this example is <c>t = 2.4255</c>. Under the null hypothesis the distribution of the test statistic is (approximately) equal to the <m>t</m>-distribution on <c>df = 191.561</c> degrees of freedom. The resulting <m>p</m>-value is <c>p-value = 0.01621</c>. Since the computed <m>p</m>-value is less than 0.05 we reject the null hypothesis with a significance level of 5% and declare that the expectations are not equal to each other.</p>
+
+      <p>The bottom part of the report presents points estimates and a confidence interval. The point estimates of the two expectations are the sub-samples averages. The estimated value of the expected difference in miles-per-gallon for lighter cars is 5.805825, which is the average of the measurements associated with the level <c>FALSE</c>. The estimated value of the expected difference for heavier cars is 5.254902, the average of measurements associated with the level <c>TRUE</c>.</p>
+
+      <p>The point estimate for the difference between the two expectations is the difference between the two sample averages: <m>5.805825 - 5.254902 =  0.550923</m>. A confidence interval for the <term>difference</term> between the expectations is reported under the title <c>95 percent confidence interval:</c>. The computed value of the confidence interval is <m>[0.1029150, 0.9989315]</m>.</p>
+
+      <p>In the rest of this section we describe the theory behind the construction of the confidence interval and the statistical test.</p>
+    </subsection>
+
+    <subsection xml:id="subsec-two-samples-ci-difference">
+      <title>Confidence Interval for the Difference</title>
+
+      <p>Consider the statistical model that is used for the construction of the confidence interval. The main issue is that the model actually deals with two populations rather than one population. In previous theoretical discussions we assumed the presence of a single population and a measurement taken for the members of this population. When the measurement was considered as a random variable it was denoted by a capital Latin letter such as <m>X</m>. Of concern were characteristics of the distribution of <m>X</m> such as <m>\Expec(X)</m>, the expectation of <m>X</m>, and <m>\Var(X)</m>, the variance.</p>
+
+      <p>In the current investigation two populations are considered. One population is the sub-population associated with the first level of the factor and the other population is associated with the second level. The measurement is taken for the members of both sub-populations. However, the measurement involves two random variables, one associated with the first sub-population and the other associated with the second sub-population. Moreover, the distribution of the measurement for one population may differ from the distribution for the other population. We denote the random variable associated with the first sub-population by <m>X_a</m> and the one associated with the other sub-population by <m>X_b</m>.</p>
+
+      <p>Consider the example in which the measurement is the difference in miles-per-gallon between highway and city driving conditions. In this example <m>X_a</m> is the measurement for cars with curb weight up to 2,414 lb and <m>X_b</m> is the same measurement for cars with curb weight above that threshold.</p>
+
+      <p>The random variables <m>X_a</m> and <m>X_b</m> may have different distributions. Consequently, the characteristics of their distributions may also vary. Denote by <m>\Expec(X_a)</m> and <m>\Expec(X_b)</m> the expectations of the first and second random variable, respectively. Likewise, <m>\Var(X_a)</m> and <m>\Var(X_b)</m> are the variances of the two random variables. These expectations and variances are subjects of the statistical inference.</p>
+
+      <p>The sample itself may also be divided into two sub-samples according to the sub-population each observation originated from. In the example, one sub-sample is associated with the lighter car types and the other sub-sample with the heavier ones. These sub-samples can be used in order to make inference with respect to the parameters of <m>X_a</m> and <m>X_b</m>, respectively. For example, the average of the observations from first sub-sample, <m>\bar X_a</m>, can serve as the estimator of the of the expectation <m>\Expec(X_a)</m> and the second sub-sample's average <m>\bar X_b</m> may be used in order to estimate <m>\Expec(X_b)</m>.</p>
+
+      <p>Our goal in this section is to construct a confidence interval for the difference in expectations <m>\Expec(X_a)-\Expec(X_b)</m>. A natural estimator for this difference in expectations is the difference in averages <m>\bar X_a- \bar X_b</m>. The average difference will also serve as the basis for the construction of a confidence interval.</p>
+
+      <p>Recall that the construction of the confidence interval for a single expectation was based on the sample average <m>\bar X</m>. We exploited the fact that the distribution of <m>Z = (\bar X - \Expec(X)/\sqrt{\Var(X)/n}</m>, the standardized sample average, is approximately standard Normal. From this Normal approximation we obtained an approximate 0.95 probability for the event</p>
+
+      <me>\big\{-1.96 \cdot \sqrt{\Var(X)/n} \leq \bar X - \Expec(X) \leq 1.96 \cdot \sqrt{\Var(X)/n}\big\}\;,</me>
+
+      <p>where <m>1.96 = \mbox{\texttt{qnorm(0.975)}}</m> is the 0.975-percentile of the standard Normal distribution<fn>In the case where the sample size is small and the observations are Normally distributed we used the <m>t</m>-distribution instead. The percentile that was used in that case was <c>qt(0.975,n-1)</c>, the 0.975 percentile of the <m>t</m>-distribution on <m>n-1</m> degrees of freedom.</fn>. Substituting the estimator <m>S</m> for the unknown variance of the measurement and rewriting the event in a format that puts the expectation <m>\Expec(X)</m> in the center, between two boundaries, produced the confidence interval:</p>
+
+      <me>\bar X \pm 1.96 \cdot S/\sqrt{n}\;.</me>
+
+      <p>Similar considerations can be used in the construction of a confidence interval for the difference between expectations on the basis of the difference between sub-sample averages. The deviation <m>\{\bar X_a- \bar X_b\} - \{\Expec(X_a)- \Expec(X_b)\}</m> between the difference of the averages and the difference of the expectations that they estimate can be standardized. By the Central Limit Theorem one may obtain that the distribution of the standardized deviation is approximately standard Normal.</p>
+
+      <p>Standardization is obtained by dividing by the standard deviation of the estimator. In the current setting the estimator is the difference between the averages. The variance of the difference is given by</p>
+
+      <me>\Var(\bar X_a- \bar X_b) = \Var(\bar X_a) + \Var(\bar X_b) = \frac{\Var(X_a)}{n_a} + \frac{\Var(X_b)}{n_b}\;,</me>
+
+      <p>where <m>n_a</m> is the size of the sub-sample that produces the sample average <m>\bar X_a</m> and <m>n_b</m> is the size of the sub-sample that produces the sample average <m>\bar X_b</m>. Observe that both <m>\bar X_a</m> and <m>\bar X_b</m> contribute to the variability of the difference. The total variability is the sum of the two contributions<fn>It can be proved mathematically that the variance of a difference (or a sum) of two independent random variables is the sum of the variances. The situation is different when the two random variables are correlated.</fn>. Finally, we use the fact that the variance of the sample average is equal to he variance of a single measurement divided by the sample size. This fact is used for both averages in order to obtain a representation of the variance of the estimator in terms of the variances of the measurement in the two sub-population and the sizes of the two sub-samples.</p>
+
+      <p>The standardized deviation takes the form:</p>
+
+      <me>Z = \frac{\bar X_a- \bar X_b - \{\Expec(X_a)- \Expec(X_b)\}}{\sqrt{\Var(X_a)/n_a +\Var(X_b)/n_b}}\;.</me>
+
+      <p>When both sample sizes <m>n_a</m> and <m>n_b</m> are large then the distribution of <m>Z</m> is approximately standard Normal. As a corollary from the Normal approximation one gets that <m>\Prob(-1.96 \leq Z \leq 1.96) \approx 0.95</m>.</p>
+
+      <p>The values of variances <m>\Var(X_a)</m> and <m>\Var(X_b)</m> that appear in the definition of <m>Z</m> are unknown. However, these values can be estimated using the sub-samples variances <m>S_a^2</m> and <m>S_b^2</m>. When the size of both sub-samples is large then these estimators will produce good approximations of the unknown variances:</p>
+
+      <me>\Var(X_a) \approx S_a^2,\; \Var(X_b) \approx S_b^2\quad \Longrightarrow \quad\frac{\Var(X_a)}{n_a} + \frac{\Var(X_b)}{n_b} \approx  \frac{S_a^2}{n_a} + \frac{S_b^2}{n_b}\;.</me>
+
+      <p>The event <m>\{-1.96 \leq Z \leq 1.96\}</m> may be approximated by the event:</p>
+
+      <me>\Bigg\{-1.96 \cdot \sqrt{\frac{S_a^2}{n_a} + \frac{S_b^2}{n_b}} \leq \bar X_a- \bar X_b - \{\Expec(X_a)- \Expec(X_b)\} \leq 1.96 \cdot \sqrt{\frac{S_a^2}{n_a} + \frac{S_b^2}{n_b}}\Bigg\}\;,</me>
+
+      <p>The approximation results from the use of the sub-sample variances as a substitute for the unknown variances of the measurement in the two sub-populations. When the two sample sizes <m>n_a</m> and <m>n_b</m> are large then the probability of the given event will also be approximately equal to 0.95.</p>
+
+      <p>Finally, reexpressing the least event in a format that puts the parameter <m>\Expec(X_a)- \Expec(X_b)</m> in the center will produce the confidence interval with boundaries of the form:</p>
+
+      <me>\bar X_a- \bar X_b \pm 1.96 \cdot \sqrt{S_a^2/n_a + S_b^2/n_b}</me>
+
+      <p>In order to illustrate the computations that are involved in the construction of a confidence interval for the difference between two expectations let us return to the example of difference in miles-per-gallon for lighter and for heavier cars. Compute the two sample sizes, sample averages, and sample variances:</p>
+
+      <program language="r">
+        <input>
+table(heavy)
+tapply(dif.mpg,heavy,mean)
+tapply(dif.mpg,heavy,var)
+        </input>
+      </program>
+<pre>
+## heavy
+## FALSE  TRUE 
+##   103   102
+</pre>
+<pre>
+##    FALSE     TRUE 
+## 5.805825 5.254902
+</pre>
+<pre>
+##    FALSE     TRUE 
+## 2.020750 3.261114
+</pre>
+
+      <p>Observe that there 103 lighter cars and 102 heavier ones. These counts were obtained by the application of the function <c>table</c> to the factor <c>heavy</c>. The lighter cars are associated with the level <c>FALSE</c> and heavier cars are associated with the level <c>TRUE</c>.</p>
+
+      <p>The average difference in miles-per-gallon for lighter cars is 5.805825 and the variance is 2.020750. The average difference in miles-per-gallon for heavier cars is 5.254902 and the variance is 3.261114. These quantities were obtained by the application of the functions <c>mean</c> or <c>var</c> to the values of the variable <c>dif.mpg</c> that are associated with each level of the factor <c>heavy</c>. The application was carried out using the function <c>tapply</c>.</p>
+
+      <p>The computed values of the means are equal to the vales reported in the output of the application of the function <c>t.test</c> to the formula <c>dif.mpg~heavy</c>. The difference between the averages is <m>\bar x_a - \bar x_b =  5.805825 - 5.254902 = 0.550923</m>. This value is the center of the confidence interval. The estimate of the standard deviation of the difference in averages is:</p>
+
+      <me>\sqrt{s_a^2/n_a + s_b^2/n_b} = \sqrt{2.020750/103 + 3.261114/102} = 0.227135\;.</me>
+
+      <p>Therefore, the confidence interval for the difference in expectations is</p>
+
+      <me>\bar x_a- \bar x_b \pm 1.96 \cdot \sqrt{\frac{s_a^2}{n_a} + \frac{s_b^2}{n_b}} = 0.550923 \pm 1.96 \cdot 0.227135 = [0.1057384,0.9961076]\;,</me>
+
+      <p>which is (essentially) the confidence interval that is presented in the report<fn>The confidence interval given in the output of the function <c>t.test</c> is <m>[0.1029150, 0.9989315]</m>, which is very similar, but not identical, to the confidence interval that we computed. The discrepancy stems from the selection of the percentile. We used the percentile of the normal distribution 1.96 = <c>qnorm(0.975)</c>. The function <c>t.test</c>, on the other hand, uses the percentile of the <m>t</m>-distribution 1.972425 = <c>qt(0.975,191.561)</c>. Using this value instead would give <m>0.550923 \pm 1.972425 \cdot 0.227135</m>, which coincides with the interval reported by <c>t.test</c>. For practical applications the difference between the two confidence intervals are not negligible.</fn>.</p>
+    </subsection>
+
+    <subsection xml:id="subsec-two-samples-t-test">
+      <title>The t-Test for Two Means</title>
+
+      <p>The statistical model that involves two sub-populations may be considered also in the context of hypothesis testing. Hypotheses can be formulated regarding the relations between the parameters of the model. These hypotheses can be tested using the data. For example, in the current application of the <m>t</m>-test, the null hypothesis is <m>H_0: \Expec(X_a) = \Expec(X_b)</m> and the alternative hypothesis is <m>H_1: \Expec(X_a) \not= \Expec(X_b)</m>. In this subsection we explain the theory behind this test.</p>
+
+      <p>Recall that the construction of a statistical test included the definition of a test statistic and the determination of a rejection region. The null hypothesis is rejected if, and only if, the test statistic obtains a value in the rejection region. The determination of the rejection region is based on the sampling distribution of the test statistic under the null hypothesis. The significance level of the test is the probability of rejecting the null hypothesis (i.e., the probability that the test statistic obtains a value in the rejection region) when the null hypothesis is correct (the distribution of the test statistic is the distribution under the null hypothesis). The significance level of the test is set at a given value, say 5%, thereby restricting the size of the rejection region.</p>
+
+      <p>In the previous chapter we consider the case where there is one population. For review, consider testing the hypothesis that the expectation of the measurement is equal to zero (<m>H_0: \Expec(X) = 0</m>) against the alternative hypothesis that it is not (<m>H_1: \Expec(X) \not = 0</m>). A sample of size <m>n</m> is obtained from this population. Based on the sample one may compute a test statistic:</p>
+
+      <me>T = \frac{\bar X - 0}{S/\sqrt{n}} = \frac{\bar X}{S/\sqrt{n}}\;,</me>
+
+      <p>where <m>\bar X</m> is the sample average and <m>S</m> is the sample standard deviation. The rejection region of this test is <m>\{|T| &gt; \mbox{\texttt{qt(0.975,n-1)}}\}</m>, for <c>qt(0.975,n-1)</c> the 0.975-percentile of the <m>t</m>-distribution on <m>n-1</m> degrees of freedom.</p>
+
+      <p>Alternatively, one may compute the <m>p</m>-value and reject the null hypothesis if the <m>p</m>-value is less than 0.05. The <m>p</m>-value in this case is equal to <m>\Prob(|T| &gt; |t|)</m>, where <m>t</m> is the computed value of the test statistic. The distribution of <m>T</m> is the <m>t</m>-distribution of <m>n-1</m> degrees of freedom.</p>
+
+      <p>A similar approach can be used in the situation where two sub-population are involved and one wants to test the null hypothesis that the expectations are equal versus the alternative hypothesis that they are not. The null hypothesis can be written in the form <m>H_0:\Expec(X_a) - \Expec(X_b) = 0</m> with the alternative hypothesis given as <m>H_1:\Expec(X_a) - \Expec(X_b) \not = 0</m>.</p>
+
+      <p>It is natural to base the test static on the difference between sub-samples averages <m>\bar X_a - \bar X_b</m>. The <m>T</m> statistic is the ratio between the deviation of the estimator from the null value of the parameter, divided by the (estimated) standard deviation of the estimator. In the current setting the estimator is difference in sub-samples averages <m>\bar X_a - \bar X_b</m>, the null value of the parameter, the difference between the expectations, is 0, and the (estimated) standard deviation of the estimator is <m>\sqrt{S_a^2/n_a + S_b^2/n_b}</m>. It turns out that the test statistic in the current setting is:</p>
+
+      <me>T = \frac{\bar X_a - \bar X_b - 0}{ \sqrt{S_a^2/n_a + S^2_b/n_b}} = \frac{\bar X_a - \bar X_b}{ \sqrt{S_a^2/n_a + S^2_b/n_b}}\;.</me>
+
+      <p>Consider as a measurement the difference in miles-per-gallon. Define the sub-population <m>a</m> to the lighter cars and the sub-population <m>b</m> to be the heavier cars. Recall that the sub-sample sizes are <m>n_a =103</m> and <m>n_b=102</m>. Also, the sub-sample averages are <m>\bar x_a = 5.805825</m> and <m>\bar x_b =5.254902</m>, and the sub-sample variances are <m>s^2_a = 2.020750</m> and <m>s_b^2 = 3.261114</m>.</p>
+
+      <p>In order to calculate the observed value of the test statistic we use once more the fact that the difference between the averages is <m>\bar x_a - \bar x_b =  5.805825 - 5.254902 = 0.550923</m> and the estimated value of the standard deviation of the sub-samples average difference is:</p>
+
+      <me>\sqrt{s_a^2/n_a + s_b^2/n_b} = \sqrt{2.020750/103 + 3.261114/102} = 0.227135\;.</me>
+
+      <p>It follows that the observed value of the <m>T</m> statistic is</p>
+
+      <me>t = \frac{\bar x_a - \bar x_b}{\sqrt{s_a^2/n_a + s_b^2/n_b}} = \frac{0.550923}{0.227135} = 2.425531\;,</me>
+
+      <p>which, after rounding up, is equal to the value presented in the report that was produced by the function <c>t.test</c>.</p>
+
+      <p>The <m>p</m>-value is computed as the probability of obtaining values of the test statistic more extreme than the value that was obtained in our data. The computation is carried out under the assumptions of the null hypothesis. The limit distribution of the <m>T</m> statistic, when both sub-sample sizes <m>n_a</m> and <m>n_b</m> are large, is standard Normal. In the case when the measurements are Normally distributed then a refined approximation of the distribution of the statistic is the <m>t</m>-distribution. Both the standard Normal and the <m>t</m>-distribution are symmetric about the origin.</p>
+
+      <p>The probability of obtaining a value in either tails for a symmetric distribution is equal to twice the probability of obtaining a value in the upper tail:</p>
+
+      <me>\Prob( |T| &gt; 2.4255) = 2 \times \Prob( T &gt; 2.4255) =  2 \times \big [1 - \Prob( T \leq  2.4255)\big ]\;.</me>
+
+      <p>The function <c>t.test</c> computes the <m>p</m>-value using the <m>t</m>-distribution. For the current data, the number of degrees of freedom that are used in this approximation<fn>The Weltch <m>t</m>-test for the comparison of two means uses the <m>t</m>-distribution as an approximation of the null distribution of the <m>T</m> test statistic. The number of degrees of freedom is computed by the formula: <m>\mbox{\texttt{df}} = (v_a + v_b)^2/\{v_a^2/(n_a-1) + v_b^2/(n_b-1)\}</m>, where <m>v_a = s_a^2/n_a</m> and <m>v_b = s_b^2/n_b</m>.</fn> is <c>df</c> = 191.561. When we apply the function <c>pt</c> for the computation of the cumulative probability of the <m>t</m>-distribution we get:</p>
+
+      <program language="r">
+        <input>
+2*(1-pt(2.4255,191.561))
+        </input>
+      </program>
+<pre>
+## [1] 0.01621458
+</pre>
+      <p>which (after rounding) is equal to the reported <m>p</m>-value of 0.01621. This <m>p</m>-value is less than 0.05, hence the null hypothesis is rejected in favor of the alternative hypothesis that assumes an effect of the weight on the expectation.</p>
+    </subsection>
   </section>
 
-  <section xml:id="sec-exercises-13">
+  <section xml:id="sec-two-samples-comparing-variances">
+    <title>Comparing Sample Variances</title>
+
+    <p>In the previous section we discussed inference associated with the comparison of the expectations of a numerical measurement between two sub-population. Inference included the construction of a confidence interval for the difference between expectations and the testing of the hypothesis that the expectations are equal to each other.</p>
+
+    <p>In this section we consider a comparisons between variances of the measurement in the two sub-populations. For this inference we consider the ratio between estimators of the variances and introduce a new distribution, the <m>F</m>-distribution, that is associated with this ratio.</p>
+
+    <p>Assume, again, the presence of two sub-populations, denoted <m>a</m> and <m>b</m>. A numerical measurement is taken over a sample. The sample can be divided into two sub-samples according to the sub-population of origin. In the previous section we were interested in inference regarding the relation between the expectations of the measurement in the two sub-populations. Here we are concerned with the comparison of the variances.</p>
+
+    <p>Specifically, let <m>X_a</m> be the measurement at the first sub-population and let <m>X_b</m> be the measurement at the second sub-population. We want to compare <m>\Var(X_a)</m>, the variance in the first sub-population, to <m>\Var(X_b)</m>, the variance in the second sub-population. As the basis for the comparison we may use <m>S_a^2</m> and <m>S_b^2</m>, the sub-samples variances, which are computed from the observations in the first and the second sub-sample, respectively.</p>
+
+    <p>Consider the confidence interval for the ratio of the variances. In <xref ref="ch-confidence-intervals" /> we discussed the construction of the confidence interval for the variance in a single sample. The derivation was based on the sample variance <m>S^2</m> that serves as an estimator of the population variance <m>\Var(X)</m>. In particular, the distribution of the random variable <m>(n-1)S^2/\Var(X)</m> was identified as the chi-square distribution on <m>n-1</m> degrees of freedom<fn>This statement holds when the distribution of the measurement is Normal.</fn>. A confidence interval for the variance was obtained as a result of the identification of a central region in the chi-square distribution that contains a pre-subscribed probability<fn>Use <m>\Prob(\mbox{\texttt{qchisq(0.025,n-1)}} \leq (n-1)S^2/\Var(X) \leq \mbox{\texttt{qchisq(0.975,n-1)}}) = 0.95</m> and rewrite the event in a format that puts the parameter in the center. The resulting 95% confidence interval is <m>[(n-1)S^2/\mbox{\texttt{qchisq(0.975,n-1)}},(n-1)S^2/\mbox{\texttt{qchisq(0.025,n-1)}}]</m>.</fn>.</p>
+
+    <p>In order to construct a confidence interval for the ratio of the variances we consider the random variable that is obtained as a ratio of the estimators of the variances:</p>
+
+    <me>\frac{S_a^2/\Var(X_a)}{S^2_b/\Var(X_b)} \sim F_{(n_a-1,n_b-1)}\;.</me>
+
+    <p>The distribution of this random variable is denoted the <m>F</m>-distribution<fn>The <m>F</m> distribution is obtained when the measurement has a Normal distribution. When the distribution of the measurement is not Normal then the distribution of the given random variable will not be the <m>F</m>-distribution.</fn>. This distribution is characterized by the number of degrees of freedom associated with the estimator of the variance at the numerator and by the number of degrees of freedom associated with the estimator of the variance at the denominator. The number of degrees of freedom associated with the estimation of each variance is the number of observation used for the computation of the estimator, minus 1. In the current setting the numbers of degrees of freedom are <m>n_a-1</m> and <m>n_b-1</m>, respectively.</p>
+
+    <p>The percentiles of the <m>F</m>-distribution can be computed in <c>R</c> using the function <c>qf</c>. For example, the 0.025-percentile of the distribution for the ratio between sample variances of the response for two sub-samples is computed by the expression <c>qf(0.025,dfa,dfb)</c>, where <m>\mbox{\texttt{dfa}} = n_a - 1</m> and <m>\mbox{\texttt{dfb}} = n_b - 1</m>. Likewise, the 0.975-percentile is computed by the expression <c>qf(0.975,dfa,dfb)</c>. Between these two numbers lie 95% of the given <m>F</m>-distribution. Consequently, the probability that the random variable <m>\{S_a^2/\Var(X_a)\}/\{S_b^2/\Var(X_b)\}</m> obtains its values between these two percentiles is equal to 0.95:</p>
+
+    <me>\begin{aligned}
+\lefteqn{\frac{S_a^2/\Var(X_a)}{S_b^2/\Var(X_b)} \sim F_{(n_a-1,n_b-1)} \quad \Longrightarrow }\\ &amp; \Prob \big( \mbox{\texttt{qf(0.025,dfa,dfb)}} \leq  {\textstyle \frac{S_a^2/\Var(X_a)}{S_b^2/\Var(X_b)}}  \leq \mbox{\texttt{qf(0.975,dfa,dfb)}} \big) = 0.95\;.\end{aligned}</me>
+
+    <p>A confidence interval for the ratio between <m>\Var(X_a)</m> and <m>\Var(X_b)</m> is obtained by reformulation of the last event. In the reformulation, the ratio of the variances is placed in the center:</p>
+
+    <me>\Big\{\frac{S_a^2/S_b^2}{\mbox{\texttt{qf(0.975,dfa,fdb)}}} \leq  \frac{\Var(X_a)}{\Var(X_b)}  \leq \frac{S_a^2/S_b^2}{\mbox{\texttt{qf(0.025,dfa,dfb)}}}\Big\}\;.</me>
+
+    <p>This confidence interval has a significance level of 95%.</p>
+
+    <p>Next, consider testing hypotheses regarding the relation between the variances. Of particular interest is testing the equality of the variances. One may formulate the null hypothesis as <m>H_0: \Var(X_a)/\Var(X_b) = 1</m> and test it against the alternative hypothesis <m>H_1: \Var(X_a)/\Var(X_b) \not = 1</m>.</p>
+
+    <p>The statistic <m>F = S_a^2/S_b^2</m> can used in order to test the given null hypothesis. Values of this statistic that are either much larger or much smaller than 1 are evidence against the null hypothesis and in favor of the alternative hypothesis. The sampling distribution, under that null hypothesis, of this statistic is the <m>F_{(n_a-1,n_b-1)}</m> distribution. Consequently, the null hypothesis is rejected either if <m>F &lt; \mbox{\texttt{qf(0.025,dfa,dfb)}}</m> or if <m>F &gt;\mbox{\texttt{qf(0.975,dfa,dfb)}}</m>, where <m>\mbox{\texttt{dfa}} = n_a - 1</m> and <m>\mbox{\texttt{dfb}} = n_b - 1</m>. The significance level of this test is 5%.</p>
+
+    <p>Given an observed value of the statistic, the <m>p</m>-value is computed as the significance level of the test which uses the observed value as the threshold. If the observed value <m>f</m> is less than 1 then the <m>p</m>-value is twice the probability of the lower tail: <m>2\cdot \Prob(F &lt; f)</m>. On the other hand, if <m>f</m> is larger than 1 one takes twice the upper tail as the <m>p</m>-value: <m>2\cdot \Prob(F &gt; f) = 2\cdot [1-\Prob(F \leq f)]</m>. The null hypothesis is rejected with a significance level of 5% if the <m>p</m>-value is less than 0.05.</p>
+
+    <p>In order to illustrate the inference that compares variances let us return to the variable <c>dif.mpg</c> and compare the variances associated with the two levels of the factor <c>heavy</c>. The analysis will include testing the hypothesis that the two variances are equal and an estimate and a confidence interval for their ratio.</p>
+
+    <p>The function <c>var.test</c> may be used in order to carry out the required tasks. The input to the function is a formula such <c>dif.mpg~heavy</c>, with a numeric variable on the left and a factor with two levels on the right. The default application of the function to the formula produces the desired test and confidence interval:</p>
+
+    <program language="r">
+      <input>
+var.test(dif.mpg~heavy)
+      </input>
+    </program>
+<pre>
+## 
+##  F test to compare two variances
+## 
+## data:  dif.mpg by heavy
+## F = 0.61965, num df = 102, denom df = 101, p-value = 0.01663
+## alternative hypothesis: true ratio of variances is not equal to 1
+## 95 percent confidence interval:
+##  0.4189200 0.9162126
+## sample estimates:
+## ratio of variances 
+##          0.6196502
+</pre>
+
+    <p>Consider the report produced by the function. The observed value of the test statistic is <c>F = 0.6197</c>, and it is associated with the <m>F</m>-distribution on <c>num df = 102</c> and <c>denom df = 101</c> degrees of freedom. The test statistic can be used in order to test the null hypothesis <m>H_0: \Var(X_a)/\Var(X_b) = 1</m>, that states that the two variance are equal, against the alternative hypothesis that they are not. The <m>p</m>-value for this test is <c>p-value = 0.01663</c>, which is less than 0.05. Consequently, the null hypothesis is rejected and the conclusion is that the two variances are significantly different from each other. The estimated ratio of variances, given at the bottom of the report, is 0.6196502. The confidence interval for the ratio is reported also and is equal to <m>[0.4189200, 0.9162126]</m>.</p>
+
+    <p>In order to relate the report to the theoretical discussion above let us recall that the sub-samples variances are <m>s^2_a = 2.020750</m> and <m>s_b^2 = 3.261114</m>. The sub-samples sizes are <m>n_a = 103</m> and <m>n_b = 102</m>, respectively. The observed value of the statistic is the ratio <m>s_a^2/s_b^2 = 2.020750/3.261114 = 0.6196502</m>, which is the value that appears in the report. Notice that this is the estimate of the ratio between the variances that is given at the bottom of the report.</p>
+
+    <p>The <m>p</m>-value of the two-sided test is equal to twice the probability of the tail that is associated with the observed value of the test statistic as a threshold. The number of degrees of freedom is <m>\mbox{\texttt{dfa}} = n_a - 1 = 102</m> and <m>\mbox{\texttt{dfb}} = n_b - 1 = 101</m>. The observed value of the ratio test statistic is <m>f = 0.6196502</m>. This value is less than one. Consequently, the probability <m>\Prob(F &lt; 0.6196502)</m> enters into the computation of the <m>p</m>-value, which equals twice this probability:</p>
+
+    <program language="r">
+      <input>
+2*pf(0.6196502,102,101)
+      </input>
+    </program>
+<pre>
+## [1] 0.01662612
+</pre>
+    <p>Compare this value to the <m>p</m>-value that appears in the report and see that, after rounding up, the two are the same.</p>
+
+    <p>For the confidence interval of the ratio compute the percentiles of the <m>F</m> distribution:</p>
+
+    <program language="r">
+      <input>
+qf(0.025,102,101)
+qf(0.975,102,101)
+      </input>
+    </program>
+<pre>
+## [1] 0.676317
+</pre>
+<pre>
+## [1] 1.479161
+</pre>
+    <p>The confidence interval is equal to:</p>
+
+    <me>\begin{aligned}
+\Big[\frac{s_a^2/s_b^2}{\mbox{\texttt{qf(0.975,102,101)}}} , \frac{s_a^2/s_b^2}{\mbox{\texttt{qf(0.025,102,101)}}}\Big] &amp;= \Big[\frac{0.6196502}{1.479161} , \frac{0.6196502}{0.676317}\Big]\\ &amp;= [0.4189200, 0.9162127]\;,\end{aligned}</me>
+
+    <p>which coincides with the reported interval.</p>
+  </section>
+
+  <section xml:id="sec-two-samples-exercises">
     <title>Exercises</title>
-    <p>Content to be added.</p>
+
+    <exercise xml:id="exercise-13-1">
+      <statement>
+        <p>In this exercise we would like to analyze the results of the trial that involves magnets as a treatment for pain. The trial is described in Question [ex:Inference.1]. The results of the trial are provided in the file <c>magnets.csv</c>.</p>
+
+        <p>Patients in this trail where randomly assigned to a treatment or to a control. The responses relevant for this analysis are either the variable <c>change</c>, which measures the difference in the score of pain reported by the patients before and after the treatment, or the variable <c>score1</c>, which measures the score of pain before a device is applied. The explanatory variable is the factor <c>active</c>. This factor has two levels, level <c>1</c> to indicate the application of an active magnet and level <c>2</c> to indicate the application of an inactive placebo.</p>
+
+        <p>In the following questions you are required to carry out tests of hypotheses. All tests should conducted at the 5% significance level:</p>
+
+        <ol>
+          <li>
+            <p>Is there a significance difference between the treatment and the control groups in the expectation of the reported score of pain before the application of the device?</p>
+          </li>
+          <li>
+            <p>Is there a significance difference between the treatment and the control groups in the variance of the reported score of pain before the application of the device?</p>
+          </li>
+          <li>
+            <p>Is there a significance difference between the treatment and the control groups in the expectation of the change in score that resulted from the application of the device?</p>
+          </li>
+          <li>
+            <p>Is there a significance difference between the treatment and the control groups in the variance of the change in score that resulted from the application of the device?</p>
+          </li>
+        </ol>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="exercise-13-2">
+      <statement>
+        <p>It is assumed, when constructing the <m>F</m>-test for equality of variances, that the measurements are Normally distributed. In this exercise we want to examine the robustness of the test to divergence from the assumption. You are required to compute the significance level of a two-sided <m>F</m>-test of <m>H_0:\Var(X_a)=\Var(X_b)</m> versus <m>H_1: \Var(X_a)\not =\Var(X_b)</m>. Assume there are <m>n_a=29</m> observations in one group and <m>n_b = 21</m> observations in the other group. Use an <m>F</m>-test with a nominal 5% significance level.</p>
+
+        <ol>
+          <li>
+            <p>Consider the case where <m>X \sim \mathrm{Normal}(4,4^2)</m>.</p>
+          </li>
+          <li>
+            <p>Consider the case where <m>X \sim \mathrm{Exponential}(1/4)</m>.</p>
+          </li>
+        </ol>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="exercise-13-3">
+      <statement>
+        <p>The sample average in one sub-sample is <m>\bar x_a = 124.3</m> and the sample standard deviation is <m>s_a = 13.4</m>. The sample average in the second sub-sample is <m>\bar x_b = 80.5</m> and the sample standard deviation is <m>s_b = 16.7</m>. The size of the first sub-sample is <m>n_a=15</m> and this is also the size of the second sub-sample. We are interested in the estimation of the ratio of variances <m>\Var(X_a)/\Var(X_b)</m>.</p>
+
+        <ol>
+          <li>
+            <p>Compute the estimate of parameter of interest.</p>
+          </li>
+          <li>
+            <p>Construct a confidence interval, with a confidence level of 95%, to the value of the parameter of interest.</p>
+          </li>
+          <li>
+            <p>It is discovered that the size of each of the sub-samples is actually equal to 150, and no to 15 (but the values of the other quantities are unchanged). What is the corrected estimate? What is the corrected confidence interval?</p>
+          </li>
+        </ol>
+      </statement>
+    </exercise>
   </section>
 
-  <section xml:id="sec-summary-13">
+  <section xml:id="sec-two-samples-summary">
     <title>Summary</title>
-    <p>Content to be added.</p>
+
+    <subsection xml:id="subsec-two-samples-glossary">
+      <title>Glossary</title>
+
+      <dl>
+        <li>
+          <title>Response</title>
+          <p>The variable who's distribution one seeks to investigate.</p>
+        </li>
+        <li>
+          <title>Explanatory Variable</title>
+          <p>A variable that may affect the distribution of the response.</p>
+        </li>
+      </dl>
+    </subsection>
+
+    <subsection xml:id="subsec-two-samples-discuss">
+      <title>Discuss in the Forum</title>
+
+      <p>Statistics has an important role in the analysis of data. However, some claim that the more important role of statistics is in the design stage when one decides how to collect the data. Good design may improve the chances that the eventual inference of the data will lead to a meaningful and trustworthy conclusion.</p>
+
+      <p>Some say that the quantity of data that is collected is most important. Other say that the quality of the data is more important than the quantity. What is your opinion?</p>
+
+      <p>When formulating your answer it may be useful to come up with an example from your past experience where the quantity of data was not sufficient. Else, you can describe a case where the quality of the data was less than satisfactory. How did these deficiencies affected the validity of the conclusions of the analysis of the data?</p>
+
+      <p>For illustration consider the surveys. Conducting the survey by the telephone may be a fast way to reach a large number of responses. However, the quality of the response may be less that the response obtained by face-to-face interviews.</p>
+    </subsection>
+
+    <subsection xml:id="subsec-two-samples-formulas">
+      <title>Formulas</title>
+
+      <ul>
+        <li>
+          <p>Test statistic for equality of expectations: <m>t = (\bar x_a - \bar x_b)/ \sqrt{s_a^2/n_a + s_b^2/n_b}</m>.</p>
+        </li>
+        <li>
+          <p>Confidence interval: <m>(\bar x_a - \bar x_b) \pm \mbox{\texttt{qnorm(0.975)}}\sqrt{s_a^2/n_a + s_b^2/n_b}</m>.</p>
+        </li>
+        <li>
+          <p>Test statistic for equality of variances: <m>f = s_a^2/s_b^2</m>.</p>
+        </li>
+        <li>
+          <p>Confidence interval: <me>\big[(s_a^2/s_b^2)/\mbox{\texttt{qf(0.975,dfa,dfb)}} , (s_a^2/s_b^2)/\mbox{\texttt{qf(0.025,dfa,dfb)}}\big]\;.</me></p>
+        </li>
+      </ul>
+    </subsection>
   </section>
 </chapter>
