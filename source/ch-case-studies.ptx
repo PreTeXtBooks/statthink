@@ -158,7 +158,7 @@ summary(patient)
       </program>
       <p>
         Observe that of the 72 <q>patients</q>, 38 are overweight and 33 have an
-        average weight. The time spend with the patient, as predicted by
+        average weight. The time spent with the patient, as predicted by
         physicians, is distributed between 5 minutes and 1 hour, with a average
         of 27.82 minutes and a median of 30 minutes.
       </p>
@@ -195,7 +195,7 @@ table(patient$time)
         that was asked.
       </p>
       <p>
-        The goal of the analysis is to examine the relation between overweigh
+        The goal of the analysis is to examine the relation between overweight
         and the Doctor's response. The explanatory variable is a factor with two
         levels. The response is numeric. A natural tool to use in order to test
         this hypothesis is the <m>t</m>-test, which is implemented with the function
@@ -217,7 +217,7 @@ t.test(time~weight,data=patient)
         fairly symmetric.
       </p>
       <p>
-        When we consider the report that produced by the function <c>t.test</c> we
+        When we consider the report that is produced by the function <c>t.test</c> we
         may observe that the <m>p</m>-value is equal to 0.005774. This <m>p</m>-value is
         computed in testing the null hypothesis that the expectation of the
         response for both types of patients are equal against the two sided
@@ -281,7 +281,7 @@ table(patient$time,patient$weight)
         an Exponential response that were conducted in an earlier exercise
         may cast some doubt on how trustworthy are nominal <m>p</m>-values of the
         <m>t</m>-test when the measurements are skewed. The skewness of the response
-        for the group <c>BMI=30</c> is a reason to be worry.
+        for the group <c>BMI=30</c> is a reason to worry.
       </p>
       <p>
         We may consider a different test, which is more robust, in order to
@@ -385,7 +385,7 @@ hist(job$sims)
       </program>
       <p>
         All variables are numeric. Examination of the 4 summaries and
-        histograms does not produce interest findings. All variables are, more
+        histograms does not produce interesting findings. All variables are, more
         or less, symmetric with the distribution of the variable <c>ratings</c>
         tending perhaps to be more uniform then the other three.
       </p>
@@ -471,9 +471,9 @@ summary(sims.grip)
         </input>
       </program>
       <p>
-        Examination of the report reviles a clear statistical significance for
+        Examination of the report reveals a clear statistical significance for
         the effect of the explanatory variable on the distribution of response.
-        The value of R-squared, the ration of the variance of the response
+        The value of R-squared, the ratio of the variance of the response
         explained by the regression is <m>0.4094</m>. The square root of this
         quantity, <m>\sqrt{0.4094} \approx 0.64</m>, is the proportion of the
         standard deviation of the response that is explained by the explanatory
@@ -540,7 +540,7 @@ summary(sims.score)
         corresponds to a proportion of the standard deviation that is explained by
         the model of <m>\sqrt{0.5422} \approx 0.74</m>. Thus, almost 3/4 of the
         variability is accounted for by the score, so the score is a reasonable
-        mean of guessing what the results of the simulations will be. This guess
+        means of guessing what the results of the simulations will be. This guess
         is based only on the results of the simple tests of strength that is
         conducted with the JES device.
       </p>
@@ -570,7 +570,7 @@ plot(grip~arm,data=job)
       </p>
       <p>
         In light of this observation, one may want to consider other measures of
-        strength that represents features of the strength not captures by these
+        strength that represents features of the strength not captured by these
         two variable. Namely, measures that show less joint trend than the two
         considered.
       </p>
@@ -611,7 +611,7 @@ qqline(residuals(sims.score))
       </program>
       <p>
         The produced histogram is represented on the upper panel. The histogram portrays a symmetric
-        distribution that my result from Normally distributed observations. A
+        distribution that may result from Normally distributed observations. A
         better method to compare the distribution of the residuals to the Normal
         distribution is to use the <em>Quantile-Quantile plot</em>. This plot can be
         found on the lower panel. We do not
