@@ -27,5 +27,6 @@
     <js>
       <file source="custom-program-toggle.js"/>
     </js>
+    <runestone services="none"/>
   </html>
 </publication>
