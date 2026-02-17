@@ -96,7 +96,7 @@ plot(table(n.cost))
       <title>Exercise 3.2</title>
       
       <ol>
-        <li><p>In order to compute the mean of the data we may write the following simple <c>R</c> code:</p><
+        <li><p>In order to compute the mean of the data we may write the following simple <c>R</c> code:</p>
       <program language="r">
         <input>
 x.val &lt;- c(2,4,6,8,10)
