@@ -96,7 +96,7 @@
       Let us apply the methods that were introduced throughout the book to two
       examples of data analysis. Both examples are taken from the case studies
       of the <url href="http://onlinestatbook.com/rvls.html">Rice Virtual Lab in
-      Statistics</url> can be found in their
+      Statistics</url> and can be found in their
       <url href="http://onlinestatbook.com/case_studies_rvls/">Case Studies</url> section.
       The analysis of these case studies may involve any of the tools that
       were described in the second part of the book (and some from the first
@@ -159,12 +159,12 @@ summary(patient)
       <p>
         Observe that of the 72 <q>patients</q>, 38 are overweight and 33 have an
         average weight. The time spent with the patient, as predicted by
-        physicians, is distributed between 5 minutes and 1 hour, with a average
+        physicians, is distributed between 5 minutes and 1 hour, with an average
         of 27.82 minutes and a median of 30 minutes.
       </p>
       <p>
         It is a good practice to have a look at the data before doing the
-        analysis. In this examination on should see that the numbers make sense
+        analysis. In this examination one should see that the numbers make sense
         and one should identify special features of the data. Even in this very
         simple example we may want to have a look at the histogram of the
         variable <c>time</c>:
@@ -359,10 +359,10 @@ prop.test(table(patient$time&gt;=30,patient$weight))
         Two separate measures of job performance are presented in this case
         study. First, the supervisors for each of the participants were asked to
         rate how well their employee(s) perform on the physical aspects of their
-        jobs. This measure is summarizes in the variable <c>ratings</c>. Second,
+        jobs. This measure is summarized in the variable <c>ratings</c>. Second,
         simulations of physically demanding work tasks were developed. The
         summary score of these simulations are given in the variable <c>sims</c>.
-        Higher values of either measures of performance indicates better
+        Higher values of either measure of performance indicate better
         performance.
       </p>
       <p>
@@ -652,7 +652,7 @@ qqline(residuals(sims.score))
       <p>
         One element is more of the same. The statistical models that were
         presented are as simple as a model can get. A typical application will
-        required more complex models. Each of these models may require specific
+        require more complex models. Each of these models may require specific
         methods for estimation and testing. The characteristics of inference,
         e.g. significance or confidence levels, rely on assumptions that the
         models are assumed to possess. The user should be familiar with
@@ -669,7 +669,7 @@ qqline(residuals(sims.score))
         In many applications it is important to assess what the values of future
         observations may be and in what range of values are they likely to
         occur. Statistical tools such as regression are natural in this context.
-        However, the required task is not testing or estimation the values of
+        However, the required task is not testing or estimating the values of
         parameters, but the prediction of future values of the response.
       </p>
       <p>
