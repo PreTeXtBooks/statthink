@@ -3,8 +3,8 @@
 <chapter xml:id="ch-random-variables" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Random Variables</title>
 
-  <section xml:id="sec-student-learning-objective">
-    <title>Student Learning Objective</title>
+  <section xml:id="sec-student-learning-objectives">
+    <title>Student Learning Objectives</title>
       <p>
         This section introduces some important examples of random variables. The
         distributions of these random variables emerge as mathematical models of
@@ -465,8 +465,8 @@ sum((X.val-EX)^2*P.val)
     </subsection>
   </section>
 
-  <section xml:id="sec-continuous-random-variable">
-    <title>Continuous Random Variable</title>
+  <section xml:id="sec-continuous-random-variables">
+    <title>Continuous Random Variables</title>
     
     <introduction>
       <p>
@@ -944,32 +944,6 @@ pexp(6,0.5) - pexp(2,0.5)
           <p><m>\Expec(X) = 1/\lambda\;, \quad \Var(X)= 1/\lambda^2</m></p>
         </li>
       </dl>
-      <p>
-        <m>\Prob(X = x) = {n \choose x} p^x (1-p)^{n-x}</m>, for
-        <m>x = 0, 1, \ldots, n</m>.
-      </p>
-      <p>
-        <m>\Prob(X=x) = e^{-\lambda}\lambda^x/x!</m>, for <m>x=0,1,2,\ldots</m>.
-      </p>
-      <p>
-        <m>\mathrm{Binomial}(n,p)</m> setting. The number <m>n</m> is the total number
-        of atoms in the unit mass and <m>p</m> is the probability that an atom
-        decays within the given second. However, since <m>n</m> is very large and
-        <m>p</m> is very small we get that the Poisson distribution is an
-        appropriate model for the count.
-      </p>
-      <p>
-        <m>f(x) = 1/(b-a)</m>, for <m>a \leq x \leq b</m>, and it is equal to 0 for
-        other values of <m>x</m>.
-      </p>
-      <p>
-        is <m>f(x) =\lambda e^{-\lambda x}</m>, for <m>0 \leq x</m>, and it is equal
-        to 0 for <m>x &lt; 0</m>.
-      </p>
-      <p>
-        <m>X\sim \mbox{Negative-Binomial}(r,p)</m> then <m>\Expec(X) = r(1-p)/p</m>
-        and <m>\Var(X) = r(1-p)/p^2</m>.
-      </p>
     </subsection>
   </section>
 </chapter>
