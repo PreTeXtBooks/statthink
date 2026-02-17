@@ -68,7 +68,7 @@
     </p>
     <p>
       The discussion in this section is parallel to the discussion in
-      Section <xref ref="sec-comparing-means" />. That section considered the comparison of
+      Section <xref ref="sec-two-sample-tests" />. That section considered the comparison of
       the expectation of a numerical response between two sub-populations. We
       denoted these sub-populations <m>a</m> and <m>b</m> with expectations
       <m>\Expec(X_a)</m> and <m>\Expec(X_b)</m>, respectively. The inference used the
