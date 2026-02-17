@@ -31,6 +31,11 @@ n.cost &lt;- c(4,2,1,1,0,2,1,2,4,2,5,3,1,5,1,5,1,2,1,1,3,4,2,4,3)
 table(n.cost)
         </input>
       </program>
+<pre>
+## n.cost
+## 0 1 2 3 4 5 
+## 1 8 6 3 4 3
+</pre>
       <p>For convenience, one may also create the bar plot of the data using the code:</p>
       <program language="r">
         <input>
@@ -77,12 +82,11 @@ plot(table(n.cost))
       <title>Exercise 3.1</title>
       
       <ol>
-        <li><p>Consider the data “<c>x1</c>". From the summary we see that it is distributed in the range between 0 and slightly below 5. The central 50% of the distribution are located between 2.5 and 3.8. The mean and median are approximately equal to each other, which suggests an approximately symmetric distribution. Consider the histograms in <xref ref="fig-dstat9"/>. Histograms 1 and 3 correspond to a distributions in the appropriate range. However, the distribution in Histogram 3 is concentrated in lower values than suggested by the given first and third quartiles. Consequently, we match the summary of “<c>x1</c>" with Histogram 1.</p></li>
-      </ol>
+        <li><p>Consider the data “<c>x1</c>". From the summary we see that it is distributed in the range between 0 and slightly below 5. The central 50% of the distribution are located between 2.5 and 3.8. The mean and median are approximately equal to each other, which suggests an approximately symmetric distribution. Consider the histograms in <xref ref="fig-dstat9"/>. Histograms 1 and 3 correspond to a distributions in the appropriate range. However, the distribution in Histogram 3 is concentrated in lower values than suggested by the given first and third quartiles. Consequently, we match the summary of “<c>x1</c>" with Histogram 1.</p>
       <p>Consider the data “<c>x2</c>". Again, the distribution is in the range     between 0 and slightly below 5. The central 50% of the distribution are     located between 0.6 and 1.8. The mean is larger than the median, which     suggests a distribution skewed to the right. Therefore, we match the     summary of “<c>x2</c>" with Histogram 3.</p>
       <p>For the data in “<c>x3</c>" we may note that the distribution is in the range     between 2 and 6. The histogram that fits this description is     Histograms 2.</p>
       <p>The box plot is essentially a graphical representation of the     information presented by the function “<c>summary</c>". Following the     rational of matching the summary with the histograms we may obtain that     Histogram 1 should be matched with Box-plot 2 in     <xref ref="fig-dstat10"/>, Histogram 2 matches Box-plot 3, and     Histogram 3 matches Box-plot 1. Indeed, it is easier to match the box     plots with the summaries. However, it is a good idea to practice the     direct matching of histograms with box plots.</p>
-      <ol>
+        </li>
         <li><p>The data in “<c>x1</c>" fits Box-plot 2 in <xref ref="fig-dstat10"/>. The value 0.000 is the smallest value in the data and it corresponds to the smallest point in the box plot. Since this point is below the bottom whisker it follows that it is an outlier. More directly, we may note that the inter-quartile range is equal to <m>IQR = 3.840 - 2.498 = 1.342</m>. The lower threshold is equal to <m>2.498  - 1.5 \times 1.342 = 0.485</m>, which is larger that the given value. Consequently, the given value 0.000 is an outlier.</p></li>
         <li><p>Observe that the data in “<c>x3</c>" fits Box-plot 3 in <xref ref="fig-dstat10"/>. The vale 6.414 is the largest value in the data and it corresponds to the endpoint of the upper whisker in the box plot and is not an outlier. Alternatively, we may note that the inter-quartile range is equal to <m>IQR =  4.690 - 3.391 = 1.299</m>. The upper threshold is equal to <m>4.690 + 1.5 \times 1.299 = 6.6385</m>, which is larger that the given value. Consequently, the given value 6.414 is not an outlier.</p></li>
       </ol>
@@ -103,6 +107,9 @@ x.bar &lt;- sum(x.val*rel.freq)
 x.bar
         </input>
       </program>
+<pre>
+## [1] 4.666667
+</pre>
       <p>We created an object “<c>x.val</c>" that contains the unique values of the     data and an object “<c>freq</c>" that contains the frequencies of the values.     The object “<c>rel.freq</c>" contains the relative frequencies, the ratios     between the frequencies and the number of observations. The average is     computed as the sum of the products of the values with their relative     frequencies. It is stored in the objects “<c>x.bar</c>" and obtains the value     4.666667.</p>
       <p>An alternative approach is to reconstruct the original data from the     frequency table. A simple trick that will do the job is to use the     function “<c>rep</c>". The first argument to this function is a sequence of     values. If the second argument is a sequence of the same length that     contains integers then the output will be composed of a sequence that     contains the values of the first sequence, each repeated a number of     times indicated by the second argument. Specifically, if we enter to     this function the unique value “<c>x.val</c>" and the frequency of the values     “<c>freq</c>" then the output will be the sequence of values of the original     sequence “<c>x</c>":</p>
       <program language="r">
@@ -112,16 +119,25 @@ x
 mean(x)
         </input>
       </program>
+<pre>
+##  [1]  2  2  2  2  2  2  2  2  2  2  4  4  4  4  4  4  6  6  6  6  6  6  6
+## [24]  6  6  6  8  8 10 10
+</pre>
+<pre>
+## [1] 4.666667
+</pre>
       <p>Observe that when we apply the function “<c>mean</c>" to “<c>x</c>" we get again     the value 4.666667.</p>
       <ol>
-        <li><p>In order to compute the sample standard deviation we may compute first the sample variance and then take the square root of the result:</p></li>
-      </ol>
+        <li><p>In order to compute the sample standard deviation we may compute first the sample variance and then take the square root of the result:</p>
       <program language="r">
         <input>
 var.x &lt;- sum((x.val-x.bar)^2*freq)/(sum(freq)-1)
 sqrt(var.x)
         </input>
       </program>
+<pre>
+## [1] 2.425914
+</pre>
       <p>Notice that the expression “<c>sum((x.val-x.bar)^2*freq)</c>" compute the sum     of square deviations. The expression “<c>(sum(freq)-1)</c>" produces the     number of observations minus 1 (<m>n-1</m>). The ratio of the two gives the     sample variance.</p>
       <p>Alternatively, had we produced the object “<c>x</c>" that contains the data,     we may apply the function “<c>sd</c>" to get the sample standard deviation:</p>
       <program language="r">
@@ -129,10 +145,12 @@ sqrt(var.x)
 sd(x)
         </input>
       </program>
+<pre>
+## [1] 2.425914
+</pre>
       <p>Observe that in both forms of computation we obtain the same result:     2.425914.</p>
-      <ol>
+      </li>
         <li><p>In order to compute the median one may produce the table of cumulative relative frequencies of “<c>x</c>":</p></li>
-      </ol>
       <program language="r">
         <input>
 data.frame(x.val,cumsum(rel.freq))
@@ -146,7 +164,15 @@ data.frame(x.val,cumsum(rel.freq))
 summary(x)
         </input>
       </program>
-      <ol>
+<pre>
+##   x.val cumsum.rel.freq.
+## 1     2        0.3333333
+## 2     4        0.5333333
+## 3     6        0.8666667
+## 4     8        0.9333333
+## 5    10        1.0000000
+</pre>
+      </li>
         <li><p>As for the inter-quartile range (IQR) notice that the first quartile is 2 and the third quartile is 6. Hence, the inter-quartile range is equal to 6 - 2 = 4. The quartiles can be read directly from the output of the function “<c>summary</c>" or can be obtained from the data frame of the cumulative relative frequencies. For the later observe that more than 25% of the data are less or equal to 2 and more 75% of the data are less or equal to 6 (with strictly less than 75% less or equal to 4).</p></li>
         <li><p>In order to answer the last question we conduct the computation: <m>(10 - 4.666667)/2.425914 = 2.198484</m>. We conclude that the value 10 is approximately 2.1985 standard deviations above the mean.</p></li>
       </ol>
@@ -161,28 +187,21 @@ summary(x)
       <title>Exercise 4.1</title>
       
       <ol>
-        <li><p>Consult Table <xref ref="tab-tab4"/>. The probabilities of the different values of <m>Y</m> are <m>\{p, 2p, \ldots, 6p\}</m>. These probabilities sum to 1, consequently</p></li>
-      </ol>
-      <p><me>p + 2p + 3 p + 4 p + 5 p + 6p = (1+2+3+4+5+6)p = 21 p = 1 \Longrightarrow p = 1/21\;.</me></p>
-      <ol>
-        <li><p>The event <m>\{Y &lt; 3\}</m> contains the values 0, 1 and 2. Therefore,</p></li>
-      </ol>
+        <li><p>Consult <xref ref="tab-tab4"/>. The probabilities of the different values of <m>Y</m> are <m>\{p, 2p, \ldots, 6p\}</m>. These probabilities sum to 1, consequently</p>
+      <p><me>p + 2p + 3 p + 4 p + 5 p + 6p = (1+2+3+4+5+6)p = 21 p = 1 \Longrightarrow p = 1/21\;.</me></p></li>
+        <li><p>The event <m>\{Y &lt; 3\}</m> contains the values 0, 1 and 2. Therefore,</p>
       <p><me>\Prob(Y &lt; 3) = \Prob(Y=0) + \Prob(Y=1) + \Prob(Y=2) = \frac{1}{21} + \frac{2}{21} + \frac{3}{21} = \frac{6}{21}= 0.2857\;.</me></p>
-      <ol>
-        <li><p>The event <m>\{Y = \mbox{odd}\}</m> contains the values 1, 3 and 5. Therefore,</p></li>
-      </ol>
+      </li>
+        <li><p>The event <m>\{Y = \mbox{odd}\}</m> contains the values 1, 3 and 5. Therefore,</p><
       <p><me>\Prob(Y = \mbox{odd}) = \Prob(Y=1) + \Prob(Y=3) + \Prob(Y=5) = \frac{2}{21} + \frac{4}{21} + \frac{6}{21} = \frac{12}{21}= 0.5714\;.</me></p>
-      <ol>
-        <li><p>The event <m>\{1 \leq Y &lt; 4\}</m> contains the values 1, 2 and 3. Therefore,</p></li>
-      </ol>
+      </li>
+        <li><p>The event <m>\{1 \leq Y &lt; 4\}</m> contains the values 1, 2 and 3. Therefore,</p>
       <p><me>\Prob(1 \leq Y &lt; 4) = \Prob(Y=1) + \Prob(Y=2) + \Prob(Y=3) = \frac{2}{21} + \frac{3}{21} + \frac{4}{21} = \frac{9}{21}= 0.4286\;.</me></p>
-      <ol>
-        <li><p>The event <m>\{|Y -3| &lt; 1.5\}</m> contains the values 2, 3 and 4. Therefore,</p></li>
-      </ol>
+       </li>
+        <li><p>The event <m>\{|Y -3| &lt; 1.5\}</m> contains the values 2, 3 and 4. Therefore,</p>
       <p><me>\Prob(|Y -3| &lt; 1.5) = \Prob(Y=2) + \Prob(Y=3) + \Prob(Y=4) = \frac{3}{21} + \frac{4}{21} + \frac{5}{21} = \frac{12}{21}= 0.5714\;.</me></p>
-      <ol>
-        <li><p>The values that the random variable <m>Y</m> obtains are the numbers 0, 1, 2, …, 5, with probabilities <m>\{1/21, 2/21, \ldots, 6/21\}</m>, respectively. The expectation is obtained by the multiplication of the values by their respective probabilities and the summation of the products. Let us carry out the computation in <c>R</c>:</p></li>
-      </ol>
+        </li>
+        <li><p>The values that the random variable <m>Y</m> obtains are the numbers 0, 1, 2, …, 5, with probabilities <m>\{1/21, 2/21, \ldots, 6/21\}</m>, respectively. The expectation is obtained by the multiplication of the values by their respective probabilities and the summation of the products. Let us carry out the computation in <c>R</c>:</p>
       <program language="r">
         <input>
 Y.val &lt;- c(0,1,2,3,4,5)
@@ -192,16 +211,15 @@ E
         </input>
       </program>
       <p>We obtain an expectation <m>\Expec(Y) = 3.3333</m>.</p>
-      <ol>
-        <li><p>The values that the random variable <m>Y</m> obtains are the numbers 0, 1, 2, …, 5, with probabilities <m>\{1/21, 2/21, \ldots, 6/21\}</m>, respectively. The expectation is equal to <m>\Expec(Y) = 3.333333</m>. The variance is obtained by the multiplication of the squared deviation from the expectation of the values by their respective probabilities and the summation of the products. Let us carry out the computation in <c>R</c>:</p></li>
-      </ol>
+     </li>
+<li><p>The values that the random variable <m>Y</m> obtains are the numbers 0, 1, 2, …, 5, with probabilities <m>\{1/21, 2/21, \ldots, 6/21\}</m>, respectively. The expectation is equal to <m>\Expec(Y) = 3.333333</m>. The variance is obtained by the multiplication of the squared deviation from the expectation of the values by their respective probabilities and the summation of the products. Let us carry out the computation in <c>R</c>:</p>
       <program language="r">
         <input>
 Var &lt;- sum((Y.val-E)^2*P.val)
         </input>
       </program>
       <p>We obtain a variance <m>\Var(Y) = 2.2222</m>.</p>
-      <ol>
+      </li>
         <li><p>The standard deviation is the square root of the variance: <m>\sqrt{\Var(Y)} = \sqrt{2.2222} = 1.4907</m>.</p></li>
       </ol>
     </subsection>
@@ -210,10 +228,9 @@ Var &lt;- sum((Y.val-E)^2*P.val)
       <title>Exercise 4.2</title>
       
       <ol>
-        <li><p>An outcome of the game of chance may be represented by a sequence of length three composed of the letters “H" and “T". For example, the sequence “THH“ corresponds to the case where the first toss produced a ”Tail", the second a “Head" and the third a “Head".</p></li>
-      </ol>
+        <li><p>An outcome of the game of chance may be represented by a sequence of length three composed of the letters “H" and “T". For example, the sequence “THH“ corresponds to the case where the first toss produced a ”Tail", the second a “Head" and the third a “Head".</p>
       <p>With this notation we obtain that the possible outcomes of the game are     <m>\{\mbox{HHH}, \mbox{THH},\mbox{HTH}, \mbox{TTH},\mbox{HHT}, \mbox{THT},\mbox{HTT},          \mbox{TTT}\}</m>. All outcomes are equally likely. There are 8 possible outcomes and only     one of which corresponds to winning. Consequently, the probability of winning is 1/8.</p>
-      <ol>
+      </li>
         <li><p>Consider the previous solution. One looses if any other of the outcomes occurs. Hence, the probability of loosing is 7/8.</p></li>
         <li><p>Denote the gain of the player by <m>X</m>. The random variable <m>X</m> may obtain two values: 10-2 = 8 if the player wins and -2 if the player looses. The probabilities of these values are {1/8, 7/8}, respectively. Therefore, the expected gain, the expectation of <m>X</m> is:</p></li>
       </ol>
