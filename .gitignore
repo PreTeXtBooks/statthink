@@ -16,3 +16,4 @@ logs/
 codechat_config.yaml
 .devcontainer.json
 *.whl
+.github/workflows/pretext-cli.yml
