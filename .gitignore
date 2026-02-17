@@ -15,3 +15,4 @@ cli.log
 logs/
 codechat_config.yaml
 .devcontainer.json
+*.whl
