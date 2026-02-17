@@ -99,8 +99,8 @@ p.hat + 1.96*sqrt(p.hat*(1-p.hat)/n)
       <p>The event, the probability of which is being described in the last display, states that the absolute value of deviation of the sample average from the expectation, divided by the standard deviation of the sample average, is no more than 1.96. In other words, the distance between the sample average and the expectation is at most 1.96 units of standard deviation. One may rewrite this event in a form that puts the expectation within an interval that is centered at the sample average:</p>
 
       <me>\begin{aligned}
-\Big\{|\bar X - \Expec(X)| \leq 1.96 \cdot \sqrt{\Var(X)/n} \Big\} \quad \Longleftrightarrow & \\
-\Big\{ \bar X -1.96 \cdot\sqrt{\Var(X)/n} \leq  \Expec(X) &\leq \bar X + 1.96 \cdot \sqrt{\Var(X)/n}\Big\}\;.\end{aligned}</me>
+\Big\{|\bar X - \Expec(X)| \leq 1.96 \cdot \sqrt{\Var(X)/n} \Big\} \quad \Longleftrightarrow &amp; \\
+\Big\{ \bar X -1.96 \cdot\sqrt{\Var(X)/n} \leq  \Expec(X) &amp;\leq \bar X + 1.96 \cdot \sqrt{\Var(X)/n}\Big\}\;.\end{aligned}</me>
 
       <p>Clearly, the probability of the later event is (approximately) 0.95 since we are considering the same event, each time represented in a different form. The second representation states that the expectation <m>\Expec(X)</m> belongs to an interval about the sample average: <m>\bar X \pm 1.96  \sqrt{\Var(X)/n}</m>. This interval is, almost, the confidence interval we seek.</p>
 
@@ -315,7 +315,7 @@ qt(0.975,n-1)
       <p>We may summarize that for Normal measurements:</p>
 
       <me>\begin{aligned}
-\lefteqn{(n-1)S^2/\sigma^2 \sim \chi^2_{(n-1)} \quad \Longrightarrow }\\ & \Prob \big( \mbox{\texttt{qchisq(0.025,n-1)}} \leq (n-1)S^2/\sigma^2  \leq \mbox{\texttt{qchisq(0.975,n-1)}} \big) = 0.95\;.\end{aligned}</me>
+\lefteqn{(n-1)S^2/\sigma^2 \sim \chi^2_{(n-1)} \quad \Longrightarrow }\\ &amp; \Prob \big( \mbox{\texttt{qchisq(0.025,n-1)}} \leq (n-1)S^2/\sigma^2  \leq \mbox{\texttt{qchisq(0.975,n-1)}} \big) = 0.95\;.\end{aligned}</me>
 
       <p>The chi-square distribution is not symmetric. Therefore, in order to identify the region that contains 95% of the distribution region we have to compute both the 0.025- and the 0.975-percentiles of the distribution.</p>
 
