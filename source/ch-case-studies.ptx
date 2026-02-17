@@ -531,7 +531,7 @@ abline(sims.grip)
       </program>
       <p>
         The plot that is produced by this code is presented on the upper-left
-        panel of <xref ref="fig-case5" />.
+        panel of <xref ref="fig-case5"/>.
       </p>
       <p>
         The plot for the relation between the response and the variable <c>arm</c>
@@ -546,7 +546,7 @@ abline(sims.arm)
       </program>
       <p>
         The plot that is produced by the last code is presented on the
-        upper-right panel of <xref ref="fig-case5" />.
+        upper-right panel of <xref ref="fig-case5"/>.
       </p>
       <p>
         Both plots show similar characteristics. There is an overall linear
@@ -679,7 +679,7 @@ abline(sims.score)
 </pre>
       <p>
         The scatter plot that includes the regression line can be found at the
-        lower-left panel of <xref ref="fig-case5" />. Indeed, the linear
+        lower-left panel of <xref ref="fig-case5"/>. Indeed, the linear
         trend is more pronounced for this scatter plot and the regression line a
         better description of the relation between the response and the
         explanatory variable. A summary of the regression model produces the
@@ -716,7 +716,7 @@ plot(grip~arm,data=job)
       </program>
       <p>
         It is presented in the lower-right panel of
-        <xref ref="fig-case5" />. Indeed, one may see that the two
+        <xref ref="fig-case5"/>. Indeed, one may see that the two
         measurements of strength are not independent of each other but tend to
         produce an increasing linear trend. Hence, it should not be surprising
         that the relation of each of them with the response produces essentially
