@@ -96,7 +96,7 @@ plot(table(n.cost))
       <title>Exercise 3.2</title>
       
       <ol>
-        <li><p>In order to compute the mean of the data we may write the following simple <c>R</c> code:</p></li>
+        <li><p>In order to compute the mean of the data we may write the following simple <c>R</c> code:</p><
       <program language="r">
         <input>
 x.val &lt;- c(2,4,6,8,10)
@@ -149,7 +149,7 @@ sd(x)
 </pre>
       <p>Observe that in both forms of computation we obtain the same result:     2.425914.</p>
       </li>
-        <li><p>In order to compute the median one may produce the table of cumulative relative frequencies of “<c>x</c>":</p></li>
+        <li><p>In order to compute the median one may produce the table of cumulative relative frequencies of “<c>x</c>":</p>
       <program language="r">
         <input>
 data.frame(x.val,cumsum(rel.freq))
