@@ -3,50 +3,947 @@
 <chapter xml:id="ch-random-variables" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Random Variables</title>
 
-  <introduction>
-    <p>
-      This chapter presents the concept of a random variable and examples of special types
-      of random variables.
-    </p>
-  </introduction>
-
-  <section xml:id="sec-student-learning-objectives-5">
+  <section xml:id="sec-student-learning-objectives">
     <title>Student Learning Objectives</title>
-    <p>Content to be added.</p>
-  </section>
-
-  <section xml:id="sec-random-variables-intro">
-    <title>Random Variables</title>
-    <p>Content to be added.</p>
-  </section>
-
-  <section xml:id="sec-expectation">
-    <title>The Expectation of a Random Variable</title>
-    <p>Content to be added.</p>
-  </section>
-
-  <section xml:id="sec-variance-standard-deviation">
-    <title>The Variance and the Standard Deviation</title>
-    <p>Content to be added.</p>
+      <p>
+        This section introduces some important examples of random variables. The
+        distributions of these random variables emerge as mathematical models of
+        real-life settings. In two of the examples the sample space is composed
+        of integers. In the other two examples the sample space is made of
+        continuum of values. For random variables of the latter type one may use
+        the density, which is a type of a histogram, in order to describe the
+        distribution.
+      </p>
+      <p>
+        By the end of the chapter the student should:
+      </p>
+    <ul>
+      <li><p>Identify the Binomial, Poisson, Uniform, and Exponential random variables, relate them to real life situations, and memorize their expectations and variances.</p></li>
+      <li><p>Relate the plot of the density/probability function and the cumulative probability function to the distribution of a random variable.</p></li>
+      <li><p>Become familiar with the <c>R</c> functions that produce the density/probability of these random variables and their cumulative probabilities.</p></li>
+      <li><p>Plot the density and the cumulative probability function of a random variable and compute probabilities associated with random variables.</p></li>
+    </ul>
   </section>
 
   <section xml:id="sec-discrete-random-variables">
     <title>Discrete Random Variables</title>
-    <p>Content to be added.</p>
+    
+    <introduction>
+      <p>
+        In the previous chapter we introduced the notion of a random variable. A
+        random variable corresponds to the outcome of an observation or a
+        measurement prior to the actual making of the measurement. In this
+        context one can talk of all the values that the measurement may
+        potentially obtain. This collection of values is called the <term>sample
+        space</term>. To each value in the sample space one may associate the
+        <em>probability</em> of obtaining this particular value. Probabilities are like
+        relative frequencies. All probabilities are positive and the sum of the
+        probabilities that are associated with all the values in the sample
+        space is equal to one.
+      </p>
+      <p>
+        A random variable is defined by the identification of its sample space
+        and the probabilities that are associated with the values in the sample
+        space. For each type of random variable we will identify first the
+        sample space — the values it may obtain — and then describe the
+        probabilities of the values. Examples of situations in which each type
+        of random variable may serve as a model of a measurement will be
+        provided. The <c>R</c> system provides functions for the computation of
+        probabilities associated with specific types of random variables. We
+        will use these functions in this and in proceeding chapters in order to
+        carry out computations associated with the random variables and in order
+        to plot their distributions.
+      </p>
+      <p>
+        The distribution of a random variable, just like the distribution of
+        data, can be characterized using numerical summaries. For the latter we
+        used summaries such as the mean and the sample variance and standard
+        deviation. The mean is used to describe the central location of the
+        distribution and the variance and standard deviation are used to
+        characterize the total spread. Parallel summaries are used for random
+        variable. In the case of a random variable the name <em>expectation</em> is
+        used for the central location of the distribution and the <em>variance</em> and
+        the <em>standard deviation</em> (the square root of the variation) are used to
+        summarize the spread. In all the examples of random variables we will
+        identify the expectation and the variance (and, thereby, also the
+        standard deviation).
+      </p>
+      <p>
+        Random variables are used as probabilistic models of measurements.
+        Theoretical considerations are used in many cases in order to define
+        random variables and their distribution. A random variable for which the
+        values in the sample space are separated from each other, say the values
+        are integers, is called a <em>discrete random variable</em>. In this section we
+        introduce two important integer-valued random variables: The <em>Binomial</em>
+        and the <em>Poisson</em> random variables. These random variables may emerge as
+        models in contexts where the measurement involves counting the number of
+        occurrences of some phenomena.
+      </p>
+      <p>
+        Many other models, apart from the Binomial and Poisson, exist for
+        discrete random variables. An example of such model, the
+        Negative-Binomial model, will be considered in
+        <xref ref="sec-exercises" />. Depending on the specific context that
+        involves measurements with discrete values, one may select the Binomial,
+        the Poisson, or one of these other models to serve as a theoretical
+        approximation of the distribution of the measurement.
+      </p>
+    </introduction>
+
+    <subsection xml:id="subsec-the-binomial-random-variable">
+      <title>The Binomial Random Variable</title>
+      <p>
+        The Binomial random variable is used in settings in which a trial that
+        has two possible outcomes is repeated several times. Let us designate
+        one of the outcomes as “Success" and the other as “Failure". Assume that
+        the probability of success in each trial is given by some number <m>p</m>
+        that is larger than 0 and smaller than 1. Given a number <m>n</m> of repeats
+        of the trial and given the probability of success, the actual number of
+        trials that will produce “Success" as their outcome is a random
+        variable. We call such random variable <em>Binomial</em>. The fact that a
+        random variable <m>X</m> has such a distribution is marked by the expression:
+        “<m>X \sim \mathrm{Binomial}(n,p)</m>".
+      </p>
+      <p>
+        As an example consider tossing 10 coins. Designate “Head" as success and
+        “Tail" as failure. For fair coins the probability of “Head" is <m>1/2</m>.
+        Consequently, if <m>X</m> is the total number of “Heads" then
+        <m>X \sim \mathrm{Binomial}(10,0.5)</m>, where <m>n=10</m> is the number of trials
+        and <m>p=0.5</m> is the probability of success in each trial.
+      </p>
+      <p>
+        It may happen that all 10 coins turn up “Tail". In this case <m>X</m> is
+        equal to 0. It may also be the case that one of the coins turns up
+        “Head" and the others turn up “Tail". The random variable <m>X</m> will
+        obtain the value 1 in such a case. Likewise, for any integer between 0
+        and 10 it may be the case that the number of “Heads" that turn up is
+        equal to that integer with the other coins turning up “Tail". Hence, the
+        sample space of <m>X</m> is the set of integers <m>\{0, 1, 2, \ldots, 10\}</m>.
+        The probability of each outcome may be computed by an appropriate
+        mathematical formula that will not be discussed here<fn>If <m>X\sim \mathrm{Binomial}(n,p)</m> then <m>\Prob(X = x) = {n \choose x} p^x (1-p)^{n-x}</m>, for <m>x = 0, 1, \ldots, n</m>.</fn>.
+      </p>
+      <p>
+        The probabilities of the various possible values of a Binomial random
+        variable may be computed with the aid of the <c>R</c> function “<c>dbinom</c>"
+        (that uses the mathematical formula for the computation). The input to
+        this function is a sequence of values, the value of <m>n</m>, and the value
+        of <m>p</m>. The output is the sequence of probabilities associated with each
+        of the values in the first input.
+      </p>
+    <figure xml:id="fig-rvar2">
+      <caption>The Binomial(10,0.5) Distribution</caption>
+      <image source="_figures/RVar2.png" />
+    </figure>
+      <p>
+        For example, let us use the function in order to compute the probability
+        that the given Binomial obtains an odd value. A sequence that contains
+        the odd values in the Binomial sample space can be created with the
+        expression “<c>c(1,3,5,7,9)</c>". This sequence can serve as the input in the
+        first argument of the function “<c>dbinom</c>". The other arguments are
+        “<c>10</c>" and “<c>0.5</c>", respectively:
+      </p>
+    <program language="r">
+      <input>
+dbinom(c(1,3,5,7,9),10,0.5)
+      </input>
+    </program>
+      <p>
+        Observe that the output of the function is a sequence of the same length
+        as the first argument. This output contains the Binomial probabilities
+        of the values in the first argument. In order to obtain the probability
+        of the event <m>\{\mbox{X is odd}\}</m> we should sum up these probabilities,
+        which we can do by applying the function “<c>sum</c>" to the output of the
+        function that computes the Binomial probabilities:
+      </p>
+    <program language="r">
+      <input>
+sum(dbinom(c(1,3,5,7,9),10,0.5))
+      </input>
+    </program>
+      <p>
+        Observe that the probability of obtaining an odd value in this specific
+        case is equal to one half.
+      </p>
+      <p>
+        Another example is to compute all the probabilities of all the potential
+        values of a <m>\mathrm{Binomial}(10,0.5)</m> random variable:
+      </p>
+    <program language="r">
+      <input>
+x &lt;- 0:10
+dbinom(x,10,0.5)
+      </input>
+    </program>
+      <p>
+        The expression “<c>start.value:end.value</c>" produces a sequence of numbers
+        that initiate with the number “<c>start.value</c>" and proceeds in jumps of
+        size one until reaching the number “<c>end.value</c>". In this example,
+        “<c>0:10</c>" produces the sequence of integers between 0 and 10, which is
+        the sample space of the current Binomial example. Entering this sequence
+        as the first argument to the function “<c>dbinom</c>" produces the
+        probabilities of all the values in the sample space.
+      </p>
+      <p>
+        One may display the distribution of a discrete random variable with a
+        bar plot similar to the one used to describe the distribution of data.
+        In this plot a vertical bar representing the probability is placed above
+        each value of the sample space. The height of the bar is equal to the
+        probability. A bar plot of the <m>\mathrm{Binomial}(10,0.5)</m> distribution
+        is provided in <xref ref="fig-rvar2" />.
+      </p>
+      <p>
+        Another useful function is “<c>pbinom</c>", which produces the cumulative
+        probability of the Binomial:
+      </p>
+    <program language="r">
+      <input>
+pbinom(x,10,0.5)
+cumsum(dbinom(x,10,0.5))
+      </input>
+    </program>
+      <p>
+        The output of the function “<c>pbinom</c>" is the cumulative probability
+        <m>\Prob(X \leq x)</m> that the random variable is less than or equal to the
+        input value. Observe that this cumulative probability is obtained by
+        summing all the probabilities associated with values that are less than
+        or equal to the input value. Specifically, the cumulative probability at
+        <m>x=3</m> is obtained by the summation of the probabilities at <m>x=0</m>, <m>x=1</m>,
+        <m>x=2</m>, and <m>x=3</m>:
+      </p>
+      <p>
+        <me>\Prob(X \leq 3) = 0.0009765625 + 0.009765625 + 0.0439453125 + 0.1171875 = 0.171875</me>
+        The numbers in the sum are the first 4 values from the output of the
+        function “<c>dbinom(x,10,0.5)</c>", which computes the probabilities of the
+        values of the sample space.
+      </p>
+      <p>
+        In principle, the expectation of the Binomial random variable, like the
+        expectation of any other (discrete) random variable is obtained from the
+        application of the general formulae:
+      </p>
+      <p>
+        <me>\Expec(X) = \sum_x \big(x \times \Prob(X = x)\big)\;,\quad \Var(X) = \sum_x\big( (x-\Expec(X))^2 \times \Prob(x)\big)\;.</me>
+        However, in the specific case of the Binomial random variable, in which
+        the probability <m>\Prob(X = x)</m> obeys the specific mathematical formula
+        of the Binomial distribution, the expectation and the variance reduce to
+        the specific formulae:
+      </p>
+      <p>
+        <me>\Expec(X) = n p\;,\quad \Var(X) = n p(1-p)\;.</me>
+        Hence, the expectation is the product of the number of trials <m>n</m> with
+        the probability of success in each trial <m>p</m>. In the variance the number
+        of trials is multiplied by the product of a probability of success (<m>p</m>)
+        with the probability of a failure (<m>1-p</m>).
+      </p>
+      <p>
+        As illustration, let us compute for the given example the expectation
+        and the variance according to the general formulae for the computation
+        of the expectation and variance in random variables and compare the
+        outcome to the specific formulae for the expectation and variance in the
+        Binomial distribution:
+      </p>
+    <program language="r">
+      <input>
+X.val &lt;- 0:10
+P.val &lt;- dbinom(X.val,10,0.5)
+EX &lt;- sum(X.val*P.val)
+EX
+sum((X.val-EX)^2*P.val)
+      </input>
+    </program>
+      <p>
+        This agrees with the specific formulae for Binomial variables, since
+        <m>10 \times 0.5 = 5</m> and <m>10 \times 0.5 \times(1-0.5) = 2.5</m>.
+      </p>
+      <p>
+        Recall that the general formula for the computation of the expectation
+        calls for the multiplication of each value in the sample space with the
+        probability of that value, followed by the summation of all the
+        products. The object “<c>X.val</c>" contains all the values of the random
+        variable and the object “<c>P.val</c>" contains the probabilities of these
+        values. Hence, the expression “<c>X.val*P.val</c>" produces the product of
+        each value of the random variable times the probability of that value.
+        Summation of these products with the function “<c>sum</c>" gives the
+        expectation, which is saved in an object that is called “<c>EX</c>".
+      </p>
+      <p>
+        The general formula for the computation of the variance of a random
+        variable involves the product of the squared deviation associated with
+        each value with the probability of that value, followed by the summation
+        of all products. The expression “<c>(X.val-EX)^ 2</c>" produces the sequence
+        of squared deviations from the expectation for all the values of the
+        random variable. Summation of the product of these squared deviations
+        with the probabilities of the values (the outcome of
+        “<c>(X.val-EX)^2*P.val</c>") gives the variance.
+      </p>
+      <p>
+        When the value of <m>p</m> changes (without changing the number of trials
+        <m>n</m>) then the probabilities that are assigned to each of the values of
+        the sample space of the Binomial random variable change, but the sample
+        space itself does not. For example, consider rolling a die 10 times and
+        counting the number of times that the face 3 was obtained. Having the
+        face 3 turning up is a “Success". The probability <m>p</m> of a success in
+        this example is 1/6, since the given face is one out of 6 equally likely
+        faces. The resulting random variable that counts the total number of
+        success in 10 trials has a <m>\mathrm{Binomial}(10,1/6)</m> distribution. The
+        sample space is yet again equal to the set of integers
+        <m>\{0,1, \ldots,10\}</m>. However, the probabilities of values are
+        different. These probabilities can again be computed with the aid of the
+        function “<c>dbinom</c>":
+      </p>
+    <program language="r">
+      <input>
+dbinom(x,10,1/6)
+      </input>
+    </program>
+      <p>
+        In this case smaller values of the random variable are assigned higher
+        probabilities and larger values are assigned lower probabilities.
+      </p>
+    <figure xml:id="fig-rvar3">
+      <caption>The Binomial Distribution for Various Probability of <q>Success</q> <m>p</m></caption>
+      <image source="_figures/RVar3.png" />
+    </figure>
+      <p>
+        In <xref ref="fig-rvar3" /> the probabilities for
+        <m>\mathrm{Binomial}(10,1/6)</m>, the <m>\mathrm{Binomial}(10,1/2)</m>, and the
+        <m>\mathrm{Binomial}(10,0.6)</m> distributions are plotted side by side. In
+        all these 3 distributions the sample space is the same, the integers
+        between 0 and 10. However, the probabilities of the different values
+        differ. (Note that all bars should be placed on top of the integers. For
+        clarity of the presentation, the bars associated with the
+        <m>\mathrm{Binomial}(10,1/6)</m> are shifted slightly to the left and the
+        bars associated with the <m>\mathrm{Binomial}(10,0.6)</m> are shifted
+        slightly to the right.)
+      </p>
+      <p>
+        The expectation of the <m>\mathrm{Binomial}(10,0.5)</m> distribution is equal
+        to <m>10 \times 0.5 = 5</m>. Compare this to the expectation of the
+        <m>\mathrm{Binomial}(10,1/6)</m> distribution, which is
+        <m>10 \times (1/6) = 1.666667</m> and to the expectation of the
+        <m>\mathrm{Binomial}(10,0.6)</m> distribution which equals
+        <m>10 \times 0.6 = 6</m>.
+      </p>
+      <p>
+        The variance of the <m>\mathrm{Binomial}(10,0.5)</m> distribution is
+        <m>10 \times 0.5 \times 0.5 = 2.5</m>. The variance when <m>p=1/6</m> is
+        <m>10 \times (1/6) \times (5/6) = 1.388889</m> and the variance when <m>p=0.6</m>
+        is <m>10 \times 0.6 \times 0.4 = 2.4</m>.
+      </p>
+
+    <example xml:id="ex-rvar1">
+      <statement>
+        <p>As an application of the Binomial distribution consider a pre-election poll. A candidate is running for office and is interested in knowing the percentage of support in the general population in its candidacy. Denote the probability of support by <m>p</m>. In order to estimate the percentage a sample of size 300 is selected from the population. Let <m>X</m> be the count of supporters in the sample. A natural model for the distribution of <m>X</m> is the <m>\mathrm{Binomial}(300,p)</m> distribution, since each subject in the sample may be a supporter (“Success") or may not be a supporter (“Failure"). The probability that a subject supports the candidate is <m>p</m> and there are <m>n=300</m> subjects in the sample.</p>
+      </statement>
+    </example>
+
+    <example xml:id="ex-rvar2">
+      <statement>
+        <p>As another example consider the procedure for quality control that is described in Discussion Forum of <xref ref="ch-probability" />. According to the procedure 20 items are tested and the number of faulty items is recorded. If <m>p</m> is the probability that an item is identified as faulty then the distribution of the total number of faulty items may be modeled by the <m>\mathrm{Binomial}(20,p)</m> distribution.</p>
+      </statement>
+    </example>
+      <p>
+        In both examples one may be interested in making statements on the
+        probability <m>p</m> based on the sample. Statistical inference relates the
+        actual count obtained in the sample to the theoretical Binomial
+        distribution in order to make such statements.
+      </p>
+    </subsection>
+
+    <subsection xml:id="subsec-the-poisson-random-variable">
+      <title>The Poisson Random Variable</title>
+      <p>
+        The <em>Poisson</em> distribution is used as an approximation of the total
+        number of occurrences of rare events. Consider, for example, the
+        Binomial setting that involves <m>n</m> trials with <m>p</m> as the probability of
+        success of each trial. Then, if <m>p</m> is small but <m>n</m> is large then the
+        number of successes <m>X</m> has, approximately, the Poisson distribution.
+      </p>
+      <p>
+        The sample space of the Poisson random variable is the unbounded
+        collection of integers: <m>\{0,1,2, \ldots\}</m>. Any integer value is
+        assigned a positive probability. Hence, the Poisson random variable is a
+        convenient model when the maximal number of occurrences of the events in
+        a-priori unknown or is very large. For example, one may use the Poisson
+        distribution to model the number of phone calls that enter a switchboard
+        in a given interval of time or the number of malfunctioning components
+        in a shipment of some product.
+      </p>
+    <figure xml:id="fig-rvar4">
+      <caption>The Poisson(2) Distribution</caption>
+      <image source="_figures/RVar4.png" />
+    </figure>
+      <p>
+        The Binomial distribution was specified by the number of trials <m>n</m> and
+        probability of success in each trial <m>p</m>. The Poisson distribution is
+        specified by its expectation, which we denote by <m>\lambda</m>. The
+        expression “<m>X \sim \mathrm{Poisson}(\lambda)</m>" states that the random
+        variable <m>X</m> has a Poisson distribution<fn>If <m>X \sim \mathrm{Poisson}(\lambda)</m> then <m>\Prob(X=x) = e^{-\lambda}\lambda^x/x!</m>, for <m>x=0,1,2,\ldots</m>.</fn> with expectation
+        <m>\Expec(X) = \lambda</m>. The function “<c>dpois</c>" computes the probability,
+        according to the Poisson distribution, of values that are entered as the
+        first argument to the function. The expectation of the distribution is
+        entered in the second argument. The function “<c>ppois</c>" computes the
+        cumulative probability. Consequently, we can compute the probabilities
+        and the cumulative probabilities of the values between 0 and 10 for the
+        <m>\mathrm{Poisson}(2)</m> distribution via:
+      </p>
+    <program language="r">
+      <input>
+x &lt;- 0:10
+dpois(x,2)
+ppois(x,2)
+      </input>
+    </program>
+      <p>
+        The probability function of the Poisson distribution with <m>\lambda = 2</m>,
+        in the range between 0 and 10, is plotted in
+        <xref ref="fig-rvar4" />. Observe that in this example probabilities
+        of the values 8 and beyond are very small. As a matter of fact, the
+        cumulative probability at <m>x=7</m> (the 8th value in the output of
+        “<c>ppois(x,2)</c>") is approximately 0.999, out of the total cumulative
+        probability of 1.000, leaving a total probability of about 0.001 to be
+        distributed among all the values larger than 7.
+      </p>
+    <figure xml:id="fig-rvar5">
+      <caption>The Poisson Distribution for Various Values of <m>\lambda</m></caption>
+      <image source="_figures/RVar5.png" />
+    </figure>
+      <p>
+        Let us compute the expectation of the given Poisson distribution:
+      </p>
+    <program language="r">
+      <input>
+X.val &lt;- 0:10
+P.val &lt;- dpois(X.val,2)
+sum(X.val*P.val)
+      </input>
+    </program>
+      <p>
+        Observe that the outcome is almost, but not quite, equal to <m>2.00</m>,
+        which is the actual value of the expectation. The reason for the
+        inaccuracy is the fact that we have based the computation in <c>R</c> on the
+        first 11 values of the distribution only, instead of the infinite
+        sequence of values. A more accurate result may be obtained by the
+        consideration of the first 101 values:
+      </p>
+    <program language="r">
+      <input>
+X.val &lt;- 0:100
+P.val &lt;- dpois(X.val,2)
+EX &lt;- sum(X.val*P.val)
+EX
+sum((X.val-EX)^2*P.val)
+      </input>
+    </program>
+      <p>
+        In the last expression we have computed the variance of the Poisson
+        distribution and obtained that it is equal to the expectation. This
+        results can be validated mathematically. For the Poisson distribution it
+        is always the case that the variance is equal to the expectation, namely
+        to <m>\lambda</m>: <me>\Expec(X) = \Var(X) = \lambda\;.</me>
+      </p>
+      <p>
+        In <xref ref="fig-rvar5" /> you may find the probabilities of the
+        Poisson distribution for <m>\lambda = 0.5</m>, <m>\lambda = 1</m> and
+        <m>\lambda = 2</m>. Notice once more that the sample space is the same for
+        all the Poisson distributions. What varies when we change the value of
+        <m>\lambda</m> are the probabilities. Observe that as <m>\lambda</m> increases
+        then probability of larger values increases as well.
+      </p>
+
+    <example xml:id="ex-rvar3">
+      <statement>
+        <p>A radio active element decays by the release of subatomic particles and energy. The decay activity is measured in terms of the number of decays per second in a unit mass. A typical model for the distribution of the number of decays is the Poisson distribution. Observe that the number of decays in a second is a integer and, in principle, it may obtain any integer value larger or equal to zero. The event of a radio active decay of an atom is a relatively rare event. Therefore, the Poisson model is likely to fit this phenomena<fn>The number of decays may also be considered in the <m>\mathrm{Binomial}(n,p)</m> setting. The number <m>n</m> is the total number of atoms in the unit mass and <m>p</m> is the probability that an atom decays within the given second. However, since <m>n</m> is very large and <m>p</m> is very small we get that the Poisson distribution is an appropriate model for the count.</fn>.</p>
+      </statement>
+    </example>
+
+    <example xml:id="ex-rvar4">
+      <statement>
+        <p>Consider an overhead power line suspended between two utility poles. During rain, drops of water may hit the power line. The total number of drops that hit the line in a one minute period may be modeled by a Poisson random variable.</p>
+      </statement>
+    </example>
+    </subsection>
   </section>
 
   <section xml:id="sec-continuous-random-variables">
     <title>Continuous Random Variables</title>
-    <p>Content to be added.</p>
+    
+    <introduction>
+      <p>
+        Many types of measurements, such as height, weight, angle, temperature,
+        etc., may in principle have a continuum of possible values. Continuous
+        random variables are used to model uncertainty regarding future values
+        of such measurements.
+      </p>
+      <p>
+        The main difference between discrete random variables, which is the type
+        we examined thus far, and continuous random variable, that are added now
+        to the list, is in the sample space, i.e., the collection of possible
+        outcomes. The former type is used when the possible outcomes are
+        separated from each other as the integers are. The latter type is used
+        when the possible outcomes are the entire line of real numbers or when
+        they form an interval (possibly an open ended one) of real numbers.
+      </p>
+      <p>
+        The difference between the two types of sample spaces implies
+        differences in the way the distribution of the random variables is being
+        described. For discrete random variables one may list the probability
+        associated with each value in the sample space using a table, a formula,
+        or a bar plot. For continuous random variables, on the other hand,
+        probabilities are assigned to intervals of values, and not to specific
+        values. Thence, densities are used in order to display the distribution.
+      </p>
+      <p>
+        Densities are similar to histograms, with areas under the plot
+        corresponding to probabilities. We will provide a more detailed
+        description of densities as we discuss the different examples of
+        continuous random variables.
+      </p>
+      <p>
+        In continuous random variables integration replaces summation and the
+        density replaces the probability in the computation of quantities such
+        as the probability of an event, the expectation, and the variance.
+      </p>
+      <p>
+        Hence, if the expectation of a discrete random variable is given in the
+        formula <m>\Expec(X) = \sum_x \big(x \times \Prob(x)\big)</m>, which involves
+        the summation over all values of the product between the value and the
+        probability of the value, then for continuous random variable the
+        definition becomes:
+      </p>
+      <p>
+        <me>\Expec(X) = \int \big(x \times f(x)\big)dx\;,</me>
+        where <m>f(x)</m> is the density of <m>X</m> at the value <m>x</m>. Therefore, in the
+        expectation of a continuous random variable one multiplies the value by
+        the density at the value. This product is then integrated over the
+        sample space.
+      </p>
+      <p>
+        Likewise, the formula
+        <m>\Var(X) = \sum_x\big( (x-\Expec(X))^2 \times \Prob(x)\big)</m> for the
+        variance is replaced by:
+      </p>
+      <p>
+        <me>\Var(X) =\int\big((x-\Expec(X))^2 \times f(x) \big) dx\;.</me>
+        Nonetheless, the intuitive interpretation of the expectation as the
+        central value of the distribution that identifies the location and the
+        interpretation of the standard deviation (the square root of the
+        variance) as the summary of the total spread of the distribution is
+        still valid.
+      </p>
+      <p>
+        In this section we will describe two types of continuous random
+        variables: Uniform and Exponential. In the next chapter another example
+        – the Normal distribution – will be introduced.
+      </p>
+    </introduction>
+
+    <subsection xml:id="subsec-the-uniform-random-variable">
+      <title>The Uniform Random Variable</title>
+      <p>
+        The Uniform distribution is used in order to model measurements that may
+        have values in a given interval, with all values in this interval
+        equally likely to occur.
+      </p>
+      <p>
+        For example, consider a random variable <m>X</m> with the Uniform
+        distribution over the interval <m>[3,7]</m>, denoted by
+        “<m>X \sim \mathrm{Uniform}(3,7)</m>". The density function at given values
+        may be computed with the aid of the function “<c>dunif</c>". For instance let
+        us compute the density of the <m>\mathrm{Uniform}(3,7)</m> distribution over
+        the integers <m>\{0, 1, \ldots, 10\}</m>:
+      </p>
+    <program language="r">
+      <input>
+dunif(0:10,3,7)
+      </input>
+    </program>
+      <p>
+        Notice that for the values 0, 1, and 2, and the values 8, 9 and 10 that
+        are outside of the interval the density is equal to zero, indicating
+        that such values cannot occur in the given distribution. The values of
+        the density at integers inside the interval are positive and equal to
+        each other. The density is not restricted to integer values. For
+        example, at the point <m>4.73</m> we get that the density is positive and of
+        the same height:
+      </p>
+    <program language="r">
+      <input>
+dunif(4.73,3,7)
+      </input>
+    </program>
+    <figure xml:id="fig-rvar6">
+      <caption>The Uniform(3,7) Distribution</caption>
+      <image source="_figures/RVar6.png" />
+    </figure>
+      <p>
+        A plot of the <m>\mathrm{Uniform}(3,7)</m> density is given in
+        <xref ref="fig-rvar6" /> in the form of a solid line. Observe that
+        the density is positive over the interval <m>[3,7]</m> where its height is
+        1/4. Area under the curve in the density corresponds to probability.
+        Indeed, the fact that the total probability is one is reflected in the
+        total area under the curve being equal to 1. Over the interval <m>[3,7]</m>
+        the density forms a rectangle. The base of the rectangle is the length
+        of the interval <m>7-3=4</m>. The height of the rectangle is thus equal to
+        1/4 in order to produce a total area of <m>4 \times (1/4) = 1</m>.
+      </p>
+      <p>
+        The function “<c>punif</c>" computes the cumulative probability of the
+        uniform distribution. The probability <m>\Prob(X \leq 4.73)</m>, for
+        <m>X \sim \mathrm{Uniform}(3,7)</m>, is given by:
+      </p>
+    <program language="r">
+      <input>
+punif(4.73,3,7)
+      </input>
+    </program>
+      <p>
+        This probability corresponds to the marked area to the left of the point
+        <m>x = 4.73</m> in <xref ref="fig-rvar6" />. This area of the marked
+        rectangle is equal to the length of the base 4.73 - 3 = 1.73, times the
+        height of the rectangle 1/(7-3) = 1/4. Indeed:
+      </p>
+    <program language="r">
+      <input>
+(4.73-3)/(7-3)
+      </input>
+    </program>
+      <p>
+        is the area of the marked rectangle and is equal to the probability.
+      </p>
+      <p>
+        Let us use <c>R</c> in order to plot the density and the cumulative
+        probability functions of the Uniform distribution. We produce first a
+        large number of points in the region we want to plot. The points are
+        produced with aid of the function “<c>seq</c>". The output of this function
+        is a sequence with equally spaced values. The starting value of the
+        sequence is the first argument in the input of the function and the last
+        value is the second argument in the input. The argument “<c>length=1000</c>"
+        sets the length of the sequence, 1,000 values in this case:
+      </p>
+    <program language="r">
+      <input>
+x &lt;- seq(0,10,length=1000)
+den &lt;- dunif(x,3,7)
+plot(x,den)
+      </input>
+    </program>
+      <p>
+        The object “<c>den</c>" is a sequence of length 1,000 that contains the
+        density of the <m>\mathrm{Uniform}(3,7)</m> evaluated over the values of
+        “<c>x</c>". When we apply the function “<c>plot</c>" to the two sequences we get a
+        scatter plot of the 1,000 points.
+      </p>
+      <p>
+        A scatter plot is a plot of points. Each point in the scatter plot is
+        identify by its horizontal location on the plot (its “<m>x</m>" value) and by
+        its vertical location on the plot (its <m>y</m> value). The horizontal value
+        of each point in the plot is determined by the first argument to the
+        function “<c>plot</c>" and the vertical value is determined by the second
+        argument. For example, the first value in the sequence “<c>x</c>" is 0. The
+        value of the Uniform density at this point is 0. Hence, the first value
+        of the sequence “<c>den</c>" is also 0. A point that corresponds to these
+        values is produced in the plot. The horizontal value of the point is 0
+        and the vertical value is 0. In a similar way the other 999 points are
+        plotted. The last point to be plotted has a horizontal value of 10 and a
+        vertical value of 0.
+      </p>
+      <p>
+        The number of points that are plotted is large and they overlap each
+        other in the graph and thus produce an impression of a continuum. In
+        order to obtain nicer looking plots we may choose to connect the points
+        to each other with segments and use smaller points. This may be achieved
+        by the addition of the argument “<c>type=l</c>", with the letter <c>l</c> for
+        line, to the plotting function:
+      </p>
+    <program language="r">
+      <input>
+plot(x,den,type="l")
+      </input>
+    </program>
+      <p>
+        The cumulative probability of the <m>\mathrm{Uniform}(3,7)</m> is produced by the code:
+      </p>
+    <program language="r">
+      <input>
+cdf &lt;- punif(x,3,7)
+plot(x,cdf,type="l")
+      </input>
+    </program>
+      <p>
+        One can think of the density of the Uniform as an histogram<fn>If <m>X \sim \mathrm{Uniform}(a,b)</m> then the density is <m>f(x) = 1/(b-a)</m>, for <m>a \leq x \leq b</m>, and it is equal to 0 for other values of <m>x</m>.</fn>. The
+        expectation of a Uniform random variable is the middle point of it’s
+        histogram. Hence, if <m>X \sim \mathrm{Uniform}(a,b)</m> then:
+      </p>
+      <p>
+        <me>\Expec(X) = \frac{a+b}{2}\;.</me> For the <m>X \sim \mathrm{Uniform}(3,7)</m>
+        distribution the expectation is <m>\Expec(X)= (3+7)/2 = 5</m>. Observe that 5
+        is the center of the Uniform density in Plot <xref ref="fig-rvar6" />.
+      </p>
+      <p>
+        It can be shown that the variance of the <m>\mathrm{Uniform}(a,b)</m> is
+        equal to
+      </p>
+      <p>
+        <me>\Var(X) = \frac{(b-a)^2}{12}\;,</me> with the standard deviation
+        being the square root of this value. Specifically, for
+        <m>X \sim \mathrm{Uniform}(3,7)</m> we get that
+        <m>\Var(X) = (7-3)^2/12 = 1.333333</m>. The standard deviation is equal to
+        <m>\sqrt{1.333333} = 1.154701</m>.
+      </p>
+
+    <example xml:id="ex-rvar5">
+      <statement>
+        <p>In <xref ref="ex-rvar4" /> we considered rain drops that hit an overhead power line suspended between two utility poles. The <em>number</em> of drops that hit the line can be modeled using the Poisson distribution. The <em>position</em> between the two poles where a rain drop hits the line can be modeled by the Uniform distribution. The rain drop can hit any position between the two utility poles. Hitting one position along the line is as likely as hitting any other position.</p>
+      </statement>
+    </example>
+
+    <example xml:id="ex-rvar6">
+      <statement>
+        <p>Meiosis is the process in which a diploid cell that contains two copies of the genetic material produces an haploid cell with only one copy (sperms or eggs, depending on the sex). The resulting molecule of genetic material is linear molecule (chromosome) that is composed of consecutive segments: a segment that originated from one of the two copies followed by a segment from the other copy and vice versa. The border points between segments are called points of crossover. The Haldane model for crossovers states that the position of a crossover between two given loci on the chromosome corresponds to the Uniform distribution and the total number of crossovers between these two loci corresponds to the Poisson distribution.</p>
+      </statement>
+    </example>
+    </subsection>
+
+    <subsection xml:id="subsec-the-exponential-random-variable">
+      <title>The Exponential Random Variable</title>
+      <p>
+        The Exponential distribution is frequently used to model times between
+        events. For example, times between incoming phone calls, the time until
+        a component becomes malfunction, etc. We denote the Exponential
+        distribution via “<m>X \sim \mathrm{Exponential}(\lambda)</m>", where
+        <m>\lambda</m> is a parameter that characterizes the distribution and is
+        called the <em>rate</em> of the distribution. The overlap between the parameter
+        used to characterize the Exponential distribution and the one used for
+        the Poisson distribution is deliberate. The two distributions are
+        tightly interconnected. As a matter of fact, it can be shown that if the
+        distribution between occurrences of a phenomena has the Exponential
+        distribution with rate <m>\lambda</m> then the total number of the
+        occurrences of the phenomena within a unit interval of time has a
+        <m>\mathrm{Poisson}(\lambda)</m> distribution.
+      </p>
+      <p>
+        The sample space of an Exponential random variable contains all
+        non-negative numbers. Consider, for example,
+        <m>X \sim \mathrm{Exponential}(0.5)</m>. The density of the distribution in
+        the range between 0 and 10 is presented in <xref ref="fig-rvar7" />.
+        Observe that in the Exponential distribution smaller values are more
+        likely to occur in comparison to larger values. This is indicated by the
+        density being larger at the vicinity of 0. The density of the
+        exponential distribution given in the plot is positive, but hardly so,
+        for values larger than 10.
+      </p>
+    <figure xml:id="fig-rvar7">
+      <caption>The Exponential(0.5) Distribution</caption>
+      <image source="_figures/RVar7.png" />
+    </figure>
+      <p>
+        The density of the Exponential distribution can be computed with the aid
+        of the function “<c>dexp</c>"<fn>If <m>X \sim \mathrm{Exponential}(\lambda)</m> then the density is <m>f(x) =\lambda e^{-\lambda x}</m>, for <m>0 \leq x</m>, and it is equal to 0 for <m>x &lt; 0</m>.</fn>. The cumulative probability can be computed
+        with the function “<c>pexp</c>". For illustration, assume
+        <m>X \sim \mathrm{Exponential}(0.5)</m>. Say one is interested in the
+        computation of the probability <m>\Prob(2 &lt; X \leq 6)</m> that the random
+        variable obtains a value that belongs to the interval <m>(2,6]</m>. The
+        required probability is indicated as the marked area in
+        <xref ref="fig-rvar7" />. This area can be computed as the difference
+        between the probability <m>\Prob(X \leq 6)</m>, the area to the left of 6,
+        and the probability <m>\Prob(X \leq 2)</m>, the area to the left of 2:
+      </p>
+    <program language="r">
+      <input>
+pexp(6,0.5) - pexp(2,0.5)
+      </input>
+    </program>
+      <p>
+        The difference is the probability of belonging to the interval, namely
+        the area marked in the plot.
+      </p>
+      <p>
+        The expectation of <m>X</m>, when <m>X \sim \mathrm{Exponential}(\lambda)</m>, is
+        given by the equation:
+      </p>
+      <p>
+        <me>\Expec(X) = 1/\lambda\;,</me> and the variance is
+        given by:
+      </p>
+      <p>
+        <me>\Var(X) =1/\lambda^2\;.</me> The standard deviation is the
+        square root of the variance, namely <m>1/\lambda</m>. Observe that the larger
+        is the rate the smaller are the expectation and the standard deviation.
+      </p>
+    <figure xml:id="fig-rvar8">
+      <caption>The Exponential Distribution for Various Values of <m>\lambda</m></caption>
+      <image source="_figures/RVar8.png" />
+    </figure>
+      <p>
+        In <xref ref="fig-rvar8" /> the densities of the Exponential
+        distribution are plotted for <m>\lambda = 0.5</m>, <m>\lambda = 1</m>, and
+        <m>\lambda = 2</m>. Notice that with the increase in the value of the
+        parameter then the values of the random variable tends to become
+        smaller. This inverse relation makes sense in connection to the Poisson
+        distribution. Recall that the Poisson distribution corresponds to the
+        total number of occurrences in a unit interval of time when the time
+        between occurrences has an Exponential distribution. A larger
+        expectation <m>\lambda</m> of the Poisson corresponds to a larger number of
+        occurrences that are likely to take place during the unit interval of
+        time. The larger is the number of occurrences the smaller are the time
+        intervals between occurrences.
+      </p>
+
+    <example xml:id="ex-rvar7">
+      <statement>
+        <p>Consider Examples <xref ref="ex-rvar4" /> and <xref ref="ex-rvar5" /> that deal with rain dropping on a power line. The times between consecutive hits of the line may be modeled by the Exponential distribution. Hence, the time to the first hit has an Exponential distribution. The time between the first and the second hit is also Exponentially distributed, and so on.</p>
+      </statement>
+    </example>
+
+    <example xml:id="ex-rvar8">
+      <statement>
+        <p>Return to <xref ref="ex-rvar3" /> that deals with the radio activity of some element. The total count of decays per second is model by the Poisson distribution. The times between radio active decays is modeled according to the Exponential distribution. The rate <m>\lambda</m> of that Exponential distribution is equal to the expectation of the total count of decays in one second, i.e. the expectation of the Poisson distribution.</p>
+      </statement>
+    </example>
+    </subsection>
   </section>
 
-  <section xml:id="sec-exercises-5">
+  <section xml:id="sec-exercises">
     <title>Exercises</title>
-    <p>Content to be added.</p>
+
+    <exercise>
+      <statement>
+        <p>A particular measles vaccine produces a reaction (a fever higher that 102 Fahrenheit) in each vaccinee with probability of 0.09. A clinic vaccinates 500 people each day.</p>
+        <p>1.  What is the expected number of people that will develop a reaction each day?</p>
+        <p>2.  What is the standard deviation of the number of people that will develop a reaction each day?</p>
+        <p>3.  In a given day, what is the probability that more than 40 people will develop a reaction?</p>
+        <p>4.  In a given day, what is the probability that the number of people that will develop a reaction is between 50 and 45 (inclusive)?</p>
+      </statement>
+    </exercise>
+    <figure xml:id="fig-rvar10">
+      <caption>Bar Plots of the Negative-Binomial Distribution</caption>
+      <image source="_figures/RVar10.png" />
+    </figure>
+
+    <exercise>
+      <statement>
+        <p>The Negative-Binomial distribution is yet another example of a discrete, integer valued, random variable. The sample space of the distribution are all non-negative integers <m>\{0, 1, 2, \ldots\}</m>. The fact that a random variable <m>X</m> has this distribution is marked by “<m>X \sim \mbox{Negative-Binomial}(r,p)</m>", where <m>r</m> and <m>p</m> are parameters that specify the distribution.</p>
+        <p>Consider 3 random variables from the Negative-Binomial distribution:</p>
+    <ul>
+      <li><p><m>X_1 \sim \mbox{Negative-Binomial}(2,0.5)</m></p></li>
+      <li><p><m>X_2 \sim \mbox{Negative-Binomial}(4,0.5)</m></p></li>
+      <li><p><m>X_3 \sim \mbox{Negative-Binomial}(8,0.8)</m></p></li>
+    </ul>
+        <p>The bar plots of these random variables are presented in <xref ref="fig-rvar10" />, reorganized in a random order.</p>
+        <p>1.  Produce bar plots of the distributions of the random variables <m>X_1</m>, <m>X_2</m>, <m>X_3</m> in the range of integers between 0 and 15 and thereby identify the pair of parameters that produced each one of the plots in <xref ref="fig-rvar10" />. Notice that the bar plots can be produced with the aid of the function “<c>plot</c>" and the function “<c>dnbinom(x,r,p)</c>", where “<c>x</c>" is a sequence of integers and “<c>r</c>" and “<c>p</c>" are the parameters of the distribution. Pay attention to the fact that you should use the argument “<c>type = h</c>" in the function “<c>plot</c>" in order to produce the horizontal bars.</p>
+        <p>2.  Below is a list of pairs that includes an expectation and a variance. Each of the pairs is associated with one of the random variables <m>X_1</m>, <m>X_2</m>, and <m>X_3</m>:</p>
+        <p>1.  <m>\Expec(X) = 4</m>, <m>\Var(X) = 8</m>.</p>
+        <p>2.  <m>\Expec(X) = 2</m>, <m>\Var(X) =  4</m>.</p>
+        <p>3.  <m>\Expec(X) = 2</m>, <m>\Var(X) =  2.5</m>.</p>
+        <p>Use <xref ref="fig-rvar10" /> in order to match the random variable with its associated pair. Do not use numerical computations or formulae for the expectation and the variance in the Negative-Binomial distribution in order to carry out the matching<fn>It can be shown, or else found on the web, that if <m>X\sim \mbox{Negative-Binomial}(r,p)</m> then <m>\Expec(X) = r(1-p)/p</m> and <m>\Var(X) = r(1-p)/p^2</m>.</fn>. Use, instead, the structure of the bar-plots.</p>
+      </statement>
+    </exercise>
   </section>
 
-  <section xml:id="sec-summary-5">
+  <section xml:id="sec-summary">
     <title>Summary</title>
-    <p>Content to be added.</p>
+
+    <subsection xml:id="subsec-glossary">
+      <title>Glossary</title>
+      <dl>
+        <li>
+          <title>Binomial Random Variable</title>
+          <p>The number of successes among <m>n</m> repeats of independent trials with a probability <m>p</m> of success in each trial. The distribution is marked as <m>\mathrm{Binomial}(n,p)</m>.</p>
+        </li>
+        <li>
+          <title>Poisson Random Variable</title>
+          <p>An approximation to the number of occurrences of a rare event, when the expected number of events is <m>\lambda</m>. The distribution is marked as <m>\mathrm{Poisson}(\lambda)</m>.</p>
+        </li>
+        <li>
+          <title>Density</title>
+          <p>Histogram that describes the distribution of a continuous random variable. The area under the curve corresponds to probability.</p>
+        </li>
+        <li>
+          <title>Uniform Random Variable</title>
+          <p>A model for a measurement with equally likely outcomes over an interval <m>[a,b]</m>. The distribution is marked as <m>\mathrm{Uniform}(a,b)</m>.</p>
+        </li>
+        <li>
+          <title>Exponential Random Variable</title>
+          <p>A model for times between events. The distribution is marked as <m>\mathrm{Exponential}(\lambda)</m>.</p>
+        </li>
+      </dl>
+    </subsection>
+
+    <subsection xml:id="subsec-discuss-in-the-forum">
+      <title>Discuss in the Forum</title>
+      <p>
+        This unit deals with two types of discrete random variables, the
+        Binomial and the Poisson, and two types of continuous random variables,
+        the Uniform and the Exponential. Depending on the context, these types
+        of random variables may serve as theoretical models of the uncertainty
+        associated with the outcome of a measurement.
+      </p>
+      <p>
+        In your opinion, is it or is it not useful to have a theoretical model
+        for a situation that occurs in real life?
+      </p>
+      <p>
+        When forming your answer to this question you may give an example of a
+        situation from you own field of interest for which a random variable,
+        possibly from one of the types that are presented in this unit, can
+        serve as a model. Discuss the importance (or lack thereof) of having a
+        theoretical model for the situation.
+      </p>
+      <p>
+        For example, the Exponential distribution may serve as a model for the
+        time until an atom of a radio active element decays by the release of
+        subatomic particles and energy. The decay activity is measured in terms
+        of the number of decays per second. This number is modeled as having a
+        Poisson distribution. Its expectation is the rate of the Exponential
+        distribution. For the radioactive element Carbon-14
+        (<m>{}^{\mbox{\tiny 14}}\mathrm{C}</m>) the decay rate is
+        <m>3.8394 \times 10^{-12}</m> particles per second. Computations that are
+        based on the Exponential model may be used in order to date ancient
+        specimens.
+      </p>
+    </subsection>
+
+    <subsection xml:id="subsec-summary-of-formulas">
+      <title>Summary of Formulas</title>
+      <dl>
+        <li>
+          <title>Discrete Random Variable</title>
+          <p>
+            <md>
+              <mrow>\begin{aligned}
+            \Expec(X) &amp;= \sum_x \big(x \times \Prob(x)\big) \\
+            \Var(X) &amp;= \sum_x\big( (x-\Expec(X))^2 \times \Prob(x)\big) \end{aligned}</mrow>
+            </md>
+          </p>
+        </li>
+        <li>
+          <title>Continuous Random Variable</title>
+          <p>
+            <md>
+              <mrow>\begin{aligned}
+            \Expec(X) &amp;= \int \big(x \times f(x)\big)dx \\
+            \Var(X) &amp;= \int\big((x-\Expec(X))^2 \times f(x) \big) dx \end{aligned}</mrow>
+            </md>
+          </p>
+        </li>
+        <li>
+          <title>Binomial</title>
+          <p><m>\Expec(X) = n p \;, \quad \Var(X) = n p(1-p)</m></p>
+        </li>
+        <li>
+          <title>Poisson</title>
+          <p><m>\Expec(X) = \lambda\;, \quad \Var(X) = \lambda</m></p>
+        </li>
+        <li>
+          <title>Uniform</title>
+          <p><m>\Expec(X) = (a+b)/2\;, \quad \Var(X)= (b-a)^2/12</m></p>
+        </li>
+        <li>
+          <title>Exponential</title>
+          <p><m>\Expec(X) = 1/\lambda\;, \quad \Var(X)= 1/\lambda^2</m></p>
+        </li>
+      </dl>
+    </subsection>
   </section>
 </chapter>
