@@ -3,39 +3,642 @@
 <chapter xml:id="ch-probability" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Probability</title>
 
-  <introduction>
-    <p>
-      This chapter introduces fundamental probability concepts essential for statistical inference.
-    </p>
-  </introduction>
-
   <section xml:id="sec-student-learning-objectives-4">
     <title>Student Learning Objectives</title>
-    <p>Content to be added.</p>
+    <p>
+      This section extends the notion of variability that was introduced in the context of data to other situations. The variability of the entire <em>population</em> and the concept of a <em>random variable</em> is discussed. These concepts are central for the development and interpretation of statistical inference. By the end of the chapter the student should:
+    </p>
+    <ul>
+      <li><p>Consider the distribution of a variable in a population and compute parameters of this distribution, such as the mean and the standard deviation.</p></li>
+      <li><p>Become familiar with the concept of a random variable.</p></li>
+      <li><p>Understand the relation between the distribution of the population and the distribution of a random variable produced by sampling a random subject from the population.</p></li>
+      <li><p>Identify the distribution of the random variable in simple settings and compute its expectation and variance.</p></li>
+    </ul>
   </section>
 
-  <section xml:id="sec-sample-space-events">
-    <title>Sample Space and Events</title>
-    <p>Content to be added.</p>
+  <section xml:id="sec-different-forms-variability">
+    <title>Different Forms of Variability</title>
+    <p>
+      In the previous chapters we examined the variability in data. In the statistical context, data is obtained by selecting a sample from the target population and measuring the quantities of interest for the subjects that belong to the sample. Different subjects in the sample may obtain different values for the measurement, leading to variability in the data.
+    </p>
+    <p>
+      This variability may be summarized with the aid of a <em>frequency table</em>, a table of <em>relative frequency</em>, or via the <em>cumulative relative frequency</em>. A graphical display of the variability in the data may be obtained with the aid of the <em>bar plot</em>, the <em>histogram</em>, or the <em>box plot</em>.
+    </p>
+    <p>
+      Numerical summaries may be computed in order to characterize the main features of the variability. We used the <em>mean</em> and the <em>median</em> in order to identify the location of the distribution. The <em>sample variance</em>, or better yet the <em>sample standard deviation</em>, as well as the <em>inter-quartile range</em> were all described as tools to quantify the overall spread of the data.
+    </p>
+    <p>
+      The aim of all these graphical representations and numerical summaries is to investigate the variability of the data.
+    </p>
+    <p>
+      The subject of this chapter is to introduce two other forms of variability, variability that is not associated, at least not directly, with the data that we observe. The first type of variability is the <em>population variability</em>. The other type of variability is the variability of a <em>random variable</em>.
+    </p>
+    <p>
+      The notions of variability that will be presented are abstract, they are not given in terms of the data that we observe, and they have a mathematical-theoretical flavor to them. At first, these abstract notions may look to you as a waste of your time and may seem to be unrelated to the subject matter of the course. The opposite is true. The very core of statistical thinking is relating observed data to theoretical and abstract models of a phenomena. Via this comparison, and using the tools of statistical inference that are presented in the second half of the book, statisticians can extrapolate insights or make statements regarding the phenomena on the basis of the observed data. Thereby, the abstract notions of variability that are introduced in this chapter, and are extended in the subsequent chapters up to the end of this part of the book, are the essential foundations for the practice of statistics.
+    </p>
+    <p>
+      The first notion of variability is the variability that is associated with the population. It is similar in its nature to the variability of the data. The difference between these two types of variability is that the former corresponds to the variability of the quantity of interest across all members of the population and not only for those that were selected to the sample.
+    </p>
+    <p>
+      In Chapters <xref ref="ch-data" /> and <xref ref="ch-descriptive-stat" /> we examined the data set <q><c>ex.1</c></q> which contained data on the sex and height of a sample of 100 observations. In this chapter we will consider the sex and height of <em>all</em> the members of the population from which the sample was selected. The size of the relevant population is 100,000, including the 100 subjects that composed the sample. When we examine the values of the height across the entire population we can see that different people may have different heights. This variability of the heights is the population variability.
+    </p>
+    <p>
+      The other abstract type of variability, the variability of a random variable, is a mathematical concept. The aim of this concept is to model the notion of randomness in measurements or the uncertainty regarding the outcome of a measurement. In particular we will initially consider the variability of a random variable in the context of selecting one subject at random from the population.
+    </p>
+    <p>
+      Imagine we have a population of size 100,000 and we are about to select at random one subject from this population. We intend to measure the height of the subject that will be selected. Prior to the selection and measurement we are not certain what value of height will be obtained. One may associate the notion of variability with uncertainty <mdash /> different subjects to be selected may obtain different evaluations of the measurement and we do not know before hand which subject will be selected. The resulting variability is the variability of a random variable.
+    </p>
+    <p>
+      Random variables can be defined for more abstract settings. Their aim is to provide models for randomness and uncertainty in measurements. Simple examples of such abstract random variables will be provided in this chapter. More examples will be introduced in the subsequent chapters. The more abstract examples of random variables need not be associated with a specific population. Still, the same definitions that are used for the example of a random variable that emerges as a result of sampling a single subject from a population will apply to the more abstract constructions.
+    </p>
+    <p>
+      All types of variability, the variability of the data we dealt with before as well as the other two types of variability, can be displayed using graphical tools and characterized with numerical summaries. Essentially the same type of plots and numerical summaries, possibly with some modifications, may and will be applied.
+    </p>
+    <p>
+      A point to remember is that the variability of the data relates to a concrete list of data values that is presented to us. In contrary to the case of the variability of the data, the other types of variability are not associated with quantities we actually get to observe. The data for the sample we get to see but not the data for the rest of the population. Yet, we can still discuss the variability of a population that is out there, even though we do not observe the list of measurements for the entire population. (The example that we give in this chapter of a population was artificially constructed and serves for illustration only. In the actual statistical context one does not obtain measurements from the entire population, only from the subjects that went into the sample.) The discussion of the variability in this context is theoretical in its nature. Still, this theoretical discussion is instrumental for understanding statistics.
+    </p>
   </section>
 
-  <section xml:id="sec-probability-function">
-    <title>The Probability Function</title>
-    <p>Content to be added.</p>
+  <section xml:id="sec-a-population">
+    <title>A Population</title>
+    <p>
+      In this section we introduce the variability of a population and present some numerical summaries that characterizes this variability. Before doing so, let us review with the aid of an example some of the numerical summaries that were used for the characterization of the variability of data.
+    </p>
+    <p>
+      Recall the file <q><c>ex1.csv</c></q> that contains data on the height and sex of 100 subjects. (The data file can be obtained from <url href="http://pluto.huji.ac.il/~msby/StatThink/Datasets/ex1.csv" />.) We read the content of the file into a data frame by the name <q><c>ex.1</c></q> and apply the function <q><c>summary</c></q> to the data frame:
+    </p>
+    <program language="r">
+      <input>
+ex.1 &lt;- read.csv("_data/ex1.csv")
+summary(ex.1)
+      </input>
+    </program>
+    <p>
+      We saw in the previous chapter that, when applied to a numeric sequence, the function <q><c>summary</c></q> produces the smallest and largest values in the sequence, the three quartiles (including the median) and the mean. If the input of the same function is a factor then the outcome is the frequency in the data of each of the levels of the factor. Here <q><c>sex</c></q> is a factor with two levels. From the summary we can see that 54 of the subjects in the sample are female and 46 are male.
+    </p>
+    <p>
+      Notice that when the input to the function <q><c>summary</c></q> is a data frame, as is the case in this example, then the output is a summary of each of the variables of the data frame. In this example two of the variables are numeric (<q><c>id</c></q> and <q><c>height</c></q>) and one variable is a factor (<q><c>sex</c></q>).
+    </p>
+    <p>
+      Recall that the mean is the arithmetic average of the data which is computed by summing all the values of the variable and dividing the result by the number of observations. Hence, if <m>n</m> is the number of observations (<m>n=100</m> in this example) and <m>x_i</m> is the value of the variable for subject <m>i</m>, then one may write the mean in a formula form as
+    </p>
+    <me>\bar x = \frac{\mbox{Sum of all values in the data}}{\mbox{Number of values in the data}} = \frac{\sum_{i=1}^n x_i}{n}\;,</me>
+    <p>
+      where <m>\bar x</m> corresponds to the mean of the data and the symbol <q><m>\sum_{i=1}^n x_i</m></q> corresponds to the sum of all values in the data.
+    </p>
+    <p>
+      The median is computed by ordering the data values and selecting a value that splits the ordered data into two equal parts. The first and third quartile are obtained by further splitting each of the halves into two quarters.
+    </p>
+    <p>
+      Let us discuss the variability associated with an entire target population. The file <q><c>pop1.csv</c></q> that contains the population data can be found on the internet (<url href="http://pluto.huji.ac.il/~msby/StatThink/Datasets/pop1.csv" />). It is a CSV file that contains the information on sex and height of an entire adult population of some imaginary city. (The data in <q><c>ex.1</c></q> corresponds to a sample from this city.) Read the population data into <c>R</c> and examine it:
+    </p>
+    <program language="r">
+      <input>
+pop.1 &lt;- read.csv(file="_data/pop1.csv")
+summary(pop.1)
+      </input>
+    </program>
+    <p>
+      The object <q><c>pop.1</c></q> is a data frame of the same structure as the data frame <q><c>ex.1</c></q>. It contains three variables: a unique identifier of each subject (<c>id</c>), the sex of the subject (<c>sex</c>), and its height (<c>height</c>). Applying the function <q><c>summary</c></q> to the data frame produces the summary of the variables that it contains. In particular, for the variable <q><c>sex</c></q>, which is a factor, it produces the frequency of its two categories <mdash /> 48,888 female and 51,112 <mdash /> a total of 100,000 subjects. For the variable <q><c>height</c></q>, which is a numeric variable, it produces the extreme values, the quartiles, and the mean.
+    </p>
+    <figure xml:id="fig-prob1">
+      <caption>Bar Plot of Height</caption>
+      <image source="_figures/Prob1.png" width="60%">
+        <description>Bar plot showing the distribution of heights in the population, with heights ranging from 117 to 217 centimeters and centered at 170 centimeters</description>
+      </image>
+    </figure>
+    <p>
+      Let us concentrate on the variable <q><c>height</c></q>. A bar plot of the distribution of the heights in the entire population is given in <xref ref="fig-prob1" /><fn>Such a bar plot can be produced with the expression <q><c>plot(table(pop.1$height))</c></q>.</fn>. Recall that a vertical bar is placed above each value of height that appears in the population, with the height of the bar representing the frequency of the value in the population. One may read out of the graph or obtain from the numerical summaries that the variable takes integer values in the range between 117 and 217 (heights are rounded to the nearest centimeter). The distribution is centered at 170 centimeter, with the central 50% of the values spreading between 162 and 178 centimeters.
+    </p>
+    <p>
+      The mean of the height in the entire population is equal to 170 centimeter. This mean, just like the mean for the distribution of data, is obtained by the summation of all the heights in the population divided by the population size. Let us denote the size of the entire population by <m>N</m>. In this example <m>N = 100,000</m>. (The size of the sample for the data was called <m>n</m> and was equal to <m>n=100</m> in the parallel example that deals with the data of a sample.) The mean of an entire population is denoted by the Greek letter <m>\mu</m> and is read <q>mew</q>. (The average for the data was denoted <m>\bar x</m>). The formula of the population mean is:
+    </p>
+    <me>\mu = \frac{\mbox{Sum of all values in the population}}{\mbox{Number of values in the population}}= \frac{\sum_{i=1}^N x_i}{N}\;.</me>
+    <p>
+      Observe the similarity between the definition of the mean for the data and the definition of the mean for the population. In both cases the arithmetic average is computed. The only difference is that in the case of the mean of the data the computation is with respect to the values that appear in the sample whereas for the population all the values in the population participate in the computation.
+    </p>
+    <p>
+      In actual life, we will not have all the values of a variable in the entire population. Hence, we will not be able to compute the actual value of the population mean. However, it is still meaningful to talk about the population mean because this number exists, even though we do not know what its value is. As a matter of fact, one of the issues in statistics is to try to estimate this unknown quantity on the basis of the data we do have in the sample.
+    </p>
+    <p>
+      A characteristic of the distribution of an entire population is called a <term>parameter</term>. Hence, <m>\mu</m>, the population average, is a parameter. Other examples of parameters are the population median and the population quartiles. These parameters are defined exactly like their data counterparts, but with respect to the values of the entire population instead of the observations in the sample alone.
+    </p>
+    <p>
+      Another example of a parameter is the population variance. Recall that the sample variance was defined with the aid of the deviations <m>x_i - \bar x</m>, where <m>x_i</m> is the value of the measurement for the <m>i</m>th subject and <m>\bar x</m> is the mean for the data. In order to compute the sample variance these deviations were squared to produce the squared deviations. The squares were summed up and then divided by the sample size minus one (<m>n-1</m>). The sample variance, computed from the data, was denoted <m>s^2</m>.
+    </p>
+    <p>
+      The population variance is defined in a similar way. First, the deviations from the population mean <m>x_i - \mu</m> are considered for each of the members of the population. These deviations are squared and the average of the squares is computed. We denote this parameter by <m>\sigma^2</m> (read <q>sigma square</q>). A minor difference between the sample variance and the population variance is that for the latter we should divide the sum of squared deviations by the population size (<m>N</m>) and not by the population size minus one (<m>N-1</m>):
+    </p>
+    <md>
+      <mrow>\sigma^2 =\amp \mbox{The average square deviation in the population}</mrow>
+      <mrow>=\amp \frac{\mbox{Sum of the squares of the deviations in the population}}{\mbox{Number of values in the population}}</mrow>
+      <mrow>=\amp \frac{\sum_{i=1}^N (x_i-\mu)^2}{N}\;.</mrow>
+    </md>
+    <p>
+      The standard deviation of the population, yet another parameter, is denoted by <m>\sigma</m> and is equal to the square root of the variance. The standard deviation summarizes the overall variability of the measurement across the population. Again, the typical situation is that we do not know what the actual value of the standard deviation of the population is. Yet, we may refer to it as a quantity and we may try to estimate its value based on the data we do have from the sample.
+    </p>
+    <p>
+      For the height of the subjects in our imaginary city we get that the variance is equal to <m>\sigma^2 =126.1576</m>. The standard deviation is equal to <m>\sigma = \sqrt{126.1576} = 11.23199</m>. These quantities can be computed in this example from the data frame <q><c>pop.1</c></q> with the aid of the functions <q><c>var</c></q> and <q><c>sd</c></q>, respectively<fn>Observe that the function <q><c>var</c></q> computes the sample variance. Consequently, the sum of squares is divided by <m>N-1</m>. We can correct that when computing the population variance by multiplying the result by <m>N-1</m> and dividing by <m>N</m>. Notice that the difference between the two quantities is negligible for a large population. Henceforth we will use the functions <q><c>var</c></q> and <q><c>sd</c></q> to compute the variance and standard deviations of populations without the application of the correction.</fn>.
+    </p>
+  </section>
+
+  <section xml:id="sec-random-variables">
+    <title>Random Variables</title>
+    
+    <introduction>
+      <p>
+        In the previous section we dealt with the variability of the population. Next we consider the variability of a random variable. As an example, consider taking a sample of size <m>n=1</m> from the population (a single person) and measuring his/her height.
+      </p>
+      <p>
+        The object <c>pop.1$height</c> is a sequence with 100,000 entries. Think of it as a population. We will apply the function <q><c>sample</c></q> to this sequence:
+      </p>
+      <program language="r">
+        <input>
+sample(pop.1$height,1)
+        </input>
+      </program>
+      <p>
+        The first entry to the function is the given sequence of heights. When we set the second argument to 1 then the function selects one of the entries of the sequence at random, with each entry having the same likelihood of being selected. Specifically, in this example an entry that contains the value 162 was selected. Let us run the function again:
+      </p>
+      <program language="r">
+        <input>
+sample(pop.1$height,1)
+        </input>
+      </program>
+      <p>
+        In this instance an entry with a different value was selected. Try to run the command several times yourself and see what you get. Would you necessarily obtain a different value in each run?
+      </p>
+      <p>
+        Now let us enter the same command without pressing the return key:
+      </p>
+      <program language="r">
+        <input>
+sample(pop.1$height,1)
+        </input>
+      </program>
+      <p>
+        Can you tell, before pressing the key, what value will you get?
+      </p>
+      <p>
+        The answer to this question is of course <em>No</em>. There are 100,000 entries with a total of 94 distinct values. In principle, any of the values may be selected and there is no way of telling in advance which of the values will turn out as an outcome.
+      </p>
+      <p>
+        A random variable is the future outcome of a measurement, <em>before</em> the measurement is taken. It does not have a specific value, but rather a collection of potential values with a distribution over these values. After the measurement is taken and the specific value is revealed then the random variable ceases to be a random variable! Instead, it becomes data.
+      </p>
+      <p>
+        Although one is not able to say what the outcome of a random variable will turn out to be. Still, one may identify patterns in this potential outcome. For example, knowing that the distribution of heights in the population ranges between 117 and 217 centimeter one may say in advance that the outcome of the measurement must also be in that interval. Moreover, since there is a total of 3,476 subjects with height equal to 168 centimeter and since the likelihood of each subject to be selected is equal then the likelihood of selecting a subject of this height is 3,476/100,000 = 0.03476. In the context of random variables we call this likelihood <term>probability</term>. In the same vain, the frequency of subjects with hight 192 centimeter is 488, and therefore the probability of measuring such a height is 0.00488. The frequency of subjects with height 200 centimeter or above is 393, hence the probability of obtaining a measurement in the range between 200 and 217 centimeter is 0.00393.
+      </p>
+    </introduction>
+
+    <subsection xml:id="sec-sample-space-events">
+      <title>Sample Space and Events</title>
+      <p>
+        Let us turn to the formal definition of a random variable: A random variable refer to numerical values, typically the outcome of an observation, a measurement, or a function thereof.
+      </p>
+      <p>
+        A random variable is characterized via the collection of potential values it may obtain, known as the <term>sample space</term> and the likelihood of obtaining each of the values in the sample space (namely, the probability of the value). In the given example, the sample space contains the 94 integer values that are marked in <xref ref="fig-prob1" />. The probability of each value is the height of the bar above the value, divided by the total frequency of 100,000 (namely, the relative frequency in the population).
+      </p>
+      <p>
+        We will denote random variables with capital Latin letters such as <m>X</m>, <m>Y</m>, and <m>Z</m>. Values they may obtain will be marked by small Latin letters such as <m>x</m>, <m>y</m>, <m>z</m>. For the probability of values we will use the letter <q><m>\Prob</m></q>. Hence, if we denote by <m>X</m> the measurement of height of a random individual that is sampled from the given population then:
+      </p>
+      <me>\Prob(X = 168) = 0.03476</me>
+      <p>and</p>
+      <me>\Prob(X \geq 200) = 0.00393\;.</me>
+      <p>
+        Consider, as yet another example, the probability that the height of a random person sampled from the population differs from 170 centimeter by no more than 10 centimeters. (In other words, that the height is between 160 and 180 centimeters.) Denote by <m>X</m> the height of that random person. We are interested in the probability <m>\Prob(|X -170| \leq 10)</m><fn>The expression <m>\{|X -170| \leq 10\}</m> reads as <q>the absolute value of the difference between <m>X</m> and 170 is no more that 10</q>. In other words, <m>\{-10 \leq X - 170 \leq 10\}</m>, which is equivalent to the statement that <m>\{160 \leq X \leq 180\}</m>. It follows that <m>\Prob(|X-170|\leq 10) = \Prob(160\leq X \leq 180)</m>.</fn>.
+      </p>
+      <p>
+        The random person can be any of the subjects of the population with equal probability. Thus, the sequence of the heights of the 100,000 subjects represents the distribution of the random variable <m>X</m>:
+      </p>
+      <program language="r">
+        <input>
+pop.1 &lt;- read.csv(file="_data/pop1.csv")
+X &lt;- pop.1$height
+        </input>
+      </program>
+      <p>
+        Notice that the object <q><c>X</c></q> is a sequence of lenght 100,000 that stores all the heights of the population. The probability we seek is the relative frequency in this sequency of values between 160 and 180. First we compute the probability and then explain the method of computation:
+      </p>
+      <program language="r">
+        <input>
+mean(abs(X-170) &lt;= 10)
+        </input>
+      </program>
+      <p>
+        We get that the height of a person randomly sampled from the population is between 160 and 180 centimeters with probability 0.64541.
+      </p>
+      <p>
+        Let us produce a small example that will help us explain the computation of the probability. We start by forming a sequence with 10 numbers:
+      </p>
+      <program language="r">
+        <input>
+Y &lt;- c(6.3, 6.9, 6.6, 3.4, 5.5, 4.3, 6.5, 4.7, 6.1, 5.3)
+        </input>
+      </program>
+      <p>
+        The goal is to compute the proportion of numbers that are in the range <m>[4,6]</m> (or, equivalently, <m>\{|Y-5| \leq 1\}</m>).
+      </p>
+      <p>
+        The function <q><c>abs</c></q> computes the absolute number of its input argument. When the function is applied to the sequence <q><c>Y-5</c></q> it produces a sequence of the same length with the distances between the components of <q><c>Y</c></q> and the number 5:
+      </p>
+      <program language="r">
+        <input>
+abs(Y-5)
+        </input>
+      </program>
+      <p>
+        Compare the resulting output to the original sequence. The first value in the input sequence is 6.3. Its distance from 5 is indeed 1.3. The fourth value in the input sequence is 3.4. The difference 3.4 - 5 is equal to -1.6, and when the absolute value is taken we get a distance of 1.6.
+      </p>
+      <p>
+        The function <q><c>&lt;=</c></q> expects an argument to the right and an argument to the left. It compares each component to the left with the parallel component to the right and returns a logical value, <q><c>TRUE</c></q> or <q><c>FALSE</c></q>, depending on whether the relation that is tested holds or not:
+      </p>
+      <program language="r">
+        <input>
+abs(Y - 5) &lt;= 1
+        </input>
+      </program>
+      <p>
+        Observe the in this example the function <q><c>&lt;=</c></q> produced 10 logical values, one for each of the elements of the sequence to the left of it. The first input in the sequence <q><c>Y</c></q> is 6.3, which is more than one unit away from 5. Hence, the first output of the logical expression is <q><c>FALSE</c></q>. On the other hand, the last input in the sequence <q><c>Y</c></q> is 5.3, which is within the range. Therefore, the last output of the logical expression is <q><c>TRUE</c></q>.
+      </p>
+      <p>
+        Next, we compute the proportion of <q><c>TRUE</c></q> values in the sequence:
+      </p>
+      <program language="r">
+        <input>
+mean(abs(Y - 5) &lt;= 1)
+        </input>
+      </program>
+      <p>
+        When a sequence with logical values is entered into the function <q><c>mean</c></q> then the function replaces the <c>TRUE</c>'s by 1 and the <c>FALSE</c>'s by 0. The average produces then the relative frequency of <c>TRUE</c>'s in the sequence as required. Specifically, in this example there are 4 <c>TRUE</c>'s and 6 <c>FALSE</c>'s. Consequently, the output of the final expression is <m>4/10 = 0.4</m>.
+      </p>
+      <p>
+        The computation of the probability that the sampled height falls within 10 centimeter of 170 is based on the same code. The only differences are that the input sequence <q><c>Y</c></q> is replaced by the sequence of population heights <q><c>X</c></q> as input. the number <q><c>5</c></q> is replaced by the number <q><c>170</c></q> and the number <q><c>1</c></q> is replaced by the number <q><c>10</c></q>. In both cases the result of the computation is the relative proportion of the times that the values of the input sequence fall within a given range of the indicated number.
+      </p>
+    </subsection>
+
+    <subsection xml:id="sec-probability-function">
+      <title>The Probability Function</title>
+      <p>
+        The probability function of a random variable is defined for any value that the random variable may obtain and produces the <em>distribution</em> of the random variable. The probability function may emerge as a relative frequency as in the given example or it may be a result of theoretical modeling. Examples of theoretical random variables are presented mainly in the next two chapters.
+      </p>
+      <p>
+        Consider an example of a random variable. The sample space and the probability function specify the distribution of the random variable. For example, assume it is known that a random variable <m>X</m> may obtain the values 0, 1, 2, or 3. Moreover, imagine that it is known that <m>\Prob(X=1) = 0.25</m>, <m>\Prob(X=2) = 0.15</m>, and <m>\Prob(X=3)= 0.10</m>. What is <m>\Prob(X=0)</m>, the probability that <m>X</m> is equal to 0?
+      </p>
+      <p>
+        The sample space, the collection of possible values that the random variable may obtain is the collection <m>\{0,1,2,3\}</m>. Observe that the sum over the positive values is:
+      </p>
+      <me>\Prob(X > 0) = \Prob(X=1) + \Prob(X=2) + \Prob(X=3) = 0.25 + 0.15 + 0.10 = 0.50\;.</me>
+      <p>
+        It follows, since the sum of probabilities over the entire sample space is equal to 1, that <m>\Prob(X=0) = 1- 0.5 = 0.5</m>.
+      </p>
+      <table xml:id="tab-probability1">
+        <title>The Distribution of <m>X</m></title>
+        <tabular>
+          <row header="yes">
+            <cell>Value</cell>
+            <cell>Probability</cell>
+            <cell>Cum. Prob</cell>
+          </row>
+          <row>
+            <cell>0</cell>
+            <cell>0.5</cell>
+            <cell>0.5</cell>
+          </row>
+          <row>
+            <cell>1</cell>
+            <cell>0.25</cell>
+            <cell>0.75</cell>
+          </row>
+          <row>
+            <cell>2</cell>
+            <cell>0.15</cell>
+            <cell>0.9</cell>
+          </row>
+          <row>
+            <cell>3</cell>
+            <cell>0.1</cell>
+            <cell>1</cell>
+          </row>
+        </tabular>
+      </table>
+      <p>
+        <xref ref="tab-probability1" /> summarizes the distribution of the random variable <m>X</m>. Observe the similarity between the probability function and the notion of relative frequency that was discussed in <xref ref="ch-data" />. Both quantities describe distribution. Both are non-negative and sum to 1. Likewise, notice that one may define the cumulative probability the same way cumulative relative frequency is defined: Ordering the values of the random variable from smallest to largest, the cumulative probability at a given value is the sum of probabilities for values less or equal to the given value.
+      </p>
+      <p>
+        Knowledge of the probabilities of a random variable (or the cumulative probabilities) enables the computation of other probabilities that are associated with the random variable. For example, considering the random variable <m>X</m> of <xref ref="tab-probability1" />, we may calculate the probability of <m>X</m> falling in the interval <m>[0.5, 2.3]</m>. Observe that the given range contains two values from the sample space, 1 and 2, therefore:
+      </p>
+      <me>\Prob(0.5 \leq X \leq 2.3) = \Prob(X=1) + \Prob(X = 2) = 0.25 + 0.15 = 0.40\;.</me>
+      <p>
+        Likewise, we may produce the probability of <m>X</m> obtaining an odd value:
+      </p>
+      <me>\Prob(X = \mbox{odd}) = \Prob(X=1) + \Prob(X=3) = 0.25 + 0.10 = 0.35\;.</me>
+      <p>
+        Observe that both <m>\{0.5 \leq X \leq 2.3\}</m> and <m>\{X = \mbox{odd}\}</m> refer to subsets of values of the sample space. Such subsets are denoted <term>events</term>. In both examples the probability of the event was computed by the summation of the probabilities associated with values that belong to the event.
+      </p>
+    </subsection>
+
+    <subsection xml:id="subsec-expectation-standard-deviation">
+      <title>Expectation and Standard Deviation</title>
+      <p>
+        We may characterize the center of the distribution of a random variable and the spread of the distribution in ways similar to those used for the characterization of the distribution of data and the distribution of a population.
+      </p>
+      <p>
+        The <term>expectation</term> marks the center of the distribution of a random variable. It is equivalent to the data average <m>\bar x</m> and the population average <m>\mu</m>, which was used in order to mark the location of the distribution of the data and the population, respectively.
+      </p>
+      <p>
+        Recall from <xref ref="ch-descriptive-stat" /> that the average of the data can be computed as the weighted average of the values that are present in the data, with weights given by the relative frequency. Specifically, we saw for the data
+      </p>
+      <me>1,\; 1,\; 1,\; 2,\; 2,\; 3,\; 4,\; 4,\; 4,\; 4,\; 4</me>
+      <p>that</p>
+      <me>\frac{1 + 1 + 1 + 2 + 2 + 3 + 4 + 4 + 4 + 4 + 4}{11} = 1\times \frac{3}{11} + 2 \times \frac{2}{11} + 3 \times \frac{1}{11} + 4 \times \frac{5}{11}\;,</me>
+      <p>
+        producing the value of <m>\bar x =2.727</m> in both representations. Using a formula, the equality between the two ways of computing the mean is given in terms of the equation:
+      </p>
+      <me>\bar x = \frac{\sum_{i=1}^n x_i}{n} = \sum_x \big(x \times (f_x/n)\big)\;.</me>
+      <p>
+        In the first representation of the arithmetic mean, the average is computed by the summation of all data points and dividing the sum by the sample size. In the second representation, that uses a weighted sum, the sum extends over all the unique values that appear in the data. For each unique value the value is multiplied by the relative frequency of the value in the data. These multiplications are summed up to produce the mean.
+      </p>
+      <p>
+        The expectation of a random variable is computed in the spirit of the second formulation. The expectation of a random variable is marked with the letter <q><m>\Expec</m></q> and is define via the equation:
+      </p>
+      <me>\Expec(X) = \sum_x \big(x \times \Prob(x)\big)\;.</me>
+      <p>
+        In this definition all the unique values of the sample space are considered. For each value a product of the value and the probability of the value is taken. The expectation is obtained by the summation of all these products. In this definition the probability <m>\Prob(x)</m> replaces the relative frequency <m>f_x/n</m> but otherwise, the definition of the expectation and the second formulation of the mean are identical to each other.
+      </p>
+      <p>
+        Consider the random variable <m>X</m> with distribution that is described in <xref ref="tab-probability1" />. In order to obtain its expectation we multiply each value in the sample space by the probability of the value. Summation of the products produces the expectation (see <xref ref="tab-probability2" />):
+      </p>
+      <me>\Expec(X) = 0 \times 0.5 + 1 \times 0.25 + 2 \times 0.15 + 3\times 0.10 = 0.85\;.</me>
+      <table xml:id="tab-probability2">
+        <title>The Expectation of <m>X</m></title>
+        <tabular>
+          <row header="yes">
+            <cell>Value</cell>
+            <cell>Probability</cell>
+            <cell>Value <times /> Probability</cell>
+          </row>
+          <row>
+            <cell>0</cell>
+            <cell>0.5</cell>
+            <cell>0</cell>
+          </row>
+          <row>
+            <cell>1</cell>
+            <cell>0.25</cell>
+            <cell>0.25</cell>
+          </row>
+          <row>
+            <cell>2</cell>
+            <cell>0.15</cell>
+            <cell>0.3</cell>
+          </row>
+          <row>
+            <cell>3</cell>
+            <cell>0.1</cell>
+            <cell>0.3</cell>
+          </row>
+        </tabular>
+      </table>
+      <p>
+        Expectation = sum(Value<times />Probability) = 0.85
+      </p>
+      <p>
+        In the example of height we get that the expectation is equal to 170.035 centimeter. Notice that this expectation is equal to <m>\mu</m>, the mean of the population<fn>The mean of the population can be computed with the expression <q><c>mean(pop.1$height)</c></q></fn>. This is no accident. The expectation of a potential measurement of a randomly selected subject from a population is equal to the average of the measurement across all subjects.
+      </p>
+      <p>
+        The sample variance (<m>s^2</m>) is obtained as the sum of the squared deviations from the average, divided by the sample size (<m>n</m>) minus 1:
+      </p>
+      <me>s^2 = \frac{\sum_{i=1}^n (x_i - \bar x)^2}{n-1}\;.</me>
+      <p>
+        A second formulation for the computation of the same quantity is via the use of relative frequencies. The formula for the sample variance takes the form
+      </p>
+      <me>s^2 = \frac{n}{n-1}\sum_x \big((x - \bar x)^2\times (f_x/n)\big)\;.</me>
+      <p>
+        In this formulation one considers each of the unique value that are present in the data. For each value the deviation between the value and the average is computed. These deviations are then squared and multiplied by the relative frequency. The products are summed up. Finally, the sum is multiplied by the ratio between the sample size <m>n</m> and <m>n-1</m> in order to correct for the fact that in the sample variance the sum of squared deviations is divided by the sample size minus 1 and not by the sample size.
+      </p>
+      <p>
+        In a similar way, the variance of a random variable may be defined via the probability of the values that make the sample space. For each such value one computes the deviation from the expectation. This deviation is then squared and multiplied by the probability of the value. The multiplications are summed up in order to produce the variance:
+      </p>
+      <me>\Var(X) = \sum_x\big( (x-\Expec(X))^2 \times \Prob(x)\big)\;.</me>
+      <p>
+        Notice that the formula for the computation of the variance of a random variable is very similar to the second formulation for the computation of the sample variance. Essentially, the mean of the data is replaced by the expectation of the random variable and the relative frequency of a value is replaced by the probability of the value. Another difference is that the correction factor is not used for the variance of a random variable.
+      </p>
+      <table xml:id="tab-tab3">
+        <title>The Variance of <m>X</m></title>
+        <tabular>
+          <row header="yes">
+            <cell><m>x</m></cell>
+            <cell><m>P(X=x)</m></cell>
+            <cell><m>x - E[X]</m></cell>
+            <cell><m>(x - E[X])^2</m></cell>
+            <cell><m>P(X=x)*(x - E[X])^2</m></cell>
+          </row>
+          <row>
+            <cell>0</cell>
+            <cell>0.5</cell>
+            <cell>-0.85</cell>
+            <cell>0.7225</cell>
+            <cell>0.36125</cell>
+          </row>
+          <row>
+            <cell>1</cell>
+            <cell>0.25</cell>
+            <cell>0.15</cell>
+            <cell>0.0225</cell>
+            <cell>0.005625</cell>
+          </row>
+          <row>
+            <cell>2</cell>
+            <cell>0.15</cell>
+            <cell>1.15</cell>
+            <cell>1.3225</cell>
+            <cell>0.198375</cell>
+          </row>
+          <row>
+            <cell>3</cell>
+            <cell>0.1</cell>
+            <cell>2.15</cell>
+            <cell>4.6225</cell>
+            <cell>0.46225</cell>
+          </row>
+        </tabular>
+      </table>
+      <p>
+        Var = sum(p<times />(x-sum(p<times />x))^2) = 1.0275
+      </p>
+      <p>
+        As an example consider the variance of the random variable <m>X</m>. The computation of the variance of this random variable is carried out in <xref ref="tab-tab3" />. The sample space, the values that the random variable may obtain, are given in the first column and the probabilities of the values are given in the second column. In the third column the deviation of the value from the expectation <m>\Expec(X) = 0.85</m> is computed for each value. The 4th column contains the square of these deviations and the 5th and last column involves the product of the square deviations and the probabilities. The variance is obtained by summing up the products in the last column. In the given example:
+      </p>
+      <md>
+        <mrow>\Var(X) = \amp (0-0.85)^2 \times 0.5  + (1-0.85)^2 \times 0.25</mrow>
+        <mrow>\amp + (2-0.85)^2\times 0.15 + (3-0.85)^2\times 0.10= 1.0275\;.</mrow>
+      </md>
+      <p>
+        The standard deviation of a random variable is the square root of the variance. The standard deviation of <m>X</m> is <m>\sqrt{\Var(X)} = \sqrt{1.0275} = 1.013657</m>.
+      </p>
+      <p>
+        In the example that involves the height of a subject selected from the population at random we obtain that the variance is <m>126.1576</m>, equal to the population variance, and the standard deviation is 11.23199, the square root of the variance.
+      </p>
+      <p>
+        Other characterization of the distribution that were computed for data, such as the median, the quartiles, etc., may also be defined for random variables.
+      </p>
+    </subsection>
   </section>
 
   <section xml:id="sec-properties-probability">
-    <title>Properties of the Probability Function</title>
-    <p>Content to be added.</p>
+    <title>Probability and Statistics</title>
+    <p>
+      Modern science may be characterized by a systematic collection of empirical measurements and the attempt to model laws of nature using mathematical language. The drive to deliver better measurements led to the development of more accurate and more sensitive measurement tools. Nonetheless, at some point it became apparent that measurements may not be perfectly reproducible and any repeated measurement of presumably the exact same phenomena will typically produce variability in the outcomes. On the other hand, scientists also found that there are general laws that govern this variability in repetitions. For example, it was discovered that the average of several independent repeats of the measurement is less variable and more reproducible than each of the single measurements themselves.
+    </p>
+    <p>
+      Probability was first introduced as a branch of mathematics in the investigation of uncertainty associated with gambling and games of chance. During the early 19th century probability began to be used in order to model variability in measurements. This application of probability turned out to be very successful. Indeed, one of the major achievements of probability was the development of the mathematical theory that explains the phenomena of reduced variability that is observed when averages are used instead of single measurements. In <xref ref="ch-samp-dist" /> we discuss the conclusions of this theory.
+    </p>
+    <p>
+      Statistics study method for inference based on data. Probability serves as the mathematical foundation for the development of statistical theory. In this chapter we introduced the probabilistic concept of a random variable. This concept is key for understanding statistics. In the rest of Part I of this book we discuss the probability theory that is used for statistical inference. Statistical inference itself is discussed in Part II of the book.
+    </p>
   </section>
 
   <section xml:id="sec-exercises-4">
     <title>Exercises</title>
-    <p>Content to be added.</p>
+    
+    <table xml:id="tab-tab4">
+      <title>The Distribution of <m>Y</m></title>
+      <tabular>
+        <row header="yes">
+          <cell>Value</cell>
+          <cell>Probability</cell>
+        </row>
+        <row>
+          <cell>0</cell>
+          <cell>1p</cell>
+        </row>
+        <row>
+          <cell>1</cell>
+          <cell>2p</cell>
+        </row>
+        <row>
+          <cell>2</cell>
+          <cell>3p</cell>
+        </row>
+        <row>
+          <cell>3</cell>
+          <cell>4p</cell>
+        </row>
+        <row>
+          <cell>4</cell>
+          <cell>5p</cell>
+        </row>
+        <row>
+          <cell>5</cell>
+          <cell>6p</cell>
+        </row>
+      </tabular>
+    </table>
+
+    <exercise xml:id="ex-probability-1">
+      <statement>
+        <p>
+          <xref ref="tab-tab4" /> presents the probabilities of the random variable <m>Y</m>. These probabilities are a function of the number <m>p</m>, the probability of the value <q>0</q>. Answer the following questions:
+        </p>
+        <ol>
+          <li><p>What is the value of <m>p</m>?</p></li>
+          <li><p><m>\Prob(Y &lt; 3 )</m> = ?</p></li>
+          <li><p><m>\Prob(Y = \mbox{odd})</m> = ?</p></li>
+          <li><p><m>\Prob(1 \leq Y &lt; 4)</m> = ?</p></li>
+          <li><p><m>\Prob(|Y -3| &lt; 1.5)</m> = ?</p></li>
+          <li><p><m>\Expec(Y)</m> = ?</p></li>
+          <li><p><m>\Var(Y)</m> = ?</p></li>
+          <li><p>What is the standard deviation of <m>Y</m>.</p></li>
+        </ol>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="ex-probability-2">
+      <statement>
+        <p>
+          One invests $2 to participate in a game of chance. In this game a coin is tossed three times. If all tosses end up <q>Head</q> then the player wins $10. Otherwise, the player losses the investment.
+        </p>
+        <ol>
+          <li><p>What is the probability of winning the game?</p></li>
+          <li><p>What is the probability of loosing the game?</p></li>
+          <li><p>What is the expected gain for the player that plays this game? (Notice that the expectation can obtain a negative value.)</p></li>
+        </ol>
+      </statement>
+    </exercise>
   </section>
 
   <section xml:id="sec-summary-4">
     <title>Summary</title>
-    <p>Content to be added.</p>
+
+    <subsection xml:id="subsec-glossary-4">
+      <title>Glossary</title>
+      <dl>
+        <li>
+          <title>Random Variable</title>
+          <p>The probabilistic model for the value of a measurement, before the measurement is taken.</p>
+        </li>
+        <li>
+          <title>Sample Space</title>
+          <p>The set of all values a random variable may obtain.</p>
+        </li>
+        <li>
+          <title>Probability</title>
+          <p>A number between 0 and 1 which is assigned to a subset of the sample space. This number indicates the likelihood of the random variable obtaining a value in that subset.</p>
+        </li>
+        <li>
+          <title>Expectation</title>
+          <p>The central value for a random variable. The expectation of the random variable <m>X</m> is marked by <m>\Expec(X)</m>.</p>
+        </li>
+        <li>
+          <title>Variance</title>
+          <p>The (squared) spread of a random variable. The variance of the random variable <m>X</m> is marked by <m>\Var(X)</m>. The standard deviation is the square root of the variance.</p>
+        </li>
+      </dl>
+    </subsection>
+
+    <subsection xml:id="subsec-discussion-forum-4">
+      <title>Discussion in the Forum</title>
+      <p>
+        Random variables are used to model situations in which the outcome, before the fact, is uncertain. One component in the model is the sample space. The sample space is the list of all possible outcomes. It includes the outcome that took place, but also all other outcomes that could have taken place but never did materialize. The rationale behind the consideration of the sample space is the intention to put the outcome that took place in context. What do you think of this rationale?
+      </p>
+      <p>
+        When forming your answer to this question you may give an example of a situation from you own field of interest for which a random variable can serve as a model. Identify the sample space for that random variable and discuss the importance (or lack thereof) of the correct identification of the sample space.
+      </p>
+      <p>
+        For example, consider a factory that produces car parts that are sold to car makers. The role of the QA personnel in the factory is to validate the quality of each batch of parts before the shipment to the client.
+      </p>
+      <p>
+        To achieve that, a sample of parts may be subject to a battery of quality test. Say that 20 parts are selected to the sample. The number of those among them that will not pass the quality testing may be modeled as a random variable. The sample space for this random variable may be any of the numbers 0, 1, 2, <ellipsis />, 20.
+      </p>
+      <p>
+        The number 0 corresponds to the situation where all parts in the sample passed the quality testing. The number 1 corresponds to the case where 1 part did not pass and the other 19 did. The number 2 describes the case where 2 of the 20 did not pass and 18 did pass, etc.
+      </p>
+    </subsection>
+
+    <subsection xml:id="subsec-summary-formulas-4">
+      <title>Summary of Formulas</title>
+      <dl>
+        <li>
+          <title>Population Size</title>
+          <p><m>N</m> = the number of people, things, etc. in the population.</p>
+        </li>
+        <li>
+          <title>Population Average</title>
+          <p><m>\mu = (1/N)\sum_{i=1}^N x_i</m></p>
+        </li>
+        <li>
+          <title>Expectation of a Random Variable</title>
+          <p><m>\Expec(X) = \sum_x \big(x \times \Prob(x)\big)</m></p>
+        </li>
+        <li>
+          <title>Population Variance</title>
+          <p><m>\sigma^2 = (1/N)\sum_{i=1}^N (x_i-\mu)^2</m></p>
+        </li>
+        <li>
+          <title>Variance of a Random Variable</title>
+          <p><m>\Var(X) = \sum_x\big( (x-\Expec(X))^2 \times \Prob(x)\big)</m></p>
+        </li>
+      </dl>
+    </subsection>
   </section>
 </chapter>
