@@ -50,7 +50,7 @@
     <p>
       In this chapter we deal with a Bernoulli response. Such a response has
       two levels, <c>TRUE</c> or <c>FALSE</c><fn>The levels are frequently coded as 1 or 0, <q>success</q> or <q>failure</q>,
-      or any other pair of levels.</fn>, and may emerges as the indicator
+      or any other pair of levels.</fn>, and may emerge as the indicator
       of an event. Else, it may be associated with a factor with two levels
       and correspond to the indication of one of the two levels. Such response
       was considered in Chapters <xref ref="ch-confidence-intervals" /> and <xref ref="ch-testing-hypothesis" /> where
@@ -64,7 +64,7 @@
       has two levels. These levels correspond to two sub-populations (or two
       settings). The aim of the analysis is to compare between the two
       sub-populations (or between the two settings) the probability of the
-      even.
+      event.
     </p>
     <p>
       The discussion in this section is parallel to the discussion in
@@ -98,7 +98,7 @@
     <p>
       The methods for producing the confidence intervals for the difference
       and for testing the null hypothesis that the difference is equal to zero
-      are similar is principle to the methods that were described in
+      are similar in principle to the methods that were described in
       the section for making parallel inferences regarding the
       relations between expectations. However, the derivations of the tools
       that are used in the current situation are not identical to the
@@ -367,7 +367,7 @@ hist(cars$length)
       plot is divided between 7 vertical rectangles. These vertical rectangles
       correspond to the 7 rectangles in the histogram of
       <xref ref="fig-logistic3" />, turn on their sides. Hence, the width of
-      each rectangle in <xref ref="fig-logistic2" /> correspond to the hight of
+      each rectangle in <xref ref="fig-logistic2" /> correspond to the height of
       the parallel rectangle in the histogram. Consequently, the area of the
       vertical rectangles in the mosaic plot represents the relative frequency
       of the associated interval of values of the explanatory variable.
@@ -453,7 +453,7 @@ summary(fit.doors)
       Generally, the function <c>glm</c> can be used in order to fit regression
       models in cases where the distribution of the response has special
       forms. Specifically, when the argument <c>family=binomial</c> is used then
-      the model that is being used in the model of logistic regression. The
+      the model that is being used is the logistic regression model. The
       formula that is used in the function involves a response and an
       explanatory variable. The response may be a sequence with logical
       <c>TRUE</c> or <c>FALSE</c> values as in the example<fn>The response is the output of the expression
@@ -629,14 +629,14 @@ confint(fit.doors)
         <q>response</q>. One may get the impression that the explanatory variable is
         the cause for the statistical behavior of the response. In negation to
         this interpretation, some say that all that statistics does is to
-        examine the joint distribution of the variables, but casuality cannot be
+        examine the joint distribution of the variables, but causality cannot be
         inferred from the fact that two variables are statistically related.
         What do you think? Can statistical reasoning be used in the
-        determination of casuality?
+        determination of causality?
       </p>
       <p>
         As part of your answer in may be useful to consider a specific situation
-        where the determination of casuality is required. Can any of the tools
+        where the determination of causality is required. Can any of the tools
         that were discussed in the book be used in a meaningful way to aid in
         the process of such determination?
       </p>
