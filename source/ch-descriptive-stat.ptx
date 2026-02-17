@@ -484,7 +484,7 @@ x
         It is said by some that outliers can help us understand our data better. What is your opinion?
       </p>
       <p>
-        When forming your answer to this question you may give an example of how outliers may provide insight or, else, how they may abstract our understanding. For example, consider the price of a stock that tend to go up or go down at most 2% within each trading day. A sudden 5% drop in the price of the stock may be an indication to reconsidering our position with respect to this stock.
+        When forming your answer to this question you may give an example of how outliers may provide insight or, else, how they may obstruct our understanding. For example, consider the price of a stock that tend to go up or go down at most 2% within each trading day. A sudden 5% drop in the price of the stock may be an indication to reconsidering our position with respect to this stock.
       </p>
     </subsection>
 
