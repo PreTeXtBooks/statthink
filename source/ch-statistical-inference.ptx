@@ -6,7 +6,7 @@
   <section xml:id="sec-student-learning-objectives-inference">
     <title>Student Learning Objectives</title>
     <p>
-      <xref ref="sec-key-terms-inference" text="custom">The next section</xref> of this chapter introduces the basic issues and tools of statistical inference. These tools are the subject matter of the second part of this book. In Chapters <xref ref="ch-statistical-inference" /><mdash /><xref ref="ch-bernoulli-response" /> we use data on the specifications of cars in order to demonstrate the application of the tools for making statistical inference. In <xref ref="sec-cars-data-set" text="custom">the third section</xref> of this chapter we present the data frame that contains this data. <xref ref="sec-sampling-distribution" text="custom">The fourth section</xref> reviews probability topics that were discussed in the first part of the book and are relevant for the second part. By the end of this chapter, the student should be able to:
+      <xref ref="sec-key-terms-inference" text="custom">The next section</xref> of this chapter introduces the basic issues and tools of statistical inference. These tools are the subject matter of the second part of this book. In Chapters <xref ref="ch-statistical-inference" /><mdash /><xref ref="ch-bernoulli-response" /> we use data on the specifications of cars in order to demonstrate the application of the tools for making statistical inference. In <xref ref="sec-cars-data-set" text="custom">the third section</xref> of this chapter we present the data frame that contains this data. <xref ref="sec-9-sampling-distribution" text="custom">The fourth section</xref> reviews probability topics that were discussed in the first part of the book and are relevant for the second part. By the end of this chapter, the student should be able to:
     </p>
     <ul>
       <li><p>Define key terms that are associated with inferential statistics.</p></li>
@@ -165,7 +165,7 @@ summary(cars)
     </dl>
   </section>
 
-  <section xml:id="sec-sampling-distribution">
+  <section xml:id="sec-9-sampling-distribution">
     <title>The Sampling Distribution</title>
 
     <subsection xml:id="subsec-statistics">
