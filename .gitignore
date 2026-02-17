@@ -12,3 +12,4 @@ generated-assets/
 .ptx/
 cli.log
 .error_schema.log
+logs/
