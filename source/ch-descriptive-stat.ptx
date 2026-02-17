@@ -71,6 +71,14 @@ hist(ex.1$height)
 ex.1$height
         </input>
       </program>
+<pre>
+##   [1] 182 168 172 154 174 176 193 156 157 186 143 182 194 187 171 178 157
+##  [18] 156 172 157 171 164 142 140 202 176 165 176 175 170 169 153 169 158
+##  [35] 208 185 157 147 160 173 164 182 175 165 194 178 178 186 165 180 174
+##  [52] 169 173 199 163 160 172 177 165 205 193 158 180 167 165 183 171 191
+##  [69] 191 152 148 176 155 156 177 180 186 167 174 171 148 153 136 199 161
+##  [86] 150 181 166 147 168 188 170 189 117 174 187 141 195 129 172
+</pre>
       <p>
         This is a numeric sequence and can serve as the input to a function that expects a numeric sequence as input, a function such as <q><c>hist</c></q>. (But also other functions, for example, <q><c>sum</c></q> and <q><c>cumsum</c></q>.)
       </p>
@@ -134,6 +142,10 @@ ex.1$height
 boxplot(c(1,11.5,6,7.2,4,8,9,10,6.8,8.3,2,2,10,1))
         </input>
       </program>
+      <figure xml:id="fig-dstatbox">
+        <image source="_figures/DStat-boxplot.png" width="60%">
+        </image>
+      </figure>
       <p>
         Observe that the end points of the whiskers are 1, for the minimal value, and 11.5 for the largest value. The end values of the box are 9 for the third quartile and 2 for the first quartile. The median 7 is marked inside the box.
       </p>
@@ -145,6 +157,10 @@ boxplot(c(1,11.5,6,7.2,4,8,9,10,6.8,8.3,2,2,10,1))
 boxplot(ex.1$height)
         </input>
       </program>
+      <figure xml:id="fig-dstatbox2">
+        <image source="_figures/DStat-boxplot-2.png" width="60%">
+        </image>
+      </figure>
       <p>
         In order to assess the plot let us compute quartiles of the variable:
       </p>
@@ -153,6 +169,10 @@ boxplot(ex.1$height)
 summary(ex.1$height)
         </input>
       </program>
+<pre>
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   117.0   158.0   171.0   170.1   180.2   208.0
+</pre>
       <p>
         The function <q><c>summary</c></q>, when applied to a numerical sequence, produce the minimal and maximal entries, as well the first, second and third quartiles (the second is the Median). It also computes the average of the numbers (the Mean), which will be discussed in the next section.
       </p>
@@ -208,6 +228,10 @@ mean(x)
 median(x)
         </input>
       </program>
+<pre>
+## [1] 7
+## [1] 7
+</pre>
       <p>
         The mean and the median are each 7 for these data. In a perfectly symmetrical distribution, the mean and the median are the same<fn>In the case of a symmetric distribution the vertical line of symmetry is located at the mean, which is also equal to the median.</fn>.
       </p>
@@ -231,6 +255,10 @@ mean(x)
 median(x)
         </input>
       </program>
+<pre>
+## [1] 6.416667
+## [1] 7
+</pre>
       <p>
         (Notice that the original data is replaced by the new data when object <c>x</c> is reassigned.) The median is still 7, but the mean is less than 7. The relation between the mean and the median reflects the skewing.
       </p>
@@ -248,6 +276,10 @@ mean(x)
 median(x)
         </input>
       </program>
+<pre>
+## [1] 7.583333
+## [1] 7
+</pre>
       <p>
         The median is yet again equal to 7, but this time the mean is greater than 7. Again, the mean reflects the skewing.
       </p>
@@ -263,6 +295,10 @@ mean(ex.1$height)
 median(ex.1$height)
         </input>
       </program>
+<pre>
+## [1] 170.11
+## [1] 171
+</pre>
       <p>
         Observe that the histogram of the height (<xref ref="fig-dstat1" />) is skewed to the left. This is consistent with the fact that the mean is less than the median.
       </p>
@@ -293,6 +329,9 @@ x &lt;- c(9,9.5,9.5,10,10,10,10,10.5,10.5,10.5,10.5,11,11,11,11,11,11,11.5,11.5,
 length(x)
       </input>
     </program>
+<pre>
+## [1] 20
+</pre>
     <p>
       Pay attention to the fact that we did not write the <q><c>+</c></q> at the beginning of the second line. That symbol was produced by <c>R</c> when moving to the next line to indicate that the expression is not complete yet and will not be executed. Only after inputting the right bracket and the hitting of the Return key does <c>R</c> carry out the command and creates the object <q><c>x</c></q>. When you execute this example yourself on your own computer make sure not to copy the <q><c>+</c></q> sign. Instead, if you hit the return key after the last comma on the first line, the plus sign will be produced by <c>R</c> as a new prompt and you can go on typing in the rest of the numbers.
     </p>
@@ -309,6 +348,11 @@ x.bar
 x - x.bar
       </input>
     </program>
+<pre>
+## [1] 10.525
+##  [1] -1.525 -1.025 -1.025 -0.525 -0.525 -0.525 -0.525 -0.025 -0.025 -0.025
+## [11] -0.025  0.475  0.475  0.475  0.475  0.475  0.475  0.975  0.975  0.975
+</pre>
     <p>
       The average of the observations is equal to 10.525 and when we delete this number from each of the components of the sequence <c>x</c> we obtain the deviations. For example, the first deviation is obtained as 9 - 10.525 = -1.525, the second deviation is 9.5 - 10.525 = -1.025, and so forth. The 20th deviation is 11.5 - 10.525 = 0.975, and this is the last number that is presented in the output.
     </p>
@@ -323,6 +367,11 @@ x - x.bar
 (x - x.bar)^2
       </input>
     </program>
+<pre>
+##  [1] 2.325625 1.050625 1.050625 0.275625 0.275625 0.275625 0.275625
+##  [8] 0.000625 0.000625 0.000625 0.000625 0.225625 0.225625 0.225625
+## [15] 0.225625 0.225625 0.225625 0.950625 0.950625 0.950625
+</pre>
     <p>
       Recall that <q><c>x - x.bar</c></q> is a sequence of length 20. We apply the square function to this sequence. This function is applied to each of the components of the sequence. Indeed, for the first component we have that <m>(-1.525)^2 = 2.325625</m>, for the second component <m>(-1.025)^2 = 1.050625</m>, and for the last component <m>(0.975)^2 = 0.950625</m>.
     </p>
@@ -335,6 +384,10 @@ sum((x - x.bar)^2)/(length(x)-1)
 sqrt(sum((x - x.bar)^2)/(length(x)-1))
       </input>
     </program>
+<pre>
+## [1] 0.5125
+## [1] 0.7158911
+</pre>
     <p>
       If the variance is produced as a result of dividing the sum of squares by the number of observations minus one then the variance is called the <term>sample variance</term>.
     </p>
@@ -347,6 +400,10 @@ var(x)
 sd(x)
       </input>
     </program>
+<pre>
+## [1] 0.5125
+## [1] 0.7158911
+</pre>
     <p>
       In the computation of the variance we divide the sum of squared deviations by the number of deviations minus one and not by the number of deviations. The reason for that stems from the theory of statistical inference that will be discussed in Part II of this book. Unless the size of the data is small, dividing by <m>n</m> or by <m>n-1</m> does not introduce much of a difference.
     </p>
