@@ -27,6 +27,8 @@
 
   <section xml:id="sec-discrete-random-variables">
     <title>Discrete Random Variables</title>
+    
+    <introduction>
       <p>
         In the previous chapter we introduced the notion of a random variable. A
         random variable corresponds to the outcome of an observation or a
@@ -81,11 +83,12 @@
         Many other models, apart from the Binomial and Poisson, exist for
         discrete random variables. An example of such model, the
         Negative-Binomial model, will be considered in
-        <xref ref="sec-rvarexercises" />. Depending on the specific context that
+        <xref ref="sec-exercises" />. Depending on the specific context that
         involves measurements with discrete values, one may select the Binomial,
         the Poisson, or one of these other models to serve as a theoretical
         approximation of the distribution of the measurement.
       </p>
+    </introduction>
 
     <subsection xml:id="subsec-the-binomial-random-variable">
       <title>The Binomial Random Variable</title>
@@ -464,6 +467,8 @@ sum((X.val-EX)^2*P.val)
 
   <section xml:id="sec-continuous-random-variable">
     <title>Continuous Random Variable</title>
+    
+    <introduction>
       <p>
         Many types of measurements, such as height, weight, angle, temperature,
         etc., may in principle have a continuum of possible values. Continuous
@@ -531,6 +536,7 @@ sum((X.val-EX)^2*P.val)
         variables: Uniform and Exponential. In the next chapter another example
         – the Normal distribution – will be introduced.
       </p>
+    </introduction>
 
     <subsection xml:id="subsec-the-uniform-random-variable">
       <title>The Uniform Random Variable</title>
