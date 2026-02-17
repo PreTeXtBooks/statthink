@@ -309,7 +309,7 @@ tapply(dif.mpg,heavy,var)
       <input>
 var.test(dif.mpg~heavy)
       </input>
-    </program
+    </program>
 <pre>
 ## 
 ##  F test to compare two variances
