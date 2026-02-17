@@ -3,35 +3,664 @@
 <chapter xml:id="ch-bernoulli-response" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>A Bernoulli Response</title>
 
-  <introduction>
-    <p>
-      This chapter discusses regression where the response is a factor with two levels
-      (Bernoulli/binary response).
-    </p>
-  </introduction>
-
   <section xml:id="sec-student-learning-objectives-15">
     <title>Student Learning Objectives</title>
-    <p>Content to be added.</p>
+    <p>
+      Chapters <xref ref="ch-two-samples" /> and <xref ref="ch-linear-regression" /> introduced statistical
+      inference that involves a response and an explanatory variable that may
+      affect the distribution of the response. In both chapters the response
+      was numeric. The two chapters differed in the data type of the
+      explanatory variable. In Chapter <xref ref="ch-two-samples" /> the explanatory variable
+      was a factor with two levels that splits the sample into two
+      sub-samples. In Chapter <xref ref="ch-linear-regression" /> the explanatory variable was
+      numeric and produced, together with the response, a linear trend. The
+      aim in this chapter is to consider the case where the response is a
+      Bernoulli variable. Such a variable may emerge as the indicator of the
+      occurrence of an event associated with the response or as a factor with
+      two levels. The explanatory variable is a factor with two levels in one
+      case or a numerical variable in the other case.
+    </p>
+    <p>
+      Specifically, when the explanatory variable is a factor with two levels
+      then we may use the function <c>prop.test</c>. This function was used in
+      Chapter <xref ref="ch-testing-hypothesis" /> for the analysis of the probability of an event
+      in a single sample. Here we use it in order to compare between two
+      sub-samples. This is similar to the way the function <c>t.test</c> was used
+      for a numeric response for both a single sample and for the comparison
+      between sub-samples. For the case where the explanatory variable is
+      numeric we may use the function <c>glm</c>, acronym for <em>Generalized Linear
+      Model</em>, in order to fit an appropriate regression model to the data.
+    </p>
+    <p>
+      By the end of this chapter, the student should be able to:
+    </p>
+    <ul>
+      <li><p>Produce mosaic plots of the response and the explanatory variable.</p></li>
+      <li><p>Apply the function <c>prop.test</c> in order to compare the probability
+          of an event between two sub-populations.</p></li>
+      <li><p>Define the logistic regression model that relates the probability of
+          an event in the response to a numeric explanatory variable.</p></li>
+      <li><p>Fit the logistic regression model to data using the function <c>glm</c>
+          and produce statistical inference on the fitted model.</p></li>
+    </ul>
+  </section>
+
+  <section xml:id="sec-comparing-sample-proportions">
+    <title>Comparing Sample Proportions</title>
+    <p>
+      In this chapter we deal with a Bernoulli response. Such a response has
+      two levels, <c>TRUE</c> or <c>FALSE</c><fn>The levels are frequently coded as 1 or 0, <q>success</q> or <q>failure</q>,
+      or any other pair of levels.</fn>, and may emerges as the indicator
+      of an event. Else, it may be associated with a factor with two levels
+      and correspond to the indication of one of the two levels. Such response
+      was considered in Chapters <xref ref="ch-confidence-intervals" /> and <xref ref="ch-testing-hypothesis" /> where
+      confidence intervals and tests for the probability of an event where
+      discussed in the context of a single sample. In this chapter we discuss
+      the investigation of relations between a response of this form and an
+      explanatory variable.
+    </p>
+    <p>
+      We start with the case where the explanatory variable is a factor that
+      has two levels. These levels correspond to two sub-populations (or two
+      settings). The aim of the analysis is to compare between the two
+      sub-populations (or between the two settings) the probability of the
+      even.
+    </p>
+    <p>
+      The discussion in this section is parallel to the discussion in
+      Section <xref ref="sec-comparing-means" />. That section considered the comparison of
+      the expectation of a numerical response between two sub-populations. We
+      denoted these sub-populations <m>a</m> and <m>b</m> with expectations
+      <m>\Expec(X_a)</m> and <m>\Expec(X_b)</m>, respectively. The inference used the
+      average <m>\bar X_a</m>, which was based on a sub-sample of size <m>n_a</m>, and
+      the average <m>\bar X_b</m>, which was based on the other sub-sample of size
+      <m>n_b</m>. The sub-samples variances <m>S^2_a</m> and <m>S^2_b</m> participated in the
+      inference as well. The application of a test for the equality of the
+      expectations and a confidence interval where produced by the application
+      of the function <c>t.test</c> to the data.
+    </p>
+    <p>
+      The inference problem, which is considered in this chapter, involves an
+      event. This event is being examined in two different settings that
+      correspond to two different sub-population <m>a</m> and <m>b</m>. Denote the
+      probabilities of the event in each of the sub-populations by <m>p_a</m> and
+      <m>p_b</m>. Our concern is the statistical inference associated with the
+      comparison of these two probabilities to each other.
+    </p>
+    <p>
+      Natural estimators of the probabilities are <m>\hat P_a</m> and <m>\hat P_b</m>,
+      the sub-samples proportions of occurrence of the event. These estimators
+      are used in order to carry out the inference. Specifically, we consider
+      here the construction of a confidence interval for the difference
+      <m>p_a - p_b</m> and a test of the hypothesis that the probabilities are
+      equal.
+    </p>
+    <p>
+      The methods for producing the confidence intervals for the difference
+      and for testing the null hypothesis that the difference is equal to zero
+      are similar is principle to the methods that were described in
+      the section for making parallel inferences regarding the
+      relations between expectations. However, the derivations of the tools
+      that are used in the current situation are not identical to the
+      derivations of the tools that were used there. The main differences
+      between the two cases is the replacement of the sub-sample averages by
+      the sub-sample proportions, a difference in the way the standard
+      deviation of the statistics are estimated, and the application of a
+      continuity correction. We do not discuss in this chapter the theoretical
+      details associated with the derivations. Instead, we demonstrate the
+      application of the inference in an example.
+    </p>
+    <p>
+      The variable <c>num.of.doors</c> in the data frame <c>cars</c> describes the
+      number of doors a car has. This variable is a factor with two levels,
+      <c>two</c> and <c>four</c>. We treat this variable as a response and
+      investigate its relation to explanatory variables. In this section the
+      explanatory variable is a factor with two levels and in the next section
+      it is a numeric variable. Specifically, in this section we use the
+      factor <c>fuel.type</c> as the explanatory variable. Recall that this
+      variable identified the type of fuel, diesel or gas, that the car uses.
+      The aim of the analysis is to compare the proportion of cars with four
+      doors between cars that run on diesel and cars that run on gas.
+    </p>
+    <p>
+      Let us first summarize the data in a <m>2 \times 2</m> frequency table. The
+      function <c>table</c> may be used in order to produce such a table:
+    </p>
+    <program language="r">
+      <input>
+cars &lt;- read.csv("_data/cars.csv")
+table(cars$fuel.type,cars$num.of.doors)
+      </input>
+    </program>
+    <pre>
+##         
+##          four two
+##   diesel   16   3
+##   gas      98  86
+</pre>
+    <p>
+      When the function <c>table</c> is applied to a combination of two factors
+      then the output is a table of joint frequencies. Each entry in the table
+      contains the frequency in the sample of the combination of levels, one
+      from each variable, that is associated with the entry. For example,
+      there are 16 cars in the data set that have the level <c>four</c> for the
+      variable <c>num.of.doors</c> and the level <c>diesel</c> for the variable
+      <c>fuel.type</c>. Likewise, there are 3 cars that are associated with the
+      combination <c>two</c> and <c>diesel</c>. The total number of entries to the
+      table is <m>16 + 3 + 98 + 86 = 203</m>, which is the number of cars in the
+      data set, minus the two missing values in the variable <c>num.of.doors</c>.
+    </p>
+    <p>
+      A graphical representation of the relation between the two factors can
+      be obtained using a mosaic plot. This plot is produced when the input to
+      the function <c>plot</c> is a formula where both the response and the
+      explanatory variables are factors:
+    </p>
+    <figure xml:id="fig-logistic1">
+      <caption>Number of Doors versus Fuel Type</caption>
+      <image source="_figures/Logistic1.png" width="60%">
+        <description>Mosaic plot showing the relationship between fuel type and number of doors</description>
+      </image>
+    </figure>
+    <program language="r">
+      <input>
+plot(num.of.doors ~ fuel.type,data=cars)
+      </input>
+    </program>
+    <p>
+      The box plot describes the distribution of the explanatory variable and
+      the distribution of the response for each level of the explanatory
+      variable. In the current example the explanatory variable is the factor
+      <c>fuel</c> that has 2 levels. The two levels of this variable, <c>diesel</c>
+      and <c>gas</c>, are given at the <m>x</m>-axis. A vertical rectangle is
+      associated with each level. These 2 rectangles split the total area of
+      the square. The total area of the square represents the total relative
+      frequency (which is equal to 1). Consequently, the area of each
+      rectangle represents the relative frequency of the associated level of
+      the explanatory factor.
+    </p>
+    <p>
+      A rectangle associated with a given level of the explanatory variable is
+      further divided into horizontal sub-rectangles that are associated with
+      the response factor. In the current example each darker rectangle is
+      associated with the level <c>four</c> of the response <c>num.of.door</c> and
+      each brighter rectangle is associated with the level <c>two</c>. The
+      relative area of the horizontal rectangles within each vertical
+      rectangle represent the relative frequency of the levels of the response
+      within each subset associated with the level of the explanatory
+      variable.
+    </p>
+    <p>
+      Looking at the plot one may appreciate the fact that diesel cars are
+      less frequent than cars that run on gas. The graph also displays the
+      fact that the relative frequency of cars with four doors among diesel
+      cars is larger than the relative frequency of four doors cars among cars
+      that run on gas.
+    </p>
+    <p>
+      The function <c>prop.test</c> may be used in order test the hypothesis
+      that, at the population level, the probability of the level <q>four</q> of
+      the response within the sub-population of diesel cars (the height of the
+      leftmost darker rectangle in the theoretic mosaic plot that is produced
+      for the entire population) is equal to the probability of the same level
+      of the response with in the sub-population of cars that run on gas (the
+      height of the rightmost darker rectangle in that theoretic mosaic plot).
+      Specifically, let us test the hypothesis that the two probabilities of
+      the level <q>four</q>, one for diesel cars and one for cars that run on gas,
+      are equal to each other.
+    </p>
+    <p>
+      The output of the function <c>table</c> may serve as the input to the
+      function <c>prop.test</c><fn>The function <c>prop.test</c> was applied in
+      a previous section in order to test that the probability of
+      an event is equal to a given value (<c>p = 0.5</c> by default). The
+      input to the function was a pair of numbers: the total number of
+      successes and the sample size. In the current application the input
+      is a <m>2 \times 2</m> table. When applied to such input the function
+      carries out a test of the equality of the probability of the first
+      column between the rows of the table.</fn>. The Bernoulli response variable should be
+      the second variable in the input to the table whereas the explanatory
+      factor is the first variable in the table. When we apply the test to the
+      data we get the report:
+    </p>
+    <program language="r">
+      <input>
+prop.test(table(cars$fuel.type,cars$num.of.doors))
+      </input>
+    </program>
+    <pre>
+## 
+## 	2-sample test for equality of proportions with continuity correction
+## 
+## data:  table(cars$fuel.type, cars$num.of.doors)
+## X-squared = 5.5021, df = 1, p-value = 0.01899
+## alternative hypothesis: two.sided
+## 95 percent confidence interval:
+##  0.1013542 0.5176389
+## sample estimates:
+##    prop 1    prop 2 
+## 0.8421053 0.5326087
+</pre>
+    <p>
+      The two sample proportions of cars with four doors among diesel and gas
+      cars are presented at the bottom of the report and serve as estimates of
+      the sub-populations probabilities. Indeed, the relative frequency of
+      cars with four doors among diesel cars is equal to
+      <m>\hat p_a = 16/(16+3) = 16/19 = 0.8421053</m>. Likewise, the relative
+      frequency of cars with four doors among cars that ran on gas is equal to
+      <m>\hat p_b = 98/(98+86) = 98/184 =  0.5326087</m>. The confidence interval
+      for the difference in the probability of a car with four doors between
+      the two sub-populations, <m>p_a - p_b</m>, is reported under the title
+      <c>95 percent confidence interval</c> and is given as
+      <m>[0.1013542, 0.5176389]</m>.
+    </p>
+    <p>
+      The null hypothesis, which is the subject of this test, is
+      <m>H_0: p_a = p_b</m>. This hypothesis is tested against the two-sided
+      alternative hypothesis <m>H_1: p_a \not = p_b</m>. The test itself is based
+      on a test statistic that obtains the value <c>X-squared = 5.5021</c>. This
+      test statistic corresponds essentially to the deviation between the
+      estimated value of the parameter (the difference in sub-sample
+      proportions of the event) and the theoretical value of the parameter
+      (<m>p_a - p_b = 0</m>). This deviation is divided by the estimated standard
+      deviation and the ratio is squared. The statistic itself is produced via
+      a continuity correction that makes its null distribution closer to the
+      limiting chi-square distribution on one degree of freedom. The <m>p</m>-value
+      is computed based on this limiting chi-square distribution.
+    </p>
+    <p>
+      Notice that the computed <m>p</m>-value is equal to <c>p-value = 0.01899</c>. This
+      value is smaller than 0.05. Consequently, the null hypothesis is
+      rejected at the 5% significance level in favor of the alternative
+      hypothesis. This alternative hypothesis states that the sub-populations
+      probabilities are different from each other.
+    </p>
   </section>
 
   <section xml:id="sec-logistic-regression">
     <title>Logistic Regression</title>
-    <p>Content to be added.</p>
-  </section>
-
-  <section xml:id="sec-odds-ratio">
-    <title>Odds and Odds Ratios</title>
-    <p>Content to be added.</p>
+    <p>
+      In the previous section we considered a Bernoulli response and a factor
+      with two levels as an explanatory variable. In this section we use a
+      numeric variable as the explanatory variable. The discussion in this
+      section is parallel to the discussion in Chapter <xref ref="ch-linear-regression" /> that
+      presented the topic of linear regression. However, since the response is
+      not of the same form, it is the indicator of a level of a factor and not
+      a regular numeric response, then the tools the are used are different.
+      Instead of using linear regression we use another type of regression
+      that is called <em>Logistic Regression</em>.
+    </p>
+    <p>
+      Recall that linear regression involved fitting a straight line to the
+      scatter plot of data points. This line corresponds to the expectation of
+      the response as a function of the explanatory variable. The estimated
+      coefficients of this line are computed from the data and used for
+      inference.
+    </p>
+    <p>
+      In logistic regression, instead of the consideration of the expectation
+      of a numerical response, one considers the probability of an event
+      associated with the response. This probability is treated as a function
+      of the explanatory variable. Parameters that determine this function are
+      estimated from the data and are used for inference regarding the
+      relation between the explanatory variable and the response. Again, we do
+      not discuss the theoretical details involved in the derivation of
+      logistic regression. Instead, we apply the method to an example.
+    </p>
+    <p>
+      We consider the factor <c>num.of.doors</c> as the response and the
+      probability of a car with four doors as the probability of the response.
+      The length of the car will serve as the explanatory variable.
+      Measurements of lengths of the cars are stored in the variable
+      <c>length</c> in the data frame <c>cars</c>.
+    </p>
+    <p>
+      First, let us plot the relation between the response and the explanatory
+      variable:
+    </p>
+    <figure xml:id="fig-logistic2">
+      <caption>Number of Doors versus Length</caption>
+      <image source="_figures/Logistic2.png" width="60%">
+        <description>Mosaic plot showing the relationship between car length and number of doors</description>
+      </image>
+    </figure>
+    <program language="r">
+      <input>
+plot(num.of.doors ~ length,data=cars)
+      </input>
+    </program>
+    <p>
+      The plot is a type of a mosaic plot and it is
+      produced when the input to the function <c>plot</c> is a formula with a
+      factor as a response and a numeric variable as the explanatory variable.
+      The plot presents, for interval levels of the explanatory variable, the
+      relative frequencies of each interval. It also presents the relative
+      frequency of the levels of the response within each interval level of
+      the explanatory variable.
+    </p>
+    <p>
+      In order to get a better understanding of the meaning of the given
+      mosaic plot one may consider the histogram of the explanatory variable.
+    </p>
+    <figure xml:id="fig-logistic3">
+      <caption>Histogram of the Length of Cars</caption>
+      <image source="_figures/Logistic3.png" width="60%">
+        <description>Histogram showing the distribution of car lengths</description>
+      </image>
+    </figure>
+    <program language="r">
+      <input>
+hist(cars$length)
+      </input>
+    </program>
+    <p>
+      The histogram
+      involves the partition of the range of variable length into intervals.
+      These interval are the basis for rectangles. The height of the
+      rectangles represent the frequency of cars with lengths that fall in the
+      given interval.
+    </p>
+    <p>
+      The mosaic plot in <xref ref="fig-logistic2" /> is constructed on the
+      basis of this histogram. The <m>x</m>-axis in this plot corresponds to the
+      explanatory variable <c>length</c>. The total area of the square in the
+      plot is divided between 7 vertical rectangles. These vertical rectangles
+      correspond to the 7 rectangles in the histogram of
+      <xref ref="fig-logistic3" />, turn on their sides. Hence, the width of
+      each rectangle in <xref ref="fig-logistic2" /> correspond to the hight of
+      the parallel rectangle in the histogram. Consequently, the area of the
+      vertical rectangles in the mosaic plot represents the relative frequency
+      of the associated interval of values of the explanatory variable.
+    </p>
+    <p>
+      The rectangle that is associated with each interval of values of the
+      explanatory variable is further divided into horizontal sub-rectangles
+      that are associated with the response factor. In the current example
+      each darker rectangle is associated with the level <c>four</c> of the
+      response <c>num.of.door</c> and each brighter rectangle is associated with
+      the level <c>two</c>. The relative area of the horizontal rectangles within
+      each vertical rectangle represent the relative frequency of the levels
+      of the response within each interval of values of the explanatory
+      variable.
+    </p>
+    <p>
+      From the examination of the mosaic plot one may identify relations
+      between the explanatory variable and the relative frequency of an
+      identified level of the response. In the current example one may observe
+      that the relative frequency of the cars with four doors is, overall,
+      increasing with the increase in the length of cars.
+    </p>
+    <p>
+      Logistic regression is a method for the investigation of relations
+      between the probability of an event and explanatory variables.
+      Specifically, we use it here for making inference on the number of doors
+      as a response and the length of the car as the explanatory variable.
+    </p>
+    <p>
+      Statistical inference requires a statistical model. The statistical
+      model in logistic regression relates the probability <m>p_i</m>, the
+      probability of the event for observation <m>i</m>, to <m>x_i</m>, the value of the
+      response for that observation. The relation between the two in given by
+      the formula:
+    </p>
+    <me>p_i = \frac{e^{a + b \cdot x_i}}{1 + e^{a + b\cdot x_i}}\;,</me>
+    <p>
+      where <m>a</m> and <m>b</m> are coefficients common to all observations. Equivalently,
+      one may write the same relation in the form:
+    </p>
+    <me>\log(p_i/[1-p_i]) = a + b\cdot x_i\;,</me>
+    <p>
+      that states that the relation
+      between a (function of) the probability of the event and the explanatory
+      variable is a linear trend.
+    </p>
+    <p>
+      One may fit the logistic regression to the data and test the null
+      hypothesis by the use of the function <c>glm</c>:
+    </p>
+    <program language="r">
+      <input>
+fit.doors &lt;- glm(num.of.doors=="four"~length, family=binomial,data=cars)
+summary(fit.doors)
+      </input>
+    </program>
+    <pre>
+## 
+## Call:
+## glm(formula = num.of.doors == "four" ~ length, family = binomial, 
+##     data = cars)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.4301  -0.8314   0.2899   0.8024   1.8839  
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(>|z|)    
+## (Intercept) -13.14767    2.70089  -4.868 1.13e-06 ***
+## length        0.07726    0.01559   4.955 7.20e-07 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 281.40  on 202  degrees of freedom
+## Residual deviance: 237.28  on 201  degrees of freedom
+## AIC: 241.28
+## 
+## Number of Fisher Scoring iterations: 4
+</pre>
+    <p>
+      Generally, the function <c>glm</c> can be used in order to fit regression
+      models in cases where the distribution of the response has special
+      forms. Specifically, when the argument <c>family=binomial</c> is used then
+      the model that is being used in the model of logistic regression. The
+      formula that is used in the function involves a response and an
+      explanatory variable. The response may be a sequence with logical
+      <c>TRUE</c> or <c>FALSE</c> values as in the example<fn>The response is the output of the expression
+      <c>num.of.doors==four</c>. This expression produces logical values.
+      <c>TRUE</c> when the car has 4 doors and <c>FALSE</c> when it has 2 doors.</fn>. Alternatively, it
+      may be a sequence with <q>1</q> or <q>0</q> values, <q>1</q> corresponding to the event
+      occurring to the subject and <q>0</q> corresponding to the event not
+      occurring. The argument <c>data=cars</c> is used in order to inform the
+      function that the variables are located in the given data frame.
+    </p>
+    <p>
+      The <c>glm</c> function is applied to the data and the fitted model is
+      stored in the object <c>fit.doors</c>.
+    </p>
+    <p>
+      A report is produced when the function <c>summary</c> is applied to the
+      fitted model. Notice the similarities and the differences between the
+      report presented here and the reports for linear regression that are
+      presented in Chapter <xref ref="ch-linear-regression" />. Both reports contain estimates
+      of the coefficients <m>a</m> and <m>b</m> and tests for the equality of these
+      coefficients to zero. When the coefficient <m>b</m>, the coefficient that
+      represents the slope, is equal to 0 then the probability of the event
+      and the explanatory variable are unrelated. In the current case we may
+      note that the null hypothesis <m>H_0: b = 0</m>, the hypothesis that claims
+      that there is no relation between the explanatory variable and the
+      response, is clearly rejected (<m>p</m>-value <m>2.37 \times 10^{-7}</m>).
+    </p>
+    <p>
+      The estimated values of the coefficients are <m>-13.14767</m> for the
+      intercept <m>a</m> and <m>0.07726</m> for the slope <m>b</m>. One may produce
+      confidence intervals for these coefficients by the application of the
+      function <c>confint</c> to the fitted model:
+    </p>
+    <program language="r">
+      <input>
+confint(fit.doors)
+      </input>
+    </program>
+    <pre>
+## Waiting for profiling to be done...
+##                   2.5 %      97.5 %
+## (Intercept) -18.8530894 -8.05800914
+## length        0.0479835  0.10948463
+</pre>
   </section>
 
   <section xml:id="sec-exercises-15">
     <title>Exercises</title>
-    <p>Content to be added.</p>
+    <exercise xml:id="ex-mediterranean-diet">
+      <statement>
+        <p>
+          This exercise deals with a comparison between
+          Mediterranean diet and low-fat diet recommended by the American Heart
+          Association in the context of risks for illness or death among patients
+          that survived a heart attack<fn>De Lorgeril, M., Salen, P., Martin, J., Monjaud, I., Boucher, P.,
+          Mamelle, N. (1998). Mediterranean Dietary pattern in a Randomized
+          Trial. Archives of Internal Medicine, 158, 1181-1187.</fn>. This case study is taken from the
+          <url href="http://onlinestatbook.com/rvls.html">Rice Virtual Lab in Statistics</url>.
+          More details on this case study can be found in the case study
+          <url href="http://onlinestatbook.com/case_studies_rvls/diet_study/index.html">Mediterranean Diet and
+          Health</url>
+          that is presented in that site.
+        </p>
+        <p>
+          The subjects, 605 survivors of a heart attack, were randomly assigned
+          follow either (1) a diet close to the <q>prudent diet step 1</q> of the
+          American Heart Association (AHA) or (2) a Mediterranean-type diet
+          consisting of more bread and cereals, more fresh fruit and vegetables,
+          more grains, more fish, fewer delicatessen food, less meat.
+        </p>
+        <p>
+          The subjects' diet and health condition were monitored over a period of
+          four-year. Information regarding deaths, development of cancer or the
+          development of non-fatal illnesses was collected. The information from
+          this study is stored in the file <c>diet.csv</c>. The file <c>diet.csv</c>
+          contains two factors: <c>health</c> that describes the condition of the
+          subject, either healthy, suffering from a non-fatal illness, suffering
+          from cancer, or dead; and the <c>type</c> that describes the type of diet,
+          either Mediterranean or the diet recommended by the AHA. The file can be
+          found on the internet at
+          <url href="http://pluto.huji.ac.il/~msby/StatThink/Datasets/diet.csv" />. Answer the
+          following questions based on the data in the file:
+        </p>
+        <ol>
+          <li><p>Produce a frequency table of the two variable. Read off from the
+              table the number of healthy subjects that are using the
+              Mediterranean diet and the number of healthy subjects that are using
+              the diet recommended by the AHA.</p></li>
+          <li><p>Test the null hypothesis that the probability of keeping healthy
+              following an heart attack is the same for those that use the
+              Mediterranean diet and for those that use the diet recommended by
+              the AHA. Use a two-sided alternative and a 5% significance level.</p></li>
+          <li><p>Compute a 95% confidence interval for the difference between the two
+              probabilities of keeping healthy.</p></li>
+        </ol>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="ex-cushings-syndrome">
+      <statement>
+        <p>
+          Cushing's syndrome disorder results from a tumor
+          (adenoma) in the pituitary gland that causes the production of high
+          levels of cortisol. The symptoms of the syndrome are the consequence of
+          the elevated levels of this steroid hormone in the blood. The syndrome
+          was first described by Harvey Cushing in 1932.
+        </p>
+        <p>
+          The file <c>coshings.csv</c> contains information on 27 patients that
+          suffer from Cushing's syndrome<fn>The source of the data is the data file <c>Cushings</c> from the
+          package <c>MASS</c> in <c>R</c>.</fn>. The three variables in the file are
+          <c>tetra</c>, <c>pregn</c>, and <c>type</c>. The factor <c>type</c> describes the
+          underlying type of syndrome, coded as <c>a</c>, (adenoma), <c>b</c> (bilateral
+          hyperplasia), <c>c</c> (carcinoma) or <c>u</c> for unknown. The variable
+          <c>tetra</c> describe the level of urinary excretion rate (mg/24hr) of
+          Tetrahydrocortisone, a type of steroid, and the variable <c>pregn</c>
+          describes urinary excretion rate (mg/24hr) of Pregnanetriol, another
+          type of steroid. The file can be found on the internet at
+          <url href="http://pluto.huji.ac.il/~msby/StatThink/Datasets/coshings.csv" />. Answer
+          the following questions based on the information in this file:
+        </p>
+        <ol>
+          <li><p>Plot the histogram of the variable <c>tetra</c> and the mosaic plot
+              that describes the relation between the variable <c>type</c> as a
+              response and the variable <c>tetra</c>. What is the information that is
+              conveyed by the second vertical triangle from the right (the third
+              from the left) in the mosaic plot.</p></li>
+          <li><p>Test the null hypothesis that there is no relation between the
+              variable <c>tetra</c> as an explanatory variable and the indicator of
+              the type being equal to <c>b</c> as a response. Compute a confidence
+              interval for the parameter that describes the relation.</p></li>
+          <li><p>Repeat the analysis from 2 using only the observations for which the
+              type is known. (Hint: you may fit the model to the required subset
+              by the inclusion of the argument <c>subset=(type!=u)</c> in the
+              function that fits the model.) Which of the analysis do you think is
+              more appropriate?</p></li>
+        </ol>
+      </statement>
+    </exercise>
   </section>
 
   <section xml:id="sec-summary-15">
     <title>Summary</title>
-    <p>Content to be added.</p>
+    
+    <subsection xml:id="subsec-glossary-15">
+      <title>Glossary</title>
+      <dl>
+        <li>
+          <title>Mosaic Plot</title>
+          <p>
+            A plot that describes the relation between a response factor and an
+            explanatory variable. Vertical rectangles represent the distribution
+            of the explanatory variable. Horizontal rectangles within the
+            vertical ones represent the distribution of the response.
+          </p>
+        </li>
+        <li>
+          <title>Logistic Regression</title>
+          <p>
+            A type of regression that relates between an explanatory variable
+            and a response of the form of an indicator of an event.
+          </p>
+        </li>
+      </dl>
+    </subsection>
+
+    <subsection xml:id="subsec-discuss-forum-15">
+      <title>Discuss in the Forum</title>
+      <p>
+        In the description of the statistical models that relate one variable to
+        the other we used terms that suggest a causality relation. One variable
+        was called the <q>explanatory variable</q> and the other was called the
+        <q>response</q>. One may get the impression that the explanatory variable is
+        the cause for the statistical behavior of the response. In negation to
+        this interpretation, some say that all that statistics does is to
+        examine the joint distribution of the variables, but casuality cannot be
+        inferred from the fact that two variables are statistically related.
+        What do you think? Can statistical reasoning be used in the
+        determination of casuality?
+      </p>
+      <p>
+        As part of your answer in may be useful to consider a specific situation
+        where the determination of casuality is required. Can any of the tools
+        that were discussed in the book be used in a meaningful way to aid in
+        the process of such determination?
+      </p>
+      <p>
+        Notice that the last 3 chapters dealt with statistical models that
+        related an explanatory variable to a response. We considered tools that
+        can be used when both variable are factors and when both are numeric.
+        Other tools may be used when one of the variables is a factor and the
+        other is numeric. An analysis that involves one variable as the response
+        and the other as explanatory variable can be reversed, possibly using a
+        different statistical tool, with the roles of the variables exchanged.
+        Usually, a significant statistical finding will be still significant
+        when the roles of a response and an explanatory variable are reversed.
+      </p>
+    </subsection>
+
+    <subsection xml:id="subsec-formulas-15">
+      <title>Formulas</title>
+      <ul>
+        <li><p>Logistic Regression, (Probability):
+            <m>p_i = \frac{e^{a + b \cdot x_i}}{1 + e^{a + b\cdot x_i}}</m>.</p></li>
+        <li><p>Logistic Regression, (Predictor):
+            <m>\log(p_i/[1-p_i]) = a + b\cdot x_i</m>.</p></li>
+      </ul>
+    </subsection>
   </section>
 </chapter>
