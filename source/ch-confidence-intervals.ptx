@@ -55,7 +55,7 @@ x.bar + 1.96*s/sqrt(n)
 
       </input></program>
 
-      <p>The lower limit of the confidence interval turns out to be \<m>12,108.47 and the upper limit is \</m>14,305.79. The confidence interval is the range of values between these two numbers.</p>
+      <p>The lower limit of the confidence interval turns out to be $12,108.47 and the upper limit is $14,305.79. The confidence interval is the range of values between these two numbers.</p>
 
       <p>Consider, next, a confidence interval for the probability of an event. The estimate of the probability <m>p</m> is <m>\hat p</m>, the relative proportion of occurrences of the event in the sample. Again, we construct an interval about this estimate. In this case, a confidence interval of confidence level 95% is of the form <m>\big[\hat p - 1.96 \cdot \sqrt{\hat p(1-\hat p)/n}, \hat p + 1.96 \cdot \sqrt{\hat p(1-\hat p)/n}\big]</m>, where <m>n</m> is the sample size. Observe that <m>\hat p</m> replaces <m>\bar x</m> as the estimate of the parameter and that <m>\hat p(1-\hat p)/n</m> replace <m>s^2/n</m> as the estimate of the variance of the estimator. The confidence interval for the probability may be expressed in the form:</p>
 
@@ -434,39 +434,42 @@ mean((sig^2 &gt;= var.LCL) &amp; (sig^2 &lt;= var.UCL))
 
     <exercise>
       <statement>
-        <p>This exercise deals with an experiment that was conducted among students. The aim of the experiment was to assess the effect of rumors and prior reputation of the instructor on the evaluation of the instructor by her students. The experiment was conducted by Towler and Dipboye. This case study is taken from the <url href="http://onlinestatbook.com/rvls.html">Rice Virtual Lab in Statistics</url>. More details on this case study can be found in the case study “<url href="http://onlinestatbook.com/case_studies_rvls/instructor_reputation/index.html">Instructor Reputation and Teacher Ratings</url>" that is presented in that site. The experiment involved 49 students that were randomly assigned to one of two conditions. Before viewing the lecture, students were give one of two “summaries" of the instructor’s prior teaching evaluations. The first type of summary, i.e. the first condition, described the lecturer as a charismatic instructor. The second type of summary (second condition) described the lecturer as a punitive instructor. We code the first condition as “<c>C</c>" and the second condition as “<c>P</c>". All subjects watched the same twenty-minute lecture given by the exact same lecturer. Following the lecture, subjects rated the lecturer. The outcomes are stored in the file “<c>teacher.csv</c>". The file can be found on the internet at <url href="http://pluto.huji.ac.il/~msby/StatThink/Datasets/teacher.csv">http://pluto.huji.ac.il/~msby/StatThink/Datasets/teacher.csv</url>. Download this file to your computer and store it in the working directory of <c>R</c>. Read the content of the file into an <c>R</c> data frame. Produce a summary of the content of the data frame and answer the following questions: 1.  Identify, for each variable in the file “<c>teacher.csv</c>", the name</p>
-        <p>and the type of the variable (factor or numeric). 2.  Estimate the expectation and the standard deviation among all</p>
-        <p>students of the rating of the teacher. 3.  Estimate the expectation and the standard deviation of the rating</p>
-        <p>only for students who were given a summary that describes the</p>
-        <p>teacher as charismatic. 4.  Construct a confidence interval of 99% confidence level for the</p>
-        <p>expectation of the rating among students who were given a summary</p>
-        <p>that describes the teacher as charismatic. (Assume the ratings have</p>
-        <p>a Normal distribution.) 5.  Construct a confidence interval of 90% confidence level for the</p>
-        <p>variance of the rating among students who were given a summary that</p>
-        <p>describes the teacher as charismatic. (Assume the ratings have a</p>
-        <p>Normal distribution.)</p>
+        <p>This exercise deals with an experiment that was conducted among students. The aim of the experiment was to assess the effect of rumors and prior reputation of the instructor on the evaluation of the instructor by her students. The experiment was conducted by Towler and Dipboye. This case study is taken from the <url href="http://onlinestatbook.com/rvls.html">Rice Virtual Lab in Statistics</url>. More details on this case study can be found in the case study "<url href="http://onlinestatbook.com/case_studies_rvls/instructor_reputation/index.html">Instructor Reputation and Teacher Ratings</url>" that is presented in that site.</p>
+        
+        <p>The experiment involved 49 students that were randomly assigned to one of two conditions. Before viewing the lecture, students were give one of two "summaries" of the instructor's prior teaching evaluations. The first type of summary, i.e. the first condition, described the lecturer as a charismatic instructor. The second type of summary (second condition) described the lecturer as a punitive instructor. We code the first condition as "<c>C</c>" and the second condition as "<c>P</c>". All subjects watched the same twenty-minute lecture given by the exact same lecturer. Following the lecture, subjects rated the lecturer.</p>
+        
+        <p>The outcomes are stored in the file "<c>teacher.csv</c>". The file can be found on the internet at <url href="http://pluto.huji.ac.il/~msby/StatThink/Datasets/teacher.csv">http://pluto.huji.ac.il/~msby/StatThink/Datasets/teacher.csv</url>. Download this file to your computer and store it in the working directory of <c>R</c>. Read the content of the file into an <c>R</c> data frame. Produce a summary of the content of the data frame and answer the following questions:</p>
+        
+        <ol>
+          <li><p>Identify, for each variable in the file "<c>teacher.csv</c>", the name and the type of the variable (factor or numeric).</p></li>
+          <li><p>Estimate the expectation and the standard deviation among all students of the rating of the teacher.</p></li>
+          <li><p>Estimate the expectation and the standard deviation of the rating only for students who were given a summary that describes the teacher as charismatic.</p></li>
+          <li><p>Construct a confidence interval of 99% confidence level for the expectation of the rating among students who were given a summary that describes the teacher as charismatic. (Assume the ratings have a Normal distribution.)</p></li>
+          <li><p>Construct a confidence interval of 90% confidence level for the variance of the rating among students who were given a summary that describes the teacher as charismatic. (Assume the ratings have a Normal distribution.)</p></li>
+        </ol>
       </statement>
     </exercise>
 
     <exercise>
       <statement>
-        <p>Twenty observations are used in order to construct a confidence interval for the expectation. In one case, the construction is based on the Normal approximation of the sample average and in the other case it is constructed under the assumption that the observations are Normally distributed. Assume that in reality the measurement is distributed <m>\mathrm{Exponential}(1/4)</m>. 1.  Compute, via simulation, the actual confidence level for the first</p>
-        <p>case of a confidence interval with a nominal confidence level of</p>
-        <p>95%. 2.  Compute, via simulation, the actual confidence level for the second</p>
-        <p>case of a confidence interval with a nominal confidence level of</p>
-        <p>95%. 3.  Which of the two approaches would you prefer?</p>
+        <p>Twenty observations are used in order to construct a confidence interval for the expectation. In one case, the construction is based on the Normal approximation of the sample average and in the other case it is constructed under the assumption that the observations are Normally distributed. Assume that in reality the measurement is distributed <m>\mathrm{Exponential}(1/4)</m>.</p>
+        
+        <ol>
+          <li><p>Compute, via simulation, the actual confidence level for the first case of a confidence interval with a nominal confidence level of 95%.</p></li>
+          <li><p>Compute, via simulation, the actual confidence level for the second case of a confidence interval with a nominal confidence level of 95%.</p></li>
+          <li><p>Which of the two approaches would you prefer?</p></li>
+        </ol>
       </statement>
     </exercise>
 
     <exercise>
       <statement>
-        <p>Insurance companies are interested in knowing the population percent of drivers who always buckle up before riding in a car. 1.  When designing a study to determine this proportion, what is the</p>
-        <p>minimal sample size that is required for a 99% confident that the</p>
-        <p>population proportion is accurately estimated, up to an error of</p>
-        <p>0.03? 2.  Suppose that the insurance companies did conduct the study by</p>
-        <p>surveying 400 drivers. They found that 320 of the drives claim to</p>
-        <p>always buckle up. Produce an 80% confidence interval for the</p>
-        <p>population proportion of drivers who claim to always buckle up.</p>
+        <p>Insurance companies are interested in knowing the population percent of drivers who always buckle up before riding in a car.</p>
+        
+        <ol>
+          <li><p>When designing a study to determine this proportion, what is the minimal sample size that is required for a 99% confident that the population proportion is accurately estimated, up to an error of 0.03?</p></li>
+          <li><p>Suppose that the insurance companies did conduct the study by surveying 400 drivers. They found that 320 of the drives claim to always buckle up. Produce an 80% confidence interval for the population proportion of drivers who claim to always buckle up.</p></li>
+        </ol>
       </statement>
     </exercise>
 
