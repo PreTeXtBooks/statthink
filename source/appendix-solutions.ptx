@@ -245,30 +245,27 @@ Var &lt;- sum((Y.val-E)^2*P.val)
       <title>Exercise 5.1</title>
       
       <ol>
-        <li><p>The Binomial distribution is a reasonable model for the number of people that develop high fever as result of the vaccination. Let <m>X</m> be the number of people that do so in a give day. Hence, <m>X \sim \mbox{Binomial}(500,0.09)</m>. According to the formula for the expectation in the Binomial distribution, since <m>n=500</m> and <m>p=0.09</m>, we get that:</p></li>
-      </ol>
+        <li><p>The Binomial distribution is a reasonable model for the number of people that develop high fever as result of the vaccination. Let <m>X</m> be the number of people that do so in a give day. Hence, <m>X \sim \mbox{Binomial}(500,0.09)</m>. According to the formula for the expectation in the Binomial distribution, since <m>n=500</m> and <m>p=0.09</m>, we get that:</p>
       <p><me>\Expec(X) = n p = 500 \times 0.09 = 45\;.</me></p>
-      <ol>
-        <li><p>Let <m>X \sim \mbox{Binomial}(500,0.09)</m>. Using the formula for the variance for the Binomial distribution we get that:</p></li>
-      </ol>
+      </li>
+        <li><p>Let <m>X \sim \mbox{Binomial}(500,0.09)</m>. Using the formula for the variance for the Binomial distribution we get that:</p>
       <p><me>\Var(X) = n p(1-p) = 500 \times 0.09\times 0.91 = 40.95\;.</me> Hence, since <m>\sqrt{Var(X)} = \sqrt{40.95} = 6.3992</m>, the standard deviation is 6.3992.</p>
-      <ol>
-        <li><p>Let <m>X \sim \mbox{Binomial}(500,0.09)</m>. The probability that more than 40 people will develop a reaction may be computed as the difference between 1 and the probability that 40 people or less will develop a reaction:</p></li>
-      </ol>
+      </li>
+        <li><p>Let <m>X \sim \mbox{Binomial}(500,0.09)</m>. The probability that more than 40 people will develop a reaction may be computed as the difference between 1 and the probability that 40 people or less will develop a reaction:</p>
       <p><me>\Prob(X &gt; 40) = 1- \Prob(X \leq 40)\;.</me> The probability can be computes with the aid of the function “<c>pbinom</c>" that produces the cumulative probability of the Binomial distribution:</p>
       <program language="r">
         <input>
 1 - pbinom(40,500,0.09)
         </input>
       </program>
-      <ol>
-        <li><p>The probability that the number of people that will develop a reaction is between 50 and 45 (inclusive) is the difference between <m>\Prob(X\leq 50)</m> and <m>\Prob(X &lt; 45) = \Prob(X \leq 44)</m>. Apply the function “<c>pbinom</c>" to get:</p></li>
-      </ol>
+      </li>
+        <li><p>The probability that the number of people that will develop a reaction is between 50 and 45 (inclusive) is the difference between <m>\Prob(X\leq 50)</m> and <m>\Prob(X &lt; 45) = \Prob(X \leq 44)</m>. Apply the function “<c>pbinom</c>" to get:</p>
       <program language="r">
         <input>
 pbinom(50,500,0.09) - pbinom(44,500,0.09)
         </input>
       </program>
+</li></ol>
     </subsection>
     
     <subsection xml:id="subsec-solution-5-2">
