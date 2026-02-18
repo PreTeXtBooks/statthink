@@ -1247,17 +1247,16 @@ n.b &lt;- 150
       
       <ol>
         <li><p>The intercept is equal to <m>a = -3.60</m> and the slope is equal to <m>b = 2.13</m>. Notice that the lope is the coefficient that multiplies the explanatory variable and the intercept is the coefficient that does not multiply the explanatory variable.</p></li>
-        <li><p>The value of the explanatory variable for the 3rd observation is <m>x_3 = 4.2</m>. When we use this value in the regression formula we obtain that:</p></li>
+        <li><p>The value of the explanatory variable for the 3rd observation is <m>x_3 = 4.2</m>. When we use this value in the regression formula we obtain that:</p>
+      <p><me>\Expec(Y_3) = 2.13 \cdot x_3 - 3.60 = 2.13 \cdot 4.2 - 3.60 = 5.346\;.</me> In words, the expectation of the response of the 3rd observation is equal to <m>5.346</m></p></li>
       </ol>
-      <p><me>\Expec(Y_3) = 2.13 \cdot x_3 - 3.60 = 2.13 \cdot 4.2 - 3.60 = 5.346\;.</me> In words, the expectation of the response of the 3rd observation is equal to <m>5.346</m></p>
     </subsection>
     
     <subsection xml:id="subsec-solution-14-3">
       <title>Exercise 14.3</title>
       
       <ol>
-        <li><p>After saving the file “<c>aids.csv</c>" in the working directory of <c>R</c> we read it’s content into a data frame by the name “<c>aids</c>". We then produce a summary of the fit of the linear regression model of “<c>deaths</c>" as a response and “<c>diagnosed</c>" as the explanatory variable:</p></li>
-      </ol>
+        <li><p>After saving the file “<c>aids.csv</c>" in the working directory of <c>R</c> we read it’s content into a data frame by the name “<c>aids</c>". We then produce a summary of the fit of the linear regression model of “<c>deaths</c>" as a response and “<c>diagnosed</c>" as the explanatory variable:</p>
       <program language="r">
         <input>
 aids &lt;- read.csv("_data/aids.csv")
@@ -1265,6 +1264,26 @@ fit.deaths &lt;- lm(deaths~diagnosed,data=aids)
 summary(fit.deaths)
         </input>
       </program>
+<pre>
+## 
+## Call:
+## lm(formula = deaths ~ diagnosed, data = aids)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -7988.7  -680.9    23.9  1731.3  7760.7 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   88.7161  1370.7191   0.065    0.949    
+## diagnosed      0.6073     0.0312  19.468 1.81e-14 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 3589 on 20 degrees of freedom
+## Multiple R-squared:  0.9499, Adjusted R-squared:  0.9474 
+## F-statistic:   379 on 1 and 20 DF,  p-value: 1.805e-14
+<pre>
       <p>The estimated value of the slope 0.6073. The computed <m>p</m>-value     associated with this slope is <m>1.81 \times 10^{-14}</m>, which is much     smaller than the 5% threshold. Consequently, the slope is statistically     significant.</p>
       <p>For confidence intervals apply the function “<c>confint</c>" to the fitted     model:</p>
       <program language="r">
@@ -1272,10 +1291,14 @@ summary(fit.deaths)
 confint(fit.deaths)
         </input>
       </program>
+<pre>
+##                     2.5 %      97.5 %
+## (Intercept) -2770.5538947 2947.986092
+## diagnosed       0.5422759    0.672427
+</pre>
       <p>We get that the confidence interval for the slope is <m>[0.5422759 , 0.672427]</m>.</p>
-      <ol>
-        <li><p>A scatter plot of the two variables is produced by the application of the function “<c>plot</c>" to the formula that involves these two variables. The regression line is added to the plot using the function “<c>abline</c>" with the fitted model as an input:</p></li>
-      </ol>
+      </li>
+        <li><p>A scatter plot of the two variables is produced by the application of the function “<c>plot</c>" to the formula that involves these two variables. The regression line is added to the plot using the function “<c>abline</c>" with the fitted model as an input:</p>
       <program language="r">
         <input>
 plot(deaths~diagnosed,data=aids)
@@ -1283,25 +1306,48 @@ abline(fit.deaths)
         </input>
       </program>
       <p>Observe that the points are nicely placed very to a line that     characterizes the linear trend of the regression.</p>
-      <ol>
-        <li><p>We fit a linear regression model of “<c>diagnosed</c>" as a response and “<c>year</c>" as the explanatory variable and save the fit in the object “<c>fit.diagnosed</c>". A summary of the model is produced by the application of the function “<c>summary</c>" to the fit:</p></li>
-      </ol>
+      </li>
+        <li><p>We fit a linear regression model of “<c>diagnosed</c>" as a response and “<c>year</c>" as the explanatory variable and save the fit in the object “<c>fit.diagnosed</c>". A summary of the model is produced by the application of the function “<c>summary</c>" to the fit:</p>
       <program language="r">
         <input>
 fit.diagnosed &lt;- lm(diagnosed~year,data=aids)
 summary(fit.diagnosed)
         </input>
       </program>
+<pre>
+## 
+## Call:
+## lm(formula = diagnosed ~ year, data = aids)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -28364 -18321  -3909  14964  41199 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)  
+## (Intercept) -3448225.0  1535037.3  -2.246   0.0361 *
+## year            1749.8      770.8   2.270   0.0344 *
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 22940 on 20 degrees of freedom
+## Multiple R-squared:  0.2049, Adjusted R-squared:  0.1651 
+## F-statistic: 5.153 on 1 and 20 DF,  p-value: 0.03441
+</pre>
       <p>The estimated value of the slope 1749.8. The computed <m>p</m>-value     associated with this slope is <m>0.0344</m>, which is less than the 0.05.     Consequently, one may declare the slope to be statistically significant.     Confidence intervals are produced using the function “<c>confint</c>":</p>
       <program language="r">
         <input>
 confint(fit.diagnosed)
         </input>
       </program>
+<pre>
+##                    2.5 %      97.5 %
+## (Intercept) -6650256.665 -246193.429
+## year             141.936    3357.618
+</pre>
       <p>We get that the 95% confidence interval for the slope is     <m>[141.9360, 3357.618]</m>.</p>
-      <ol>
-        <li><p>A scatter plot of the two variables is produced by the application of the function “<c>plot</c>" and the regression line is added with function “<c>abline</c>":</p></li>
-      </ol>
+      </li>
+        <li><p>A scatter plot of the two variables is produced by the application of the function “<c>plot</c>" and the regression line is added with function “<c>abline</c>":</p>
       <program language="r">
         <input>
 plot(diagnosed~year,data=aids)
@@ -1310,14 +1356,14 @@ abline(fit.diagnosed)
       </program>
       <p>Observe that the     points do not follow a linear trend. It seems that the number of     diagnosed cases increased in an exponential rate during the first years     after Aids was discovered. The trend changed in the mid 90’s with a big     drop in the number of diagnosed Aids patients. This drop may be     associated with the administration of therapies such as AZT to HIV     infected subjects that reduced the number of such subjects that     developed Aids. In the late 90’s there seams to be yet again a change in     the trend and the possible increase in numbers. The line of linear     regression misses all these changes and is a poor representation of the     historical development.</p>
       <p>The take home message from this exercise is to not use models blindly. A     good advise is to plot the data. An examination of the plot provides a     warning that the linear model is probably not a good model for the given     problem.</p>
-    </subsection>
+    </li></ol>
+     </subsection>
     
     <subsection xml:id="subsec-solution-14-4">
       <title>Exercise 14.4</title>
       
       <ol>
-        <li><p>We read the data in the table into <c>R</c>. The variable “<c>year</c>" is the explanatory variable and the variable “<c>percent</c>" is the response. The scatter plot is produced using the function “<c>plot</c>" and the regression line, fitted to the data with the function “<c>lm</c>", is added to the plot using the function “<c>abline</c>":</p></li>
-      </ol>
+        <li><p>We read the data in the table into <c>R</c>. The variable “<c>year</c>" is the explanatory variable and the variable “<c>percent</c>" is the response. The scatter plot is produced using the function “<c>plot</c>" and the regression line, fitted to the data with the function “<c>lm</c>", is added to the plot using the function “<c>abline</c>":</p>
       <program language="r">
         <input>
 year &lt;- c(1945,1950,1960,1970,1980,1986,1993)
@@ -1327,9 +1373,8 @@ abline(lm(percent~year))
         </input>
       </program>
       <p>Observe that a linear trend is a     reasonable description of the reduction in the percentage of workers     that belong to labor unions in the post World War II period.</p>
-      <ol>
-        <li><p>We compute the averages, standard deviations and the covariance:</p></li>
-      </ol>
+      </li>
+        <li><p>We compute the averages, standard deviations and the covariance:</p>
       <program language="r">
         <input>
 mean.x &lt;- mean(year)
@@ -1344,10 +1389,16 @@ sd.y
 cov.x.y
         </input>
       </program>
+<pre>
+## [1] 1969.143
+## [1] 25.84286
+## [1] 18.27957
+## [1] 7.574927
+## [1] -135.6738
+</pre>
       <p>The average of the variable “<c>year</c>" is <m>1969.143</m> and the standard     deviation is <m>18.27957</m>. The average of the variable “<c>percent</c>" is     <m>25.84286</m> and the standard deviation is <m>7.574927</m>. The covariance     between the two variables is <m>-135.6738</m>.</p>
-      <ol>
-        <li><p>The slope of the regression line is the ratio between the covariance and the variance of the explanatory variable. The intercept is the solution of the equation that states that the value of regression line at the average of the explanatory variable is the average of the response:</p></li>
-      </ol>
+      </li>
+        <li><p>The slope of the regression line is the ratio between the covariance and the variance of the explanatory variable. The intercept is the solution of the equation that states that the value of regression line at the average of the explanatory variable is the average of the response:</p>
       <program language="r">
         <input>
 b &lt;- cov.x.y/sd.x^2
@@ -1356,6 +1407,10 @@ a
 b
         </input>
       </program>
+<pre>
+## [1] 825.3845
+## [1] -0.4060353
+</pre>
       <p>We get that the intercept is equal to <m>825.3845</m> and the slope is equal     to <m>-0.4060353</m>.</p>
       <p>In order to validate these figures, let us apply the function “<c>lm</c>" to     the data:</p>
       <program language="r">
@@ -1363,34 +1418,62 @@ b
 lm(percent~year)
         </input>
       </program>
+<pre>
+## 
+## Call:
+## lm(formula = percent ~ year)
+## 
+## Coefficients:
+## (Intercept)         year  
+##     825.384       -0.406
+</pre>
       <p>Indeed, we get the same numbers that we got from the manual computation.</p>
+</li></ol>
     </subsection>
     
     <subsection xml:id="subsec-solution-14-5">
       <title>Exercise 14.5</title>
       
       <ol>
-        <li><p>The estimate for the expected value for the <m>i</m>th observation is obtained by the evaluation of the expression <m>a + b\cdot x_i</m>, where <m>a</m> and <m>b</m> are the coefficients of the fitted regression model and <m>x_i</m> is the value of the explanatory variable for the <m>i</m>th observation. In our case <m>i=4</m> and <m>x_4 = 6.7</m>:</p></li>
-      </ol>
+        <li><p>The estimate for the expected value for the <m>i</m>th observation is obtained by the evaluation of the expression <m>a + b\cdot x_i</m>, where <m>a</m> and <m>b</m> are the coefficients of the fitted regression model and <m>x_i</m> is the value of the explanatory variable for the <m>i</m>th observation. In our case <m>i=4</m> and <m>x_4 = 6.7</m>:</p>
       <p><me>a + b\cdot x_4 = 2.5-1.13\cdot x_4 = 2.5-1.13\cdot 6.7 =  -5.071\;.</me> Therefore, the estimate expectation of the response is <m>-5.071</m>.</p>
-      <ol>
-        <li><p>The residual from the regression line is the difference between the observed value of the response and the estimated expectation of the response. For the 4th observation we have that the observed value of the response is <m>y_4 = 0.17</m>. The estimated expectation was computed in the previous question. Therefore, the residual from the regression line for the 4th observation is:</p></li>
-      </ol>
+      </li>
+        <li><p>The residual from the regression line is the difference between the observed value of the response and the estimated expectation of the response. For the 4th observation we have that the observed value of the response is <m>y_4 = 0.17</m>. The estimated expectation was computed in the previous question. Therefore, the residual from the regression line for the 4th observation is:</p>
       <p><me>y_4 - (a + b\cdot x_4) = 0.17 - (-5.071) = 5.241\;.</me></p>
+      </li></ol>
     </subsection>
     
     <subsection xml:id="subsec-solution-14-6">
       <title>Exercise 14.6</title>
       
       <ol>
-        <li><p>We create the response and then fit a model and apply the summarizing function to the model:</p></li>
-      </ol>
+        <li><p>We create the response and then fit a model and apply the summarizing function to the model:</p>
       <program language="r">
         <input>
 dif.mpg &lt;- cars$highway.mpg - cars$city.mpg
 summary(lm(dif.mpg ~ cars$curb.weight))
         </input>
       </program>
+<pre>
+## 
+## Call:
+## lm(formula = dif.mpg ~ cars$curb.weight)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -5.4344 -0.7755  0.1633  0.8844  6.3035 
+## 
+## Coefficients:
+##                    Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)       8.1653491  0.5460856  14.953  &lt; 2e-16 ***
+## cars$curb.weight -0.0010306  0.0002094  -4.921 1.77e-06 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.557 on 203 degrees of freedom
+## Multiple R-squared:  0.1066, Adjusted R-squared:  0.1022 
+## F-statistic: 24.22 on 1 and 203 DF,  p-value: 1.775e-06
+</pre>
       <p>The <m>p</m>-value associated with the slope, <m>1.77\times 10^{-6}</m>, is much     smaller than the 5% threshold proposing a significant (negative) trend.     The value of R-squared, the fraction of the variability of the response     that is explained by a regression model, is <m>0.1066</m>.</p>
       <p>The standard deviation is the square root of the variance. It follows     that the fraction of the standard deviation of the response that is     explained by the regression is <m>\sqrt{0.1066}= 0.3265</m>.</p>
       <p>Following our own advice, we plot the data and the regression model:</p>
@@ -1401,14 +1484,33 @@ abline(lm(dif.mpg ~ cars$curb.weight))
         </input>
       </program>
       <p>One may observe that although there seems     to be an overall downward trend, there is still allot of variability     about the line of regression.</p>
-      <ol>
-        <li><p>We now fit and summarize the regression model with the size of engine as the explanatory variable:</p></li>
-      </ol>
+      </li>
+        <li><p>We now fit and summarize the regression model with the size of engine as the explanatory variable:</p>
       <program language="r">
         <input>
 summary(lm(dif.mpg ~ cars$engine.size))
         </input>
       </program>
+<pre>
+## 
+## Call:
+## lm(formula = dif.mpg ~ cars$engine.size)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -5.7083 -0.7083  0.1889  1.1235  6.1792 
+## 
+## Coefficients:
+##                   Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)       6.717304   0.359385  18.691  &lt; 2e-16 ***
+## cars$engine.size -0.009342   0.002691  -3.471 0.000633 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.601 on 203 degrees of freedom
+## Multiple R-squared:  0.05603,    Adjusted R-squared:  0.05138 
+## F-statistic: 12.05 on 1 and 203 DF,  p-value: 0.0006329
+</pre>
       <p>The regression slope is negative. The <m>p</m>-value is <m>0.000633</m>, which is     statistically significant. The value of R-squared is <m>0.05603</m>.     Consequently, the fraction of the standard deviation of the response     that is explained by the current regression model is     <m>\sqrt{0.05603}= 0.2367</m>.</p>
       <p>Produce the scatter plot with the line of regression:</p>
       <program language="r">
@@ -1418,7 +1520,7 @@ abline(lm(dif.mpg ~ cars$engine.size))
         </input>
       </program>
       <p>Again, there is variability about the line of regression.</p>
-      <ol>
+      </li>
         <li><p>Of the two models, the model that uses the curb weigh as the explanatory variable explains a larger portion of the variability in the response. Hence, unless other criteria tells us otherwise, we will prefer this model over the model that uses the size of engine as an explanatory variable.</p></li>
       </ol>
     </subsection>
@@ -1432,14 +1534,21 @@ abline(lm(dif.mpg ~ cars$engine.size))
       <title>Exercise 15.1</title>
       
       <ol>
-        <li><p>First we save the file “<c>diet.csv</c>" in the working directory of <c>R</c> and read it’s content. Then we apply the function “<c>table</c>" to the two variables in the file in order to obtain the requested frequency table:</p></li>
-      </ol>
+        <li><p>First we save the file “<c>diet.csv</c>" in the working directory of <c>R</c> and read it’s content. Then we apply the function “<c>table</c>" to the two variables in the file in order to obtain the requested frequency table:</p>
       <program language="r">
         <input>
 diet &lt;- read.csv("_data/diet.csv")
 table(diet$health,diet$type)
         </input>
       </program>
+<pre>
+##          
+##           aha med
+##   cancer   15   7
+##   death    24  14
+##   healthy 239 273
+##   illness  25   8
+</pre>
       <p>The resulting table has two columns and 4 rows. The third row     corresponds to healthy subjects. Of these, 239 subjects used the AHA     recommended diet and 273 used the Mediterranean diet. We may also plot     this data using a mosaic plot:</p>
       <program language="r">
         <input>
@@ -1447,17 +1556,36 @@ plot(health~type,data=diet)
         </input>
       </program>
       <p>Examining this plot one may appreciate the     fact that the vast majority of the subjects were healthy and the     relative proportion of healthy subjects among users of the Mediterranean     diet is higher than the relative proportion among users of the AHA     recommended diet.</p>
-      <ol>
-        <li><p>In order to test the hypothesis that the probability of keeping healthy following an heart attack is the same for those that use the Mediterranean diet and for those that use the diet recommended by the AHA we create a <m>2\times 2</m>. This table compares the response of being healthy or not to the type of diet as an explanatory variable. A sequence with logical components, “<c>TRUE</c>" for healthy and “<c>FALSE</c>" for not, is used as the response. Such a sequence is produced via the expression “<c>diet$health==healthy</c>". The table may serve as input to the function “<c>prop.test</c>":</p></li>
-      </ol>
+      </li>
+        <li><p>In order to test the hypothesis that the probability of keeping healthy following an heart attack is the same for those that use the Mediterranean diet and for those that use the diet recommended by the AHA we create a <m>2\times 2</m>. This table compares the response of being healthy or not to the type of diet as an explanatory variable. A sequence with logical components, “<c>TRUE</c>" for healthy and “<c>FALSE</c>" for not, is used as the response. Such a sequence is produced via the expression “<c>diet$health==healthy</c>". The table may serve as input to the function “<c>prop.test</c>":</p>
       <program language="r">
         <input>
 table(diet$health=="healthy",diet$type)
 prop.test(table(diet$health=="healthy",diet$type))
         </input>
       </program>
+<pre>
+##        
+##         aha med
+##   FALSE  64  29
+##   TRUE  239 273
+</pre>
+<pre>
+## 
+##  2-sample test for equality of proportions with continuity
+##  correction
+## 
+## data:  table(diet$health == "healthy", diet$type)
+## X-squared = 14.555, df = 1, p-value = 0.0001361
+## alternative hypothesis: two.sided
+## 95 percent confidence interval:
+##  0.1114300 0.3313203
+## sample estimates:
+##    prop 1    prop 2 
+## 0.6881720 0.4667969
+</pre>
       <p>The function “<c>prop.test</c>" conducts the test that compares between the     probabilities of keeping healthy. In particular, the computed <m>p</m>-value     for the test is <m>0.0001361</m>, which is less than 0.05. Therefore, we     reject the null hypothesis that both diets have the same effect on the     chances of remaining healthy following an heart attack.</p>
-      <ol>
+      </li>
         <li><p>The confidence interval for the difference in probabilities is equal to <m>[0.1114300, 0.3313203]</m>. The point estimation of the difference between the probabilities is <m>\hat p_a - \hat p_b = 0.6881720- 0.4667969 \approx 0.22</m> in favor of a Mediterranean diet. The confidence interval proposes that a difference as low as 0.11 or as high as 0.33 are not excluded by the data.</p></li>
       </ol>
     </subsection>
@@ -1466,8 +1594,7 @@ prop.test(table(diet$health=="healthy",diet$type))
       <title>Exercise 15.2</title>
       
       <ol>
-        <li><p>We save the data of the file in a data frame by the name “<c>cushings</c>", produce a mosaic plot with the function “<c>plot</c>" and an histogram with the function “<c>hist</c>":</p></li>
-      </ol>
+        <li><p>We save the data of the file in a data frame by the name “<c>cushings</c>", produce a mosaic plot with the function “<c>plot</c>" and an histogram with the function “<c>hist</c>":</p>
       <program language="r">
         <input>
 cushings &lt;- read.csv("_data/cushings.csv")
@@ -1477,15 +1604,36 @@ hist(cushings$tetra)
       </program>
       <p>The mosaic plot describes the distribution of the 4 levels of the     response within the different intervals of values of the explanatory     variable. The intervals coincide with the intervals that are used in the     construction of the histogram. In particular, the third vertical     rectangle from the left in the mosaic is associated with the third     interval from the left in the histogram[^6]. This interval is associated     with the range of values between 20 and 30. The height of the given     interval in the histogram is 2, which is the number of patients with     “<c>terta</c>" levels that belong to the interval.</p>
       <p>There are 4 shades of *grey* in the first vertical rectangle from the     left. Each shade is associated with a different level of the response.     The lightest shade of grey, the upmost one, is associated with the level     “<c>u</c>". Notice that this is also the shade of grey of the entire third     vertical rectangle from the left. The conclusion is that the 2 patients     that are associated with this rectangle have Tetrahydrocortisone levels     between 2 and 30 and have an unknown type of syndrome.</p>
-      <ol>
-        <li><p>We fit the logistic regression to the entire data in the data frame “<c>cushings</c>" using the function “<c>glm</c>", with the “<c>family=binomial</c>" argument. The response is the indicator that the type is equal to “<c>b</c>". The fitted model is saved in an object called “<c>cushings.fit.all</c>". The application of the function “<c>summary</c>" to the fitted model produces a report that includes the test of the hypothesis of interest:</p></li>
-      </ol>
+      </li>
+        <li><p>We fit the logistic regression to the entire data in the data frame “<c>cushings</c>" using the function “<c>glm</c>", with the “<c>family=binomial</c>" argument. The response is the indicator that the type is equal to “<c>b</c>". The fitted model is saved in an object called “<c>cushings.fit.all</c>". The application of the function “<c>summary</c>" to the fitted model produces a report that includes the test of the hypothesis of interest:</p>
       <program language="r">
         <input>
 cushings.fit.all &lt;- glm((type=="b")~tetra,family=binomial, data=cushings)
 summary(cushings.fit.all)
         </input>
       </program>
+<pre>
+## 
+## Call:
+## glm(formula = (type == "b") ~ tetra, family = binomial, data = cushings)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.0924  -1.0460  -0.8652   1.3426   1.5182  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(&gt;|z|)
+## (Intercept) -0.12304    0.61330  -0.201    0.841
+## tetra       -0.04220    0.05213  -0.809    0.418
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 35.594  on 26  degrees of freedom
+## Residual deviance: 34.739  on 25  degrees of freedom
+## AIC: 38.739
+## 
+## Number of Fisher Scoring iterations: 4
+</pre>
       <p>The test of interest examines the coefficient that is associated wit the     explanatory variable “<c>tetra</c>". The estimated value of this parameter is     <m>-0.04220</m>. The <m>p</m>-value for testing that the coefficient is 0 is equal     to <m>0.418</m>. Consequently, since the <m>p</m>-value is larger than 0.05, we do     not reject the null hypothesis that states that the response and the     explanatory variable are statistically unrelated.</p>
       <p>Confidence intervals may be computed by applying the function     “<c>confint</c>" to the fitted model:</p>
       <program language="r">
@@ -1493,25 +1641,58 @@ summary(cushings.fit.all)
 confint(cushings.fit.all)
         </input>
       </program>
+<pre>
+##                  2.5 %     97.5 %
+## (Intercept) -1.2955624 1.18118256
+## tetra       -0.1776113 0.04016772
+</pre>
       <p>Specifically, the confidence interval for the coefficient that is     associated with the explanatory variable is equal to     <m>[-0.1776113, 0.04016772]</m></p>
-      <ol>
-        <li><p>If we want to fit the logistic model to a partial subset of the data, say all the observations with values of the response other that “<c>u</c>", we may apply the argument “<c>subset</c>"[^7]. Specifically, adding the expression “<c>subset=(type!=u)</c>" would do the job[^8]. We repeat the same analysis as before. The only difference is the addition of the given expression to the function that fits the model to the data. The fitted model is saved in an object we call “<c>cushings.fit.known</c>":</p></li>
-      </ol>
+      </li>
+        <li><p>If we want to fit the logistic model to a partial subset of the data, say all the observations with values of the response other that “<c>u</c>", we may apply the argument “<c>subset</c>"[^7]. Specifically, adding the expression “<c>subset=(type!=u)</c>" would do the job[^8]. We repeat the same analysis as before. The only difference is the addition of the given expression to the function that fits the model to the data. The fitted model is saved in an object we call “<c>cushings.fit.known</c>":</p>
       <program language="r">
         <input>
 cushings.fit.known &lt;- glm((type=="b")~tetra,family=binomial, data=cushings,subset=(type!="u"))
 summary(cushings.fit.known)
         </input>
       </program>
+<pre>
+## 
+## Call:
+## glm(formula = (type == "b") ~ tetra, family = binomial, data = cushings, 
+##     subset = (type != "u"))
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.2079  -1.1865  -0.7548   1.2033   1.2791  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(&gt;|z|)
+## (Intercept)  0.11457    0.59947   0.191    0.848
+## tetra       -0.02276    0.04586  -0.496    0.620
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 29.065  on 20  degrees of freedom
+## Residual deviance: 28.789  on 19  degrees of freedom
+## AIC: 32.789
+## 
+## Number of Fisher Scoring iterations: 4
+</pre>
       <p>The estimated value of the coefficient when considering only subject     with a known type of the syndrome is slightly changed to <m>-0.02276</m>. The     new <m>p</m>-value, which is equal to <m>0.620</m>, is larger than 0.05. Hence,     yet again, we do not reject the null hypothesis.</p>
       <program language="r">
         <input>
 confint(cushings.fit.known)
         </input>
       </program>
+<pre>
+##                  2.5 %     97.5 %
+## (Intercept) -1.0519135 1.40515473
+## tetra       -0.1537617 0.06279923
+</pre>
       <p>For the modified confidence interval we apply the function “<c>confint</c>".     We get now <m>[-0.1537617, 0.06279923]</m> as a confidence interval for the     coefficient of the explanatory variable.</p>
       <p>We started with the fitting the model to all the observations. Here we     use only the observations for which the type of the syndrome is known.     The practical implication of using all observations in the fit is     equivalent to announcing that the type of the syndrome for observations     of an unknown type is not type “<c>b</c>". This is not appropriate and may     introduce bias, since the type may well be “<c>b</c>". It is more appropriate     to treat the observations associated with the level “<c>u</c>" as missing     observations and to delete them from the analysis. This approach is the     approach that was used in the second analysis.</p>
-    </subsection>
+   </li></ol>
+   </subsection>
     
   </section>
 
