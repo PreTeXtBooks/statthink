@@ -607,7 +607,6 @@ table(magnets$change[30:50])
       
       <ol>
         <li><p>Let us run the following simulation:</p>
-      </ol>
       <program language="r">
         <input>
 mu1 &lt;- 3.5
