@@ -1395,7 +1395,7 @@ summary(fit.deaths)
 ## Residual standard error: 3589 on 20 degrees of freedom
 ## Multiple R-squared:  0.9499, Adjusted R-squared:  0.9474 
 ## F-statistic:   379 on 1 and 20 DF,  p-value: 1.805e-14
-<pre>
+</pre>
       <p>The estimated value of the slope 0.6073. The computed <m>p</m>-value     associated with this slope is <m>1.81 \times 10^{-14}</m>, which is much     smaller than the 5% threshold. Consequently, the slope is statistically     significant.</p>
       <p>For confidence intervals apply the function “<c>confint</c>" to the fitted     model:</p>
       <program language="r">
