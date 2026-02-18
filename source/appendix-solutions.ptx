@@ -735,34 +735,51 @@ p*(1-p)/150
       <title>Exercise 11.1</title>
       
       <ol>
-        <li><p>We read the content of the file “<c>teacher.csv</c>" into a data frame by the name “<c>teacher</c>" and produce a summary of the content of the data frame:</p></li>
-      </ol>
+        <li><p>We read the content of the file “<c>teacher.csv</c>" into a data frame by the name “<c>teacher</c>" and produce a summary of the content of the data frame:</p>
       <program language="r">
         <input>
 teacher &lt;- read.csv("_data/teacher.csv")
 summary(teacher)
         </input>
       </program>
+<pre>
+##  condition     rating     
+##  C:25      Min.   :1.333  
+##  P:24      1st Qu.:2.000  
+##            Median :2.333  
+##            Mean   :2.429  
+##            3rd Qu.:2.667  
+##            Max.   :4.000
+</pre>
       <p>There are two variables: The variable “<c>condition</c>" is a factor with two     levels, “<c>C</c>" that codes the Charismatic condition and “<c>P</c>" that codes     the Punitive condition. The second variable is “<c>rating</c>", which is a     numeric variable.</p>
-      <ol>
-        <li><p>The sample average for the variable “<c>rating</c>" can be obtained from the summary or from the application of the function “<c>mean</c>" to the variable. The standard deviation is obtained from the application of the function “<c>sd</c>" to the variable:</p></li>
-      </ol>
+      </li>
+        <li><p>The sample average for the variable “<c>rating</c>" can be obtained from the summary or from the application of the function “<c>mean</c>" to the variable. The standard deviation is obtained from the application of the function “<c>sd</c>" to the variable:</p>
       <program language="r">
         <input>
 mean(teacher$rating)
 sd(teacher$rating)
         </input>
       </program>
+<pre>
+## [1] 2.428567
+## [1] 0.5651949
+</pre>
       <p>Observe that the sample average is equal to <m>2.428567</m> and the sample     standard deviation is equal to <m>0.5651949</m>.</p>
-      <ol>
-        <li><p>The sample average and standard deviation for each sub-sample may be produced with the aid of the function “<c>tapply</c>". We apply the function in the third argument, first “<c>mean</c>" and then “<c>sd</c>" to the variable rating, in the first argument, over each level of the factor “<c>condition</c>" in the second argument:</p></li>
-      </ol>
+      </li>
+        <li><p>The sample average and standard deviation for each sub-sample may be produced with the aid of the function “<c>tapply</c>". We apply the function in the third argument, first “<c>mean</c>" and then “<c>sd</c>" to the variable rating, in the first argument, over each level of the factor “<c>condition</c>" in the second argument:</p>
       <program language="r">
         <input>
 tapply(teacher$rating,teacher$condition,mean)
 tapply(teacher$rating,teacher$condition,sd)
         </input>
       </program>
+<pre>
+##        C        P 
+## 2.613332 2.236104
+
+##         C         P 
+## 0.5329833 0.5426667
+</pre>
       <p>Obtain that average for the condition “<c>C</c>" is <m>2.613332</m> and the     standard deviation is <m>0.5329833</m>.</p>
       <p>You may note that the rating given by students that were exposed to the     description of the lecturer as charismatic is higher on the average than     the rating given by students that were exposed to a less favorable     description. The box plots of the ratings for the two conditions are     presented in <xref ref="fig-confidence1"/>.</p>
       <program language="r">
@@ -772,20 +789,22 @@ cars$dif.mpg =  cars$highway.mpg - cars$city.mpg
 boxplot(dif.mpg ~ fuel.type, data=cars)
         </input>
       </program>
-      <ol>
-        <li><p>The 99% confidence interval for the expectation is computed by the formula <m>\bar x \pm \mbox{\texttt{qt(0.995,n-1)}} \cdot s/\sqrt{n}</m>. Only 0.5% of the <m>t</m>-distribution on <m>(n-1)</m> degrees of freedom resides above the percentile “<c>qt(0.995,n-1)</c>". Using this percentile leaves out a total of 1% in both tails and keeps 99% of the distribution inside the central interval.</p></li>
-      </ol>
-      <p>For the students that were exposed to Condition “<c>C</c>",     <m>\bar x = 2.613332</m>, <m>s = 0.5329833</m>, and <m>n = 25</m>:</p>
+      </li>
+        <li><p>The 99% confidence interval for the expectation is computed by the formula <m>\bar x \pm \mbox{\texttt{qt(0.995,n-1)}} \cdot s/\sqrt{n}</m>. Only 0.5% of the <m>t</m>-distribution on <m>(n-1)</m> degrees of freedom resides above the percentile “<c>qt(0.995,n-1)</c>". Using this percentile leaves out a total of 1% in both tails and keeps 99% of the distribution inside the central interval.</p>
+         <p>For the students that were exposed to Condition “<c>C</c>",     <m>\bar x = 2.613332</m>, <m>s = 0.5329833</m>, and <m>n = 25</m>:</p>
       <program language="r">
         <input>
 2.613332 - qt(0.995,24)*0.5329833/sqrt(25)
 2.613332 + qt(0.995,24)*0.5329833/sqrt(25)
         </input>
       </program>
+<pre>
+## [1] 2.315188
+## [1] 2.911476
+</pre>
       <p>The confidence interval for the expectation is <m>[2.315188, 2.911476]</m>.</p>
-      <ol>
-        <li><p>The 90% confidence interval for the variance is computed by the formula <m>\big[\frac{n-1}{\mbox{\texttt{qchisq(0.95,n-1)}}} s^2 ,\;\frac{n-1}{\mbox{\texttt{qchisq(0.05,n-1)}}} s^2\big]</m>. Observe that 5% of the chi-square distribution on <m>(n-1)</m> degrees of freedom is above the percentile “<c>qchisq(0.95,n-1)</c>" and 5% are below the percentile “<c>qchisq(0.05,n-1)</c>".</p></li>
-      </ol>
+      </li>
+        <li><p>The 90% confidence interval for the variance is computed by the formula <m>\big[\frac{n-1}{\mbox{\texttt{qchisq(0.95,n-1)}}} s^2 ,\;\frac{n-1}{\mbox{\texttt{qchisq(0.05,n-1)}}} s^2\big]</m>. Observe that 5% of the chi-square distribution on <m>(n-1)</m> degrees of freedom is above the percentile “<c>qchisq(0.95,n-1)</c>" and 5% are below the percentile “<c>qchisq(0.05,n-1)</c>".</p>
       <p>For the students that were exposed to Condition “<c>C</c>", <m>s = 0.5329833</m>,     and <m>n = 25</m>:</p>
       <program language="r">
         <input>
@@ -793,15 +812,19 @@ boxplot(dif.mpg ~ fuel.type, data=cars)
 (24/qchisq(0.05,24))*0.5329833^2
         </input>
       </program>
+<pre>
+## [1] 0.1872224
+## [1] 0.4923093
+</pre>
       <p>The point estimate of the variance is <m>s^2 = 0.5329833^2 = 0.2840712</m>.     The confidence interval for the variance is <m>[0.18722243, 0.4923093]</m>.</p>
-    </subsection>
+    </li></ol>
+</subsection>
     
     <subsection xml:id="subsec-solution-11-2">
       <title>Exercise 11.2</title>
       
       <ol>
-        <li><p>Let us produce the sampling distribution of the sample average and the sample standard deviation for 20 observations from the <m>\mathrm{Exponential}(1/4)</m> distribution:</p></li>
-      </ol>
+        <li><p>Let us produce the sampling distribution of the sample average and the sample standard deviation for 20 observations from the <m>\mathrm{Exponential}(1/4)</m> distribution:</p>
       <program language="r">
         <input>
 lam &lt;- 1/4
@@ -823,10 +846,12 @@ norm.UCL &lt;- X.bar + qnorm(0.975)*S/sqrt(n)
 mean((4 &gt;= norm.LCL) &amp; (4 &lt;= norm.UCL))
         </input>
       </program>
+<pre>
+## [1] 0.90342
+</pre>
       <p>The expectation of the measurement is equal to 4. This number belongs to     the confidence interval 90.47% of the times. Consequently, the actual     confidence level is 90.47%.</p>
-      <ol>
-        <li><p>Using the same sampling distribution that was produced in the solution to Question 1 we now compute the actual confidence level of a confidence interval that is constructed under the assumption that the measurement has a Normal distribution:</p></li>
-      </ol>
+      </li>
+        <li><p>Using the same sampling distribution that was produced in the solution to Question 1 we now compute the actual confidence level of a confidence interval that is constructed under the assumption that the measurement has a Normal distribution:</p>
       <program language="r">
         <input>
 t.LCL &lt;- X.bar - qt(0.975,n-1)*S/sqrt(n)
@@ -834,8 +859,11 @@ t.UCL &lt;- X.bar + qt(0.975,n-1)*S/sqrt(n)
 mean((4 &gt;= t.LCL) &amp; (4 &lt;= t.UCL))
         </input>
       </program>
+<pre>
+## [1] 0.91782
+</pre>
       <p>Based on the assumption we used the percentiles of the <m>t</m>-distribution.     The actual significance level is 91.953% <m>\approx</m> 92%, still short of     the nominal 95% confidence level.</p>
-      <ol>
+      </li>
         <li><p>It would be preferable to use the (incorrect) assumption that the observations have a Normal distribution than to apply the Normal approximation to such a small sample. In the current setting the former produced a confidence level that is closer to the nominal one. In general, using the percentiles of the <m>t</m>-distribution will produce wider and more conservative confidence intervals than those produces under the Normal approximation of the average. To be on the safer size, one typically prefers the more conservative confidence intervals.</p></li>
       </ol>
     </subsection>
@@ -844,8 +872,7 @@ mean((4 &gt;= t.LCL) &amp; (4 &lt;= t.UCL))
       <title>Exercise 11.3</title>
       
       <ol>
-        <li><p>The range of the confidence interval with 99% confidence interval is bounded by</p></li>
-      </ol>
+        <li><p>The range of the confidence interval with 99% confidence interval is bounded by</p>
       <p><me>\mbox{\texttt{qnorm(0.995)}}\cdot \{\hat P (1-\hat P)/n\}^{1/2} \leq 2.575829 \cdot \sqrt{0.25/n} = 1.287915/\sqrt{n}\;,</me> since <c>qnorm(0.995)</c> = 2.575829 and <m>\hat P (1-\hat P) \leq 0.25</m>. Consequently, the sample size <m>n</m> should satisfy the inequality:</p>
       <p><me>\begin{aligned} 1.287915/\sqrt{n} \leq 0.03\quad  &amp;\Longrightarrow  \quad \sqrt{n} \geq 1.287915/0.03 = 42.9305\\ &amp;\Longrightarrow \quad  n \geq (42.9305)^2 = 1843.028\;.\end{aligned}</me> The smallest integer larger than the lower bound is <m>n=1844</m>.</p>
       <p>The 80% confidence interval for the probability is computed by the formula     <m>\hat p \pm \mbox{\texttt{qnorm(0.90)}} \cdot \sqrt{\hat p(1-\hat p)/n}</m>:</p>
@@ -857,7 +884,12 @@ p.hat - qnorm(0.90)*sqrt(p.hat*(1-p.hat)/n)
 p.hat + qnorm(0.90)*sqrt(p.hat*(1-p.hat)/n)
         </input>
       </program>
+<pre>
+## [1] 0.774369
+## [1] 0.825631
+</pre>
       <p>We obtain a confidence interval of the form <m>[0.774369, 0.825631]</m>.</p>
+</li></ol>
     </subsection>
     
   </section>
@@ -871,23 +903,35 @@ p.hat + qnorm(0.90)*sqrt(p.hat*(1-p.hat)/n)
       <ol>
         <li><p>The null hypothesis of no placebo effect corresponds to the expectation of the change equal to 0 (<m>H_0: \Expec(X) = 0</m>). The alternative hypothesis may be formulated as the expectation not being equal to 0 (<m>H_1: \Expec(X) \not = 0</m>). This corresponds to a two sided alternative. Observe that a negative expectation of the change still corresponds to the placebo having an effect.</p></li>
         <li><p>The observations that can be used in order to test the hypothesis are those associated with patients that were treated with the inactive placebo, i.e. the last 21 observations. We extracts these values from the data frame using the expression “<c>magnets$change[30:50]</c>".</p></li>
-        <li><p>In order to carry out the test we read the data from the file “<c>magnets.csv</c>" into the data frame “<c>magnets</c>". The function “<c>t.test</c>" is applied to the observations extracted from the data frame. Note that the default expectation value of tested by the function is “<c>mu = 0</c>":</p></li>
-      </ol>
+        <li><p>In order to carry out the test we read the data from the file “<c>magnets.csv</c>" into the data frame “<c>magnets</c>". The function “<c>t.test</c>" is applied to the observations extracted from the data frame. Note that the default expectation value of tested by the function is “<c>mu = 0</c>":</p>
       <program language="r">
         <input>
 magnets &lt;- read.csv("_data/magnets.csv")
 t.test(magnets$change[30:50])
         </input>
       </program>
+<pre>
+## 
+##  One Sample t-test
+## 
+## data:  magnets$change[30:50]
+## t = 3.1804, df = 20, p-value = 0.004702
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  0.3768845 1.8135916
+## sample estimates:
+## mean of x 
+##  1.095238
+</pre>
       <p>The computed <m>p</m>-value is 0.004702, which is below 0.05. Consequently,     we reject the null hypothesis and conclude that a placebo effect seems     to be present.</p>
-    </subsection>
+    </li></ol>
+</subsection>
     
     <subsection xml:id="subsec-solution-12-2">
       <title>Exercise 12.2</title>
       
       <ol>
-        <li><p>We simulate the sampling distribution of the sample average and standard deviation. The sample is composed of <m>n=20</m> observations from the given Exponential distribution:</p></li>
-      </ol>
+        <li><p>We simulate the sampling distribution of the sample average and standard deviation. The sample is composed of <m>n=20</m> observations from the given Exponential distribution:</p>
       <program language="r">
         <input>
 lam &lt;- 1/4
@@ -903,11 +947,13 @@ T &lt;- (X.bar - 4)/(S/sqrt(n))
 mean(abs(T) &gt; qt(0.975,n-1))
         </input>
       </program>
+<pre>
+## [1] 0.0793
+</pre>
       <p>We compute the test statistic “<c>T</c>" from the sample average “<c>X.bar</c>"     and the sample standard deviation “<c>S</c>". In the last expression we     compute the probability that the absolute value of the test statistic is     larger than “<c>qt(0.975,19)</c>", which is the threshold that should be used     in order to obtain a significance level of 5% for Normal measurements.</p>
       <p>We obtain that the actual significance level of the test is <m>0.08047</m>,     which is substantially larger than the nominal significance level.</p>
-      <ol>
-        <li><p>We repeat essentially the same simulations as before. We only change the distribution of the sample from the Exponential to the Uniform distribution:</p></li>
-      </ol>
+      </li>
+        <li><p>We repeat essentially the same simulations as before. We only change the distribution of the sample from the Exponential to the Uniform distribution:</p>
       <program language="r">
         <input>
 a &lt;- 0
@@ -924,16 +970,19 @@ T &lt;- (X.bar - 4)/(S/sqrt(n))
 mean(abs(T) &gt; qt(0.975,n-1))
         </input>
       </program>
+<pre>
+## [1] 0.05129
+</pre>
       <p>The actual significance level of the test is <m>0.05163</m>, much closer to     the nominal significance level of 5%.</p>
       <p>A possible explanation for the difference between the two cases is that     the Uniform distribution is symmetric like the Normal distribution,     whereas the Exponential is skewed. In any case, for larger sample sizes     one may expect the Central Limit Theorem to kick in and produce more     satisfactory results, even for the Exponential case.</p>
-    </subsection>
+   </li></ol>
+</subsection>
     
     <subsection xml:id="subsec-solution-12-3">
       <title>Exercise 12.3</title>
       
       <ol>
-        <li><p>We input the data to <c>R</c> and then compute the test statistic and the appropriate percentile of the <m>t</m>-distribution:</p></li>
-      </ol>
+        <li><p>We input the data to <c>R</c> and then compute the test statistic and the appropriate percentile of the <m>t</m>-distribution:</p>
       <program language="r">
         <input>
 n &lt;- 55
@@ -944,27 +993,37 @@ abs(t)
 qt(0.975,n-1)
         </input>
       </program>
+<pre>
+## [1] 3.708099
+</pre>
+<pre>
+## [1] 2.004879
+</pre>
       <p>Observe that the absolute value of the statistic (3.708099) is larger     than the threshold for rejection (2.004879). Consequently, we reject the     null hypothesis.</p>
-      <ol>
-        <li><p>We recompute the percentile of the <m>t</m>-distribution:</p></li>
-      </ol>
+      </li>
+        <li><p>We recompute the percentile of the <m>t</m>-distribution:</p>
       <program language="r">
         <input>
 qt(0.995,n-1)
         </input>
       </program>
+<pre>
+## [1] 2.669985
+</pre>
       <p>Again, the absolute value of the statistic (3.708099) is larger than the     threshold for rejection (2.669985). Consequently, we reject the null     hypothesis.</p>
-      <ol>
-        <li><p>In this question we should recompute the test statistic:</p></li>
-      </ol>
+      </li>
+        <li><p>In this question we should recompute the test statistic:</p>
       <program language="r">
         <input>
 t &lt;- (x.bar - 24)/(s/sqrt(n))
 abs(t)
         </input>
       </program>
+<pre>
+## [1] 1.785381
+</pre>
       <p>The absolute value of the new statistic (1.785381) is smaller than the     threshold for rejection (2.004879). Consequently, we do not reject the     null hypothesis.</p>
-    </subsection>
+    </li></ol></subsection>
     
   </section>
 
@@ -975,43 +1034,92 @@ abs(t)
       <title>Exercise 13.1</title>
       
       <ol>
-        <li><p>The score of pain before the application of the device is measured in the variable “<c>score1</c>". This variable is used as the response. We apply the function “<c>t.test</c>" in order to test the equality of the expectation of the response in the two groups. First we read in the data from the file into a data frame and then we apply the test:</p></li>
-      </ol>
+        <li><p>The score of pain before the application of the device is measured in the variable “<c>score1</c>". This variable is used as the response. We apply the function “<c>t.test</c>" in order to test the equality of the expectation of the response in the two groups. First we read in the data from the file into a data frame and then we apply the test:</p>
       <program language="r">
         <input>
 magnets &lt;- read.csv("_data/magnets.csv")
 t.test(magnets$score1 ~ magnets$active)
         </input>
       </program>
+<pre>
+## 
+##  Welch Two Sample t-test
+## 
+## data:  magnets$score1 by magnets$active
+## t = 0.41483, df = 38.273, p-value = 0.6806
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.3757896  0.5695498
+## sample estimates:
+## mean in group "1" mean in group "2" 
+##           9.62069           9.52381
+</pre>
       <p>The computed <m>p</m>-value is 0.6806, which is above 0.05. Consequently, we     do not reject the null hypothesis that the expectations in the two     groups are equal. This should not come as a surprise, since patients     were assigned to the groups randomly and without knowledge to which     group they belong. Prior to the application of the device, the two     groups should look alike.</p>
-      <ol>
-        <li><p>Again, we use the variable “<c>score1</c>" as the response. Now apply the function “<c>var.test</c>" in order to test the equality of the variances of the response in the two groups:</p></li>
-      </ol>
+      </li>
+        <li><p>Again, we use the variable “<c>score1</c>" as the response. Now apply the function “<c>var.test</c>" in order to test the equality of the variances of the response in the two groups:</p>
       <program language="r">
         <input>
 var.test(magnets$score1 ~ magnets$active)
         </input>
       </program>
+<pre>
+## 
+##  F test to compare two variances
+## 
+## data:  magnets$score1 by magnets$active
+## F = 0.69504, num df = 28, denom df = 20, p-value = 0.3687
+## alternative hypothesis: true ratio of variances is not equal to 1
+## 95 percent confidence interval:
+##  0.2938038 1.5516218
+## sample estimates:
+## ratio of variances 
+##          0.6950431
+</pre>
       <p>The computed <m>p</m>-value is 0.3687, which is once more above 0.05.     Consequently, we do not reject the null hypothesis that the variances in     the two groups are equal. This fact is reassuring. Indeed, prior to the     application of the device, the two groups have the same characteristics.     Therefore, any subsequent difference between the two groups can be     attributed to the difference in the treatment.</p>
-      <ol>
-        <li><p>The difference in score between the treatment and the control groups is measured in the variable “<c>change</c>". This variable is used as the response for the current analysis. We apply the function “<c>t.test</c>" in order to test the equality of the expectation of the response in the two groups:</p></li>
-      </ol>
+      </li>
+        <li><p>The difference in score between the treatment and the control groups is measured in the variable “<c>change</c>". This variable is used as the response for the current analysis. We apply the function “<c>t.test</c>" in order to test the equality of the expectation of the response in the two groups:</p>
       <program language="r">
         <input>
 t.test(magnets$change ~ magnets$active)
         </input>
       </program>
+<pre>
+## 
+##  Welch Two Sample t-test
+## 
+## data:  magnets$change by magnets$active
+## t = 5.9856, df = 42.926, p-value = 3.86e-07
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  2.749137 5.543145
+## sample estimates:
+## mean in group "1" mean in group "2" 
+##          5.241379          1.095238
+</pre>
       <p>The computed <m>p</m>-value is <m>3.86\times 10^{-7}</m>, which is much below     0.05. Consequently, we reject the null hypothesis that the expectations     in the two groups are equal. The conclusion is that, according to this     trial, magnets do have an effect on the expectation of the response[^9].</p>
-      <ol>
-        <li><p>Once more we consider the variable “<c>change</c>" as the response. We apply the function “<c>var.test</c>" in order to test the equality of the variances of the response in the two groups:</p></li>
-      </ol>
+      </li>
+        <li><p>Once more we consider the variable “<c>change</c>" as the response. We apply the function “<c>var.test</c>" in order to test the equality of the variances of the response in the two groups:</p>
       <program language="r">
         <input>
 var.test(magnets$change ~ magnets$active)
         </input>
       </program>
+<pre>
+## 
+##  F test to compare two variances
+## 
+## data:  magnets$change by magnets$active
+## F = 4.2062, num df = 28, denom df = 20, p-value = 0.001535
+## alternative hypothesis: true ratio of variances is not equal to 1
+## 95 percent confidence interval:
+##  1.778003 9.389902
+## sample estimates:
+## ratio of variances 
+##           4.206171
+</pre>
       <p>The computed <m>p</m>-value is 0.001535, which is much below 0.05.     Consequently, we reject the null hypothesis that the variances in the     two groups are equal. Hence, magnets also affect the variance of the     response.</p>
-    </subsection>
+    </li></ol>
+   </subsection>
     
     <subsection xml:id="subsec-solution-13-2">
       <title>Exercise 13.2</title>
@@ -1037,11 +1145,13 @@ F &lt;- S.a^2/S.b^2
 mean((F &lt; qf(0.025,n.a-1,n.b-1))|(F &gt; qf(0.975,n.a-1,n.b-1)))
         </input>
       </program>
+<pre>
+## [1] 0.04949
+</pre>
       <p>We compute the test statistic “<c>F</c>" as the ratio of the two sample     standard deviations “<c>S.a</c>" and “<c>S.b</c>". The last expression computes     the probability that the test statistic is either less than     “<c>qt(0.025,n.a-1,n.b-1)</c>", or it is larger than     “<c>qt(0.975,n.a-1,n.b-1)</c>". The term “<c>qt(0.025,n.a-1,n.b-1)</c>" is the     0.025-percentile of the <m>F</m>-distribution on 28 and 20 degrees of freedom     and the term “<c>qt(0.975,n.a-1,n.b-1)</c>" is the 0.975-percentile of the     same <m>F</m>-distribution. The result of the last expression is the actual     significance level of the test.</p>
       <p>We obtain that the actual significance level of the test when the     measurements are Normally distributed is 0.05074, which in agreement     with the nominal significance level of 5%. Indeed, the nominal     significance level is computed under the assumption that the     distribution of the measurement is Normal.</p>
       <ol>
-        <li><p>We repeat essentially the same simulations as before. We only change the distribution of the samples from the Normal to the Exponential distribution:</p></li>
-      </ol>
+        <li><p>We repeat essentially the same simulations as before. We only change the distribution of the samples from the Normal to the Exponential distribution:</p>
       <program language="r">
         <input>
 lam &lt;- 1/4
@@ -1059,27 +1169,32 @@ F &lt;- S.a^2/S.b^2
 mean((F &lt; qf(0.025,n.a-1,n.b-1))|(F &gt; qf(0.975,n.a-1,n.b-1)))
         </input>
       </program>
+<pre>
+## [1] 0.27685
+</pre>
       <p>The actual significance level of the test is <m>0.27596</m>, which is much     higher than the nominal significance level of 5%.</p>
       <p>Through this experiment we may see that the <m>F</m>-test is not robust to     the divergence from the assumed Normal distribution of the measurement.     If the distribution of the measurement is skewed (the Exponential     distribution is an example of such skewed distribution) then the     application of the test to the data may produce unreliable conclusions.</p>
-    </subsection>
+    </li></ol>
+</subsection>
     
     <subsection xml:id="subsec-solution-13-3">
       <title>Exercise 13.3</title>
       
       <ol>
-        <li><p>We input the data to <c>R</c> and then compute the estimate:</p></li>
-      </ol>
-      <program language="r">
+        <li><p>We input the data to <c>R</c> and then compute the estimate:</p>
+     <program language="r">
         <input>
 s.a &lt;- 13.4
 s.b &lt;- 16.7
 s.a^2/s.b^2
         </input>
       </program>
+<pre>
+## [1] 0.6438381
+</pre>
       <p>The estimate is equal to the ratio of the sample variances     <m>s_a^2/s_b^2</m>. It obtains the value <m>0.6438381</m>. Notice that the     information regarding the sample averages and the sizes of the     sub-samples is not relevant for the point estimation of the parameter.</p>
-      <ol>
-        <li><p>We use the formula:</p></li>
-      </ol>
+      </li>
+        <li><p>We use the formula:</p>
       <p><me>\big[(s_a^2/s_b^2)/\mbox{\texttt{qf(0.975,14,14)}} , (s_a^2/s_b^2)/\mbox{\texttt{qf(0.025,14,14)}}\big]</me> in order to compute the confidence interval:</p>
       <program language="r">
         <input>
@@ -1089,10 +1204,13 @@ n.b &lt;- 15
 (s.a^2/s.b^2)/qf(0.025,n.a-1,n.b-1)
         </input>
       </program>
+<pre>
+## [1] 0.2161555
+## [1] 1.917728
+</pre>
       <p>The confidence interval we obtain is <m>[0.2161555, 1.917728]</m>.</p>
-      <ol>
-        <li><p>The estimate of the parameter is not affected by the change in the sample sizes and it is still equal to <m>0.6438381</m>. For the confidence interval we use now the formula:</p></li>
-      </ol>
+      </li>
+        <li><p>The estimate of the parameter is not affected by the change in the sample sizes and it is still equal to <m>0.6438381</m>. For the confidence interval we use now the formula:</p>
       <p><me>\big[(s_a^2/s_b^2)/\mbox{\texttt{qf(0.975,149,149)}} , (s_a^2/s_b^2)/\mbox{\texttt{qf(0.025,149,149)}}\big]\,:</me></p>
       <program language="r">
         <input>
@@ -1102,7 +1220,12 @@ n.b &lt;- 150
 (s.a^2/s.b^2)/qf(0.025,n.a-1,n.b-1)
         </input>
       </program>
+<pre>
+## [1] 0.466418
+## [1] 0.8887467
+</pre>
       <p>The corrected confidence interval is <m>[0.466418, 0.8887467]</m>.</p>
+</li></ol>
     </subsection>
     
   </section>
