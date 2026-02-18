@@ -258,6 +258,9 @@ Var &lt;- sum((Y.val-E)^2*P.val)
 1 - pbinom(40,500,0.09)
         </input>
       </program>
+<pre>
+## [1] 0.7556474
+</pre>
       </li>
         <li><p>The probability that the number of people that will develop a reaction is between 50 and 45 (inclusive) is the difference between <m>\Prob(X\leq 50)</m> and <m>\Prob(X &lt; 45) = \Prob(X \leq 44)</m>. Apply the function “<c>pbinom</c>" to get:</p>
       <program language="r">
@@ -265,15 +268,18 @@ Var &lt;- sum((Y.val-E)^2*P.val)
 pbinom(50,500,0.09) - pbinom(44,500,0.09)
         </input>
       </program>
-</li></ol>
+<pre>
+## [1] 0.3292321
+</pre>
+      </li>
+</ol>
     </subsection>
     
     <subsection xml:id="subsec-solution-5-2">
       <title>Exercise 5.2</title>
       
       <ol>
-        <li><p>The plots can be produced with the following code, which should be run one line at a time:</p></li>
-      </ol>
+        <li><p>The plots can be produced with the following code, which should be run one line at a time:</p>
       <program language="r">
         <input>
 x &lt;- 0:15
@@ -285,11 +291,12 @@ plot(x,dnbinom(x,8,0.8),type="h")
       <p>The first plot, that corresponds to     <m>X_1 \sim \mbox{Negative-Binomial}(2,0.5)</m>, fits Barplot 3. Notice that     the distribution tends to obtain smaller values and that the probability     of the value “0" is equal to the probability of the value “1".</p>
       <p>The second plot, the one that corresponds to     <m>X_2 \sim \mbox{Negative-Binomial}(4,0.5)</m>, is associated with     Barplot 1. Notice that the distribution tends to obtain larger values.     For example, the probability of the value “10" is substantially larger     than zero, where for the other two plots this is not the case.</p>
       <p>The third plot, the one that corresponds to     <m>X_3 \sim \mbox{Negative-Binomial}(8,0.8)</m>, matches Barplot 2. Observe     that this distribution tends to produce smaller probabilities for the     small values as well as for the larger values. Overall, it is more     concentrated than the other two.</p>
-      <ol>
-        <li><p>Barplot 1 corresponds to a distribution that tends to obtain larger values than the other two distributions. Consequently, the expectation of this distribution should be larger. The conclusion is that the pair <m>\Expec(X) = 4</m>, <m>\Var(X) = 8</m> should be associated with this distribution.</p></li>
-      </ol>
+      </li>
+        <li><p>Barplot 1 corresponds to a distribution that tends to obtain larger values than the other two distributions. Consequently, the expectation of this distribution should be larger. The conclusion is that the pair <m>\Expec(X) = 4</m>, <m>\Var(X) = 8</m> should be associated with this distribution.</p>
       <p>Barplot 2 describes a distribution that produce smaller probabilities     for the small values as well as for the larger values and is more     concentrated than the other two. The expectations of the two remaining     distributions are equal to each other and the variance of the pair     <m>\Expec(X) = 2</m>, <m>\Var(X) =  2.5</m> is smaller. Consequently, this is the     pair that should be matched with this box plot.</p>
       <p>This leaves only Barplot 3, that should be matched with the pair     <m>\Expec(X) = 2</m>, <m>\Var(X) =  4</m>.</p>
+</li>
+</ol>
     </subsection>
     
   </section>
@@ -301,84 +308,104 @@ plot(x,dnbinom(x,8,0.8),type="h")
       <title>Exercise 6.1</title>
       
       <ol>
-        <li><p>Let <m>X</m> be the total weight of 8 people. By the assumption, <m>X \sim \mbox{Normal}(560, 57^2)</m>. We are interested in the probability <m>\Prob(X &gt; 650)</m>. This probability is equal to the difference between 1 and the probability <m>\Prob(X \leq 650)</m>. We use the function “<c>pnorm</c>" in order to carry out the computation:</p></li>
-      </ol>
+        <li><p>Let <m>X</m> be the total weight of 8 people. By the assumption, <m>X \sim \mbox{Normal}(560, 57^2)</m>. We are interested in the probability <m>\Prob(X &gt; 650)</m>. This probability is equal to the difference between 1 and the probability <m>\Prob(X \leq 650)</m>. We use the function “<c>pnorm</c>" in order to carry out the computation:</p>
       <program language="r">
         <input>
 1 - pnorm(650,560,57)
         </input>
       </program>
+<pre>
+## [1] 0.05717406
+</pre>
       <p>We get that the probability that the total weight of 8 people exceeds     650kg is equal to 0.05717406.</p>
-      <ol>
-        <li><p>Let <m>Y</m> be the total weight of 9 people. By the assumption, <m>Y \sim \mbox{Normal}(630, 61^2)</m>. We are interested in the probability <m>\Prob(Y &gt; 650)</m>. This probability is equal to the difference between 1 and the probability <m>\Prob(Y \leq 650)</m>. We use again the function “<c>pnorm</c>" in order to carry out the computation:</p></li>
-      </ol>
+      </li>
+        <li><p>Let <m>Y</m> be the total weight of 9 people. By the assumption, <m>Y \sim \mbox{Normal}(630, 61^2)</m>. We are interested in the probability <m>\Prob(Y &gt; 650)</m>. This probability is equal to the difference between 1 and the probability <m>\Prob(Y \leq 650)</m>. We use again the function “<c>pnorm</c>" in order to carry out the computation:</p>
       <program language="r">
         <input>
 1 - pnorm(650,630,61)
         </input>
       </program>
+<pre>
+## [1] 0.3715054
+</pre>
       <p>We get that the probability that the total weight of 9 people exceeds     650kg is much higher and is equal to 0.3715054.</p>
-      <ol>
-        <li><p>Again, <m>X \sim \mbox{Normal}(560, 57^2)</m>, where <m>X</m> is the total weight of 8 people. In order to find the central region that contains 80% of the distribution we need to identify the 10%-percentile and the 90%-percentile of <m>X</m>. We use the function “<c>qnorm</c>" in the code:</p></li>
-      </ol>
+      </li>
+        <li><p>Again, <m>X \sim \mbox{Normal}(560, 57^2)</m>, where <m>X</m> is the total weight of 8 people. In order to find the central region that contains 80% of the distribution we need to identify the 10%-percentile and the 90%-percentile of <m>X</m>. We use the function “<c>qnorm</c>" in the code:</p>
       <program language="r">
         <input>
 qnorm(0.1,560,57)
 qnorm(0.9,560,57)
         </input>
       </program>
-      <p>The requested region is the interval \[486.9516, 633.0484\].</p>
-      <ol>
+<pre>
+## [1] 486.9516
+## [1] 633.0484
+</pre>
+      <p>The requested region is the interval (486.9516, 633.0484).</p>
+      </li>
         <li><p>As before, <m>Y \sim \mbox{Normal}(630, 61^2)</m>, where <m>Y</m> is the total weight of 9 people. In order to find the central region that contains 80% of the distribution we need to identify the 10%-percentile and the 90%-percentile of <m>Y</m>. The computation this time produces:</p></li>
-      </ol>
       <program language="r">
         <input>
 qnorm(0.1,630,61)
 qnorm(0.9,630,61)
         </input>
       </program>
-      <p>and the region is \[551.8254, 708.1746\].</p>
+<pre>
+## [1] 551.8254
+## [1] 708.1746
+</pre>
+      <p>and the region is (551.8254, 708.1746).</p>
+</ol>
     </subsection>
     
     <subsection xml:id="subsec-solution-6-2">
       <title>Exercise 6.2</title>
       
       <ol>
-        <li><p>The probability <m>\Prob(X &gt; 11)</m> can be   computed as the difference between 1 and the probability   <m>\Prob(X \leq 11)</m>. The latter probability can be computed with the   function “<c>pbinom</c>":</p></li>
-      </ol>
+        <li><p>The probability <m>\Prob(X &gt; 11)</m> can be   computed as the difference between 1 and the probability   <m>\Prob(X \leq 11)</m>. The latter probability can be computed with the   function “<c>pbinom</c>":</p>
       <program language="r">
         <input>
 1 - pbinom(11,27,0.32)
         </input>
       </program>
+<pre>
+## [1] 0.1203926
+</pre>
       <p>Therefore, <m>\Prob(X &gt; 11) = 0.1203926</m>.</p>
-      <ol>
-        <li><p>Refer again to the probability <m>\Prob(X &gt; 11)</m>. A formal application of the Normal approximation replaces in the computation the Binomial distribution by the Normal distribution with the same mean and variance. Since <m>\Expec(X) = n \cdot p = 27 \cdot 0.32 = 8.64</m> and <m>\Var(X) = n \cdot p \cdot (1-p) = 27 \cdot 0.32 \cdot 0.68 = 5.8752</m>. If we take <m>X \sim \mbox{Normal}(8.64,5.8752)</m> and use the function “<c>pnorm</c>" we get:</p></li>
-      </ol>
+      </li>
+        <li><p>Refer again to the probability <m>\Prob(X &gt; 11)</m>. A formal application of the Normal approximation replaces in the computation the Binomial distribution by the Normal distribution with the same mean and variance. Since <m>\Expec(X) = n \cdot p = 27 \cdot 0.32 = 8.64</m> and <m>\Var(X) = n \cdot p \cdot (1-p) = 27 \cdot 0.32 \cdot 0.68 = 5.8752</m>. If we take <m>X \sim \mbox{Normal}(8.64,5.8752)</m> and use the function “<c>pnorm</c>" we get:</p>
       <program language="r">
         <input>
 1 - pnorm(11,27*0.32,sqrt(27*0.32*0.68))
         </input>
       </program>
+<pre>
+## [1] 0.1651164
+</pre>
       <p>Therefore, the current Normal approximation proposes     <m>\Prob(X &gt; 11) \approx 0.1651164</m>.</p>
-      <ol>
-        <li><p>The continuity correction, that consider interval of range 0.5 about each value, replace <m>\Prob(X &gt; 11)</m>, that involves the values <m>\{12, 13, \ldots, 27\}</m>, by the event <m>\Prob(X &gt; 11.5)</m>. The Normal approximation uses the Normal distribution with the same mean and variance. Since <m>\Expec(X) =  8.64</m> and <m>\Var(X) = 5.8752</m>. If we take <m>X \sim \mbox{Normal}(8.64,5.8752)</m> and use the function “<c>pnorm</c>" we get:</p></li>
-      </ol>
+      </li>
+        <li><p>The continuity correction, that consider interval of range 0.5 about each value, replace <m>\Prob(X &gt; 11)</m>, that involves the values <m>\{12, 13, \ldots, 27\}</m>, by the event <m>\Prob(X &gt; 11.5)</m>. The Normal approximation uses the Normal distribution with the same mean and variance. Since <m>\Expec(X) =  8.64</m> and <m>\Var(X) = 5.8752</m>. If we take <m>X \sim \mbox{Normal}(8.64,5.8752)</m> and use the function “<c>pnorm</c>" we get:</p>
       <program language="r">
         <input>
 1 - pnorm(11.5,27*0.32,sqrt(27*0.32*0.68))
         </input>
       </program>
+<pre>
+## [1] 0.1190149
+</pre>
       <p>The Normal approximation with continuity correction proposes     <m>\Prob(X &gt; 11) \approx 0.1190149</m>.</p>
-      <ol>
-        <li><p>The Poisson approximation replaces the Binomial distribution by the Poisson distribution with the same expectation. The expectation is <m>\Expec(X) = n \cdot p = 27 \cdot 0.32 = 8.64</m>. If we take <m>X \sim \mbox{Poisson}(8.64)</m> and use the function “<c>ppois</c>" we get:</p></li>
-      </ol>
+      </li>
+        <li><p>The Poisson approximation replaces the Binomial distribution by the Poisson distribution with the same expectation. The expectation is <m>\Expec(X) = n \cdot p = 27 \cdot 0.32 = 8.64</m>. If we take <m>X \sim \mbox{Poisson}(8.64)</m> and use the function “<c>ppois</c>" we get:</p>
       <program language="r">
         <input>
 1 - ppois(11,27*0.32)
         </input>
       </program>
-      <p>Therefore, the Poisson approximation proposes <m>\Prob(X &gt; 11) \approx 0.1651164</m>.</p>
+<pre>
+## [1] 0.1635232
+</pre>
+      <p>Therefore, the Poisson approximation proposes <m>\Prob(X &gt; 11) \approx 0.1651164</m>.</p></li>
+</ol>
     </subsection>
     
   </section>
@@ -390,27 +417,29 @@ qnorm(0.9,630,61)
       <title>Exercise 7.1</title>
       
       <ol>
-        <li><p>After placing the file “<c>pop2.csv</c>" in the working directory one may produce  a data frame with the content of the file and compute the average of the  variable “<c>bmi</c>" using the code:</p></li>
-      </ol>
-      <program language="r">
-        <input>
+        <li><p>After placing the file “<c>pop2.csv</c>" in the working directory one may produce  a data frame with the content of the file and compute the average of the  variable “<c>bmi</c>" using the code:</p>
+      <input>
 pop.2 &lt;- read.csv(file="_data/pop2.csv")
 mean(pop.2$bmi)
         </input>
       </program>
+<pre>
+## [1] 24.98446
+</pre>
       <p>We obtain that the population average of the variable is equal to 24.98446.</p>
-      <ol>
-        <li><p>Applying the function “<c>sd</c>" to the sequence of population values produces the population standard deviation:</p></li>
-      </ol>
+      </li>
+        <li><p>Applying the function “<c>sd</c>" to the sequence of population values produces the population standard deviation:</p>
       <program language="r">
         <input>
 sd(pop.2$bmi)
         </input>
       </program>
+<pre>
+## [1] 4.188511
+</pre>
       <p>In turns out that the standard deviation of the measurement is 4.188511.</p>
-      <ol>
-        <li><p>In order to compute the expectation under the sampling distribution of the sample average we conduct a simulation. The simulation produces (an approximation) of the sampling distribution of the sample average. The sampling distribution is represented by the content of the sequence “<c>X.bar</c>":</p></li>
-      </ol>
+      </li>
+        <li><p>In order to compute the expectation under the sampling distribution of the sample average we conduct a simulation. The simulation produces (an approximation) of the sampling distribution of the sample average. The sampling distribution is represented by the content of the sequence “<c>X.bar</c>":</p>
       <program language="r">
         <input>
 X.bar &lt;- rep(0,10^5)
@@ -421,35 +450,47 @@ X.bar[i] &lt;- mean(X.samp)
 mean(X.bar)
         </input>
       </program>
+<pre>
+## [1] 24.98457
+</pre>
       <p>Initially, we produce a vector of zeros of the given lenght (100,000).     In each iteration of the “<c>for</c>" loop a random sample of size 150 is     selected from the population. The sample average is computed and stored     in the sequence “<c>X.bar</c>". At the end of all the iterations all the     zeros are replaced by evaluations of the sample average.</p>
       <p>The expectation of the sampling distribution of the sample average is     computed by the application of the function “<c>mean</c>" to the sequence     that represents the sampling distribution of the sample average. The     result for the current is 24.98681, which is vary similar[^3] to the     population average 24.98446.</p>
-      <ol>
-        <li><p>The standard deviation of the sample average under the sampling distribution is computed using the function “<c>sd</c>":</p></li>
-      </ol>
+      </li>
+        <li><p>The standard deviation of the sample average under the sampling distribution is computed using the function “<c>sd</c>":</p>
       <program language="r">
         <input>
 sd(X.bar)
         </input>
       </program>
+<pre>
+## [1] 0.3428704
+</pre>
       <p>The resulting standard deviation is 0.3422717. Recall that the standard     deviation of a single measurement is equal to 4.188511 and that the     sample size is <m>n=150</m>. The ratio between the standard deviation of the     measurement and the square root of 150 is     <m>4.188511/\sqrt{150} =0.3419905</m>, which is similar in value to the     standard deviation of the sample average[^4].</p>
-      <ol>
-        <li><p>The central region that contains 80% of the sampling distribution of the sample average can be identified with the aid of the function “<c>quantile</c>":</p></li>
-      </ol>
+      </li>
+        <li><p>The central region that contains 80% of the sampling distribution of the sample average can be identified with the aid of the function “<c>quantile</c>":</p>
       <program language="r">
         <input>
 quantile(X.bar,c(0.1,0.9))
         </input>
       </program>
+<pre>
+##      10%      90% 
+## 24.54655 25.42312
+</pre>
       <p>The value 24.54972 is the 10%-percentile of the sampling distribution.     To the left of this value are 10% of the distribution. The value     25.42629 is the 90%-percentile of the sampling distribution. To the     right of this value are 10% of the distribution. Between these two     values are 80% of the sampling distribution.</p>
-      <ol>
-        <li><p>The Normal approximation, which is the conclusion of the Central Limit Theorem substitutes the sampling distribution of the sample average by the Normal distribution with the same expectation and standard deviation. The percentiles are computed with the function “<c>qnorm</c>":</p></li>
-      </ol>
+      </li>
+        <li><p>The Normal approximation, which is the conclusion of the Central Limit Theorem substitutes the sampling distribution of the sample average by the Normal distribution with the same expectation and standard deviation. The percentiles are computed with the function “<c>qnorm</c>":</p>
       <program language="r">
         <input>
 qnorm(c(0.1,0.9),mean(X.bar),sd(X.bar))
         </input>
       </program>
-      <p>Observe that we used the expectation and the standard deviation of the     sample average in the function. The resulting interval is     <m>[24.54817, 25.42545]</m>, which is similar to the interval     <m>[24.54972, 25.42629]</m> which was obtained via simulations.</p>
+<pre>
+## [1] 24.54516 25.42397
+</pre>
+      <p>Observe that we used the expectation and the standard deviation of the sample average in the function. The resulting interval is     <m>[24.54817, 25.42545]</m>, which is similar to the interval     <m>[24.54972, 25.42629]</m> which was obtained via simulations.</p>
+</li>
+</ol>
     </subsection>
     
     <subsection xml:id="subsec-solution-7-2">
@@ -458,8 +499,7 @@ qnorm(c(0.1,0.9),mean(X.bar),sd(X.bar))
       <ol>
         <li><p>Denote by <m>X</m> the distance from the specified endpoint of a random hit. Observe that <m>X \sim \mbox{Uniform}(0,10)</m>. The 25 hits form a sample <m>X_1, X_2, \ldots, X_{25}</m> from this distribution and the sample average <m>\bar X</m> is the average of these random locations. The expectation of the average is equal to the expectation of a single measurement. Since <m>\Expec(X) = (a + b)/2 = (0 + 10)/2 = 5</m> we get that <m>\Expec(\bar X) = 5</m>.</p></li>
         <li><p>The variance of the sample average is equal to the variance of a single measurement, divided by the sample size. The variance of the Uniform distribution is <m>\Var(X) = (a + b)^2/12 = (10-0)^2/12 = 8.333333</m>. The standard deviation of the sample average is equal to the standard deviation of the sample average is equal to the standard deviation of a single measurement, divided by the square root of the sample size. The sample size is <m>n=25</m>. Consequently, the standard deviation of the average is <m>\sqrt{8.333333/25}=0.5773503</m>.</p></li>
-        <li><p>The left-most third of the detector is the interval to the left of 10/3. The distribution of the sample average, according to the Central Limit Theorem, is Normal. The probability of being less than 10/3 for the Normal distribution may be computed with the function “<c>pnorm</c>":</p></li>
-      </ol>
+        <li><p>The left-most third of the detector is the interval to the left of 10/3. The distribution of the sample average, according to the Central Limit Theorem, is Normal. The probability of being less than 10/3 for the Normal distribution may be computed with the function “<c>pnorm</c>":</p>
       <program language="r">
         <input>
 mu &lt;- 5
@@ -467,16 +507,22 @@ sig &lt;- sqrt(10^2/(12*25))
 pnorm(10/3,mu,sig)
         </input>
       </program>
+<pre>
+## [1] 0.001946209
+</pre>
       <p>The expectation and the standard deviation of the sample average are     used in computation of the probability. The probability is 0.001946209,     about 0.2%.</p>
-      <ol>
-        <li><p>The central region in the <m>\mbox{Normal}(\mu,\sigma^2)</m> distribution that contains 99% of the distribution is of the form <m>\mu \pm \mbox{\texttt{qnorm(0.995)}}\cdot \sigma</m>, where “<c>qnorm(0.995)</c>" is the 99.5%-percentile of the Standard Normal distribution. Therefore, <m>c =\mbox{\texttt{qnorm(0.995)}}\cdot \sigma</m>:</p></li>
-      </ol>
+      </li>
+        <li><p>The central region in the <m>\mbox{Normal}(\mu,\sigma^2)</m> distribution that contains 99% of the distribution is of the form <m>\mu \pm \mbox{\texttt{qnorm(0.995)}}\cdot \sigma</m>, where “<c>qnorm(0.995)</c>" is the 99.5%-percentile of the Standard Normal distribution. Therefore, <m>c =\mbox{\texttt{qnorm(0.995)}}\cdot \sigma</m>:</p>
       <program language="r">
         <input>
 qnorm(0.995)*sig
         </input>
       </program>
+<pre>
+## [1] 1.487156
+</pre>
       <p>We get that <m>c=1.487156</m>.</p>
+</li></ol>
     </subsection>
     
   </section>
@@ -488,39 +534,52 @@ qnorm(0.995)*sig
       <title>Exercise 9.1</title>
       
       <ol>
-        <li><p>Let us read the data into a data frame by the name “<c>magnets</c>" and apply the function “<c>summary</c>" to the data frame:</p></li>
-      </ol>
+        <li><p>Let us read the data into a data frame by the name “<c>magnets</c>" and apply the function “<c>summary</c>" to the data frame:</p>
       <program language="r">
         <input>
 magnets &lt;- read.csv("_data/magnets.csv")
 summary(magnets)
         </input>
       </program>
+<pre>
+##      score1          score2          change     active  
+##  Min.   : 7.00   Min.   : 0.00   Min.   : 0.0   "1":29  
+##  1st Qu.: 9.25   1st Qu.: 4.00   1st Qu.: 0.0   "2":21  
+##  Median :10.00   Median : 6.00   Median : 3.5           
+##  Mean   : 9.58   Mean   : 6.08   Mean   : 3.5           
+##  3rd Qu.:10.00   3rd Qu.: 9.75   3rd Qu.: 6.0           
+##  Max.   :10.00   Max.   :10.00   Max.   :10.0
+</pre>
       <p>The variable “<c>change</c>" contains the difference between the patient’s     rating before the application of the device and the rating after the     application. The sample average of this variable is reported as the     “<c>Mean</c>" for this variable and is equal to 3.5.</p>
-      <ol>
+      </li>
         <li><p>The variable “<c>active</c>" is a factor. Observe that the summary of this variable lists the two levels of the variable and the frequency of each level. Indeed, the levels are coded with numbers but, nonetheless, the variable is a factor[^12].</p></li>
-        <li><p>Based on the hint we know that the expressions “<c>change[1:29]</c>" and “<c>change[30:50]</c>" produce the values of the variable “<c>change</c>" for the patients that were treated with active magnets and by inactive placebo, respectively. We apply the function “<c>mean</c>" to these sub-sequences:</p></li>
-      </ol>
+        <li><p>Based on the hint we know that the expressions “<c>change[1:29]</c>" and “<c>change[30:50]</c>" produce the values of the variable “<c>change</c>" for the patients that were treated with active magnets and by inactive placebo, respectively. We apply the function “<c>mean</c>" to these sub-sequences:</p>
       <program language="r">
         <input>
 mean(magnets$change[1:29])
 mean(magnets$change[30:50])
         </input>
       </program>
+<pre>
+## [1] 5.241379
+## [1] 1.095238
+</pre>
       <p>The sample average for the patients that were treated with active     magnets is 5.241379 and sample average for the patients that were     treated with inactive placebo is 1.095238.</p>
-      <ol>
-        <li><p>We apply the function “<c>sd</c>" to these sub-sequences:</p></li>
-      </ol>
+      </li>
+        <li><p>We apply the function “<c>sd</c>" to these sub-sequences:</p>
       <program language="r">
         <input>
 sd(magnets$change[1:29])
 sd(magnets$change[30:50])
         </input>
       </program>
+<pre>
+## [1] 3.236568
+## [1] 1.578124
+</pre>
       <p>The sample standard deviation for the patients that were treated with     active magnets is 3.236568 and sample standard deviation for the     patients that were treated with inactive placebo is 1.578124.</p>
-      <ol>
-        <li><p>We apply the function “<c>boxplot</c>" to each sub-sequences:</p></li>
-      </ol>
+      </li>
+        <li><p>We apply the function “<c>boxplot</c>" to each sub-sequences:</p>
       <program language="r">
         <input>
 boxplot(magnets$change[1:29])
@@ -533,14 +592,20 @@ boxplot(magnets$change[30:50])
 table(magnets$change[30:50])
         </input>
       </program>
+<pre>
+## 
+##  0  1  2  3  4  5 
+## 11  5  1  1  2  1
+</pre>
       <p>One may see that a single observation obtained the value “3", another     one obtained the value “5" and 2 observations obtained the value “4", a     total of 4 outliers[^13]. Notice that the single point that is     associated with the value “4" actually represents 2 observations and not     one.</p>
-    </subsection>
+   </li></ol>
+</subsection>
     
     <subsection xml:id="subsec-solution-9-2">
       <title>Exercise 9.2</title>
       
       <ol>
-        <li><p>Let us run the following simulation:</p></li>
+        <li><p>Let us run the following simulation:</p>
       </ol>
       <program language="r">
         <input>
@@ -561,11 +626,14 @@ test.stat[i] &lt;- (X1.bar-X2.bar)/sqrt(X1.var/29 + X2.var/21)
 quantile(test.stat,c(0.025,0.975))
         </input>
       </program>
+<pre>
+##      2.5%     97.5% 
+## -2.026108  2.010135
+</pre>
       <p>Observe that each iteration of the simulation involves the generation of     two samples. One sample is of size 29 and it is generated from the     <m>\mathrm{Normal}(3.5,3^2)</m> distribution and the other sample is of size     21 and it is generated from the <m>\mathrm{Normal}(3.5,1.5^2)</m>     distribution. The sample average and the sample variance are computed     for each sample. The test statistic is computed based on these averages     and variances and it is stored in the appropriate position of the     sequence “<c>test.stat</c>".</p>
       <p>The values of the sequence “<c>test.stat</c>" at the end of all the     iterations represent the sampling distribution of the static. The     application of the function “<c>quantile</c>" to the sequence gives the     0.025-percentiles and the 0.975-percentiles of the sampling     distribution, which are -2.014838 and 2.018435. It follows that the     interval <m>[-2.014838, 2.018435]</m> contains about 95% of the sampling     distribution of the statistic.</p>
-      <ol>
-        <li><p>In order to evaluate the statistic for the given data set we apply the same steps that were used in the simulation for the computation of the statistic:</p></li>
-      </ol>
+      </li>
+        <li><p>In order to evaluate the statistic for the given data set we apply the same steps that were used in the simulation for the computation of the statistic:</p>
       <program language="r">
         <input>
 x1.bar &lt;- mean(magnets$change[1:29])
@@ -575,8 +643,12 @@ x2.var &lt;- var(magnets$change[30:50])
 (x1.bar-x2.bar)/sqrt(x1.var/29 + x2.var/21)
         </input>
       </program>
+<pre>
+## [1] 5.985601
+</pre>
       <p>In the first line we compute the sample average for the first 29     patients and in the second line we compute it for the last 21 patients.     In the third and fourth lines we do the same for the sample variances of     the two types of patients. Finally, in the fifth line we evaluate the     statistic. The computed value of the statistic turns out to be 5.985601,     a value that does not belong to the interval <m>[-2.014838, 2.018435]</m>.</p>
-    </subsection>
+   </li></ol>
+</subsection>
     
   </section>
 
@@ -587,8 +659,7 @@ x2.var &lt;- var(magnets$change[30:50])
       <title>Exercise 10.1</title>
       
       <ol>
-        <li><p>We simulate the sampling distribution of the average and the median in a sample generated from the Normal distribution. In order to do so we copy the code that was used in Subsection <xref ref="subsec-comparing-estimators"/>, replacing the object “<c>mid.range</c>" by the object “<c>X.med</c>" and using the function “<c>median</c>" in order to compute the sample median instead of the computation of the mid-range statistic:</p></li>
-      </ol>
+        <li><p>We simulate the sampling distribution of the average and the median in a sample generated from the Normal distribution. In order to do so we copy the code that was used in Subsection <xref ref="subsec-comparing-estimators"/>, replacing the object “<c>mid.range</c>" by the object “<c>X.med</c>" and using the function “<c>median</c>" in order to compute the sample median instead of the computation of the mid-range statistic:</p>
       <program language="r">
         <input>
 mu &lt;- 3
@@ -609,6 +680,10 @@ mean(X.bar)
 mean(X.med)
         </input>
       </program>
+<pre>
+## [1] 2.999309
+## [1] 2.999647
+</pre>
       <p>The expectation of the measurement, the parameter of interest is equal     to 3. Observe that expectations of the estimators are essentially equal     to the expectation[^13]. Consequently, both estimators are unbiased     estimators of the expectation of the measurement.</p>
       <p>In order to obtain the variances of the estimators we apply the function     “<c>var</c>" to the sequences that represent their sampling distributions:</p>
       <program language="r">
@@ -617,10 +692,13 @@ var(X.bar)
 var(X.med)
         </input>
       </program>
+<pre>
+## [1] 0.02013276
+## [1] 0.03113114
+</pre>
       <p>Observe that the variance of the sample average is essentially equal to     <m>0.020</m> and the variance of the sample median is essentially equal to     <m>0.0312</m>. The mean square error of an unbiased estimator is equal to its     variance. Hence, these numbers represent the mean square errors of the     estimators. It follows that the mean square error of the sample average     is less than the mean square error of the sample median in the     estimation of the expectation of a Normal measurement.</p>
-      <ol>
-        <li><p>We repeat the same steps as before for the Uniform distribution. Notice that we use the parameters <m>a=0.5</m> and <m>b=5.5</m> the same way we did in Subsection <xref ref="subsec-comparing-estimators"/>. These parameters produce an expectation <m>\Expec(X) = 3</m> and a variance <m>\Var(X) = 2.083333</m>:</p></li>
-      </ol>
+      </li>
+        <li><p>We repeat the same steps as before for the Uniform distribution. Notice that we use the parameters <m>a=0.5</m> and <m>b=5.5</m> the same way we did in Subsection <xref ref="subsec-comparing-estimators"/>. These parameters produce an expectation <m>\Expec(X) = 3</m> and a variance <m>\Var(X) = 2.083333</m>:</p>
       <program language="r">
         <input>
 a &lt;- 0.5
@@ -634,6 +712,7 @@ X.med[i] &lt;- median(X)
 }
         </input>
       </program>
+
       <p>Applying the function “<c>mean</c>" to the sequences that represent the     sampling distribution of the estimators we obtain that both estimators     are essentially unbiased[^14]:</p>
       <program language="r">
         <input>
@@ -641,34 +720,61 @@ mean(X.bar)
 mean(X.med)
         </input>
       </program>
-      <p>Compute the variances:</p>
+<pre>
+## [1] 3.00026
+## [1] 3.000789
+</pre>
+     <p>Compute the variances:</p>
       <program language="r">
         <input>
 var(X.bar)
 var(X.med)
         </input>
       </program>
+<pre>
+## [1] 0.02085226
+## [1] 0.06058587
+</pre>
       <p>Observe <m>0.021</m> is, essentially, the value of the variance of the sample     average[^15]. The variance of the sample median is essentially equal to     0.061. The variance of each of the estimators is equal to it’s mean     square error. This is the case since the estimators are unbiased.     Consequently, we again obtain that the mean square error of the sample     average is less than that of the sample median.</p>
-    </subsection>
+         </li></ol>
+ </subsection>
     
     <subsection xml:id="subsec-solution-10-2">
       <title>Exercise 10.2</title>
       
       <ol>
-        <li><p>Assuming that the file “<c>ex2.csv</c>" is saved in the working directory, one may read the content of the file into a data frame and produce a summary of the content of the data frame using the code:</p></li>
-      </ol>
+        <li><p>Assuming that the file “<c>ex2.csv</c>" is saved in the working directory, one may read the content of the file into a data frame and produce a summary of the content of the data frame using the code:</p>
       <program language="r">
         <input>
 ex2 &lt;- read.csv("_data/ex2.csv")
 summary(ex2)
         </input>
       </program>
+<pre>
+##        id              sex          age             bmi       
+##  Min.   :1024982   FEMALE:74   Min.   :26.00   Min.   :15.12  
+##  1st Qu.:3172782   MALE  :76   1st Qu.:32.00   1st Qu.:22.02  
+##  Median :5200484               Median :35.00   Median :25.16  
+##  Mean   :5463304               Mean   :35.09   Mean   :24.76  
+##  3rd Qu.:7982902               3rd Qu.:37.00   3rd Qu.:27.49  
+##  Max.   :9934175               Max.   :45.00   Max.   :35.24  
+##     systolic       diastolic         group    
+##  Min.   :100.8   Min.   : 51.98   HIGH  : 37  
+##  1st Qu.:118.1   1st Qu.: 75.02   LOW   :  3  
+##  Median :124.3   Median : 83.19   NORMAL:110  
+##  Mean   :125.3   Mean   : 82.44               
+##  3rd Qu.:132.6   3rd Qu.: 88.83               
+##  Max.   :154.5   Max.   :112.71
+</pre>
       <p>Examine the variable “<c>group</c>". Observe that the sample contains 37     subjects with high levels of blood pressure. Dividing 37 by the sample     size we get:</p>
       <program language="r">
         <input>
 37/150
         </input>
       </program>
+<pre>
+## [1] 0.2466667
+</pre>
       <p>Consequently, the sample proportion is <m>0.2466667</m>.</p>
       <p>Alternatively, we compute the sample proportion using the code:</p>
       <program language="r">
@@ -677,19 +783,20 @@ mean(ex2$group == "HIGH")
         </input>
       </program>
       <p>Notice that the expression “<c>ex2$group == HIGH</c>" produces a sequence of     length 150 with logical entries. The entry is equal to “<c>TRUE</c>" if the     equality holds and it is equal to “<c>FALSE</c>" if it dos not[^17]. When the     function “<c>mean</c>" is applied to a sequence with logical entries it     produces the relative frequeny of the <c>TRUE</c>s in the sequence. This     corresponds, in the corrent context, to the sample proportion of the     level “<c>HIGH</c>" in the variable “<c>ex2$group</c>".</p>
-      <ol>
-        <li><p>Make sure that the file “<c>pop2.csv</c>" is saved in the working directory. In order to compute the proportion in the population we read the content of the file into a data frame and compute the relative frequency of the level “<c>HIGH</c>" in the variable “<c>group</c>":</p></li>
-      </ol>
+      </li>
+        <li><p>Make sure that the file “<c>pop2.csv</c>" is saved in the working directory. In order to compute the proportion in the population we read the content of the file into a data frame and compute the relative frequency of the level “<c>HIGH</c>" in the variable “<c>group</c>":</p>
       <program language="r">
         <input>
 pop2 &lt;- read.csv("_data/pop2.csv")
 mean(pop2$group == "HIGH")
         </input>
       </program>
+<pre>
+## [1] 0.2466667
+</pre>
       <p>We get that the proporion in the population is <m>p = 0.28126</m>.</p>
-      <ol>
-        <li><p>The simulation of the sampling distribution involves a selection of a random sample of size 150 from the population and the computation of the proportion of the level “<c>HIGH</c>" in that sample. This procedure is iterated 100,000 times in order to produce an approximation of the distribution:</p></li>
-      </ol>
+      </li>
+        <li><p>The simulation of the sampling distribution involves a selection of a random sample of size 150 from the population and the computation of the proportion of the level “<c>HIGH</c>" in that sample. This procedure is iterated 100,000 times in order to produce an approximation of the distribution:</p>
       <program language="r">
         <input>
 P.hat &lt;- rep(0,10^5)
@@ -700,27 +807,35 @@ P.hat[i] &lt;- mean(X == "HIGH")
 mean(P.hat)
         </input>
       </program>
+<pre>
+## [1] 0.2811699
+</pre>
       <p>Observe that the sampling distribution is stored in the object     “<c>P.hat</c>". The function “<c>sample</c>" is used in order to sample 150     observation from the sequence “<c>pop2$group</c>". The sample is stored in     the object “<c>X</c>". The expression “<c>mean(X == HIGH)</c>" computes the     relative frequency of the level “<c>HIGH</c>" in the sequence “<c>X</c>".</p>
       <p>At the last line, after the production of the sequence “<c>P.hat</c>" is     completed, the function “<c>mean</c>" is applied to the sequence. The result     is the expected value of estimator <m>\hat P</m>, which is equal to     <m>0.2812307</m>. This expectation is essentially equal to the probability of     the event <m>p = 0.28126</m>.[^18]</p>
-      <ol>
-        <li><p>The application of the function “<c>var</c>" to the sequence “<c>P.hat</c>" produces:</p></li>
-      </ol>
+      </li>
+        <li><p>The application of the function “<c>var</c>" to the sequence “<c>P.hat</c>" produces:</p>
       <program language="r">
         <input>
 var(P.hat)
         </input>
       </program>
+<pre>
+## [1] 0.001333049
+</pre>
       <p>Hence, the variance of the estimator is (approximately) equal to     <m>0.00135</m>.</p>
-      <ol>
-        <li><p>Compute the variance according to the formula that is proposed in Section:</p></li>
-      </ol>
+      </li>
+        <li><p>Compute the variance according to the formula that is proposed in Section:</p>
       <program language="r">
         <input>
 p &lt;- mean(pop2$group == "HIGH")
 p*(1-p)/150
         </input>
       </program>
-      <p>We get that the proposed variance in Section \[sec::Estimation\_5\] is     <m>0.0013476850</m>, which is in good agreement with the value <m>0.00135</m> that     was obtained in the simulation[^19].</p>
+<pre>
+## [1] 0.001347685
+</pre>
+      <p>We get that the proposed variance in Section 5 is     <m>0.0013476850</m>, which is in good agreement with the value <m>0.00135</m> that     was obtained in the simulation[^19].</p>
+</li></ol>
     </subsection>
     
   </section>
