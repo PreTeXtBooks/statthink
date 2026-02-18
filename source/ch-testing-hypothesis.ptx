@@ -36,7 +36,19 @@
 cars &lt;- read.csv("_data/cars.csv")
 t.test(cars$price,mu=13662)
       </input></program>
-
+<pre>
+## 
+##  One Sample t-test
+## 
+## data:  cars$price
+## t = -0.81148, df = 200, p-value = 0.4181
+## alternative hypothesis: true mean is not equal to 13662
+## 95 percent confidence interval:
+##  12101.80 14312.46
+## sample estimates:
+## mean of x 
+##  13207.13
+</pre>
       <p>The data in the file "<c>cars.csv</c>" is read into a data frame that is given the name "<c>cars</c>". Afterwards, the data on prices of car types in 1985 is entered as the first argument to the function "<c>t.test</c>". The other argument is the expected value that we want to test, the current average price of cars, given in terms of 1985 Dollar value. The output of the function is reported under the title: "<c>One Sample t-test</c>".</p>
 
       <p>Let us read the report from the bottom up. The bottom part of the report describes the confidence interval and the point estimate of the expected price of a car in 1985, based on the given data. Indeed, the last line reports the sample average of the price, which is equal to 13,207.13. This number, the average of the 201 non-missing values of the variable "<c>price</c>", serves as the estimate of the expected price of a car in 1985. The 95% confidence interval of the expectation, the interval [12101.80, 14312.46], is presented on the 4th line from the bottom. This is the confidence interval for the expectation that was computed in <xref ref="subsec-cimean"/><fn>As a matter of fact, the confidence interval computed in <xref ref="subsec-cimean"/> is [12108.47, 14305.79], which is not identical to the confidence that appears in the report. The reason for the discrepancy is that we used the 0.975-percentile of the Normal distribution, 1.96, whereas the confidence interval computed here uses the 0.975-percentile of the <m>t</m>-distribution on 201-1=200 degrees of freedom. The latter is equal to 1.971896. Nonetheless, for all practical purposes, the two confidence intervals are the same.</fn>.</p>
@@ -99,12 +111,17 @@ x.bar &lt;- mean(cars$price,na.rm=TRUE)
 x.bar
 s &lt;- sd(cars$price,na.rm=TRUE)
       </input></program>
-
+<pre>
+## [1] 13207.13
+</pre>
       <p>The observed value of the sample average is <m>\bar x = 13207.13</m> and the observed value of the sample standard deviation is <m>s = 7947.066</m>. The sample size (due to having 4 missing values) is <m>n=201</m>. The formula for the computation of the test statistic in this example is <m>t = [\bar x - 13,662]/[s/\sqrt{n}]</m>. Plugging in this formula the sample size and the computed values of the sample average and standard deviation produces:</p>
 
       <program language="r"><input>
 (x.bar - 13662)/(s/sqrt(201))
       </input></program>
+<pre>
+## [1] -0.8114824
+</pre>
 
       <p>This value, after rounding up, is equal to the value "<c>t = -0.8115</c>" that is reported in the output of the function "<c>t.test</c>".</p>
 
@@ -203,7 +220,9 @@ s &lt;- sd(cars$price,na.rm=TRUE)
       <program language="r"><input>
 2*(1-pt(0.8114824,200))
       </input></program>
-
+<pre>
+## [1] 0.4180534
+</pre>
       <p>This probability is equal, after rounding up, to the probability "<c>p-value = 0.4181</c>" that is reported in the output of the function "<c>t.test</c>".</p>
 
       <p>The <m>p</m>-value is a function of the data. In the particular data set the computed value of the <m>T</m> statistic was -0.8114824. For a different data set the evaluation of the statistic would have produced a different value. As a result, the threshold that would have been used in the computation would have been different, thereby changing the numerical value of the <m>p</m>-value. Being a function of the data, we conclude that the <m>p</m>-value is a statistic.</p>
@@ -228,7 +247,14 @@ dif.mpg &lt;- cars$highway.mpg - cars$city.mpg
 summary(dif.mpg)
 plot(table(dif.mpg))
     </input></program>
-
+<pre>
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   0.000   5.000   6.000   5.532   7.000  11.000
+</pre>
+    <figure xml:id="fig-hypothesis1">
+      <image source="_figures/hypothesis1.png" width="60%">
+      </image>
+    </figure>
     <p>In the first expression we created the variable "<c>dif.mpg</c>" that contains the difference in miles-per-gallon. The difference is computed for each car type between highway driving conditions and urban driving condition. The summary of this variable is produced in the second expression. Observe that the values of the variable range between 0 and 11, with 50% of the distribution concentrated between 5 and 7. The median is 6 and the mean is 5.532. The last expression produces the bar plot of the distribution. It turns out that the variable "<c>dif.mpg</c>" obtains integer values.</p>
 
     <p>In this section we test hypotheses regarding the expected difference in fuel consumption between highway and city conditions.</p>
@@ -246,14 +272,21 @@ plot(table(dif.mpg))
     <program language="r"><input>
 summary(cars$curb.weight)
     </input></program>
-
+<pre>
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    1488    2145    2414    2556    2935    4066
+</pre>
     <p>Half of the cars in the data frame weigh less than 2,414 lb and half the cars weigh more. The average weight of a car is 2,556 lb. Let us take 2,414 as a threshold and denote cars below this weight as "light" and cars above this threshold as "heavy":</p>
 
     <program language="r"><input>
 heavy &lt;- cars$curb.weight &gt; 2414
 table(heavy)
     </input></program>
-
+<pre>
+## heavy
+## FALSE  TRUE 
+##   103   102
+</pre>
     <p>The variable "<c>heavy</c>" indicates for each car type whether its weight is above or below the threshold weight of 2,414 lb. The variable is composed of a sequence with as many components as the number of observations in the data frame "<c>cars</c>" (<m>n = 205</m>). Each component is a logical value: "<c>TRUE</c>" if the car is heavier than the threshold and "<c>FALSE</c>" if it is not. When we apply the function "<c>table</c>" to this sequence we get that 102 of the cars are heavier than the threshold and 103 are not so.</p>
 
     <p>We would like to apply the <m>t</m>-test first to the subset of all cars with weight above 2,414 lb (cars that are associated with the value "<c>TRUE</c>" in the variable "<c>heavy</c>"), and then to all cars with weights not exceeding the threshold (cars associated with value "<c>FALSE</c>"). In the past we showed that one may address components of a sequence using its position in the sequence. Here we demonstrate an alternative approach for addressing specific locations by using a sequence with logical components.</p>
@@ -271,7 +304,10 @@ d &lt;- c(13,22,0,12,6,20)
 w &gt; 5
 d[w &gt; 5]
     </input></program>
-
+<pre>
+## [1] FALSE FALSE FALSE  TRUE FALSE  TRUE
+## [1] 12 20
+</pre>
     <p>The expression "<c>w &gt; 5</c>" is a sequence of logical components, with the value "<c>TRUE</c>" at the positions where "<c>w</c>" is above the threshold and the value "<c>FALSE</c>" at the positions where "<c>w</c>" is below the threshold. We may use the sequence with logical components as an index to the sequence of the same length "<c>d</c>". The relevant expression is "<c>d[w &gt; 5]</c>". The output of this expression is the sub-sequence of elements from "<c>d</c>" that are associated with the "<c>TRUE</c>" values of the logical sequence. Indeed, "<c>TRUE</c>" values are present at the 4th and the 6th positions of the logical sequence. Consequently, the output of the expression "<c>d[w &gt; 5]</c>" contains the 4th and the 6th components of the sequence "<c>d</c>".</p>
 
     <p>The operator "<c>!</c>", when applied to a logical value, reverses the value. A "<c>TRUE</c>" becomes "<c>FALSE</c>" and a "<c>FALSE</c>" becomes "<c>TRUE</c>". Consider the code:</p>
@@ -280,7 +316,10 @@ d[w &gt; 5]
 !(w &gt; 5)
 d[!(w &gt; 5)]
     </input></program>
-
+<pre>
+## [1]  TRUE  TRUE  TRUE FALSE  TRUE FALSE
+## [1] 13 22  0  6
+</pre>
     <p>Observe that the sequence "<c>!(w &gt; 5)</c>" obtains a value of "<c>TRUE</c>" at the positions where "<c>w</c>" is less or equal to 5. Consequently, the output of the expression "<c>d[!(w &gt; 5)]</c>" are all the values of "<c>d</c>" that are associated with components of "<c>w</c>" that are less or equal to 5.</p>
 
     <p>The variable "<c>dif.mpg</c>" contains data on the difference in miles-per-gallon between highway and city driving conditions for all the car types. The sequence "<c>heavy</c>" identifies the car types with curb weight above the threshold of 2,414 lb. The components of this sequence are logical with the value "<c>TRUE</c>" at positions associated with the heavier car types and the "<c>FALSE</c>" at positions associated with the lighter car types. Observe that the output of the expression "<c>dif.mpg[heavy]</c>" is the subsequence of differences in miles-per-gallon for the cars with curb weight above the given threshold. We apply the function "<c>t.test</c>" to this expression in order to conduct the <m>t</m>-test on the expectation of the variable "<c>dif.mpg</c>" for the heavier cars:</p>
@@ -288,7 +327,19 @@ d[!(w &gt; 5)]
     <program language="r"><input>
 t.test(dif.mpg[heavy],mu=5.53)
     </input></program>
-
+<pre>
+## 
+##  One Sample t-test
+## 
+## data:  dif.mpg[heavy]
+## t = -1.5385, df = 101, p-value = 0.127
+## alternative hypothesis: true mean is not equal to 5.53
+## 95 percent confidence interval:
+##  4.900198 5.609606
+## sample estimates:
+## mean of x 
+##  5.254902
+</pre>
     <p>The target population are the heavier car types. Notice that we test the null hypothesis that expected difference among the heavier cars is equal to 5.53 against the alternative hypothesis that the expected difference among heavier cars is not equal to 5.53. The null hypothesis is not rejected at the 5% significance level since the <m>p</m>-value, which is equal to 0.1735, is larger than 0.05. Consequently, based on the data at hand, we cannot conclude that the expected difference in miles-per-gallon for heavier cars is significantly different than the average difference for all cars.</p>
 
     <p>Observe also that the estimate of the expectation, the sample mean, is equal to 5.254902, with a confidence interval of the form <m>[4.900198, 5.609606]</m>.</p>
@@ -298,7 +349,19 @@ t.test(dif.mpg[heavy],mu=5.53)
     <program language="r"><input>
 t.test(dif.mpg[!heavy],mu=5.53)
     </input></program>
-
+<pre>
+## 
+##  One Sample t-test
+## 
+## data:  dif.mpg[!heavy]
+## t = 1.9692, df = 102, p-value = 0.05164
+## alternative hypothesis: true mean is not equal to 5.53
+## 95 percent confidence interval:
+##  5.528002 6.083649
+## sample estimates:
+## mean of x 
+##  5.805825
+</pre>
     <p>Again, the null hypothesis is not rejected at the 5% significance level since a <m>p</m>-value of 0.05164 is still larger than 0.05. However, unlike the case for heavier cars where the <m>p</m>-value was undeniably larger than the threshold. In this example it is much closer to the threshold of 0.05. Consequently, we may almost conclude that the expected difference in miles-per-gallon for lighter cars is significantly different than the average difference for all car.</p>
 
     <p>Why did we not reject the null hypothesis for the heavier cars but almost did so for the lighter cars? Both tests are based on the <m>T</m> statistic, which measures the ratio between the deviation of the sample average from its expectation under the null, divided by the estimate of the standard deviation of the sample average. The value of this statistic is "<c>t = -1.5385</c>" for heavier cars and it is "<c>t = 1.9692</c>" for lighter cars, an absolute value of about 25% higher.</p>
@@ -310,7 +373,10 @@ t.test(dif.mpg[!heavy],mu=5.53)
     <program language="r"><input>
 tapply(dif.mpg,heavy,sd)
     </input></program>
-
+<pre>
+##    FALSE     TRUE 
+## 1.421531 1.805856
+</pre>
     <p>The important lesson to learn from this exercise is that simple minded notion of significance and statistical significance are not the same. A simple minded assessment of the discrepancy from the null hypothesis will put the evidence from the data on lighter cars and the evidence from the data on heavier cars on the same level. In both cases the estimated value of the expectation is the same distance away from the null value.</p>
 
     <p>However, statistical assessment conducts the analysis in the context of the sampling distribution. The deviation of the sample average from the expectation is compared to the standard deviation of the sample average. Consequently, in statistical testing of hypothesis a smaller deviation of the sample average from the expectation under the null may be more significant than a larger one if the sampling variability of the former is much smaller than the sampling variability of the later.</p>
@@ -320,7 +386,19 @@ tapply(dif.mpg,heavy,sd)
     <program language="r"><input>
 t.test(dif.mpg[!heavy],mu=5.53,alternative="greater")
     </input></program>
-
+<pre>
+## 
+##  One Sample t-test
+## 
+## data:  dif.mpg[!heavy]
+## t = 1.9692, df = 102, p-value = 0.02582
+## alternative hypothesis: true mean is greater than 5.53
+## 95 percent confidence interval:
+##  5.573323      Inf
+## sample estimates:
+## mean of x 
+##  5.805825
+</pre>
     <p>The value of the test statistic (<c>t = 1.9692</c>) is the same as for the test of the two-sided alternative and so is the number of degrees of freedom associated with the statistic (<c>df = 102</c>). However, the <m>p</m>-value is smaller (<c>p-value = 0.02582</c>), compared to the <m>p</m>-value in the test for the two-sided alternative (<c>p-value = 0.05164</c>). The <m>p</m>-value for the one-sided test is the probability under the sampling distribution that the test statistic obtains vales larger than the observed value of 1.9692. The <m>p</m>-value for the two-sided test is twice that figure since it involves also the probability of being less than the negative of the observes value.</p>
 
     <p>The estimated value of the expectation, the sample average, is unchanged. However, instead of producing a confidence interval for the expectation the report produces a <em>one-sided</em> confidence interval of the form <m>[5.573323, \infty)</m>. Such an interval corresponds to the <em>smallest</em> value that the expectation may reasonably obtain on the basis of the observed data.</p>
@@ -330,7 +408,19 @@ t.test(dif.mpg[!heavy],mu=5.53,alternative="greater")
     <program language="r"><input>
 t.test(dif.mpg[!heavy],mu=5.53,alternative="less")
     </input></program>
-
+<pre>
+## 
+##  One Sample t-test
+## 
+## data:  dif.mpg[!heavy]
+## t = 1.9692, df = 102, p-value = 0.9742
+## alternative hypothesis: true mean is less than 5.53
+## 95 percent confidence interval:
+##      -Inf 6.038328
+## sample estimates:
+## mean of x 
+##  5.805825
+</pre>
     <p>The alternative here is determined by the expression "<c>alternative=less</c>". The <m>p</m>-value is equal to 0.9742, which is the probability that the test statistic obtains values less than the observed value of 1.9692. Clearly, the null hypothesis is not rejected in this test.</p>
 
   </section>
@@ -364,7 +454,12 @@ t.test(dif.mpg[!heavy],mu=5.53,alternative="less")
 fuel &lt;- cars$fuel.type
 table(fuel,heavy)
     </input></program>
-
+<pre>
+##         heavy
+## fuel     FALSE TRUE
+##   diesel     6   14
+##   gas       97   88
+</pre>
     <p>Originally the function "<c>table</c>" was applied to a single factor and produced a sequence with the frequencies of each level of the factor. In the current application the input to the function are two factors<fn>To be more accurate, the variable "<c>heavy</c>" is not a factor but a sequence with logical components. Nonetheless, when the function "<c>table</c>" is applied to such a sequence it treats it as a factor with two levels, "<c>TRUE</c>" and "<c>FALSE</c>".</fn>. The output is a table of frequencies. Each entry to the table corresponds to the frequency of a combination of levels, one from the first input factor and the other from the second input factor. In this example we obtain that 6 cars use diesel and their curb weight was below the threshold. There are 14 cars that use diesel and their curb weight is above the threshold. Likewise, there are 97 light cars that use gas and 88 heavy cars with gas engines.</p>
 
     <p>The function "<c>prop.test</c>" produces statistical tests for proportions. The relevant information for the current application of the function is the fact that frequency of light diesel cars is 6 among a total number of 20 diesel cars. The first entry to the function is the frequency of the occurrence of the event, 6 in this case, and the second entry is the relevant sample size, the total number of diesel cars which is 20 in the current example:</p>
@@ -372,7 +467,19 @@ table(fuel,heavy)
     <program language="r"><input>
 prop.test(6,20)
     </input></program>
-
+<pre>
+## 
+##  1-sample proportions test with continuity correction
+## 
+## data:  6 out of 20, null probability 0.5
+## X-squared = 2.45, df = 1, p-value = 0.1175
+## alternative hypothesis: true p is not equal to 0.5
+## 95 percent confidence interval:
+##  0.1283909 0.5433071
+## sample estimates:
+##   p 
+## 0.3
+</pre>
     <p>The function produces a report that is printed on the screen. The title identifies the test as a one-sample test of proportions. In later chapters we will apply the same function to more complex data structures and the title will change accordingly. The title also identifies the fact that a continuity correction is used in the computation of the test statistic.</p>
 
     <p>The line under the title indicates the frequency of the event in the sample and the sample size. (In the current example, 6 diesel cars with weights below the threshold among a total of 20 diesel cars.) The probability of the event, under the null hypothesis, is described. The default value of this probability is "<c>p = 0.5</c>", which is the proper value in the current example. This default value can be modified by replacing the value 0.5 by the appropriate probability.</p>
@@ -386,7 +493,19 @@ prop.test(6,20)
     <program language="r"><input>
 prop.test(60,200)
     </input></program>
-
+<pre>
+## 
+##  1-sample proportions test with continuity correction
+## 
+## data:  60 out of 200, null probability 0.5
+## X-squared = 31.205, df = 1, p-value = 2.322e-08
+## alternative hypothesis: true p is not equal to 0.5
+## 95 percent confidence interval:
+##  0.2384423 0.3693892
+## sample estimates:
+##   p 
+## 0.3
+</pre>
     <p>The estimated value of the probability is the same as before since <m>\hat p = 60/200 = 0.3</m>. However, the <m>p</m>-value is <m>2.322 \times 10^{-8}</m>, which is way below the significance threshold of 0.05. In this scenario the null hypothesis is rejected with flying colors.</p>
 
     <p>This last example is yet another demonstration of the basic characteristic of statistical hypothesis testing. The consideration is based not on the discrepancy of the estimator of the parameter from the value of the parameter under the null. Instead, it is based on the <em>relative</em> discrepancy in comparison to the sampling variability of the estimator. When the sample size is larger the variability is smaller. Hence, the chances of rejecting the null hypothesis for the same discrepancy increases.</p>
