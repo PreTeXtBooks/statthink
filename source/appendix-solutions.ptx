@@ -418,6 +418,7 @@ qnorm(0.9,630,61)
       
       <ol>
         <li><p>After placing the file “<c>pop2.csv</c>" in the working directory one may produce  a data frame with the content of the file and compute the average of the  variable “<c>bmi</c>" using the code:</p>
+      <program>
       <input>
 pop.2 &lt;- read.csv(file="_data/pop2.csv")
 mean(pop.2$bmi)
