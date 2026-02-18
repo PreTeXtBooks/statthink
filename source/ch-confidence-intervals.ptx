@@ -108,7 +108,7 @@ p.hat + 1.96*sqrt(p.hat*(1-p.hat)/n)
 
       <me>\Prob \bigg(\bigg|\frac{\bar X - \Expec(X)}{\sqrt{\Var(X)/n}}\bigg| \leq 1.96 \bigg) \approx 0.95</me>
 
-      <p>The event, the probability of which is being described in the last display, states that the absolute value of deviation of the sample average from the expectation, divided by the standard deviation of the sample average, is no more than 1.96. In other words, the distance between the sample average and the expectation is at most 1.96 units of standard deviation. One may rewrite this event in a form that puts the expectation within an interval that is centered at the sample average:</p>
+      <p>The event, the probability of which is being described in the last display, states that the absolute value of deviation of the sample average from the expectation, divided by the standard deviation of the sample average, is no more than 1.96. In other words, the distance between the sample average and the expectation is at most 1.96 units of standard deviation. One may rewrite this event in a form that puts the expectation within an interval that is centered at the sample average<fn>Observe that <m>|\bar X - \Expec(X)|  = |\Expec(X) -\bar X |</m> and therefore <m>\big\{|\bar X - \Expec(X)| \leq 1.96 \cdot \sqrt{\Var(X)/n} \big\} =\big\{| \Expec(X)-\bar X | \leq 1.96 \cdot \sqrt{\Var(X)/n} \big\}</m>. From the definition of the absolute value we obtain that the last expression is equal to <m>\big\{-1.96 \cdot \sqrt{\Var(X)/n} \leq \Expec(X)-\bar X  \leq 1.96 \cdot \sqrt{\Var(X)/n} \big\}</m>. Moving the average to the other side of the inequality (for both inequalities involved) produces the representation <m>\big\{\bar X-1.96 \cdot \sqrt{\Var(X)/n} \leq \Expec(X)\leq \bar X + 1.96 \cdot \sqrt{\Var(X)/n} \big\}</m>.</fn>:</p>
 
       <me>\begin{aligned}
 \Big\{|\bar X - \Expec(X)| \leq 1.96 \cdot \sqrt{\Var(X)/n} \Big\} \quad \Longleftrightarrow &amp; \\
@@ -120,7 +120,7 @@ p.hat + 1.96*sqrt(p.hat*(1-p.hat)/n)
 
       <me>S^2 \approx \Var(X) \quad \Longrightarrow \quad \sqrt{\Var(X)/n} \approx S/\sqrt{n}\;,</me>
 
-      <p>where <m>S</m> is the sample standard deviation.</p>
+      <p>where <m>S</m> is the sample standard deviation<fn>The sample variance, that serves as the estimator of the variance, is computed from the sample using the formula: <m>S^2 = \sum_{i=1}^n (X_i-\bar X)^2/(n-1)</m>.</fn>.</p>
 
       <p>When the sample size is sufficiently large, so that <m>S</m> is very close to the value of the standard deviation of an observation, we obtain that the interval <m>\bar X \pm 1.96  \sqrt{\Var(X)/n}</m> and the interval <m>\bar X \pm 1.96 \cdot S/\sqrt{n}</m> almost coincide. Therefore:</p>
 
@@ -268,7 +268,7 @@ boxplot(dif.mpg ~ fuel.type, data=cars)
 
       <me>\frac{\bar X - \Expec(X)}{S/\sqrt{n}} \sim t_{(n-1)} \quad \Longrightarrow \quad \Prob \bigg(\bigg|\frac{\bar X - \Expec(X)}{S/\sqrt{n}}\bigg| \leq \mbox{\texttt{qt(0.975,n-1)}} \bigg) = 0.95\;.</me>
 
-      <p>Notice that the equation associated with the probability is not an approximation but an exact relation. Rewriting the event that is described in the probability in the form of a confidence interval, produces</p>
+      <p>Notice that the equation associated with the probability is not an approximation but an exact relation<fn>When the measurement is Normally distributed.</fn>. Rewriting the event that is described in the probability in the form of a confidence interval, produces</p>
 
       <me>\bar X \pm \mbox{\texttt{qt(0.975,n-1)}}\cdot S/ \sqrt{n}</me>
 
@@ -466,7 +466,7 @@ mean((sig^2 &gt;= var.LCL) &amp; (sig^2 &lt;= var.UCL))
 
     <p>Consider a confidence level of 95%. Recall that the structure of the confidence interval for the proportion is <m>\hat P \pm 1.96 \cdot \{\hat P (1-\hat P)/n\}^{1/2}</m>. The range of the confidence interval is <m>1.96 \cdot \{\hat P (1-\hat P)/n\}^{1/2}</m>. How large should <m>n</m> be in order to guarantee that the range is no more than 0.05?</p>
 
-    <p>The answer to this question depends on the magnitude of <m>\hat P (1-\hat P)</m>, which is a random quantity. Luckily, one may observe that the maximal value of the quadratic function <m>f(p) = p (1-p)</m> is 1/4. It follows that</p>
+    <p>The answer to this question depends on the magnitude of <m>\hat P (1-\hat P)</m>, which is a random quantity. Luckily, one may observe that the maximal value<fn>The derivative is <m>f'(p) = 1-2p</m>. Solving <m>f'(p)=0</m> produces <m>p=1/2</m> as the maximizer. Plugging this value in the function gives <m>1/4</m> as the maximal value of the function.</fn> of the quadratic function <m>f(p) = p (1-p)</m> is 1/4. It follows that</p>
 
     <me>1.96 \cdot \{\hat P (1-\hat P)/n\}^{1/2} \leq 1.96 \cdot \{0.25/n\}^{1/2} = 0.98/\sqrt{n}\;.</me>
 
@@ -493,7 +493,7 @@ mean((sig^2 &gt;= var.LCL) &amp; (sig^2 &lt;= var.UCL))
 
     <exercise>
       <statement>
-        <p>This exercise deals with an experiment that was conducted among students. The aim of the experiment was to assess the effect of rumors and prior reputation of the instructor on the evaluation of the instructor by her students. The experiment was conducted by Towler and Dipboye. This case study is taken from the <url href="http://onlinestatbook.com/rvls.html">Rice Virtual Lab in Statistics</url>. More details on this case study can be found in the case study "<url href="http://onlinestatbook.com/case_studies_rvls/instructor_reputation/index.html">Instructor Reputation and Teacher Ratings</url>" that is presented in that site.</p>
+        <p>This exercise deals with an experiment that was conducted among students. The aim of the experiment was to assess the effect of rumors and prior reputation of the instructor on the evaluation of the instructor by her students. The experiment was conducted by Towler and Dipboye<fn>Towler, A. and Dipboye, R. L. (1998). The effect of instructor reputation and need for cognition on student behavior (poster presented at American Psychological Society conference, May 1998).</fn>. This case study is taken from the <url href="http://onlinestatbook.com/rvls.html">Rice Virtual Lab in Statistics</url>. More details on this case study can be found in the case study "<url href="http://onlinestatbook.com/case_studies_rvls/instructor_reputation/index.html">Instructor Reputation and Teacher Ratings</url>" that is presented in that site.</p>
         
         <p>The experiment involved 49 students that were randomly assigned to one of two conditions. Before viewing the lecture, students were give one of two "summaries" of the instructor's prior teaching evaluations. The first type of summary, i.e. the first condition, described the lecturer as a charismatic instructor. The second type of summary (second condition) described the lecturer as a punitive instructor. We code the first condition as "<c>C</c>" and the second condition as "<c>P</c>". All subjects watched the same twenty-minute lecture given by the exact same lecturer. Following the lecture, subjects rated the lecturer.</p>
         
@@ -536,6 +536,87 @@ mean((sig^2 &gt;= var.LCL) &amp; (sig^2 &lt;= var.UCL))
 
   <section xml:id="sec-summary-11">
     <title>Summary</title>
+
+    <subsection xml:id="subsec-glossary-11">
+      <title>Glossary</title>
+      <dl>
+        <li>
+          <title>Confidence Interval</title>
+          <p>
+            An interval that is most likely to contain the population parameter.
+          </p>
+        </li>
+        <li>
+          <title>Confidence Level</title>
+          <p>
+            The sampling probability that random confidence intervals contain
+            the parameter value. The confidence level of an observed interval
+            indicates that it was constructed using a formula that produces,
+            when applied to random samples, such random intervals.
+          </p>
+        </li>
+        <li>
+          <title>t-Distribution</title>
+          <p>
+            A bell-shaped distribution that resembles the standard Normal
+            distribution but has wider tails. The distribution is characterized
+            by a positive parameter called <em>degrees of freedom</em>.
+          </p>
+        </li>
+        <li>
+          <title>Chi-Square Distribution</title>
+          <p>
+            A distribution associated with the sum of squares of Normal random
+            variable. The distribution takes only positive values and it is
+            not symmetric. The distribution is characterized by a positive
+            parameter called <em>degrees of freedom</em>.
+          </p>
+        </li>
+      </dl>
+    </subsection>
+
+    <subsection xml:id="subsec-discuss-forum-11">
+      <title>Discuss in the forum</title>
+      <p>
+        When large samples are at hand one may make fewer a priori assumptions
+        regarding the exact form of the distribution of the measurement. General
+        limit theorems, such as the Central Limit Theorem, may be used in order
+        to establish the validity of the inference under general conditions. On
+        the other hand, for small sample sizes one must make strong assumptions
+        with respect to the distribution of the observations in order to justify
+        the validity of the procedure.
+      </p>
+      <p>
+        It may be claimed that making statistical inferences when the sample
+        size is small is worthless. How can one trust conclusions that depend on
+        assumptions regarding the distribution of the observations, assumptions
+        that cannot be verified? What is your opinion?
+      </p>
+      <p>
+        For illustration consider the construction of a confidence interval.
+        Confidence interval for the expectation is implemented with a specific
+        formula. The significance level of the interval is provable when the
+        sample size is large or when the sample size is small but the
+        observations have a Normal distribution. If the sample size is small and
+        the observations have a distribution different from the Normal then the
+        nominal significance level may not coincide with the actual significance
+        level.
+      </p>
+    </subsection>
+
+    <subsection xml:id="subsec-formulas-11">
+      <title>Formulas for Confidence Intervals, 95% Confidence Level</title>
+      <ul>
+        <li><p>Expectation:
+            <m>\bar x \pm \mbox{\texttt{qnorm(0.975)}} \cdot s/\sqrt{n}</m>.</p></li>
+        <li><p>Probability:
+            <m>\hat p \pm \mbox{\texttt{qnorm(0.975)}} \cdot \sqrt{\hat p(1-\hat p)/n}</m>.</p></li>
+        <li><p>Normal Expectation:
+            <m>\bar x \pm \mbox{\texttt{qt(0.975,n-1)}} \cdot s/\sqrt{n}</m>.</p></li>
+        <li><p>Normal Variance:
+            <m>\big[\frac{n-1}{\mbox{\texttt{qchisq(0.975,n-1)}}} s^2 ,\;\frac{n-1}{\mbox{\texttt{qchisq(0.025,n-1)}}} s^2\big]</m>.</p></li>
+      </ul>
+    </subsection>
 
   </section>
 

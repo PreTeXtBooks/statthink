@@ -3,39 +3,516 @@
 <chapter xml:id="ch-testing-hypothesis" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Testing Hypotheses</title>
 
-  <introduction>
-    <p>
-      This chapter introduces the testing of statistical hypotheses.
-    </p>
-  </introduction>
-
   <section xml:id="sec-student-learning-objectives-12">
     <title>Student Learning Objectives</title>
-    <p>Content to be added.</p>
+
+    <p>Hypothesis testing emerges as a crucial component in decision making where one of two competing options needs to be selected. Statistical hypothesis testing provides formal guidelines for making such a selection. This chapter deals with the formulation of statistical hypothesis testing and describes the associated decision rules. Specifically, we consider hypothesis testing in the context of the expectation of a measurement and in the context of the probability of an event. In subsequent chapters we deal with hypothesis testing in the context of other parameters as well. By the end of this chapter, the student should be able to:</p>
+
+    <ul>
+      <li><p>Formulate statistical hypothesis for testing.</p></li>
+      <li><p>Test, based on a sample, hypotheses regarding the expectation of the measurement and the probability of an event.</p></li>
+      <li><p>Identify the limitations of statistical hypothesis testing and the danger of misinterpretation of the test's conclusions.</p></li>
+    </ul>
+
   </section>
 
-  <section xml:id="sec-hypothesis-tests">
-    <title>Hypothesis Tests</title>
-    <p>Content to be added.</p>
+  <section xml:id="sec-theory-hypothesis-testing">
+    <title>The Theory of Hypothesis Testing</title>
+
+    <p>Statistical inference is used in order to detect and characterize meaningful phenomena that may be hidden in an environment contaminated by random noise. Hypothesis testing is an important step, typically the first, in the process of making inferences. In this step one tries to answer the question: "Is there a phenomena at all?". The basic approach is to determine whether the observed data can or cannot be reasonably explained by a model of randomness that does not involve the phenomena.</p>
+
+    <p>In this section we introduce the structure and characteristics of statistical hypothesis testing. We start with an informal application of a statistical test and proceed with formal definitions. In the next section we discuss in more detail the testing of hypotheses on the expectation of a measurement and the testing of hypotheses on the probability of an event. More examples are considered in subsequent chapters.</p>
+
+    <subsection xml:id="subsec-example-hypothesis-testing">
+      <title>An Example of Hypothesis Testing</title>
+
+      <p>The variable "<c>price</c>" in the file "<c>cars.csv</c>" contains data on the prices of different types of cars that were sold in the United States during 1985. The average price of a car back then — the average of the variable "<c>price</c>" — was $13,207. One may be interested in the question: Do Americans pay today for cars a different price than what they used to pay in the 80's? Has the price of cars changed significantly since 1985?</p>
+
+      <p>The average price of a car in the United States in 2009 was $27,958<fn>Source: "<url href="http://wiki.answers.com/Q/Average_price_of_a_car_in_2009">http://wiki.answers.com/Q/Average_price_of_a_car_in_2009</url>".</fn>. Clearly, this figure is higher than $13,207. However, in order to produce a fair answer to the question we have to take into account that, due to inflation, the prices of all products went up during these years. A more meaningful comparison will involve the current prices of cars in terms of 1985 Dollars. Indeed, if we take into account inflation then we get that, on the average, the cost of today's cars corresponds to an average price of $13,662 in 1985 values<fn>Source: "<url href="http://www.westegg.com/inflation/">http://www.westegg.com/inflation/</url>". The interpretation of adjusting prices to inflation is that our comparison will correspond to changes in the price of cars, relative to other items that enter into the computation of the Consumer Price Index.</fn>. This price is still higher than the prices in the 1985 but not as much. The question we are asking is: "Is the difference between $13,207 and $13,662 significant or is it not so?".</p>
+
+      <p>In order to give a statistical answer to this question we carry out a statistical test. The specific test is conducted with the aid of the function "<c>t.test</c>". Later we will discuss in more details some of the arguments that may be used in this function. Currently, we simply apply it to the data stored in the variable "<c>price</c>" to test that the expected price is different than the $13,662, the average price of a car in 2009, adjusted for inflation:</p>
+
+      <program language="r"><input>
+cars &lt;- read.csv("_data/cars.csv")
+t.test(cars$price,mu=13662)
+      </input></program>
+
+      <p>The data in the file "<c>cars.csv</c>" is read into a data frame that is given the name "<c>cars</c>". Afterwards, the data on prices of car types in 1985 is entered as the first argument to the function "<c>t.test</c>". The other argument is the expected value that we want to test, the current average price of cars, given in terms of 1985 Dollar value. The output of the function is reported under the title: "<c>One Sample t-test</c>".</p>
+
+      <p>Let us read the report from the bottom up. The bottom part of the report describes the confidence interval and the point estimate of the expected price of a car in 1985, based on the given data. Indeed, the last line reports the sample average of the price, which is equal to 13,207.13. This number, the average of the 201 non-missing values of the variable "<c>price</c>", serves as the estimate of the expected price of a car in 1985. The 95% confidence interval of the expectation, the interval [12101.80, 14312.46], is presented on the 4th line from the bottom. This is the confidence interval for the expectation that was computed in <xref ref="subsec-cimean"/><fn>As a matter of fact, the confidence interval computed in <xref ref="subsec-cimean"/> is [12108.47, 14305.79], which is not identical to the confidence that appears in the report. The reason for the discrepancy is that we used the 0.975-percentile of the Normal distribution, 1.96, whereas the confidence interval computed here uses the 0.975-percentile of the <m>t</m>-distribution on 201-1=200 degrees of freedom. The latter is equal to 1.971896. Nonetheless, for all practical purposes, the two confidence intervals are the same.</fn>.</p>
+
+      <p>The information relevant to conducting the statistical test itself is given in the upper part of the report. Specifically, it is reported that the data in "<c>cars$price</c>" is used in order to carry out the test. Based on this data a test statistic is computed and obtains the value of "<c>t = -0.8115</c>". This statistic is associated with the <m>t</m>-distribution with "<c>df = 200</c>" degrees of freedom. The last quantity that is being reported is denoted the <em><m>p</m>-value</em> and it obtains the value "<c>p-value = 0.4181</c>". The test may be carried out with the aid of the value of the <m>t</m> statistic or, more directly, using the <m>p</m>-value. Currently we will use the <m>p</m>-value.</p>
+
+      <p>The test itself examines the hypothesis that the expected price of a car in 1985 was equal to $13,662, the average price of a car in 2009, given in 1985 values. This hypothesis is called the null hypothesis. The alternative hypothesis is that the expected price of a car in 1985 was not equal to that figure. The specification of the alternative hypothesis is reported on the third line of the output of the function "<c>t.test</c>".</p>
+
+      <p>One may decide between the two hypothesis on the basis of the size of the <m>p</m>-value. The rule of thumb is to reject the null hypothesis, and thus accept the alternative hypothesis, if the <m>p</m>-value is less than 0.05. In the current example the <m>p</m>-value is equal 0.4181 and is larger than 0.05. Consequently, we may conclude that the expected price of a car in 1985 was not significantly different than the current price of a car.</p>
+
+      <p>In the rest of this section we give a more rigorous explanation of the theory and practice of statistical hypothesis testing.</p>
+
+    </subsection>
+
+    <subsection xml:id="subsec-structure-statistical-test">
+      <title>The Structure of a Statistical Test of Hypotheses</title>
+
+      <p>The initial step in statistical inference in general, and in statistical hypothesis testing in particular, is the formulation of the statistical model and the identification of the parameter/s that should be investigated. In the current situation the statistical model may correspond to the assumption that the data in the variable "<c>price</c>" are an instance of a <em>random</em> sample (of size <m>n=201</m>). The parameter that we want to investigate is the expectation of the measurement that produced the sample. The variance of the measurement is also relevant for the investigation.</p>
+
+      <p>After the statistical model has been set, one may split the process of testing a statistical hypothesis into three steps: (i) formulation of the hypotheses, (ii) specification of the test, and (iii) reaching the final conclusion. The first two steps are carried out on the basis of the probabilistic characteristics of the statistical model and in the context of the sampling distribution. In principal, the first two steps may be conducted in the planning stage prior to the collection of the observations. Only the third step involves the actual data. In the example that was considered in the previous subsection the third step was applied to the data in the variable "<c>price</c>" using the function "<c>t.test</c>".</p>
+
+      <p><em>(i) Formulating the hypotheses</em>: A statistical model involves a parameter that is the target of the investigation. In principle, this parameter may obtain any value within a range of possible values. The formulation of the hypothesis corresponds to splitting the range of values into two sub-collections: a sub-collection that emerges in response to the presence of the phenomena and a sub-collection that emerges in response to the situation when the phenomena is absent. The sub-collection of parameter values where the phenomena is absent is called the <em>null hypothesis</em> and is marked as "<m>H_0</m>". The other sub-collection, the one reflecting the presence of the phenomena, is denoted the <em>alternative hypothesis</em> and is marked "<m>H_1</m>".</p>
+
+      <p>For example, consider the price of cars. Assume that the phenomena one wishes to investigate is the change in the relative price of a car in the 80's as compared to prices today. The parameter of interest is the expected price of cars back then, which we denote by <m>\Expec(X)</m>. The formulation of the statement that the expected price of cars has changed is "<m>\Expec(X) \not = 13,662</m>". This statement corresponds to the <em>presence</em> of a phenomena, to a change, and is customarily defined as the alternative hypothesis. On the other hand, the situation "<m>\Expec(X) = 13,662</m>" corresponds to not having any change in the price of cars. Hence, this situation corresponds to the <em>absence</em> of the phenomena and is denoted the null hypothesis. In summary, in order to investigate the change in the relative price of cars we my consider the null hypothesis "<m>H_0:\Expec(X) = 13,662</m>" and test it against the alternative hypothesis "<m>H_1: \Expec(X)\not = 13,662</m>".</p>
+
+      <p>A variation in the formulation of the phenomena can change the definition of the null and alternative hypotheses. For example, if the intention is to investigate the <em>rise</em> in the price of cars then the phenomena will correspond to the expected price in 1985 being less than $13,662. Accordingly, the alternative hypothesis should be defined as <m>H_1: \Expec(X) &lt; 13,662</m>, with the null hypothesis defined as <m>H_0: \Expec(X) \geq 13,662</m>. Observe that in this case an expected price larger than $13,662 relates to the phenomena of rising (relative) prices <em>not</em> taking place.</p>
+
+      <p>On the other hand, if one would wants to investigate a <em>decrease</em> in the price then one should define the alternative hypothesis to be <m>H_1: \Expec(X) &gt; 13,662</m>, with the null hypothesis being <m>H_0: \Expec(X) \leq 13,662</m>.</p>
+
+      <p>The type of alternative that was considered in the example, <m>H_1: \Expec(X) \not = 13,622</m> is called a <em>two-sided</em> alternative. The other two types of alternative hypotheses that were considered thereafter, <m>H_1: \Expec(X) &lt; 13,662</m> and <m>H_1: \Expec(X) &gt; 13,662</m>, are both called <em>one-sided</em> alternatives.</p>
+
+      <p>In summary, the formulation of the hypothesis is a reflection of the phenomena one wishes to examine. The setting associated with the presence of the phenomena is denoted the alternative hypothesis and the complimentary setting, the setting where the phenomena is absent, is denoted the null hypothesis.</p>
+
+      <p><em>(ii) Specifying the test:</em> The second step in hypothesis testing involves the selection of the decision rule, i.e. the statistical test, to be used in order to decide between the two hypotheses. The decision rule is composed of a statistic and a subset of values of the statistic that correspond to the rejection of the null hypothesis. The statistic is called the <em>test statistic</em> and the subset of values is called the <em>rejection region</em>. The decision is to reject the null hypothesis (and consequently choose the alternative hypothesis) if the test statistic falls in the rejection region. Otherwise, if the test statistic does not fall in the rejection region then the null hypothesis is selected.</p>
+
+      <p>Return to the example in which we test between <m>H_0:\Expec(X) = 13,662</m> and <m>H_1:\Expec(X) \not= 13,662</m>. One may compute the statistic:</p>
+
+      <me>T = \frac{\bar X - 13,662}{S/\sqrt{n}}\;,</me>
+
+      <p>where <m>\bar X</m> is the sample average (of the variable "<c>price</c>"), <m>S</m> is the sample standard deviation, and <m>n</m> is the sample size (<m>n = 201</m> in the current example).</p>
+
+      <p>The sample average <m>\bar X</m> is an estimator of the expected price of the car. In principle, the statistic <m>T</m> measures the discrepancy between the estimated value of the expectation (<m>\bar X</m>) and the expected value under the null hypothesis (<m>\Expec(X) = 13,662</m>). This discrepancy is measured in units of the (estimated) standard deviation of the sample average<fn>If the variance of the measurement <m>\Var(X)</m> was known one could have use <m>Z = (\bar X - 13,662)/\sqrt{\Var{X}/n}</m> as a test statistic. This statistic corresponds to the discrepancy of the sample average from the null expectation in units of its standard deviation, i.e. the <m>z</m>-value of the sample average. Since the variance of the observation is unknown, we use an estimator of the variance (<m>S^2</m>) instead.</fn>.</p>
+
+      <p>If the null hypothesis <m>H_0:\Expec(X) = 13,662</m> is true then the sampling distribution of the sample average <m>\bar X</m> should be concentrated about the value 13,662. Values of the sample average much larger or much smaller than this value may serve as evidence against the null hypothesis.</p>
+
+      <p>In reflection, if the null hypothesis holds true then the values of the sampling distribution of the statistic <m>T</m> should tend to be in the vicinity of 0. Values with a relative small absolute value are consistent with the null hypothesis. On the other hand, extremely positive or extremely negative values of the statistic indicate that the null hypothesis is probably false.</p>
+
+      <p>It is natural to set a value <m>c</m> and to reject the null hypothesis whenever the absolute value of the statistic <m>T</m> is larger than <m>c</m>. The resulting rejection region is of the form <m>\{|T| &gt; c\}</m>. The rule of thumb, again, is to take threshold <m>c</m> to be equal the 0.975-percentile of the <m>t</m>-distribution on <m>n-1</m> degrees of freedom, where <m>n</m> is the sample size. In the current example, the sample size is <m>n=201</m> and the percentile of the <m>t</m>-distribution is <c>qt(0.975,200)</c> = 1.971896. Consequently, the subset <m>\{|T| &gt; 1.971896\}</m> is the rejection region of the test.</p>
+
+      <p>A change in the hypotheses that are being tested may lead to a change in the test statistic and/or the rejection region. For example, for testing <m>H_0: \Expec(X) \geq 13,662</m> versus <m>H_1: \Expec(X) &lt; 13,662</m> one may still use the same test statistic <m>T</m> as before. However, only very negative values of the statistic are inconsistent with the null hypothesis. It turns out that the rejection region in this case is of the form <m>\{T &lt; -1.652508\}</m>, where <c>qt(0.05,200)</c> = -1.652508 is the 0.05-percentile of the <m>t</m>-distribution on 200 degrees of freedom. On the other hand, the rejection region for testing between <m>H_0: \Expec(X) \leq 13,662</m> and <m>H_1: \Expec(X) &gt; 13,662</m> is <m>\{T &gt; 1.652508\}</m>. In this case, <c>qt(0.95,200)</c> = 1.652508 is the 0.95-percentile of the <m>t</m>-distribution on 200 degrees of freedom.</p>
+
+      <p>Selecting the test statistic and deciding what rejection region to use specifies the statistical test and completes the second step.</p>
+
+      <p><em>(iii) Reaching a conclusion:</em> After the stage is set, all that is left is to apply the test to the observed data. This is done by computing the observed value of the test statistic and checking whether or not the observed value belongs to the rejection region. If it does belong to the rejection region then the decision is to reject the null hypothesis. Otherwise, if the statistic does not belong to the rejection region, then the decision is to accept the null hypothesis.</p>
+
+      <p>Return to the example of testing the price of car types. The observed value of the <m>T</m> statistic is part of the output of the application of the function "<c>t.test</c>" to the data. The value is "<c>t = -0.8115</c>". As an exercise, let us recompute directly from the data the value of the <m>T</m> statistic:</p>
+
+      <program language="r"><input>
+x.bar &lt;- mean(cars$price,na.rm=TRUE)
+x.bar
+s &lt;- sd(cars$price,na.rm=TRUE)
+      </input></program>
+
+      <p>The observed value of the sample average is <m>\bar x = 13207.13</m> and the observed value of the sample standard deviation is <m>s = 7947.066</m>. The sample size (due to having 4 missing values) is <m>n=201</m>. The formula for the computation of the test statistic in this example is <m>t = [\bar x - 13,662]/[s/\sqrt{n}]</m>. Plugging in this formula the sample size and the computed values of the sample average and standard deviation produces:</p>
+
+      <program language="r"><input>
+(x.bar - 13662)/(s/sqrt(201))
+      </input></program>
+
+      <p>This value, after rounding up, is equal to the value "<c>t = -0.8115</c>" that is reported in the output of the function "<c>t.test</c>".</p>
+
+      <p>The critical threshold for the absolute value of the <m>T</m> statistic on <m>201-1 = 200</m> degrees of freedom is <c>qt(0.975,200)</c> = 1.971896. Since the absolute observed value (<m>|t| = 0.8114824</m>) is less then the threshold we get that the value of the statistic does not belong to the rejection region (which is composed of absolute values larger than the threshold). Consequently, we accept the null hypothesis. This null hypothesis declares that the expected price of a car was equal to the current expected price (after adjusting for the change in Consumer Price Index)<fn>Previously, we carried out the same test using the <m>p</m>-value. The computed <m>p</m>-value in this example is 0.4181. The null hypothesis was accepted since this value is larger than 0.05. As a matter of fact, the test that uses the <m>T</m> statistic as a test statistic and reject the null hypothesis for absolute values larger than <c>qt(0.975,n-1)</c> is equivalent to the test that uses the <m>p</m>-value and rejects the null hypothesis for <m>p</m>-values less than 0.05. Below we discuss the computation of the <m>p</m>-value.</fn>.</p>
+
+    </subsection>
+
+    <subsection xml:id="subsec-error-types-probabilities">
+      <title>Error Types and Error Probabilities</title>
+
+      <p>The <m>T</m> statistic was proposed for testing a change in the price of a car. This statistic measures the discrepancy between the sample average price of a car and the expected value of the sample average, where the expectation is computed under the null hypothesis. The structure of the rejection region of the test is <m>\{|T| &gt; c\}</m>, where <m>c</m> is an appropriate threshold. In the current example the value of the threshold <m>c</m> was set to be equal to <c>qt(0.975,200)</c> = 1.971896. In general, the specification of the threshold <m>c</m> depends on the error probabilities that are associated with the test. In this section we describe these error probabilities.</p>
+
+      <p>The process of making decisions may involve errors. In the case of hypothesis testing one may specify two types of error. On the one hand, the case may be that the null hypothesis is correct (in the example, <m>\Expec(X) = 13,662</m>). However, the data is such that the null hypothesis is rejected (here, <m>|T| &gt; 1.971896</m>). This error is called a <em>Type I</em> error.</p>
+
+      <p>A different type of error occurs when the alternative hypothesis holds (<m>\Expec(X) \not= 13,662</m>) but the null hypothesis is not rejected (<m>|T| \leq 1.971896</m>). This other type of error is called <em>Type II</em> error. A summary of the types of errors can be found in Table <xref ref="tab-Testing1"/>:</p>
+
+      <table xml:id="tab-Testing1">
+        <title>Error Types</title>
+        <tabular>
+          <row bottom="minor">
+            <cell></cell>
+            <cell><m>H_0: \Expec(X) = 13,662</m></cell>
+            <cell><m>H_1:\Expec(X) \not= 13,662</m></cell>
+          </row>
+          <row>
+            <cell>Accept <m>H_0</m>: <m>|T| \leq 1.971896</m></cell>
+            <cell></cell>
+            <cell>Type II Error</cell>
+          </row>
+          <row>
+            <cell>Reject <m>H_0</m>: <m>|T| &gt; 1.971896</m></cell>
+            <cell>Type I Error</cell>
+            <cell></cell>
+          </row>
+        </tabular>
+      </table>
+
+      <p>In statistical testing of hypothesis the two types of error are not treated symmetrically. Rather, making a Type I error is considered more severe than making a Type II error. Consequently, the test's decision rule is designed so as to assure an acceptable probability of making a Type I error. Reducing the probability of a Type II error is desirable, but is of secondary importance.</p>
+
+      <p>Indeed, in the example that deals with the price of car types the threshold was set as high as <c>qt(0.975,200)</c> = 1.971896 in order to reject the null hypothesis. It is not sufficient that the sample average is not equal to 13,662 (corresponding to a threshold of 0), but it has to be significantly different from the expectation under the null hypothesis, the distance between the sample average and the null expectation should be relatively large, in order to exclude <m>H_0</m> as an option.</p>
+
+      <p>The significance level of the evidence for rejecting the null hypothesis is based on the probability of the Type I error. The probabilities associated with the different types of error are presented in Table <xref ref="tab-Testing2"/>:</p>
+
+      <table xml:id="tab-Testing2">
+        <title>Error Probabilities</title>
+        <tabular>
+          <row bottom="minor">
+            <cell></cell>
+            <cell><m>H_0: \Expec(X) = 13,662</m></cell>
+            <cell><m>H_1:\Expec(X) \not= 13,662</m></cell>
+          </row>
+          <row>
+            <cell><m>\Prob(|T| \leq c)</m></cell>
+            <cell></cell>
+            <cell>Prob. of Type II Error</cell>
+          </row>
+          <row>
+            <cell><m>\Prob(|T| &gt; c)</m></cell>
+            <cell>Significance Level</cell>
+            <cell>Statistical Power</cell>
+          </row>
+        </tabular>
+      </table>
+
+      <p>Observe that the probability of a Type I error is called the significance level. The significance level is set at some pre-specified level such as 5% or 1%, with 5% being the most widely used level. In particular, setting the threshold in the example to be equal to <c>qt(0.975,200)</c> = 1.971896 produces a test with a 5% significance level.</p>
+
+      <p>This lack of symmetry between the two hypothesis proposes another interpretation of the difference between the hypothesis. According to this interpretation the null hypothesis is the one in which the cost of making an error is greater. Thus, when one separates the collection of parameter values into two subsets then the subset that is associated with a more severe error is designated as the null hypothesis and the other subset becomes the alternative.</p>
+
+      <p>For example, a new drug must pass a sequence of clinical trials before it is approved for distribution. In these trials one may want to test whether the new drug produces beneficial effect in comparison to the current treatment. Naturally, the null hypothesis in this case would be that the new drug is no better than the current treatment and the alternative hypothesis would be that it is better. Only if the clinical trials demonstrates a significant beneficiary effect of the new drug would it be released for marketing.</p>
+
+      <p>In scientific research, in general, the currently accepted theory, the conservative explanation, is designated as the null hypothesis. A claim for novelty in the form of an alternative explanation requires strong evidence in order for it to be accepted and be favored over the traditional explanation. Hence, the novel explanation is designated as the alternative hypothesis. It replaces the current theory only if the empirical data clearly supports its. The test statistic is a summary of the empirical data. The rejection region corresponds to values that are unlikely to be observed according to the current theory. Obtaining a value in the rejection region is an indication that the current theory is probably not adequate and should be replaced by an explanation that is more consistent with the empirical evidence.</p>
+
+      <p>The second type of error probability in <xref ref="tab-Testing2"/> is the probability of a Type II error. Instead of dealing directly with this probability the tradition is to consider the complementary probability that corresponds to the probability of <em>not</em> making a Type II error. This complementary probability is called the <em>statistical power</em>:</p>
+
+      <me>\mbox{Statistical Power} = 1 - \mbox{Probability of Type II Error}</me>
+
+      <p>The statistical power is the probability of rejecting the null hypothesis when the state of nature is the alternative hypothesis. (In comparison, the significance level is the probability of rejecting the null hypothesis when the state of nature is the null hypothesis.) When comparing two decision rules for testing hypothesis, both having the same significance level, the one that possesses a higher statistical power should be favored.</p>
+
+    </subsection>
+
+    <subsection xml:id="subsec-p-values">
+      <title><m>p</m>-Values</title>
+
+      <p>The <m>p</m>-value is another test statistic. It is associated with a specific test statistic and a structure of the rejection region. The <m>p</m>-value is equal to the significance level of the test in which the observed value of the statistic serves as the threshold. In the current example, where the <m>T</m> is the underlying test statistic and the structure of the rejection region is of the form <m>\{|T| &gt; c\}</m> then the <m>p</m>-value is equal to the probability of rejecting the null hypothesis in the case where the threshold <m>c</m> is equal to the observed absolute value of the <m>T</m> statistic. In other words:</p>
+
+      <me>\mbox{$p$-value} = \Prob(|T| &gt; |t|) = \Prob(|T| &gt; |-0.8114824|)= \Prob(|T| &gt; 0.8114824)\;,</me>
+
+      <p>where <m>t=-0.8114824</m> is the observed value of the <m>T</m> statistic and the computation of the probability is conducted under the null hypothesis.</p>
+
+      <p>Specifically, under the null hypothesis <m>H_0: \Expec(X) = 13,662</m> we get that the distribution of the statistic <m>T = [\bar X - 13,662]/[S/\sqrt{n}]</m> is the <m>t</m>-distribution on <m>n-1 = 200</m> degrees of freedom. The probability of the event <m>\{|T| &gt; 0.8114824\}</m> corresponds to the sum of the probabilities of both tails of the distribution. By the symmetry of the <m>t</m>-distribution this equals twice the probability of the upper tail:</p>
+
+      <me>\Prob(|T| &gt; 0.8114824) = 2\cdot \Prob(T&gt; 0.8114824) = 2\cdot [1-\Prob(|T| \leq 0.8114824)]\;.</me>
+
+      <p>When we compute this probability in <c>R</c> we get:</p>
+
+      <program language="r"><input>
+2*(1-pt(0.8114824,200))
+      </input></program>
+
+      <p>This probability is equal, after rounding up, to the probability "<c>p-value = 0.4181</c>" that is reported in the output of the function "<c>t.test</c>".</p>
+
+      <p>The <m>p</m>-value is a function of the data. In the particular data set the computed value of the <m>T</m> statistic was -0.8114824. For a different data set the evaluation of the statistic would have produced a different value. As a result, the threshold that would have been used in the computation would have been different, thereby changing the numerical value of the <m>p</m>-value. Being a function of the data, we conclude that the <m>p</m>-value is a statistic.</p>
+
+      <p>The <m>p</m>-value is used as a test statistic by comparing its value to the pre-defined significance level. If the significance level is 1% then the null hypothesis is rejected for <m>p</m>-values less that 0.01. Likewise, if the significance level is set at the 5% level then the null hypothesis is rejected for <m>p</m>-values less than 0.05.</p>
+
+      <p>The statistical test that is based directly on the <m>T</m> statistic and the statistical test that is based on the <m>p</m>-value are equivalent to each other. The one rejects the null hypothesis if, and only if, the other does so. The advantage of using the <m>p</m>-value as the test statistic is that no further probabilistic computations are required. The <m>p</m>-value is compared directly to the significance level we seek. For the test that examines the <m>T</m> statistic we still need to identify the threshold associated with the given significance level.</p>
+
+      <p>In the next 2 sections we extend the discussion of the <m>t</m>-test and give further examples to the use of the function "<c>t.test</c>". We also deal with tests on probabilities of events and introduce the function "<c>prop.test</c>" for conducting such tests.</p>
+
+    </subsection>
+
   </section>
 
-  <section xml:id="sec-test-procedure">
-    <title>The Structure of Hypothesis Tests</title>
-    <p>Content to be added.</p>
+  <section xml:id="sec-testing-expectation">
+    <title>Testing Hypothesis on Expectation</title>
+
+    <p>Let us consider the variable "<c>dif.mpg</c>" that contains the difference in fuel consumption between highway and city conditions. This variable was considered in Chapter <xref ref="ch-confidence-intervals"/>. Examine the distribution of this variable:</p>
+
+    <program language="r"><input>
+dif.mpg &lt;- cars$highway.mpg - cars$city.mpg
+summary(dif.mpg)
+plot(table(dif.mpg))
+    </input></program>
+
+    <p>In the first expression we created the variable "<c>dif.mpg</c>" that contains the difference in miles-per-gallon. The difference is computed for each car type between highway driving conditions and urban driving condition. The summary of this variable is produced in the second expression. Observe that the values of the variable range between 0 and 11, with 50% of the distribution concentrated between 5 and 7. The median is 6 and the mean is 5.532. The last expression produces the bar plot of the distribution. It turns out that the variable "<c>dif.mpg</c>" obtains integer values.</p>
+
+    <p>In this section we test hypotheses regarding the expected difference in fuel consumption between highway and city conditions.</p>
+
+    <p>Energy is required in order to move cars. For heavier cars more energy is required. Consequently, one may conjecture that milage per gallon for heavier cars is less than the milage per gallon for lighter cars.</p>
+
+    <p>The relation between the weight of the car and the difference between the milage-per-gallon in highway and city driving conditions is less clear. On the one hand, urban traffic involves frequent changes in speed in comparison to highway conditions. One may presume that this change in speed is a cause for reduced efficiency in fuel consumption. If this is the case then one may predict that heavier cars, which require more energy for acceleration, will be associated with a bigger difference between highway and city driving conditions in comparison to lighter cars.</p>
+
+    <p>One the other hand, heavier cars do less miles per gallon overall. The difference between two smaller numbers (the milage per gallon in highway and in city conditions for heavier cars) may tend to be smaller than the difference between two larger numbers (the milage per gallon in highway and in city conditions for lighter cars). If this is the case then one may predict that heavier cars will be associated with a smaller difference between highway and city driving conditions in comparison to lighter cars.</p>
+
+    <p>The average difference between highway and city conditions is approximately 5.53 for all cars. Divide the cars into two groups of equal size: One group is composed of the heavier cars and the other group is composed of the lighter cars. We will examine the relation between the weight of the car and difference in miles per gallon between the two driving conditions by testing hypotheses separately for each weight group<fn>In the next chapters we will consider more direct ways for comparing the effect of one variable (<c>curb.weight</c> in this example) on the distribution of another variable (<c>dif.mpg</c> in this example). Here, instead, we investigate the effect indirectly by the investigation of hypotheses on the expectation of the variable <c>dif.mpg</c> separately for heavier cars and for lighter cars.</fn>. For each such group we start by testing the two-sided hypothesis <m>H_1:\Expec(X) \not = 5.53</m>, where <m>X</m> is the difference between highway and city miles-per-gallon in cars that belong to the given weight group. After carrying the test for the two-sided alternative we will discuss results of the application of tests for one-sided alternatives.</p>
+
+    <p>We start by the definition of the weight groups. The variable "<c>curb.weight</c>" measures the weight of the cars in the data frame "<c>cars</c>". Let us examine the summary of the content of this variable:</p>
+
+    <program language="r"><input>
+summary(cars$curb.weight)
+    </input></program>
+
+    <p>Half of the cars in the data frame weigh less than 2,414 lb and half the cars weigh more. The average weight of a car is 2,556 lb. Let us take 2,414 as a threshold and denote cars below this weight as "light" and cars above this threshold as "heavy":</p>
+
+    <program language="r"><input>
+heavy &lt;- cars$curb.weight &gt; 2414
+table(heavy)
+    </input></program>
+
+    <p>The variable "<c>heavy</c>" indicates for each car type whether its weight is above or below the threshold weight of 2,414 lb. The variable is composed of a sequence with as many components as the number of observations in the data frame "<c>cars</c>" (<m>n = 205</m>). Each component is a logical value: "<c>TRUE</c>" if the car is heavier than the threshold and "<c>FALSE</c>" if it is not. When we apply the function "<c>table</c>" to this sequence we get that 102 of the cars are heavier than the threshold and 103 are not so.</p>
+
+    <p>We would like to apply the <m>t</m>-test first to the subset of all cars with weight above 2,414 lb (cars that are associated with the value "<c>TRUE</c>" in the variable "<c>heavy</c>"), and then to all cars with weights not exceeding the threshold (cars associated with value "<c>FALSE</c>"). In the past we showed that one may address components of a sequence using its position in the sequence. Here we demonstrate an alternative approach for addressing specific locations by using a sequence with logical components.</p>
+
+    <p>In order to illustrate this second approach consider the two sequences:</p>
+
+    <program language="r"><input>
+w &lt;- c(5,3,4,6,2,9)
+d &lt;- c(13,22,0,12,6,20)
+    </input></program>
+
+    <p>Say we want to select the components of the sequence "<c>d</c>" in all the locations where the components of the sequence "<c>w</c>" obtain values larger than 5. Consider the code:</p>
+
+    <program language="r"><input>
+w &gt; 5
+d[w &gt; 5]
+    </input></program>
+
+    <p>The expression "<c>w &gt; 5</c>" is a sequence of logical components, with the value "<c>TRUE</c>" at the positions where "<c>w</c>" is above the threshold and the value "<c>FALSE</c>" at the positions where "<c>w</c>" is below the threshold. We may use the sequence with logical components as an index to the sequence of the same length "<c>d</c>". The relevant expression is "<c>d[w &gt; 5]</c>". The output of this expression is the sub-sequence of elements from "<c>d</c>" that are associated with the "<c>TRUE</c>" values of the logical sequence. Indeed, "<c>TRUE</c>" values are present at the 4th and the 6th positions of the logical sequence. Consequently, the output of the expression "<c>d[w &gt; 5]</c>" contains the 4th and the 6th components of the sequence "<c>d</c>".</p>
+
+    <p>The operator "<c>!</c>", when applied to a logical value, reverses the value. A "<c>TRUE</c>" becomes "<c>FALSE</c>" and a "<c>FALSE</c>" becomes "<c>TRUE</c>". Consider the code:</p>
+
+    <program language="r"><input>
+!(w &gt; 5)
+d[!(w &gt; 5)]
+    </input></program>
+
+    <p>Observe that the sequence "<c>!(w &gt; 5)</c>" obtains a value of "<c>TRUE</c>" at the positions where "<c>w</c>" is less or equal to 5. Consequently, the output of the expression "<c>d[!(w &gt; 5)]</c>" are all the values of "<c>d</c>" that are associated with components of "<c>w</c>" that are less or equal to 5.</p>
+
+    <p>The variable "<c>dif.mpg</c>" contains data on the difference in miles-per-gallon between highway and city driving conditions for all the car types. The sequence "<c>heavy</c>" identifies the car types with curb weight above the threshold of 2,414 lb. The components of this sequence are logical with the value "<c>TRUE</c>" at positions associated with the heavier car types and the "<c>FALSE</c>" at positions associated with the lighter car types. Observe that the output of the expression "<c>dif.mpg[heavy]</c>" is the subsequence of differences in miles-per-gallon for the cars with curb weight above the given threshold. We apply the function "<c>t.test</c>" to this expression in order to conduct the <m>t</m>-test on the expectation of the variable "<c>dif.mpg</c>" for the heavier cars:</p>
+
+    <program language="r"><input>
+t.test(dif.mpg[heavy],mu=5.53)
+    </input></program>
+
+    <p>The target population are the heavier car types. Notice that we test the null hypothesis that expected difference among the heavier cars is equal to 5.53 against the alternative hypothesis that the expected difference among heavier cars is not equal to 5.53. The null hypothesis is not rejected at the 5% significance level since the <m>p</m>-value, which is equal to 0.1735, is larger than 0.05. Consequently, based on the data at hand, we cannot conclude that the expected difference in miles-per-gallon for heavier cars is significantly different than the average difference for all cars.</p>
+
+    <p>Observe also that the estimate of the expectation, the sample mean, is equal to 5.254902, with a confidence interval of the form <m>[4.900198, 5.609606]</m>.</p>
+
+    <p>Next, let us apply the same test to the lighter cars. The expression "<c>dif.mpg[!heavy]</c>" produces the subsequence of differences in miles-per-gallon for the cars with curb weight below the given threshold. The application of the function "<c>t.test</c>" to this subsequence gives:</p>
+
+    <program language="r"><input>
+t.test(dif.mpg[!heavy],mu=5.53)
+    </input></program>
+
+    <p>Again, the null hypothesis is not rejected at the 5% significance level since a <m>p</m>-value of 0.05164 is still larger than 0.05. However, unlike the case for heavier cars where the <m>p</m>-value was undeniably larger than the threshold. In this example it is much closer to the threshold of 0.05. Consequently, we may almost conclude that the expected difference in miles-per-gallon for lighter cars is significantly different than the average difference for all car.</p>
+
+    <p>Why did we not reject the null hypothesis for the heavier cars but almost did so for the lighter cars? Both tests are based on the <m>T</m> statistic, which measures the ratio between the deviation of the sample average from its expectation under the null, divided by the estimate of the standard deviation of the sample average. The value of this statistic is "<c>t = -1.5385</c>" for heavier cars and it is "<c>t = 1.9692</c>" for lighter cars, an absolute value of about 25% higher.</p>
+
+    <p>The deviation of the sample average for the heavier cars and the expectation under the null is <m>5.254902 - 5.53 = -0.275098</m>. On the other hand, the deviation of the sample average for the lighter cars and the expectation under the null is <m>5.805825 - 5.53 = 0.275825</m>. The two deviations are practically equal to each other in the absolute value.</p>
+
+    <p>The estimator of the standard deviation of the sample average is <m>S/\sqrt{n}</m>, where <m>S</m> is the sample standard deviation and <m>n</m> is the sample size. The sample sizes, 103 for lighter cars and 102 for heavier cars, are almost equal. Therefore, the reason for the difference in the values of the <m>T</m> statistics for both weight groups must be differences in the sample standard deviations. Indeed, when we compute the sample standard deviation for lighter and heavier cars<fn>The function "<c>tapply</c>" applies the function that is given as its third argument (the function "<c>sd</c>" in this case) to each subset of values of the sequence that is given as its first argument (the sequence "<c>dif.mpg</c>" in the current application). The subsets are determined by the levels of the second argument (the sequence "<c>heavy</c>" in this case). The output is the sample standard deviation of the variable "<c>dif.mpg</c>" for lighter cars (the level "<c>FALSE</c>") and for heavier cars (the level "<c>TRUE</c>").</fn> we get that the standard deviation for lighter cars (1.421531) is much smaller than the standard deviation for heavier cars (1.805856):</p>
+
+    <program language="r"><input>
+tapply(dif.mpg,heavy,sd)
+    </input></program>
+
+    <p>The important lesson to learn from this exercise is that simple minded notion of significance and statistical significance are not the same. A simple minded assessment of the discrepancy from the null hypothesis will put the evidence from the data on lighter cars and the evidence from the data on heavier cars on the same level. In both cases the estimated value of the expectation is the same distance away from the null value.</p>
+
+    <p>However, statistical assessment conducts the analysis in the context of the sampling distribution. The deviation of the sample average from the expectation is compared to the standard deviation of the sample average. Consequently, in statistical testing of hypothesis a smaller deviation of the sample average from the expectation under the null may be more significant than a larger one if the sampling variability of the former is much smaller than the sampling variability of the later.</p>
+
+    <p>Let us proceed with the demonstration of the application of the <m>t</m>-test by the testing of one-sided alternatives in the context of the lighter cars. One may test the one-sided alternative <m>H_1:\Expec(X) &gt; 5.53</m> that the expected value of the difference in miles-per-gallon among cars with curb weight no more than 2,414 lb is <em>greater</em> than 5.53 by the application of the function "<c>t.test</c>" to the data on lighter cars. This data is the output of the expression "<c>dif.mpg[!heavy]</c>". As before, we specify the null value of the expectation by the introduction of the expression "<c>mu=5.53</c>". The fact that we are interested in the testing of the specific alternative is specified by the introduction of a new argument of the form: "<c>alternative=greater</c>". The default value of the argument "<c>alternative</c>" is "<c>two.sided</c>", which produces a test of a two-sided alternative. By changing the value of the argument to "<c>greater</c>" we produce a test for the appropriate one-sided alternative:</p>
+
+    <program language="r"><input>
+t.test(dif.mpg[!heavy],mu=5.53,alternative="greater")
+    </input></program>
+
+    <p>The value of the test statistic (<c>t = 1.9692</c>) is the same as for the test of the two-sided alternative and so is the number of degrees of freedom associated with the statistic (<c>df = 102</c>). However, the <m>p</m>-value is smaller (<c>p-value = 0.02582</c>), compared to the <m>p</m>-value in the test for the two-sided alternative (<c>p-value = 0.05164</c>). The <m>p</m>-value for the one-sided test is the probability under the sampling distribution that the test statistic obtains vales larger than the observed value of 1.9692. The <m>p</m>-value for the two-sided test is twice that figure since it involves also the probability of being less than the negative of the observes value.</p>
+
+    <p>The estimated value of the expectation, the sample average, is unchanged. However, instead of producing a confidence interval for the expectation the report produces a <em>one-sided</em> confidence interval of the form <m>[5.573323, \infty)</m>. Such an interval corresponds to the <em>smallest</em> value that the expectation may reasonably obtain on the basis of the observed data.</p>
+
+    <p>Finally, consider the test of the other one-sided alternative <m>H_1:\Expec(X) &lt; 5.53</m>:</p>
+
+    <program language="r"><input>
+t.test(dif.mpg[!heavy],mu=5.53,alternative="less")
+    </input></program>
+
+    <p>The alternative here is determined by the expression "<c>alternative=less</c>". The <m>p</m>-value is equal to 0.9742, which is the probability that the test statistic obtains values less than the observed value of 1.9692. Clearly, the null hypothesis is not rejected in this test.</p>
+
   </section>
 
-  <section xml:id="sec-errors-testing">
-    <title>Errors in Hypothesis Testing</title>
-    <p>Content to be added.</p>
+  <section xml:id="sec-testing-proportion">
+    <title>Testing Hypothesis on Proportion</title>
+
+    <p>Consider the problem of testing hypothesis on the probability of an event. Recall that a probability <m>p</m> of some event can be estimated by the observed relative frequency of the event in the sample, denoted <m>\hat P</m>. The estimation is associated with the Bernoulli random variable <m>X</m>, that obtains the value 1 when the event occurs and the value 0 when it does not. The statistical model states that <m>p</m> is the expectation of <m>X</m>. The estimator <m>\hat P</m> is the sample average of this measurement.</p>
+
+    <p>With this formulation we may relate the problem of testing hypotheses formulated in terms of <m>p</m> to the problem of tests associated to the expectation of a measurement. For the latter problem we applied the <m>t</m>-test. A similar, though not identical, test is used for the problem of testing hypothesis on proportions.</p>
+
+    <p>Assume that one in interested in testing the null hypothesis that the probability of the event is equal to some specific value, say one half, versus the alternative hypothesis that the probability is not equal to this value. These hypotheses are formulated as <m>H_0:p = 0.5</m> and <m>H_1:p\not = 0.5</m>.</p>
+
+    <p>The sample proportion of the event <m>\hat P</m> is the basis for the construction of the test statistic. Recall that the variance of the estimator <m>\hat P</m> is given by <m>\Var(\hat P) = p(1-p)/n</m>. Under the null hypothesis we get that the variance is equal to <m>\Var(\hat P) = 0.5(1-0.5)/n</m>. A natural test statistic is the standardized sample proportion:</p>
+
+    <me>Z = \frac{\hat P - 0.5}{\sqrt{0.5 (1-0.5)/n}}\;,</me>
+
+    <p>that measures the ratio between the deviation of the estimator from its null expected value and the standard deviation of the estimator. The standard deviation of the sample proportion is used in the ratio.</p>
+
+    <p>If the null hypothesis that <m>p=0.5</m> holds true then one gets that the value 0 is the center of the sampling distribution of the test statistic <m>Z</m>. Values of the statistic that are much larger or much smaller than 0 indicate that the null hypothesis is unlikely. Consequently, one may consider a rejection region of the form <m>\{|Z| &gt; c\}</m>, for some threshold value <m>c</m>. The threshold <m>c</m> is set at a high enough level to assure the required significance level, namely the probability under the null hypothesis of obtaining a value in the rejection region. Equivalently, the rejection region can be written in the form <m>\{Z^2 &gt; c^2\}</m>.</p>
+
+    <p>As a result of the Central Limit Theorem one may conclude that the distribution of the test statistic is approximately Normal. Hence, Normal computations may be used in order to produce an approximate threshold or in order to compute an approximation for the <m>p</m>-value. Specifically, if <m>Z</m> has the standard Normal distribution then <m>Z^2</m> has a <m>\chi^2</m> distribution on one degree of freedom.</p>
+
+    <p>In order to illustrate the application of hypothesis testing for proportion consider the following problem: In the previous section we obtained the curb weight of 2,414 lb as the sample median. The weights of half the cars in the sample were above that level and the weights of half the cars were below this level. If this level was actually the population median then the probability that the weight of a random car is not exceeding this level would be equal to 0.5.</p>
+
+    <p>Let us test the hypothesis that the median weight of cars that run on diesel is also 2,414 lb. Recall that 20 out of the 205 car types in the sample have diesel engines. Let us use the weights of these cars in order to test the hypothesis.</p>
+
+    <p>The variable "<c>fuel.type</c>" is a factor with two levels "<c>diesel</c>" and "<c>gas</c>" that identify the fuel type of each car. The variable "<c>heavy</c>" identifies for each car whether its weight is above the level of 2414 or not. Let us produce a <m>2 \times 2</m> table that summarizes the frequency of each combination of weight group and the fuel type:</p>
+
+    <program language="r"><input>
+fuel &lt;- cars$fuel.type
+table(fuel,heavy)
+    </input></program>
+
+    <p>Originally the function "<c>table</c>" was applied to a single factor and produced a sequence with the frequencies of each level of the factor. In the current application the input to the function are two factors<fn>To be more accurate, the variable "<c>heavy</c>" is not a factor but a sequence with logical components. Nonetheless, when the function "<c>table</c>" is applied to such a sequence it treats it as a factor with two levels, "<c>TRUE</c>" and "<c>FALSE</c>".</fn>. The output is a table of frequencies. Each entry to the table corresponds to the frequency of a combination of levels, one from the first input factor and the other from the second input factor. In this example we obtain that 6 cars use diesel and their curb weight was below the threshold. There are 14 cars that use diesel and their curb weight is above the threshold. Likewise, there are 97 light cars that use gas and 88 heavy cars with gas engines.</p>
+
+    <p>The function "<c>prop.test</c>" produces statistical tests for proportions. The relevant information for the current application of the function is the fact that frequency of light diesel cars is 6 among a total number of 20 diesel cars. The first entry to the function is the frequency of the occurrence of the event, 6 in this case, and the second entry is the relevant sample size, the total number of diesel cars which is 20 in the current example:</p>
+
+    <program language="r"><input>
+prop.test(6,20)
+    </input></program>
+
+    <p>The function produces a report that is printed on the screen. The title identifies the test as a one-sample test of proportions. In later chapters we will apply the same function to more complex data structures and the title will change accordingly. The title also identifies the fact that a continuity correction is used in the computation of the test statistic.</p>
+
+    <p>The line under the title indicates the frequency of the event in the sample and the sample size. (In the current example, 6 diesel cars with weights below the threshold among a total of 20 diesel cars.) The probability of the event, under the null hypothesis, is described. The default value of this probability is "<c>p = 0.5</c>", which is the proper value in the current example. This default value can be modified by replacing the value 0.5 by the appropriate probability.</p>
+
+    <p>The next line presents the information relevant for the test itself. The test statistic, which is essentially the square of the <m>Z</m> statistic described above<fn>The test statistic that is computed by default is based on <em>Yates' correction for continuity</em>, which is very similar to the continuity correction that was used in <xref ref="ch-normal"/> for the Normal approximation of the Binomial distribution. Specifically, the test statistic to the continuity correction for testing <m>H_0:p = p_0</m> takes the form <m>[|\hat p - p_0|-0.5/n]^2/[p_0(1-p_0)/n]</m>. Compare this statistic with the statistic proposed in the text that takes the form <m>[\hat p - p_0]^2/[p_0(1-p_0)/n]</m>. The latter statistic is used if the argument "<c>correct = FALSE</c>" is added to the function.</fn>, obtains the value 2.45. The sampling distribution of this statistic under the null hypothesis is, approximately, the <m>\chi^2</m> distribution on 1 degree of freedom. The <m>p</m>-value, which is the probability that <m>\chi^2</m> distribution on 1 degree of freedom obtains a value above 2.45, is equal to 0.1175. Consequently, the null hypothesis is not rejected at the 5% significance level.</p>
+
+    <p>The bottom part of the report provides the confidence interval and the point estimate for the probability of the event. The confidence interval for the given data is <m>[0.1283909, 0.5433071]</m> and the point estimate is <m>\hat p = 6/20 = 0.3</m>.</p>
+
+    <p>It is interesting to note that although the deviation between the estimated proportion <m>\hat p = 0.3</m> and the null value of the probability <m>p = 0.5</m> is relatively large still the null hypothesis was not rejected. The reason for that is the smallness of the sample, <m>n = 20</m>, that was used in order to test the hypothesis. Indeed, as an exercise let us examine the application of the same test to a setting where <m>n = 200</m> and the number of occurrences of the event is 60:</p>
+
+    <program language="r"><input>
+prop.test(60,200)
+    </input></program>
+
+    <p>The estimated value of the probability is the same as before since <m>\hat p = 60/200 = 0.3</m>. However, the <m>p</m>-value is <m>2.322 \times 10^{-8}</m>, which is way below the significance threshold of 0.05. In this scenario the null hypothesis is rejected with flying colors.</p>
+
+    <p>This last example is yet another demonstration of the basic characteristic of statistical hypothesis testing. The consideration is based not on the discrepancy of the estimator of the parameter from the value of the parameter under the null. Instead, it is based on the <em>relative</em> discrepancy in comparison to the sampling variability of the estimator. When the sample size is larger the variability is smaller. Hence, the chances of rejecting the null hypothesis for the same discrepancy increases.</p>
+
   </section>
 
   <section xml:id="sec-exercises-12">
     <title>Exercises</title>
-    <p>Content to be added.</p>
+
+    <exercise>
+      <statement>
+        <p>Consider a medical condition that does not have a standard treatment. The recommended design of a clinical trial for a new treatment to such condition involves using a placebo treatment as a control. A placebo treatment is a treatment that externally looks identical to the actual treatment but, in reality, it does not have the active ingredients. The reason for using placebo for control is the "placebo effect". Patients tend to react to the fact that they are being treated regardless of the actual beneficial effect of the treatment.</p>
+
+        <p>As an example, consider the trial for testing magnets as a treatment for pain. The patients that were randomly assigned to the control (the last 21 observations in the file "<c>magnets.csv</c>") were treated with devices that looked like magnets but actually were not. The goal in this exercise is to test for the presence of a placebo effect using the data in the file "<c>magnets.csv</c>".</p>
+
+        <ol>
+          <li><p>Let <m>X</m> be the measurement of change, the difference between the score of pain before the treatment and the score after the treatment, for patients that were treated with the inactive placebo. Express, in terms of the expected value of <m>X</m>, the null hypothesis and the alternative hypothesis for a statistical test to determine the presence of a placebo effect. The null hypothesis should reflect the situation that the placebo effect is absent.</p></li>
+          <li><p>Identify the observations that can be used in order to test the hypotheses.</p></li>
+          <li><p>Carry out the test and report your conclusion. (Use a significance level of 5%.)</p></li>
+        </ol>
+      </statement>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>It is assumed, when constructing the <m>t</m>-test, that the measurements are Normally distributed. In this exercise we examine the robustness of the test to divergence from the assumption. You are required to compute the significance level of a two-sided <m>t</m>-test of <m>H_0:\Expec(X)=4</m> versus <m>H_1: \Expec(X) \not = 4</m>. Assume there are <m>n=20</m> observations and use a <m>t</m>-test with a nominal 5% significance level.</p>
+
+        <ol>
+          <li><p>Consider the case where <m>X \sim \mathrm{Exponential}(1/4)</m>.</p></li>
+          <li><p>Consider the case where <m>X \sim \mathrm{Uniform}(0,8)</m>.</p></li>
+        </ol>
+      </statement>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>Assume that you are interested in testing <m>H_0:\Expec(X) = 20</m> versus <m>H_1:\Expec(X)\not = 20</m> with a significance level of 5% using the <m>t</m>-test. Let the sample average, of a sample of size <m>n=55</m>, be equal to <m>\bar x = 22.7</m> and the sample standard deviation be equal to <m>s = 5.4</m>.</p>
+
+        <ol>
+          <li><p>Do you reject the null hypothesis?</p></li>
+          <li><p>Use the same information. Only now you are interested in a significance level of 1%. Do you reject the null hypothesis?</p></li>
+          <li><p>Use the information the presentation of the exercise. But now you are interested in testing <m>H_0:\Expec(X) = 24</m> versus <m>H_1:\Expec(X)\not = 24</m> (with a significance level of 5%). Do you reject the null hypothesis?</p></li>
+        </ol>
+      </statement>
+    </exercise>
+
   </section>
 
   <section xml:id="sec-summary-12">
     <title>Summary</title>
-    <p>Content to be added.</p>
+
+    <subsection xml:id="subsec-glossary-12">
+      <title>Glossary</title>
+
+      <dl>
+        <li>
+          <title>Hypothesis Testing</title>
+          <p>A method for determining between two hypothesis, with one of the two being the currently accepted hypothesis. A determination is based on the value of the test statistic. The probability of falsely rejecting the currently accepted hypothesis is the significance level of the test.</p>
+        </li>
+        <li>
+          <title>Null Hypothesis (<m>H_0</m>)</title>
+          <p>A sub-collection that emerges in response to the situation when the phenomena is absent. The established scientific theory that is being challenged. The hypothesis which is worse to erroneously reject.</p>
+        </li>
+        <li>
+          <title>Alternative Hypothesis (<m>H_1</m>)</title>
+          <p>A sub-collection that emerges in response to the presence of the investigated phenomena. The new scientific theory that challenges the currently established theory.</p>
+        </li>
+        <li>
+          <title>Test Statistic</title>
+          <p>A statistic that summarizes the data in the sample in order to decide between the two alternative.</p>
+        </li>
+        <li>
+          <title>Rejection Region</title>
+          <p>A set of values that the test statistic may obtain. If the observed value of the test statistic belongs to the rejection region then the null hypothesis is rejected. Otherwise, the null hypothesis is not rejected.</p>
+        </li>
+        <li>
+          <title>Type I Error</title>
+          <p>The null hypothesis is correct but it is rejected by the test.</p>
+        </li>
+        <li>
+          <title>Type II Error</title>
+          <p>The alternative hypothesis holds but the null hypothesis is not rejected by the test.</p>
+        </li>
+        <li>
+          <title>Significance Level</title>
+          <p>The probability of a Type I error. The probability, computed under the null hypothesis, of rejecting the null hypothesis. The test is constructed to have a given significance level. A commonly used significance level is 5%.</p>
+        </li>
+        <li>
+          <title>Statistical Power</title>
+          <p>The probability, computed under the alternative hypothesis, of rejecting the null hypothesis. The statistical power is equal to 1 minus the probability of a Type II error.</p>
+        </li>
+        <li>
+          <title><m>p</m>-value</title>
+          <p>A form of a test statistic. It is associated with a specific test statistic and a structure of the rejection region. The <m>p</m>-value is equal to the significance level of the test in which the observed value of the statistic serves as the threshold.</p>
+        </li>
+      </dl>
+
+    </subsection>
+
+    <subsection xml:id="subsec-discuss-forum-12">
+      <title>Discuss in the forum</title>
+
+      <p>In statistical thinking there is a tenancy towards conservatism. The investigators, enthusiastic to obtain positive results, may prefer favorable conclusions and may tend over-interpret the data. It is the statistician's role to add to the objectivity in the interpretation of the data and to advocate caution.</p>
+
+      <p>On the other hand, the investigators may say that conservatism and science are incompatible. If one is too cautious, if one is always protecting oneself against the worst-case scenario, then one will not be able to make bold new discoveries.</p>
+
+      <p>Which of the two approach do you prefer?</p>
+
+      <p>When you formulate your answer to this question it may be useful to recall cases in your past in which you where required to analyze data or you were exposed to other people's analysis. Could the analysis benefit or be harmed by either of the approaches?</p>
+
+      <p>For example, many scientific journal will tend to reject a research paper unless the main discoveries are statistically significant (<m>p</m>-value <m>&lt;</m> 5%). Should one not publish also results that show a significance level of 10%?</p>
+
+    </subsection>
+
+    <subsection xml:id="subsec-formulas-12">
+      <title>Formulas</title>
+
+      <ul>
+        <li><p>Test Statistic for Expectation: <m>t = (\bar x - \mu_0)/ (s/\sqrt{n})</m>.</p></li>
+        <li><p>Two-Sided Test: Reject <m>H_0</m> if <m>\{|t| &gt; \mbox{\texttt{qt(0.975,n-1)}}\}</m>.</p></li>
+        <li><p>Greater Than: Reject <m>H_0</m> if <m>\{t &gt; \mbox{\texttt{qt(0.95,n-1)}}\}</m>.</p></li>
+        <li><p>Less Than: Reject <m>H_0</m> if <m>\{t &lt; \mbox{\texttt{qt(0.05,n-1)}}\}</m>.</p></li>
+      </ul>
+
+    </subsection>
+
   </section>
+
 </chapter>
