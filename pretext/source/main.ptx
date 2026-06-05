@@ -16,7 +16,6 @@
 
   <book xml:id="statthink">
     <title>Introduction to Statistical Thinking</title>
-    <subtitle>A Pretext for Statistics</subtitle>
 
     <frontmatter xml:id="frontmatter">
       <titlepage>
