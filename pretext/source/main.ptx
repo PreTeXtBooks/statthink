@@ -46,57 +46,7 @@
       </colophon>
 
       <preface xml:id="preface">
-        <title>Preface</title>
-        
-        <paragraphs xml:id="pretext-version-note">
-          <title>About This PreTeXt Version</title>
-          
-          <p>
-            This is a <url href="https://pretextbook.org/" visual="pretextbook.org">PreTeXt</url> 
-            version of <em>Introduction to Statistical Thinking</em> by Benjamin Yakir. 
-            The original book was written using <url href="https://bookdown.org/" visual="bookdown.org">bookdown</url> 
-            and is available at:
-          </p>
-          
-          <p>
-            <ul>
-              <li>
-                <p>
-                  <term>Original GitHub Repository:</term> 
-                  <url href="https://github.com/eleuven/statthink" visual="github.com/eleuven/statthink"/>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <term>Original Online Book:</term> 
-                  <url href="https://eleuven.github.io/statthink/" visual="eleuven.github.io/statthink"/>
-                </p>
-              </li>
-            </ul>
-          </p>
-          
-          <p>
-            This PreTeXt conversion maintains the original content and pedagogical approach 
-            while taking advantage of PreTeXt's enhanced accessibility features, 
-            interactive elements, and multiple output formats (HTML, PDF, EPUB, and more).
-          </p>
-          
-          <p>
-            <alert>For issues related to the PreTeXt rendering or conversion:</alert> 
-            Please report them at the PreTeXt version repository: 
-            <url href="https://github.com/PreTeXtBooks/statthink" visual="github.com/PreTeXtBooks/statthink"/>.
-          </p>
-          
-          <p>
-            All credit for the original content belongs to Benjamin Yakir. 
-            This PreTeXt conversion is released under the same 
-            Creative Commons Attribution License (CC-BY 3.0) as the original work.
-          </p>
-        </paragraphs>
-        
-        <paragraphs xml:id="original-preface">
-          <title>Original Preface</title>
-          
+        <title>Preface</title>          
           <p>
             The target audience for this book is college students who are required
             to learn statistics, students with little background in mathematics and
@@ -231,8 +181,39 @@
         <p>
           Jerusalem, June 2011.
         </p>
-        </paragraphs>
       </preface>
+
+ <preface xml:id="preface-ptx-version">
+    <title>Note on This PreTeXt Edition</title>
+
+    <p>
+      This is a <url href="https://pretextbook.org/" visual="pretextbook.org">PreTeXt</url>
+      conversion of <em>Introduction to Statistical Thinking</em>, originally written by
+       Benjamin Yakir.
+      The original work is available online at
+      <url href="https://eleuven.github.io/statthink/">eleuven.github.io/statthink/</url>
+      The original GitHub repository for the book source is at
+      <url href="https://github.com/eleuven/statthink">github.com/eleuven/statthink</url>.
+    </p>
+
+    <p>
+      This PreTeXt edition was prepared by
+      <url href="https://github.com/PreTeXtBooks/statthink">the PreTeXtBooks project</url>
+      to make the content available in the PreTeXt format, enabling accessible and structured
+      output in HTML, PDF, and other formats.   All prose, code examples, figures, and mathematical content are intended to be 
+  faithful reproductions of the original work, though occasional typographical errors 
+  may have been introduced in the conversion process. Report any issues to our
+  <url href = "https://github.com/PreTeXtBooks/statthink/issues">GitHub Issues Page.</url>
+
+    </p>
+
+    <p>
+      The original work by Benjamin Yakir is licensed under a
+      <url href="https://creativecommons.org/licenses/by/3.0/">Creative Commons
+      By 3.0</url>.
+    </p>
+  </preface>
+
     </frontmatter>
 
     <xi:include href="./ch-introduction.ptx" />
