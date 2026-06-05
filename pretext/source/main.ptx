@@ -189,7 +189,7 @@
     <p>
       This is a <url href="https://pretextbook.org/" visual="pretextbook.org">PreTeXt</url>
       conversion of <em>Introduction to Statistical Thinking</em>, originally written by
-       Benjamin Yakir.
+      <url href = "https://pluto.huji.ac.il/~msby/">Benjamin Yakir</url>.
       The original work is available online at
       <url href="https://eleuven.github.io/statthink/">eleuven.github.io/statthink/</url>
       The original GitHub repository for the book source is at
