@@ -262,15 +262,15 @@ boxplot(dif.mpg ~ fuel.type, data=cars)
 
       <p>The <c>R</c> system contains functions for the computation of the density, the cumulative probability function and the percentiles of the <m>t</m>-distribution, as well as for the simulation of a random sample from this distribution. Specifically, the function “<c>qt</c>" computes the percentiles of the <m>t</m>-distribution. The first argument to the function is a probability and the second argument is the number of degrees of freedom. The output of the function is the percentile associated with the probability of the first argument. Namely, it is a value such that the probability that the <m>t</m>-distribution is below the value is equal to the probability in the first argument.</p>
 
-      <p>For example, let “<c>n</c>" be the sample size. The output of the expression “<c>qt(0.975,n-1)</c>" is the 0.975-percentile of the <m>t</m>-distribution on <m>(n-1)</m> degrees of freedom. By definition, 97.5% of the <m>t</m>-distribution are below this value and 2.5% are above it. The symmetry of the <m>t</m> distribution implies that 2.5% of the distribution is below the negative of this value. The middle part of the distribution is bracketed by these two values: <m>[-\mbox{\texttt{qt(0.975,n-1)}}, \mbox{\texttt{qt(0.975,n-1)}}]</m>, and it contains 95% of the distribution.</p>
+      <p>For example, let “<c>n</c>" be the sample size. The output of the expression “<c>qt(0.975,n-1)</c>" is the 0.975-percentile of the <m>t</m>-distribution on <m>(n-1)</m> degrees of freedom. By definition, 97.5% of the <m>t</m>-distribution are below this value and 2.5% are above it. The symmetry of the <m>t</m> distribution implies that 2.5% of the distribution is below the negative of this value. The middle part of the distribution is bracketed by these two values: <m>[-\mathtt{qt(0.975,n-1)}, \mathtt{qt(0.975,n-1)}]</m>, and it contains 95% of the distribution.</p>
 
       <p>Summarizing the above claims in a single formula produces the statement:</p>
 
-      <me>\frac{\bar X - \Expec(X)}{S/\sqrt{n}} \sim t_{(n-1)} \quad \Longrightarrow \quad \Prob \bigg(\bigg|\frac{\bar X - \Expec(X)}{S/\sqrt{n}}\bigg| \leq \mbox{\texttt{qt(0.975,n-1)}} \bigg) = 0.95\;.</me>
+      <me>\frac{\bar X - \Expec(X)}{S/\sqrt{n}} \sim t_{(n-1)} \quad \Longrightarrow \quad \Prob \bigg(\bigg|\frac{\bar X - \Expec(X)}{S/\sqrt{n}}\bigg| \leq \mathtt{qt(0.975,n-1)} \bigg) = 0.95\;.</me>
 
       <p>Notice that the equation associated with the probability is not an approximation but an exact relation<fn>When the measurement is Normally distributed.</fn>. Rewriting the event that is described in the probability in the form of a confidence interval, produces</p>
 
-      <me>\bar X \pm \mbox{\texttt{qt(0.975,n-1)}}\cdot S/ \sqrt{n}</me>
+      <me>\bar X \pm \mathtt{qt(0.975,n-1)}\cdot S/ \sqrt{n}</me>
 
       <p>as a confidence interval for the expectation of the Normal measurement with a confidence level of 95%.</p>
 
@@ -351,22 +351,22 @@ qt(0.975,n-1)
 
       <p>The <c>R</c> system contains functions for the computation of the density, the cumulative probability function and the percentiles of the chi-square distribution, as well as for the simulation of a random sample from this distribution. Specifically, the percentiles of the chi-square distribution are computed with the aid of the function “<c>qchisq</c>". The first argument to the function is a probability and the second argument is the number of degrees of freedom. The output of the function is the percentile associated with the probability of the first argument. Namely, it is a value such that the probability that the chi-square distribution is below the value is equal to the probability in the first argument.</p>
 
-      <p>For example, let “<c>n</c>" be the sample size. The output of the expression “<c>qt(0.975,n-1)</c>" is the 0.975-percentile of the chi-square distribution. By definition, 97.5% of the chi-square distribution are below this value and 2.5% are above it. Similarly, the expression “<c>qchisq(0.025,n-1)</c>" is the 0.025-percentile of the chi-square distribution, with 2.5% of the distribution below this value. Notice that between these two percentiles, namely within the interval <m>[\mbox{\texttt{qchisq(0.025,n-1)}}, \mbox{\texttt{qchisq(0.975,n-1)}}]</m>, are 95% of the chi-square distribution.</p>
+      <p>For example, let “<c>n</c>" be the sample size. The output of the expression “<c>qt(0.975,n-1)</c>" is the 0.975-percentile of the chi-square distribution. By definition, 97.5% of the chi-square distribution are below this value and 2.5% are above it. Similarly, the expression “<c>qchisq(0.025,n-1)</c>" is the 0.025-percentile of the chi-square distribution, with 2.5% of the distribution below this value. Notice that between these two percentiles, namely within the interval <m>[\mathtt{qchisq(0.025,n-1)}, \mathtt{qchisq(0.975,n-1)}]</m>, are 95% of the chi-square distribution.</p>
 
       <p>We may summarize that for Normal measurements:</p>
 
       <me>\begin{aligned}
-\lefteqn{(n-1)S^2/\sigma^2 \sim \chi^2_{(n-1)} \quad \Longrightarrow }\\ &amp; \Prob \big( \mbox{\texttt{qchisq(0.025,n-1)}} \leq (n-1)S^2/\sigma^2  \leq \mbox{\texttt{qchisq(0.975,n-1)}} \big) = 0.95\;.\end{aligned}</me>
+\lefteqn{(n-1)S^2/\sigma^2 \sim \chi^2_{(n-1)} \quad \Longrightarrow }\\ &amp; \Prob \big( \mathtt{qchisq(0.025,n-1)} \leq (n-1)S^2/\sigma^2  \leq \mathtt{qchisq(0.975,n-1)} \big) = 0.95\;.\end{aligned}</me>
 
       <p>The chi-square distribution is not symmetric. Therefore, in order to identify the region that contains 95% of the distribution region we have to compute both the 0.025- and the 0.975-percentiles of the distribution.</p>
 
       <p>The event associated with the 95% region is rewritten in a form that puts the parameter <m>\sigma^2</m> in the center:</p>
 
-      <me>\big\{(n-1)S^2/\mbox{\texttt{qchisq(0.975,n-1)}} \leq  \sigma^2  \leq (n-1)S^2/\mbox{\texttt{qchisq(0.025,n-1)}}\big\}\;.</me>
+      <me>\big\{(n-1)S^2/\mathtt{qchisq(0.975,n-1)} \leq  \sigma^2  \leq (n-1)S^2/\mathtt{qchisq(0.025,n-1)}\big\}\;.</me>
 
       <p>The left most and the right most expressions in this event mark the end points of the confidence interval. The structure of the confidence interval is:</p>
 
-      <me>\big[\{(n-1)/\mbox{\texttt{qchisq(0.975,n-1)}}\}\times S^2,\;\{(n-1)/\mbox{\texttt{qchisq(0.025,n-1)}}\}\times S^2\big]\;.</me>
+      <me>\big[\{(n-1)/\mathtt{qchisq(0.975,n-1)}\}\times S^2,\;\{(n-1)/\mathtt{qchisq(0.025,n-1)}\}\times S^2\big]\;.</me>
 
       <p>Consequently, the confidence interval is obtained by the multiplication of the estimator of the variance by a ratio between the number of degrees of freedom (<m>n-1</m>) and an appropriate percentile of the chi-square distribution. The percentile on the left hand side is associated with the larger probability (making the ratio smaller) and the percentile on the right hand side is associated with the smaller probability (making the ratio larger).</p>
 
@@ -608,13 +608,13 @@ mean((sig^2 &gt;= var.LCL) &amp; (sig^2 &lt;= var.UCL))
       <title>Formulas for Confidence Intervals, 95% Confidence Level</title>
       <ul>
         <li><p>Expectation:
-            <m>\bar x \pm \mbox{\texttt{qnorm(0.975)}} \cdot s/\sqrt{n}</m>.</p></li>
+            <m>\bar x \pm \mathtt{qnorm(0.975)} \cdot s/\sqrt{n}</m>.</p></li>
         <li><p>Probability:
-            <m>\hat p \pm \mbox{\texttt{qnorm(0.975)}} \cdot \sqrt{\hat p(1-\hat p)/n}</m>.</p></li>
+            <m>\hat p \pm \mathtt{qnorm(0.975)} \cdot \sqrt{\hat p(1-\hat p)/n}</m>.</p></li>
         <li><p>Normal Expectation:
-            <m>\bar x \pm \mbox{\texttt{qt(0.975,n-1)}} \cdot s/\sqrt{n}</m>.</p></li>
+            <m>\bar x \pm \mathtt{qt(0.975,n-1)} \cdot s/\sqrt{n}</m>.</p></li>
         <li><p>Normal Variance:
-            <m>\big[\frac{n-1}{\mbox{\texttt{qchisq(0.975,n-1)}}} s^2 ,\;\frac{n-1}{\mbox{\texttt{qchisq(0.025,n-1)}}} s^2\big]</m>.</p></li>
+            <m>\big[\frac{n-1}{\mathtt{qchisq(0.975,n-1)}} s^2 ,\;\frac{n-1}{\mathtt{qchisq(0.025,n-1)}} s^2\big]</m>.</p></li>
       </ul>
     </subsection>
 

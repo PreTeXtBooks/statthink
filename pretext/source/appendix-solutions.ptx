@@ -513,7 +513,7 @@ pnorm(10/3,mu,sig)
 </pre>
       <p>The expectation and the standard deviation of the sample average are     used in computation of the probability. The probability is 0.001946209,     about 0.2%.</p>
       </li>
-        <li><p>The central region in the <m>\mbox{Normal}(\mu,\sigma^2)</m> distribution that contains 99% of the distribution is of the form <m>\mu \pm \mbox{\texttt{qnorm(0.995)}}\cdot \sigma</m>, where “<c>qnorm(0.995)</c>" is the 99.5%-percentile of the Standard Normal distribution. Therefore, <m>c =\mbox{\texttt{qnorm(0.995)}}\cdot \sigma</m>:</p>
+        <li><p>The central region in the <m>\mbox{Normal}(\mu,\sigma^2)</m> distribution that contains 99% of the distribution is of the form <m>\mu \pm \mathtt{qnorm(0.995)}\cdot \sigma</m>, where “<c>qnorm(0.995)</c>" is the 99.5%-percentile of the Standard Normal distribution. Therefore, <m>c =\mathtt{qnorm(0.995)}\cdot \sigma</m>:</p>
       <program language="r">
         <input>
 qnorm(0.995)*sig
@@ -902,7 +902,7 @@ boxplot(dif.mpg ~ fuel.type, data=cars)
         </input>
       </program>
       </li>
-        <li><p>The 99% confidence interval for the expectation is computed by the formula <m>\bar x \pm \mbox{\texttt{qt(0.995,n-1)}} \cdot s/\sqrt{n}</m>. Only 0.5% of the <m>t</m>-distribution on <m>(n-1)</m> degrees of freedom resides above the percentile “<c>qt(0.995,n-1)</c>". Using this percentile leaves out a total of 1% in both tails and keeps 99% of the distribution inside the central interval.</p>
+        <li><p>The 99% confidence interval for the expectation is computed by the formula <m>\bar x \pm \mathtt{qt(0.995,n-1)} \cdot s/\sqrt{n}</m>. Only 0.5% of the <m>t</m>-distribution on <m>(n-1)</m> degrees of freedom resides above the percentile “<c>qt(0.995,n-1)</c>". Using this percentile leaves out a total of 1% in both tails and keeps 99% of the distribution inside the central interval.</p>
          <p>For the students that were exposed to Condition “<c>C</c>",     <m>\bar x = 2.613332</m>, <m>s = 0.5329833</m>, and <m>n = 25</m>:</p>
       <program language="r">
         <input>
@@ -916,7 +916,7 @@ boxplot(dif.mpg ~ fuel.type, data=cars)
 </pre>
       <p>The confidence interval for the expectation is <m>[2.315188, 2.911476]</m>.</p>
       </li>
-        <li><p>The 90% confidence interval for the variance is computed by the formula <m>\big[\frac{n-1}{\mbox{\texttt{qchisq(0.95,n-1)}}} s^2 ,\;\frac{n-1}{\mbox{\texttt{qchisq(0.05,n-1)}}} s^2\big]</m>. Observe that 5% of the chi-square distribution on <m>(n-1)</m> degrees of freedom is above the percentile “<c>qchisq(0.95,n-1)</c>" and 5% are below the percentile “<c>qchisq(0.05,n-1)</c>".</p>
+        <li><p>The 90% confidence interval for the variance is computed by the formula <m>\big[\frac{n-1}{\mathtt{qchisq(0.95,n-1)}} s^2 ,\;\frac{n-1}{\mathtt{qchisq(0.05,n-1)}} s^2\big]</m>. Observe that 5% of the chi-square distribution on <m>(n-1)</m> degrees of freedom is above the percentile “<c>qchisq(0.95,n-1)</c>" and 5% are below the percentile “<c>qchisq(0.05,n-1)</c>".</p>
       <p>For the students that were exposed to Condition “<c>C</c>", <m>s = 0.5329833</m>,     and <m>n = 25</m>:</p>
       <program language="r">
         <input>
@@ -985,9 +985,9 @@ mean((4 &gt;= t.LCL) &amp; (4 &lt;= t.UCL))
       
       <ol>
         <li><p>The range of the confidence interval with 99% confidence interval is bounded by</p>
-      <p><me>\mbox{\texttt{qnorm(0.995)}}\cdot \{\hat P (1-\hat P)/n\}^{1/2} \leq 2.575829 \cdot \sqrt{0.25/n} = 1.287915/\sqrt{n}\;,</me> since <c>qnorm(0.995)</c> = 2.575829 and <m>\hat P (1-\hat P) \leq 0.25</m>. Consequently, the sample size <m>n</m> should satisfy the inequality:</p>
+      <p><me>\mathtt{qnorm(0.995)}\cdot \{\hat P (1-\hat P)/n\}^{1/2} \leq 2.575829 \cdot \sqrt{0.25/n} = 1.287915/\sqrt{n}\;,</me> since <c>qnorm(0.995)</c> = 2.575829 and <m>\hat P (1-\hat P) \leq 0.25</m>. Consequently, the sample size <m>n</m> should satisfy the inequality:</p>
       <p><me>\begin{aligned} 1.287915/\sqrt{n} \leq 0.03\quad  &amp;\Longrightarrow  \quad \sqrt{n} \geq 1.287915/0.03 = 42.9305\\ &amp;\Longrightarrow \quad  n \geq (42.9305)^2 = 1843.028\;.\end{aligned}</me> The smallest integer larger than the lower bound is <m>n=1844</m>.</p>
-      <p>The 80% confidence interval for the probability is computed by the formula     <m>\hat p \pm \mbox{\texttt{qnorm(0.90)}} \cdot \sqrt{\hat p(1-\hat p)/n}</m>:</p>
+      <p>The 80% confidence interval for the probability is computed by the formula     <m>\hat p \pm \mathtt{qnorm(0.90)} \cdot \sqrt{\hat p(1-\hat p)/n}</m>:</p>
       <program language="r">
         <input>
 n &lt;- 400
@@ -1307,7 +1307,7 @@ s.a^2/s.b^2
       <p>The estimate is equal to the ratio of the sample variances     <m>s_a^2/s_b^2</m>. It obtains the value <m>0.6438381</m>. Notice that the     information regarding the sample averages and the sizes of the     sub-samples is not relevant for the point estimation of the parameter.</p>
       </li>
         <li><p>We use the formula:</p>
-      <p><me>\big[(s_a^2/s_b^2)/\mbox{\texttt{qf(0.975,14,14)}} , (s_a^2/s_b^2)/\mbox{\texttt{qf(0.025,14,14)}}\big]</me> in order to compute the confidence interval:</p>
+      <p><me>\big[(s_a^2/s_b^2)/\mathtt{qf(0.975,14,14)} , (s_a^2/s_b^2)/\mathtt{qf(0.025,14,14)}\big]</me> in order to compute the confidence interval:</p>
       <program language="r">
         <input>
 n.a &lt;- 15
@@ -1323,7 +1323,7 @@ n.b &lt;- 15
       <p>The confidence interval we obtain is <m>[0.2161555, 1.917728]</m>.</p>
       </li>
         <li><p>The estimate of the parameter is not affected by the change in the sample sizes and it is still equal to <m>0.6438381</m>. For the confidence interval we use now the formula:</p>
-      <p><me>\big[(s_a^2/s_b^2)/\mbox{\texttt{qf(0.975,149,149)}} , (s_a^2/s_b^2)/\mbox{\texttt{qf(0.025,149,149)}}\big]\,:</me></p>
+      <p><me>\big[(s_a^2/s_b^2)/\mathtt{qf(0.975,149,149)} , (s_a^2/s_b^2)/\mathtt{qf(0.025,149,149)}\big]\,:</me></p>
       <program language="r">
         <input>
 n.a &lt;- 150

@@ -625,9 +625,9 @@ prop.test(60,200)
 
       <ul>
         <li><p>Test Statistic for Expectation: <m>t = (\bar x - \mu_0)/ (s/\sqrt{n})</m>.</p></li>
-        <li><p>Two-Sided Test: Reject <m>H_0</m> if <m>\{|t| &gt; \mbox{\texttt{qt(0.975,n-1)}}\}</m>.</p></li>
-        <li><p>Greater Than: Reject <m>H_0</m> if <m>\{t &gt; \mbox{\texttt{qt(0.95,n-1)}}\}</m>.</p></li>
-        <li><p>Less Than: Reject <m>H_0</m> if <m>\{t &lt; \mbox{\texttt{qt(0.05,n-1)}}\}</m>.</p></li>
+        <li><p>Two-Sided Test: Reject <m>H_0</m> if <m>\{|t| &gt; \mathtt{qt(0.975,n-1)}\}</m>.</p></li>
+        <li><p>Greater Than: Reject <m>H_0</m> if <m>\{t &gt; \mathtt{qt(0.95,n-1)}\}</m>.</p></li>
+        <li><p>Less Than: Reject <m>H_0</m> if <m>\{t &lt; \mathtt{qt(0.05,n-1)}\}</m>.</p></li>
       </ul>
 
     </subsection>

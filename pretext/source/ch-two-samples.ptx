@@ -142,7 +142,7 @@ t.test(dif.mpg~heavy)
 
       <me>\big\{-1.96 \cdot \sqrt{\Var(X)/n} \leq \bar X - \Expec(X) \leq 1.96 \cdot \sqrt{\Var(X)/n}\big\}\;,</me>
 
-      <p>where <m>1.96 = \mbox{\texttt{qnorm(0.975)}}</m> is the 0.975-percentile of the standard Normal distribution<fn>In the case where the sample size is small and the observations are Normally distributed we used the <m>t</m>-distribution instead. The percentile that was used in that case was <c>qt(0.975,n-1)</c>, the 0.975 percentile of the <m>t</m>-distribution on <m>n-1</m> degrees of freedom.</fn>. Substituting the estimator <m>S</m> for the unknown variance of the measurement and rewriting the event in a format that puts the expectation <m>\Expec(X)</m> in the center, between two boundaries, produced the confidence interval:</p>
+      <p>where <m>1.96 = \mathtt{qnorm(0.975)}</m> is the 0.975-percentile of the standard Normal distribution<fn>In the case where the sample size is small and the observations are Normally distributed we used the <m>t</m>-distribution instead. The percentile that was used in that case was <c>qt(0.975,n-1)</c>, the 0.975 percentile of the <m>t</m>-distribution on <m>n-1</m> degrees of freedom.</fn>. Substituting the estimator <m>S</m> for the unknown variance of the measurement and rewriting the event in a format that puts the expectation <m>\Expec(X)</m> in the center, between two boundaries, produced the confidence interval:</p>
 
       <me>\bar X \pm 1.96 \cdot S/\sqrt{n}\;.</me>
 
@@ -223,7 +223,7 @@ tapply(dif.mpg,heavy,var)
 
       <me>T = \frac{\bar X - 0}{S/\sqrt{n}} = \frac{\bar X}{S/\sqrt{n}}\;,</me>
 
-      <p>where <m>\bar X</m> is the sample average and <m>S</m> is the sample standard deviation. The rejection region of this test is <m>\{|T| &gt; \mbox{\texttt{qt(0.975,n-1)}}\}</m>, for <c>qt(0.975,n-1)</c> the 0.975-percentile of the <m>t</m>-distribution on <m>n-1</m> degrees of freedom.</p>
+      <p>where <m>\bar X</m> is the sample average and <m>S</m> is the sample standard deviation. The rejection region of this test is <m>\{|T| &gt; \mathtt{qt(0.975,n-1)}\}</m>, for <c>qt(0.975,n-1)</c> the 0.975-percentile of the <m>t</m>-distribution on <m>n-1</m> degrees of freedom.</p>
 
       <p>Alternatively, one may compute the <m>p</m>-value and reject the null hypothesis if the <m>p</m>-value is less than 0.05. The <m>p</m>-value in this case is equal to <m>\Prob(|T| &gt; |t|)</m>, where <m>t</m> is the computed value of the test statistic. The distribution of <m>T</m> is the <m>t</m>-distribution of <m>n-1</m> degrees of freedom.</p>
 
@@ -251,7 +251,7 @@ tapply(dif.mpg,heavy,var)
 
       <me>\Prob( |T| &gt; 2.4255) = 2 \times \Prob( T &gt; 2.4255) =  2 \times \big [1 - \Prob( T \leq  2.4255)\big ]\;.</me>
 
-      <p>The function <c>t.test</c> computes the <m>p</m>-value using the <m>t</m>-distribution. For the current data, the number of degrees of freedom that are used in this approximation<fn>The Weltch <m>t</m>-test for the comparison of two means uses the <m>t</m>-distribution as an approximation of the null distribution of the <m>T</m> test statistic. The number of degrees of freedom is computed by the formula: <m>\mbox{\texttt{df}} = (v_a + v_b)^2/\{v_a^2/(n_a-1) + v_b^2/(n_b-1)\}</m>, where <m>v_a = s_a^2/n_a</m> and <m>v_b = s_b^2/n_b</m>.</fn> is <c>df</c> = 191.561. When we apply the function <c>pt</c> for the computation of the cumulative probability of the <m>t</m>-distribution we get:</p>
+      <p>The function <c>t.test</c> computes the <m>p</m>-value using the <m>t</m>-distribution. For the current data, the number of degrees of freedom that are used in this approximation<fn>The Weltch <m>t</m>-test for the comparison of two means uses the <m>t</m>-distribution as an approximation of the null distribution of the <m>T</m> test statistic. The number of degrees of freedom is computed by the formula: <m>\mathtt{df} = (v_a + v_b)^2/\{v_a^2/(n_a-1) + v_b^2/(n_b-1)\}</m>, where <m>v_a = s_a^2/n_a</m> and <m>v_b = s_b^2/n_b</m>.</fn> is <c>df</c> = 191.561. When we apply the function <c>pt</c> for the computation of the cumulative probability of the <m>t</m>-distribution we get:</p>
 
       <program language="r">
         <input>
@@ -276,7 +276,7 @@ tapply(dif.mpg,heavy,var)
 
     <p>Specifically, let <m>X_a</m> be the measurement at the first sub-population and let <m>X_b</m> be the measurement at the second sub-population. We want to compare <m>\Var(X_a)</m>, the variance in the first sub-population, to <m>\Var(X_b)</m>, the variance in the second sub-population. As the basis for the comparison we may use <m>S_a^2</m> and <m>S_b^2</m>, the sub-samples variances, which are computed from the observations in the first and the second sub-sample, respectively.</p>
 
-    <p>Consider the confidence interval for the ratio of the variances. In <xref ref="ch-confidence-intervals" /> we discussed the construction of the confidence interval for the variance in a single sample. The derivation was based on the sample variance <m>S^2</m> that serves as an estimator of the population variance <m>\Var(X)</m>. In particular, the distribution of the random variable <m>(n-1)S^2/\Var(X)</m> was identified as the chi-square distribution on <m>n-1</m> degrees of freedom<fn>This statement holds when the distribution of the measurement is Normal.</fn>. A confidence interval for the variance was obtained as a result of the identification of a central region in the chi-square distribution that contains a pre-subscribed probability<fn>Use <m>\Prob(\mbox{\texttt{qchisq(0.025,n-1)}} \leq (n-1)S^2/\Var(X) \leq \mbox{\texttt{qchisq(0.975,n-1)}}) = 0.95</m> and rewrite the event in a format that puts the parameter in the center. The resulting 95% confidence interval is <m>[(n-1)S^2/\mbox{\texttt{qchisq(0.975,n-1)}},(n-1)S^2/\mbox{\texttt{qchisq(0.025,n-1)}}]</m>.</fn>.</p>
+    <p>Consider the confidence interval for the ratio of the variances. In <xref ref="ch-confidence-intervals" /> we discussed the construction of the confidence interval for the variance in a single sample. The derivation was based on the sample variance <m>S^2</m> that serves as an estimator of the population variance <m>\Var(X)</m>. In particular, the distribution of the random variable <m>(n-1)S^2/\Var(X)</m> was identified as the chi-square distribution on <m>n-1</m> degrees of freedom<fn>This statement holds when the distribution of the measurement is Normal.</fn>. A confidence interval for the variance was obtained as a result of the identification of a central region in the chi-square distribution that contains a pre-subscribed probability<fn>Use <m>\Prob(\mathtt{qchisq(0.025,n-1)} \leq (n-1)S^2/\Var(X) \leq \mathtt{qchisq(0.975,n-1)}) = 0.95</m> and rewrite the event in a format that puts the parameter in the center. The resulting 95% confidence interval is <m>[(n-1)S^2/\mathtt{qchisq(0.975,n-1)},(n-1)S^2/\mathtt{qchisq(0.025,n-1)}]</m>.</fn>.</p>
 
     <p>In order to construct a confidence interval for the ratio of the variances we consider the random variable that is obtained as a ratio of the estimators of the variances:</p>
 
@@ -284,20 +284,20 @@ tapply(dif.mpg,heavy,var)
 
     <p>The distribution of this random variable is denoted the <m>F</m>-distribution<fn>The <m>F</m> distribution is obtained when the measurement has a Normal distribution. When the distribution of the measurement is not Normal then the distribution of the given random variable will not be the <m>F</m>-distribution.</fn>. This distribution is characterized by the number of degrees of freedom associated with the estimator of the variance at the numerator and by the number of degrees of freedom associated with the estimator of the variance at the denominator. The number of degrees of freedom associated with the estimation of each variance is the number of observation used for the computation of the estimator, minus 1. In the current setting the numbers of degrees of freedom are <m>n_a-1</m> and <m>n_b-1</m>, respectively.</p>
 
-    <p>The percentiles of the <m>F</m>-distribution can be computed in <c>R</c> using the function <c>qf</c>. For example, the 0.025-percentile of the distribution for the ratio between sample variances of the response for two sub-samples is computed by the expression <c>qf(0.025,dfa,dfb)</c>, where <m>\mbox{\texttt{dfa}} = n_a - 1</m> and <m>\mbox{\texttt{dfb}} = n_b - 1</m>. Likewise, the 0.975-percentile is computed by the expression <c>qf(0.975,dfa,dfb)</c>. Between these two numbers lie 95% of the given <m>F</m>-distribution. Consequently, the probability that the random variable <m>\{S_a^2/\Var(X_a)\}/\{S_b^2/\Var(X_b)\}</m> obtains its values between these two percentiles is equal to 0.95:</p>
+    <p>The percentiles of the <m>F</m>-distribution can be computed in <c>R</c> using the function <c>qf</c>. For example, the 0.025-percentile of the distribution for the ratio between sample variances of the response for two sub-samples is computed by the expression <c>qf(0.025,dfa,dfb)</c>, where <m>\mathtt{dfa} = n_a - 1</m> and <m>\mathtt{dfb} = n_b - 1</m>. Likewise, the 0.975-percentile is computed by the expression <c>qf(0.975,dfa,dfb)</c>. Between these two numbers lie 95% of the given <m>F</m>-distribution. Consequently, the probability that the random variable <m>\{S_a^2/\Var(X_a)\}/\{S_b^2/\Var(X_b)\}</m> obtains its values between these two percentiles is equal to 0.95:</p>
 
     <me>\begin{aligned}
-\lefteqn{\frac{S_a^2/\Var(X_a)}{S_b^2/\Var(X_b)} \sim F_{(n_a-1,n_b-1)} \quad \Longrightarrow }\\ &amp; \Prob \big( \mbox{\texttt{qf(0.025,dfa,dfb)}} \leq  {\textstyle \frac{S_a^2/\Var(X_a)}{S_b^2/\Var(X_b)}}  \leq \mbox{\texttt{qf(0.975,dfa,dfb)}} \big) = 0.95\;.\end{aligned}</me>
+\lefteqn{\frac{S_a^2/\Var(X_a)}{S_b^2/\Var(X_b)} \sim F_{(n_a-1,n_b-1)} \quad \Longrightarrow }\\ &amp; \Prob \big( \mathtt{qf(0.025,dfa,dfb)} \leq  {\textstyle \frac{S_a^2/\Var(X_a)}{S_b^2/\Var(X_b)}}  \leq \mathtt{qf(0.975,dfa,dfb)} \big) = 0.95\;.\end{aligned}</me>
 
     <p>A confidence interval for the ratio between <m>\Var(X_a)</m> and <m>\Var(X_b)</m> is obtained by reformulation of the last event. In the reformulation, the ratio of the variances is placed in the center:</p>
 
-    <me>\Big\{\frac{S_a^2/S_b^2}{\mbox{\texttt{qf(0.975,dfa,fdb)}}} \leq  \frac{\Var(X_a)}{\Var(X_b)}  \leq \frac{S_a^2/S_b^2}{\mbox{\texttt{qf(0.025,dfa,dfb)}}}\Big\}\;.</me>
+    <me>\Big\{\frac{S_a^2/S_b^2}{\mathtt{qf(0.975,dfa,fdb)}} \leq  \frac{\Var(X_a)}{\Var(X_b)}  \leq \frac{S_a^2/S_b^2}{\mathtt{qf(0.025,dfa,dfb)}}\Big\}\;.</me>
 
     <p>This confidence interval has a significance level of 95%.</p>
 
     <p>Next, consider testing hypotheses regarding the relation between the variances. Of particular interest is testing the equality of the variances. One may formulate the null hypothesis as <m>H_0: \Var(X_a)/\Var(X_b) = 1</m> and test it against the alternative hypothesis <m>H_1: \Var(X_a)/\Var(X_b) \not = 1</m>.</p>
 
-    <p>The statistic <m>F = S_a^2/S_b^2</m> can used in order to test the given null hypothesis. Values of this statistic that are either much larger or much smaller than 1 are evidence against the null hypothesis and in favor of the alternative hypothesis. The sampling distribution, under that null hypothesis, of this statistic is the <m>F_{(n_a-1,n_b-1)}</m> distribution. Consequently, the null hypothesis is rejected either if <m>F &lt; \mbox{\texttt{qf(0.025,dfa,dfb)}}</m> or if <m>F &gt;\mbox{\texttt{qf(0.975,dfa,dfb)}}</m>, where <m>\mbox{\texttt{dfa}} = n_a - 1</m> and <m>\mbox{\texttt{dfb}} = n_b - 1</m>. The significance level of this test is 5%.</p>
+    <p>The statistic <m>F = S_a^2/S_b^2</m> can used in order to test the given null hypothesis. Values of this statistic that are either much larger or much smaller than 1 are evidence against the null hypothesis and in favor of the alternative hypothesis. The sampling distribution, under that null hypothesis, of this statistic is the <m>F_{(n_a-1,n_b-1)}</m> distribution. Consequently, the null hypothesis is rejected either if <m>F &lt; \mathtt{qf(0.025,dfa,dfb)}</m> or if <m>F &gt;\mathtt{qf(0.975,dfa,dfb)}</m>, where <m>\mathtt{dfa} = n_a - 1</m> and <m>\mathtt{dfb} = n_b - 1</m>. The significance level of this test is 5%.</p>
 
     <p>Given an observed value of the statistic, the <m>p</m>-value is computed as the significance level of the test which uses the observed value as the threshold. If the observed value <m>f</m> is less than 1 then the <m>p</m>-value is twice the probability of the lower tail: <m>2\cdot \Prob(F &lt; f)</m>. On the other hand, if <m>f</m> is larger than 1 one takes twice the upper tail as the <m>p</m>-value: <m>2\cdot \Prob(F &gt; f) = 2\cdot [1-\Prob(F \leq f)]</m>. The null hypothesis is rejected with a significance level of 5% if the <m>p</m>-value is less than 0.05.</p>
 
@@ -328,7 +328,7 @@ var.test(dif.mpg~heavy)
 
     <p>In order to relate the report to the theoretical discussion above let us recall that the sub-samples variances are <m>s^2_a = 2.020750</m> and <m>s_b^2 = 3.261114</m>. The sub-samples sizes are <m>n_a = 103</m> and <m>n_b = 102</m>, respectively. The observed value of the statistic is the ratio <m>s_a^2/s_b^2 = 2.020750/3.261114 = 0.6196502</m>, which is the value that appears in the report. Notice that this is the estimate of the ratio between the variances that is given at the bottom of the report.</p>
 
-    <p>The <m>p</m>-value of the two-sided test is equal to twice the probability of the tail that is associated with the observed value of the test statistic as a threshold. The number of degrees of freedom is <m>\mbox{\texttt{dfa}} = n_a - 1 = 102</m> and <m>\mbox{\texttt{dfb}} = n_b - 1 = 101</m>. The observed value of the ratio test statistic is <m>f = 0.6196502</m>. This value is less than one. Consequently, the probability <m>\Prob(F &lt; 0.6196502)</m> enters into the computation of the <m>p</m>-value, which equals twice this probability:</p>
+    <p>The <m>p</m>-value of the two-sided test is equal to twice the probability of the tail that is associated with the observed value of the test statistic as a threshold. The number of degrees of freedom is <m>\mathtt{dfa} = n_a - 1 = 102</m> and <m>\mathtt{dfb} = n_b - 1 = 101</m>. The observed value of the ratio test statistic is <m>f = 0.6196502</m>. This value is less than one. Consequently, the probability <m>\Prob(F &lt; 0.6196502)</m> enters into the computation of the <m>p</m>-value, which equals twice this probability:</p>
 
     <program language="r">
       <input>
@@ -357,7 +357,7 @@ qf(0.975,102,101)
     <p>The confidence interval is equal to:</p>
 
     <me>\begin{aligned}
-\Big[\frac{s_a^2/s_b^2}{\mbox{\texttt{qf(0.975,102,101)}}} , \frac{s_a^2/s_b^2}{\mbox{\texttt{qf(0.025,102,101)}}}\Big] &amp;= \Big[\frac{0.6196502}{1.479161} , \frac{0.6196502}{0.676317}\Big]\\ &amp;= [0.4189200, 0.9162127]\;,\end{aligned}</me>
+\Big[\frac{s_a^2/s_b^2}{\mathtt{qf(0.975,102,101)}} , \frac{s_a^2/s_b^2}{\mathtt{qf(0.025,102,101)}}\Big] &amp;= \Big[\frac{0.6196502}{1.479161} , \frac{0.6196502}{0.676317}\Big]\\ &amp;= [0.4189200, 0.9162127]\;,\end{aligned}</me>
 
     <p>which coincides with the reported interval.</p>
   </section>
@@ -462,13 +462,13 @@ qf(0.975,102,101)
           <p>Test statistic for equality of expectations: <m>t = (\bar x_a - \bar x_b)/ \sqrt{s_a^2/n_a + s_b^2/n_b}</m>.</p>
         </li>
         <li>
-          <p>Confidence interval: <m>(\bar x_a - \bar x_b) \pm \mbox{\texttt{qnorm(0.975)}}\sqrt{s_a^2/n_a + s_b^2/n_b}</m>.</p>
+          <p>Confidence interval: <m>(\bar x_a - \bar x_b) \pm \mathtt{qnorm(0.975)}\sqrt{s_a^2/n_a + s_b^2/n_b}</m>.</p>
         </li>
         <li>
           <p>Test statistic for equality of variances: <m>f = s_a^2/s_b^2</m>.</p>
         </li>
         <li>
-          <p>Confidence interval: <me>\big[(s_a^2/s_b^2)/\mbox{\texttt{qf(0.975,dfa,dfb)}} , (s_a^2/s_b^2)/\mbox{\texttt{qf(0.025,dfa,dfb)}}\big]\;.</me></p>
+          <p>Confidence interval: <me>\big[(s_a^2/s_b^2)/\mathtt{qf(0.975,dfa,dfb)} , (s_a^2/s_b^2)/\mathtt{qf(0.025,dfa,dfb)}\big]\;.</me></p>
         </li>
       </ul>
     </subsection>

@@ -643,7 +643,7 @@ summary(sims.arm)
         can be used is <c>lm(sims ~ grip + arm, data=job)</c>.</fn> takes the form:
       </p>
       <me>
-        \mbox{\texttt{score}} = -5.434 + 0.024\cdot \mbox{\texttt{grip}}+ 0.037\cdot \mbox{\texttt{arm}}\;.
+        \mathtt{score} = -5.434 + 0.024\cdot \mathtt{grip}+ 0.037\cdot \mathtt{arm}\;.
       </me>
       <p>
         We use this combined score as an explanatory variable. First we form the
